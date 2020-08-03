@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8E845E39A055B87E3285FCA4 /* Pods_VegeXI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 943E4B56E189F1F7F3E0DE26 /* Pods_VegeXI.framework */; };
 		AF27F3DE24D5F29800CFEF9C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AF27F3DD24D5F29800CFEF9C /* Alamofire */; };
+		AF58173224D7DF9200F2683D /* SNSLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58173124D7DF9200F2683D /* SNSLoginService.swift */; };
 		AF88436924D6C902000ABC2A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF88436824D6C902000ABC2A /* GoogleService-Info.plist */; };
 		AF9E8D1C24D58E160047F0C4 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9E8D1A24D58E020047F0C4 /* KakaoOpenSDK.framework */; };
 		AF9E8D1D24D58E160047F0C4 /* KakaoOpenSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AF9E8D1A24D58E020047F0C4 /* KakaoOpenSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -38,6 +39,7 @@
 		09A17A193B26B7E3D5AFF37D /* Pods-VegeXI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VegeXI.release.xcconfig"; path = "Target Support Files/Pods-VegeXI/Pods-VegeXI.release.xcconfig"; sourceTree = "<group>"; };
 		38105EDA7625BA3CC11C87BE /* Pods-VegeXI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VegeXI.debug.xcconfig"; path = "Target Support Files/Pods-VegeXI/Pods-VegeXI.debug.xcconfig"; sourceTree = "<group>"; };
 		943E4B56E189F1F7F3E0DE26 /* Pods_VegeXI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VegeXI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF58173124D7DF9200F2683D /* SNSLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLoginService.swift; sourceTree = "<group>"; };
 		AF88436824D6C902000ABC2A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AF9E8D1A24D58E020047F0C4 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoOpenSDK.framework; path = Frameworks/KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		AF9E8D1E24D58E3C0047F0C4 /* KakaoOpenSDK-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KakaoOpenSDK-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 		AFC1186A24D3B00F005B2E44 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				AF58173124D7DF9200F2683D /* SNSLoginService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 			files = (
 				AFC1185724D3AEE1005B2E44 /* ViewController.swift in Sources */,
 				AFC1185324D3AEE1005B2E44 /* AppDelegate.swift in Sources */,
+				AF58173224D7DF9200F2683D /* SNSLoginService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
