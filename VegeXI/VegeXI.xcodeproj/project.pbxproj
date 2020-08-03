@@ -118,7 +118,6 @@
 				AFC1186A24D3B00F005B2E44 /* Service */,
 				AFC1186924D3B004005B2E44 /* Supporting */,
 				AFC1186024D3AEE3005B2E44 /* Info.plist */,
-				AF88436824D6C902000ABC2A /* GoogleService-Info.plist */,
 				AF9E8D0F24D51A220047F0C4 /* Header */,
 			);
 			path = VegeXI;
@@ -152,6 +151,7 @@
 				AFC1185224D3AEE1005B2E44 /* AppDelegate.swift */,
 				AFC1185D24D3AEE3005B2E44 /* LaunchScreen.storyboard */,
 				AFC1185B24D3AEE3005B2E44 /* Assets.xcassets */,
+				AF88436824D6C902000ABC2A /* GoogleService-Info.plist */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
