@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E845E39A055B87E3285FCA4 /* Pods_VegeXI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 943E4B56E189F1F7F3E0DE26 /* Pods_VegeXI.framework */; };
+		AF27F3DE24D5F29800CFEF9C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AF27F3DD24D5F29800CFEF9C /* Alamofire */; };
+		AF88436924D6C902000ABC2A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF88436824D6C902000ABC2A /* GoogleService-Info.plist */; };
+		AF9E8D1C24D58E160047F0C4 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9E8D1A24D58E020047F0C4 /* KakaoOpenSDK.framework */; };
+		AF9E8D1D24D58E160047F0C4 /* KakaoOpenSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AF9E8D1A24D58E020047F0C4 /* KakaoOpenSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AFC1185324D3AEE1005B2E44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC1185224D3AEE1005B2E44 /* AppDelegate.swift */; };
 		AFC1185724D3AEE1005B2E44 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC1185624D3AEE1005B2E44 /* ViewController.swift */; };
 		AFC1185C24D3AEE3005B2E44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFC1185B24D3AEE3005B2E44 /* Assets.xcassets */; };
@@ -15,7 +20,27 @@
 		AFC1187024D3B0BD005B2E44 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = AFC1186F24D3B0BD005B2E44 /* Then */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		AF9E8D0D24D517530047F0C4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				AF9E8D1D24D58E160047F0C4 /* KakaoOpenSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		09A17A193B26B7E3D5AFF37D /* Pods-VegeXI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VegeXI.release.xcconfig"; path = "Target Support Files/Pods-VegeXI/Pods-VegeXI.release.xcconfig"; sourceTree = "<group>"; };
+		38105EDA7625BA3CC11C87BE /* Pods-VegeXI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VegeXI.debug.xcconfig"; path = "Target Support Files/Pods-VegeXI/Pods-VegeXI.debug.xcconfig"; sourceTree = "<group>"; };
+		943E4B56E189F1F7F3E0DE26 /* Pods_VegeXI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VegeXI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF88436824D6C902000ABC2A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AF9E8D1A24D58E020047F0C4 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoOpenSDK.framework; path = Frameworks/KakaoOpenSDK.framework; sourceTree = "<group>"; };
+		AF9E8D1E24D58E3C0047F0C4 /* KakaoOpenSDK-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KakaoOpenSDK-Bridging-Header.h"; sourceTree = "<group>"; };
 		AFC1184F24D3AEE1005B2E44 /* VegeXI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VegeXI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFC1185224D3AEE1005B2E44 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AFC1185624D3AEE1005B2E44 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,19 +54,50 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF27F3DE24D5F29800CFEF9C /* Alamofire in Frameworks */,
 				AFC1186D24D3B08C005B2E44 /* SnapKit in Frameworks */,
 				AFC1187024D3B0BD005B2E44 /* Then in Frameworks */,
+				AF9E8D1C24D58E160047F0C4 /* KakaoOpenSDK.framework in Frameworks */,
+				8E845E39A055B87E3285FCA4 /* Pods_VegeXI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4EDD59B61593B9AB8AD2819E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				38105EDA7625BA3CC11C87BE /* Pods-VegeXI.debug.xcconfig */,
+				09A17A193B26B7E3D5AFF37D /* Pods-VegeXI.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		AF9E8D0F24D51A220047F0C4 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				AF9E8D1E24D58E3C0047F0C4 /* KakaoOpenSDK-Bridging-Header.h */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		AF9E8D1624D58D3F0047F0C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AF9E8D1A24D58E020047F0C4 /* KakaoOpenSDK.framework */,
+				943E4B56E189F1F7F3E0DE26 /* Pods_VegeXI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AFC1184624D3AEE1005B2E44 = {
 			isa = PBXGroup;
 			children = (
 				AFC1185124D3AEE1005B2E44 /* VegeXI */,
 				AFC1185024D3AEE1005B2E44 /* Products */,
+				AF9E8D1624D58D3F0047F0C4 /* Frameworks */,
+				4EDD59B61593B9AB8AD2819E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +118,7 @@
 				AFC1186A24D3B00F005B2E44 /* Service */,
 				AFC1186924D3B004005B2E44 /* Supporting */,
 				AFC1186024D3AEE3005B2E44 /* Info.plist */,
+				AF9E8D0F24D51A220047F0C4 /* Header */,
 			);
 			path = VegeXI;
 			sourceTree = "<group>";
@@ -91,9 +148,10 @@
 		AFC1186924D3B004005B2E44 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
-				AFC1185B24D3AEE3005B2E44 /* Assets.xcassets */,
 				AFC1185224D3AEE1005B2E44 /* AppDelegate.swift */,
 				AFC1185D24D3AEE3005B2E44 /* LaunchScreen.storyboard */,
+				AF88436824D6C902000ABC2A /* GoogleService-Info.plist */,
+				AFC1185B24D3AEE3005B2E44 /* Assets.xcassets */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -112,9 +170,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AFC1186324D3AEE3005B2E44 /* Build configuration list for PBXNativeTarget "VegeXI" */;
 			buildPhases = (
+				B54E07590A02FA2604096F77 /* [CP] Check Pods Manifest.lock */,
 				AFC1184B24D3AEE1005B2E44 /* Sources */,
 				AFC1184C24D3AEE1005B2E44 /* Frameworks */,
 				AFC1184D24D3AEE1005B2E44 /* Resources */,
+				AF9E8D0D24D517530047F0C4 /* Embed Frameworks */,
+				C733A60595BA37C1A7B93773 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -124,6 +185,7 @@
 			packageProductDependencies = (
 				AFC1186C24D3B08C005B2E44 /* SnapKit */,
 				AFC1186F24D3B0BD005B2E44 /* Then */,
+				AF27F3DD24D5F29800CFEF9C /* Alamofire */,
 			);
 			productName = VegeXI;
 			productReference = AFC1184F24D3AEE1005B2E44 /* VegeXI.app */;
@@ -156,6 +218,7 @@
 			packageReferences = (
 				AFC1186B24D3B08B005B2E44 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				AFC1186E24D3B0BD005B2E44 /* XCRemoteSwiftPackageReference "Then" */,
+				AF27F3DC24D5F29800CFEF9C /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = AFC1185024D3AEE1005B2E44 /* Products */;
 			projectDirPath = "";
@@ -173,10 +236,53 @@
 			files = (
 				AFC1185F24D3AEE3005B2E44 /* LaunchScreen.storyboard in Resources */,
 				AFC1185C24D3AEE3005B2E44 /* Assets.xcassets in Resources */,
+				AF88436924D6C902000ABC2A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B54E07590A02FA2604096F77 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VegeXI-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C733A60595BA37C1A7B93773 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AFC1184B24D3AEE1005B2E44 /* Sources */ = {
@@ -318,17 +424,29 @@
 		};
 		AFC1186424D3AEE3005B2E44 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 38105EDA7625BA3CC11C87BE /* Pods-VegeXI.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)\n$(EMBEDDED_CONTENT_CONTAINS_SWIFT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZLCDRXJTXW;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = VegeXI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"$(inherited)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.teamsloth.VegeXI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "VegeXI/Header/KakaoOpenSDK-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -336,17 +454,29 @@
 		};
 		AFC1186524D3AEE3005B2E44 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09A17A193B26B7E3D5AFF37D /* Pods-VegeXI.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)\n$(EMBEDDED_CONTENT_CONTAINS_SWIFT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZLCDRXJTXW;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = VegeXI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"$(inherited)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.teamsloth.VegeXI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "VegeXI/Header/KakaoOpenSDK-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -376,6 +506,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AF27F3DC24D5F29800CFEF9C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.2;
+			};
+		};
 		AFC1186B24D3B08B005B2E44 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -395,6 +533,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AF27F3DD24D5F29800CFEF9C /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF27F3DC24D5F29800CFEF9C /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		AFC1186C24D3B08C005B2E44 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AFC1186B24D3B08B005B2E44 /* XCRemoteSwiftPackageReference "SnapKit" */;
