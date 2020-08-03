@@ -35,6 +35,27 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureUI()
+        configureSNSLogin()
+    }
+    
+    // MARK: - Selectors
+    
+    @objc func handleLoginNaver() {
+        NaverLoginService.shared.loginInstance?.requestThirdPartyLogin()
+    }
+    
+    @objc func clickedKakaoLogin() {
+        KakaoLoginService.shared.getKakaoInfo()
+    }
+    
+    // MARK: - Helpers
+    
+    func configureSNSLogin() {
+        NaverLoginService.shared.loginInstance?.delegate = self
+    }
+    
+    func configureUI() {
         view.backgroundColor = .systemBackground
         
         view.addSubview(loginButton)
@@ -49,19 +70,6 @@ class HomeVC: UIViewController {
             $0.bottom.equalTo(loginButton.snp.top).offset(-16)
             $0.height.equalTo(50)
         }
-        
-        print("Naver Token =>", NaverLoginService.shared.loginInstance?.accessToken)
-    }
-    
-    // MARK: - Selectors
-    
-    @objc func handleLoginNaver() {
-        NaverLoginService.shared.loginInstance?.delegate = self
-        NaverLoginService.shared.loginInstance?.requestThirdPartyLogin()
-    }
-    
-    @objc func clickedKakaoLogin() {
-        KakaoLoginService.shared.getKakaoInfo()
     }
 }
 

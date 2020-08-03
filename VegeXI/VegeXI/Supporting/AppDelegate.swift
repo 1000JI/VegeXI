@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         instance?.appName = kServiceAppName
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = ViewController()
+        window?.rootViewController = HomeVC()
         window?.backgroundColor = .systemBackground
         window?.makeKeyAndVisible()
         

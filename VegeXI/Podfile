@@ -8,5 +8,9 @@ target 'VegeXI' do
   # Pods for VegeXI
   pod 'naveridlogin-sdk-ios'
   pod 'Firebase/Analytics'
+  pod 'Firebase/Database'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Core'
 
 end
