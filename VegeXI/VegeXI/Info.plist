@@ -2,28 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>KAKAO_APP_KEY</key>
-    <string>75c9f5e63458b928e4348d36cff24056</string>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <!-- 공통 -->
-        <string>kakao75c9f5e63458b928e4348d36cff24056</string>
-
-        <!-- 간편로그인 -->
-        <string>kakaokompassauth</string>
-        <string>storykompassauth</string>
-
-        <!-- 카카오톡링크 -->
-        <string>kakaolink</string>
-        <string>kakaotalk-5.9.7</string>
-
-        <!-- 카카오스토리링크 -->
-        <string>storylink</string>
-        
-        <!-- 네이버 로그인 -->
-        <string>naversearchapp</string>
-        <string>naversearchthirdlogin</string>
-    </array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -56,9 +34,30 @@
 				<string>naverlogin</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.799002044006-43md5uepbuoicdok6vk7f7mevanph24l</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>KAKAO_APP_KEY</key>
+	<string>75c9f5e63458b928e4348d36cff24056</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>kakao75c9f5e63458b928e4348d36cff24056</string>
+		<string>kakaokompassauth</string>
+		<string>storykompassauth</string>
+		<string>kakaolink</string>
+		<string>kakaotalk-5.9.7</string>
+		<string>storylink</string>
+		<string>naversearchapp</string>
+		<string>naversearchthirdlogin</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

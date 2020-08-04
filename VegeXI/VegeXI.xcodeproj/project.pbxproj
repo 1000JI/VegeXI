@@ -41,6 +41,7 @@
 /* Begin PBXFileReference section */
 		09A17A193B26B7E3D5AFF37D /* Pods-VegeXI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VegeXI.release.xcconfig"; path = "Target Support Files/Pods-VegeXI/Pods-VegeXI.release.xcconfig"; sourceTree = "<group>"; };
 		38105EDA7625BA3CC11C87BE /* Pods-VegeXI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VegeXI.debug.xcconfig"; path = "Target Support Files/Pods-VegeXI/Pods-VegeXI.debug.xcconfig"; sourceTree = "<group>"; };
+		42299CBD24D93E6A00AE9253 /* VegeXI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VegeXI.entitlements; sourceTree = "<group>"; };
 		943E4B56E189F1F7F3E0DE26 /* Pods_VegeXI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VegeXI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF2EE70124D86C4C00A956BD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AF2EE70324D87B4800A956BD /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
@@ -73,6 +74,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		42299CB624D9367400AE9253 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		42299CB724D9367800AE9253 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		42299CB824D9367B00AE9253 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AFC1185624D3AEE1005B2E44 /* HomeVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		4EDD59B61593B9AB8AD2819E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +151,7 @@
 		AFC1185124D3AEE1005B2E44 /* VegeXI */ = {
 			isa = PBXGroup;
 			children = (
+				42299CBD24D93E6A00AE9253 /* VegeXI.entitlements */,
 				AFC1186624D3AFE5005B2E44 /* Tutorial */,
 				AFC1186724D3AFEE005B2E44 /* Challenge */,
 				AFC1186824D3AFFA005B2E44 /* MyPage */,
@@ -143,7 +167,9 @@
 		AFC1186624D3AFE5005B2E44 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				AFC1185624D3AEE1005B2E44 /* HomeVC.swift */,
+				42299CB824D9367B00AE9253 /* Controller */,
+				42299CB724D9367800AE9253 /* View */,
+				42299CB624D9367400AE9253 /* Model */,
 			);
 			path = Tutorial;
 			sourceTree = "<group>";
@@ -204,6 +230,7 @@
 				AFC1184D24D3AEE1005B2E44 /* Resources */,
 				AF9E8D0D24D517530047F0C4 /* Embed Frameworks */,
 				C733A60595BA37C1A7B93773 /* [CP] Embed Pods Frameworks */,
+				CDC604F1A6A2912C0AA79D73 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -308,6 +335,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CDC604F1A6A2912C0AA79D73 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -460,8 +504,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)\n$(EMBEDDED_CONTENT_CONTAINS_SWIFT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = VegeXI/VegeXI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZLCDRXJTXW;
+				DEVELOPMENT_TEAM = DX4KVUBK56;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -490,8 +535,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)\n$(EMBEDDED_CONTENT_CONTAINS_SWIFT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = VegeXI/VegeXI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZLCDRXJTXW;
+				DEVELOPMENT_TEAM = DX4KVUBK56;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
