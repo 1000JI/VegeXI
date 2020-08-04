@@ -166,10 +166,10 @@
 		AFC1186924D3B004005B2E44 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
-				AFC1185224D3AEE1005B2E44 /* AppDelegate.swift */,
-				AFC1185D24D3AEE3005B2E44 /* LaunchScreen.storyboard */,
 				AFC1185B24D3AEE3005B2E44 /* Assets.xcassets */,
 				AF88436824D6C902000ABC2A /* GoogleService-Info.plist */,
+				AFC1185D24D3AEE3005B2E44 /* LaunchScreen.storyboard */,
+				AFC1185224D3AEE1005B2E44 /* AppDelegate.swift */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
