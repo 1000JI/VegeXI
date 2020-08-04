@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         NaverLoginService.shared.initNaverLogin()
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = HomeVC()
+        window?.rootViewController = SignInViewController()
         window?.backgroundColor = .systemBackground
         window?.makeKeyAndVisible()
         
@@ -69,7 +69,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         guard let authentication = user.authentication else { return }
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
-        print(credential.provider)
+        
+        Auth.auth().signIn(with: credential) { (authResult, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("Login Successful") }
+        }
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
