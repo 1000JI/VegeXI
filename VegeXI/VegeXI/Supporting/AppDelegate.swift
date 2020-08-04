@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         NaverLoginService.shared.initNaverLogin()
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = HomeVC()
+        window?.rootViewController = SignInViewController()
         window?.backgroundColor = .systemBackground
         window?.makeKeyAndVisible()
         
