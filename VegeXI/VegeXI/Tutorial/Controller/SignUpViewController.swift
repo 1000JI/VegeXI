@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SignUpViewController: UIViewController {
     
@@ -20,13 +21,23 @@ class SignUpViewController: UIViewController {
         $0.spacing = 10
     }
     let idTextField = UITextField().then {
-        $0.backgroundColor = .lightGray
+        $0.placeholder = " 아이디를 입력해주세요"
+        $0.layer.borderWidth = 0.5
+        $0.layer.borderColor = UIColor.lightGray.cgColor
+        $0.autocapitalizationType = .none
     }
     let nicknameTextField = UITextField().then {
-        $0.backgroundColor = .lightGray
+        $0.placeholder = " 닉네임을 입력해주세요"
+        $0.layer.borderWidth = 0.5
+        $0.layer.borderColor = UIColor.lightGray.cgColor
+        $0.autocapitalizationType = .none
     }
     let passwordTextField = UITextField().then {
-        $0.backgroundColor = .lightGray
+        $0.placeholder = " 패스워드를 입력해주세요"
+        $0.layer.borderWidth = 0.5
+        $0.layer.borderColor = UIColor.lightGray.cgColor
+        $0.autocapitalizationType = .none
+        $0.isSecureTextEntry = true
     }
     
     // Buttons
@@ -39,12 +50,14 @@ class SignUpViewController: UIViewController {
     let signUpButton = UIButton().then {
         $0.setTitle("가입하기", for: .normal)
         $0.setTitleColor(.systemBlue, for: .normal)
-        $0.backgroundColor = .lightGray
+        $0.layer.borderWidth = 0.5
+        $0.layer.borderColor = UIColor.lightGray.cgColor
     }
     let goBackButton = UIButton().then {
         $0.setTitle("돌아가기", for: .normal)
         $0.setTitleColor(.systemBlue, for: .normal)
-        $0.backgroundColor = .lightGray
+        $0.layer.borderWidth = 0.5
+        $0.layer.borderColor = UIColor.lightGray.cgColor
     }
     
     
@@ -95,11 +108,40 @@ class SignUpViewController: UIViewController {
     }
     
     
+    // MARK: - Helpers
+    private func createUser() {
+        guard let email = idTextField.text else { return }
+        guard let nickname = nicknameTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                guard let authResult = authResult else { return print("No Auth Result") }
+                let uid = authResult.user.uid
+                let email = email
+                let nickname = nickname
+                let profileImageUrl = ""
+                let type = "firebase"
+                
+                let ref = Database.database().reference()
+                ref.child("users").setValue(uid)
+                ref.child("users").child(uid).child("email").setValue(email)
+                ref.child("users").child(uid).child("nickname").setValue(nickname)
+                ref.child("users").child(uid).child("profileImageUrl").setValue(profileImageUrl)
+                ref.child("users").child(uid).child("type").setValue(type)                
+                self.dismiss(animated: true)
+            }
+        }
+    }
+    
+    
+    
     // MARK: - Selectors
     @objc private func handleButtons(_ sender: UIButton) {
         switch sender {
         case signUpButton:
-            print("signup")
+            createUser()
         case goBackButton:
             dismiss(animated: true)
         default:

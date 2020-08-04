@@ -14,20 +14,33 @@ import Alamofire
 import Then
 import GoogleSignIn
 import AuthenticationServices
+import Firebase
 
 class SignInViewController: UIViewController {
     
     // MARK: - Properties
+    var firebaseStateListener: AuthStateDidChangeListenerHandle?
     
     // TextFields
     let idTextField = UITextField().then {
-        $0.backgroundColor = .lightGray
+        $0.placeholder = " 아이디를 입력해주세요"
+        $0.layer.borderWidth = 0.5
+        $0.layer.borderColor = UIColor.lightGray.cgColor
+        $0.autocapitalizationType = .none
     }
     let passwordTextField = UITextField().then {
-        $0.backgroundColor = .lightGray
+        $0.placeholder = " 패스워드를 입력해주세요"
+        $0.layer.borderWidth = 0.5
+        $0.layer.borderColor = UIColor.lightGray.cgColor
+        $0.autocapitalizationType = .none
+        $0.isSecureTextEntry = true
     }
     
     // Buttons
+    let signInButton = UIButton().then {
+        $0.setTitle("로그인", for: .normal)
+        $0.setTitleColor(.systemBlue, for: .normal)
+    }
     let authorizationAppleIDButton = ASAuthorizationAppleIDButton()
     let googleLoginButton = GIDSignInButton()
     private lazy var kakaoLoginButton = KOLoginButton().then {
@@ -53,6 +66,18 @@ class SignInViewController: UIViewController {
         configureSNSLogin()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        firebaseStateListener = Auth.auth().addStateDidChangeListener { (auth, user) in
+            print(auth, user ?? "No User")
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        Auth.auth().removeStateDidChangeListener(firebaseStateListener!)
+    }
+    
     
     // MARK: - Selectors
     
@@ -74,7 +99,20 @@ class SignInViewController: UIViewController {
         controller.performRequests()
     }
     
+    @objc private func handleSignInButton(_ sender: UIButton) {
+        guard let email = idTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("Logged In Successfully")
+            }
+        }
+    }
+    
     @objc private func handleSignUpButton(_ sender: UIButton) {
+                logoutMethod()
         let nextVC = SignUpViewController()
         nextVC.modalPresentationStyle = .fullScreen
         present(nextVC, animated: true)
@@ -95,7 +133,7 @@ class SignInViewController: UIViewController {
     private func configureUI() {
         configurePropertyAttributes()
         view.backgroundColor = .systemBackground
-        [idTextField, passwordTextField, authorizationAppleIDButton, googleLoginButton, naverLoginButton, kakaoLoginButton, signUpButton].forEach {
+        [idTextField, passwordTextField, signInButton, authorizationAppleIDButton, googleLoginButton, naverLoginButton, kakaoLoginButton, signUpButton].forEach {
             view.addSubview($0)
         }
         
@@ -110,7 +148,14 @@ class SignInViewController: UIViewController {
             $0.centerX.equalToSuperview()
             $0.width.equalTo(idTextField)
             $0.height.equalTo(45)
-            $0.bottom.equalTo(authorizationAppleIDButton.snp.top).offset(-100)
+            $0.bottom.equalTo(signInButton.snp.top).offset(-100)
+        }
+        
+        signInButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(idTextField)
+            $0.height.equalTo(45)
+            $0.bottom.equalTo(authorizationAppleIDButton.snp.top).offset(-50)
         }
         
         authorizationAppleIDButton.snp.makeConstraints {
@@ -144,7 +189,17 @@ class SignInViewController: UIViewController {
     }
     
     private func configurePropertyAttributes() {
+        signInButton.addTarget(self, action: #selector(handleSignInButton(_:)), for: .touchUpInside)
         signUpButton.addTarget(self, action: #selector(handleSignUpButton(_:)), for: .touchUpInside)
+    }
+    
+    private func logoutMethod() {
+        do {
+            try Auth.auth().signOut()
+            print("Logged Out Sucessfully")
+        } catch {
+            print(error)
+        }
     }
 }
 
