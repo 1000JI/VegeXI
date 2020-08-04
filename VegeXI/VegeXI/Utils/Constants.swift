@@ -7,8 +7,6 @@
 //
 
 import Firebase
-import FirebaseStorage
-import FirebaseDatabase
 
 let STORAGE_REF = Storage.storage().reference()
 let STORAGE_PROFILE_IMAGES = STORAGE_REF.child("profile_images")

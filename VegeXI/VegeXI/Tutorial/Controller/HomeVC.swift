@@ -73,7 +73,7 @@ class HomeVC: UIViewController {
                                              for: .touchUpInside)
         NaverLoginService.shared.loginInstance?.delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
-        //        GIDSignIn.sharedInstance().signIn()
+//        GIDSignIn.sharedInstance().signIn()
     }
     
     func configureUI() {

@@ -8,8 +8,8 @@
 
 import UIKit
 import NaverThirdPartyLogin
+import Firebase
 import FirebaseCore
-//import Firebase
 import GoogleSignIn
 
 @UIApplicationMain
