@@ -8,7 +8,7 @@
 
 import UIKit
 import NaverThirdPartyLogin
-import Firebase
+import FirebaseCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

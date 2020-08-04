@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8E845E39A055B87E3285FCA4 /* Pods_VegeXI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 943E4B56E189F1F7F3E0DE26 /* Pods_VegeXI.framework */; };
-		AF27F3DE24D5F29800CFEF9C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AF27F3DD24D5F29800CFEF9C /* Alamofire */; };
+		AF27F3DE24D5F29800CFEF9C /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = AF27F3DD24D5F29800CFEF9C /* SwiftPackageProductDependency */; };
 		AF2EE70224D86C4C00A956BD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2EE70124D86C4C00A956BD /* User.swift */; };
 		AF2EE70424D87B4800A956BD /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2EE70324D87B4800A956BD /* AuthService.swift */; };
 		AF58173224D7DF9200F2683D /* SNSLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58173124D7DF9200F2683D /* SNSLoginService.swift */; };
@@ -19,8 +19,8 @@
 		AFC1185724D3AEE1005B2E44 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC1185624D3AEE1005B2E44 /* HomeVC.swift */; };
 		AFC1185C24D3AEE3005B2E44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFC1185B24D3AEE3005B2E44 /* Assets.xcassets */; };
 		AFC1185F24D3AEE3005B2E44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFC1185D24D3AEE3005B2E44 /* LaunchScreen.storyboard */; };
-		AFC1186D24D3B08C005B2E44 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AFC1186C24D3B08C005B2E44 /* SnapKit */; };
-		AFC1187024D3B0BD005B2E44 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = AFC1186F24D3B0BD005B2E44 /* Then */; };
+		AFC1186D24D3B08C005B2E44 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = AFC1186C24D3B08C005B2E44 /* SwiftPackageProductDependency */; };
+		AFC1187024D3B0BD005B2E44 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = AFC1186F24D3B0BD005B2E44 /* SwiftPackageProductDependency */; };
 		AFF46CAD24D85A00008F118E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF46CAC24D85A00008F118E /* Constants.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,9 +62,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF27F3DE24D5F29800CFEF9C /* Alamofire in Frameworks */,
-				AFC1186D24D3B08C005B2E44 /* SnapKit in Frameworks */,
-				AFC1187024D3B0BD005B2E44 /* Then in Frameworks */,
+				AF27F3DE24D5F29800CFEF9C /* BuildFile in Frameworks */,
+				AFC1186D24D3B08C005B2E44 /* BuildFile in Frameworks */,
+				AFC1187024D3B0BD005B2E44 /* BuildFile in Frameworks */,
 				AF9E8D1C24D58E160047F0C4 /* KakaoOpenSDK.framework in Frameworks */,
 				8E845E39A055B87E3285FCA4 /* Pods_VegeXI.framework in Frameworks */,
 			);
@@ -203,7 +203,7 @@
 				AFC1184C24D3AEE1005B2E44 /* Frameworks */,
 				AFC1184D24D3AEE1005B2E44 /* Resources */,
 				AF9E8D0D24D517530047F0C4 /* Embed Frameworks */,
-				C733A60595BA37C1A7B93773 /* [CP] Embed Pods Frameworks */,
+				F2AB151BFBDEF85E56C837E8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -211,9 +211,9 @@
 			);
 			name = VegeXI;
 			packageProductDependencies = (
-				AFC1186C24D3B08C005B2E44 /* SnapKit */,
-				AFC1186F24D3B0BD005B2E44 /* Then */,
-				AF27F3DD24D5F29800CFEF9C /* Alamofire */,
+				AFC1186C24D3B08C005B2E44 /* SwiftPackageProductDependency */,
+				AFC1186F24D3B0BD005B2E44 /* SwiftPackageProductDependency */,
+				AF27F3DD24D5F29800CFEF9C /* SwiftPackageProductDependency */,
 			);
 			productName = VegeXI;
 			productReference = AFC1184F24D3AEE1005B2E44 /* VegeXI.app */;
@@ -244,9 +244,9 @@
 			);
 			mainGroup = AFC1184624D3AEE1005B2E44;
 			packageReferences = (
-				AFC1186B24D3B08B005B2E44 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				AFC1186E24D3B0BD005B2E44 /* XCRemoteSwiftPackageReference "Then" */,
-				AF27F3DC24D5F29800CFEF9C /* XCRemoteSwiftPackageReference "Alamofire" */,
+				AFC1186B24D3B08B005B2E44 /* RemoteSwiftPackageReference */,
+				AFC1186E24D3B0BD005B2E44 /* RemoteSwiftPackageReference */,
+				AF27F3DC24D5F29800CFEF9C /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = AFC1185024D3AEE1005B2E44 /* Products */;
 			projectDirPath = "";
@@ -293,7 +293,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C733A60595BA37C1A7B93773 /* [CP] Embed Pods Frameworks */ = {
+		F2AB151BFBDEF85E56C837E8 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -538,7 +538,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		AF27F3DC24D5F29800CFEF9C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		AF27F3DC24D5F29800CFEF9C /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -546,7 +546,7 @@
 				minimumVersion = 5.2.2;
 			};
 		};
-		AFC1186B24D3B08B005B2E44 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		AFC1186B24D3B08B005B2E44 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -554,7 +554,7 @@
 				minimumVersion = 5.0.1;
 			};
 		};
-		AFC1186E24D3B0BD005B2E44 /* XCRemoteSwiftPackageReference "Then" */ = {
+		AFC1186E24D3B0BD005B2E44 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/devxoul/Then.git";
 			requirement = {
@@ -565,19 +565,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AF27F3DD24D5F29800CFEF9C /* Alamofire */ = {
+		AF27F3DD24D5F29800CFEF9C /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AF27F3DC24D5F29800CFEF9C /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = AF27F3DC24D5F29800CFEF9C /* RemoteSwiftPackageReference */;
 			productName = Alamofire;
 		};
-		AFC1186C24D3B08C005B2E44 /* SnapKit */ = {
+		AFC1186C24D3B08C005B2E44 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AFC1186B24D3B08B005B2E44 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = AFC1186B24D3B08B005B2E44 /* RemoteSwiftPackageReference */;
 			productName = SnapKit;
 		};
-		AFC1186F24D3B0BD005B2E44 /* Then */ = {
+		AFC1186F24D3B0BD005B2E44 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AFC1186E24D3B0BD005B2E44 /* XCRemoteSwiftPackageReference "Then" */;
+			package = AFC1186E24D3B0BD005B2E44 /* RemoteSwiftPackageReference */;
 			productName = Then;
 		};
 /* End XCSwiftPackageProductDependency section */

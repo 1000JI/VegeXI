@@ -25,7 +25,9 @@ class HomeVC: UIViewController {
     
     private lazy var naverLoginButton = UIButton(type: .system).then {
         $0.setImage(UIImage(named: "naver_login_short_white")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        $0.addTarget(self, action: #selector(handleLoginNaver), for: .touchUpInside)
+        $0.addTarget(self,
+                     action: #selector(handleLoginNaver),
+                     for: .touchUpInside)
     }
     
     
