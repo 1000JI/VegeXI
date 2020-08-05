@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 
 class SignUpViewController: UIViewController {
     
@@ -124,17 +125,15 @@ class SignUpViewController: UIViewController {
                 let profileImageUrl = ""
                 let type = "firebase"
                 
-                let ref = Database.database().reference()
-                ref.child("users").setValue(uid)
-                ref.child("users").child(uid).child("email").setValue(email)
-                ref.child("users").child(uid).child("nickname").setValue(nickname)
-                ref.child("users").child(uid).child("profileImageUrl").setValue(profileImageUrl)
-                ref.child("users").child(uid).child("type").setValue(type)                
+                REF_USERS.setValue(uid)
+                REF_USERS.child(uid).child("email").setValue(email)
+                REF_USERS.child(uid).child("nickname").setValue(nickname)
+                REF_USERS.child(uid).child("profileImageUrl").setValue(profileImageUrl)
+                REF_USERS.child(uid).child("type").setValue(type)                
                 self.dismiss(animated: true)
             }
         }
     }
-    
     
     
     // MARK: - Selectors

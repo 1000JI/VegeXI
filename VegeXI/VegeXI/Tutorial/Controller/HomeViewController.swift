@@ -14,13 +14,13 @@ class HomeViewController: UIViewController {
     
     var userUid: String?
     
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .systemPurple
-        print(#function, UserService.shared.user)
+        print(#function, UserService.shared.user ?? "")
         
         fetchUser()
     }
@@ -36,7 +36,7 @@ class HomeViewController: UIViewController {
             self.showLoader(false)
             
             UserService.shared.user = user
-            print(#function, UserService.shared.user)
+            print(#function, UserService.shared.user ?? "")
         }
     }
     

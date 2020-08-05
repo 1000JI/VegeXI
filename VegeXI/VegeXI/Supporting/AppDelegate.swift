@@ -7,9 +7,10 @@
 //
 
 import UIKit
-import NaverThirdPartyLogin
 import Firebase
+import FirebaseCore
 import GoogleSignIn
+import NaverThirdPartyLogin
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,15 +25,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = .systemBackground
         
-        if let uid = UserDefaults.standard.string(forKey: "saveUid") {
-            print("DEBUG: exist uuid")
-            let controller = HomeViewController()
-            controller.userUid = uid
-            window?.rootViewController = controller
-        } else {
-            print("DEBUG: not exist uuid")
-            window?.rootViewController = SignInViewController()
-        }
+//        if let uid = UserDefaults.standard.string(forKey: "saveUid") {
+//            print("DEBUG: exist uuid")
+//            let controller = HomeViewController()
+//            controller.userUid = uid
+//            window?.rootViewController = controller
+//        } else {
+//            print("DEBUG: not exist uuid")
+//            window?.rootViewController = SignInViewController()
+//        }
+        window?.rootViewController = FBSignInViewController()
         window?.makeKeyAndVisible()
         
         return true

@@ -7,47 +7,33 @@
 //
 
 import UIKit
-import SnapKit
-import KakaoOpenSDK
-import NaverThirdPartyLogin
+import Firebase
+import FirebaseAuth
 import Alamofire
 import Then
-import GoogleSignIn
+import SnapKit
 import AuthenticationServices
-import Firebase
+import GoogleSignIn
+import KakaoOpenSDK
+import NaverThirdPartyLogin
 
 class SignInViewController: UIViewController {
     
     // MARK: - Properties
-    var firebaseStateListener: AuthStateDidChangeListenerHandle?
-    
-    // TextFields
-    let idTextField = UITextField().then {
-        $0.placeholder = " 아이디를 입력해주세요"
-        $0.layer.borderWidth = 0.5
-        $0.layer.borderColor = UIColor.lightGray.cgColor
-        $0.autocapitalizationType = .none
-    }
-    let passwordTextField = UITextField().then {
-        $0.placeholder = " 패스워드를 입력해주세요"
-        $0.layer.borderWidth = 0.5
-        $0.layer.borderColor = UIColor.lightGray.cgColor
-        $0.autocapitalizationType = .none
-        $0.isSecureTextEntry = true
-    }
+    private var firebaseStateListener: AuthStateDidChangeListenerHandle?
     
     // Buttons
-    let googleLoginButton = GIDSignInButton()
-    let kakaoLoginButton = KOLoginButton()
-    let authorizationAppleIDButton = ASAuthorizationAppleIDButton()
-    let naverLoginButton = UIButton(type: .system).then {
+    private let googleLoginButton = GIDSignInButton()
+    private let kakaoLoginButton = KOLoginButton()
+    private let authorizationAppleIDButton = ASAuthorizationAppleIDButton()
+    private let naverLoginButton = UIButton(type: .system).then {
         $0.setImage(UIImage(named: "naver_login_short_white")?.withRenderingMode(.alwaysOriginal), for: .normal)
     }
-    let signInButton = UIButton().then {
+    private let signInButton = UIButton().then {
         $0.setTitle("로그인", for: .normal)
         $0.setTitleColor(.systemBlue, for: .normal)
     }
-    let signUpButton = UIButton().then {
+    private let signUpButton = UIButton().then {
         $0.setTitle("가입하기", for: .normal)
         $0.setTitleColor(.systemBlue, for: .normal)
     }
@@ -76,11 +62,11 @@ class SignInViewController: UIViewController {
     
     // MARK: - Selectors
     
-    @objc func handleLoginNaver() {
+    @objc private func handleLoginNaver() {
         NaverLoginService.shared.loginInstance?.requestThirdPartyLogin()
     }
     
-    @objc func clickedKakaoLogin() {
+    @objc private func clickedKakaoLogin() {
         KakaoLoginService.shared.registerKakaoAuth()
     }
     
@@ -88,17 +74,6 @@ class SignInViewController: UIViewController {
         AppleLoginService.shared.appleRequestAuthorization()
     }
     
-    @objc private func handleSignInButton(_ sender: UIButton) {
-        guard let email = idTextField.text else { return }
-        guard let password = passwordTextField.text else { return }
-        Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                print("Logged In Successfully")
-            }
-        }
-    }
     
     @objc private func handleSignUpButton(_ sender: UIButton) {
                 logoutMethod()
@@ -127,9 +102,9 @@ class SignInViewController: UIViewController {
     }
     
     private func configurePropertyAttributes() {
-        signInButton.addTarget(self,
-                               action: #selector(handleSignInButton(_:)),
-                               for: .touchUpInside)
+//        signInButton.addTarget(self,
+//                               action: #selector(handleSignInButton(_:)),
+//                               for: .touchUpInside)
         signUpButton.addTarget(self,
                                action: #selector(handleSignUpButton(_:)),
                                for: .touchUpInside)
@@ -147,27 +122,14 @@ class SignInViewController: UIViewController {
     private func configureUI() {
         configurePropertyAttributes()
         view.backgroundColor = .systemBackground
-        [idTextField, passwordTextField, signInButton, authorizationAppleIDButton, googleLoginButton, naverLoginButton, kakaoLoginButton, signUpButton].forEach {
+        [signInButton, authorizationAppleIDButton, googleLoginButton, naverLoginButton, kakaoLoginButton, signUpButton].forEach {
             view.addSubview($0)
         }
         
-        idTextField.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.width.equalToSuperview().offset(-50)
-            $0.height.equalTo(45)
-            $0.bottom.equalTo(passwordTextField.snp.top).offset(-25)
-        }
-        
-        passwordTextField.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(idTextField)
-            $0.height.equalTo(45)
-            $0.bottom.equalTo(signInButton.snp.top).offset(-100)
-        }
         
         signInButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(idTextField)
+            $0.width.equalTo(view.snp.width)
             $0.height.equalTo(45)
             $0.bottom.equalTo(authorizationAppleIDButton.snp.top).offset(-50)
         }
