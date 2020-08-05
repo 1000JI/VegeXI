@@ -191,6 +191,10 @@ final class GoogleLoginService {
     
     func registerGoogleAuth(user: GIDGoogleUser!) {
         guard let authentication = user.authentication else { return }
+        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
+        
+        window.rootViewController?.showLoader(true)
+        
         let credential = GoogleAuthProvider.credential(
             withIDToken: authentication.idToken,
             accessToken: authentication.accessToken)
@@ -200,6 +204,7 @@ final class GoogleLoginService {
                 print(error.localizedDescription)
             } else {
                 print("Login Successful")
+                
                 guard let uuid = Auth.auth().currentUser?.uid else { return }
                 guard let email = user.profile.email else { return }
                 guard let name = user.profile.name else { return }
@@ -212,5 +217,14 @@ final class GoogleLoginService {
                 AuthService.shared.authServiceUser(authData: authModel)
             }
         }
+    }
+}
+
+final class BasicLoginService {
+    static let shared = BasicLoginService()
+    private init() { }
+    
+    func registerBasicAuth() {
+        
     }
 }

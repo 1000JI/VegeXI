@@ -6,52 +6,36 @@
 //  Copyright © 2020 TeamSloth. All rights reserved.
 //
 
-import UIKit
-import SnapKit
-import KakaoOpenSDK
-import NaverThirdPartyLogin
 import Alamofire
-import Then
-import GoogleSignIn
 import AuthenticationServices
 import Firebase
+import FirebaseAuth
+import GoogleSignIn
+import KakaoOpenSDK
+import NaverThirdPartyLogin
+import SnapKit
+import Then
+import UIKit
 
 class SignInViewController: UIViewController {
     
     // MARK: - Properties
-    var firebaseStateListener: AuthStateDidChangeListenerHandle?
     
-    // TextFields
-    let idTextField = UITextField().then {
-        $0.placeholder = " 아이디를 입력해주세요"
-        $0.layer.borderWidth = 0.5
-        $0.layer.borderColor = UIColor.lightGray.cgColor
-        $0.autocapitalizationType = .none
-    }
-    let passwordTextField = UITextField().then {
-        $0.placeholder = " 패스워드를 입력해주세요"
-        $0.layer.borderWidth = 0.5
-        $0.layer.borderColor = UIColor.lightGray.cgColor
-        $0.autocapitalizationType = .none
-        $0.isSecureTextEntry = true
+    private let logoImageView = UIImageView().then {
+        $0.image = UIImage(named: "slowvegexicon")
+        $0.contentMode = .scaleAspectFill
+        $0.snp.makeConstraints {
+            $0.height.width.equalTo(150)
+        }
     }
     
-    // Buttons
-    let googleLoginButton = GIDSignInButton()
-    let kakaoLoginButton = KOLoginButton()
-    let authorizationAppleIDButton = ASAuthorizationAppleIDButton()
-    let naverLoginButton = UIButton(type: .system).then {
-        $0.setImage(UIImage(named: "naver_login_short_white")?.withRenderingMode(.alwaysOriginal), for: .normal)
+    private lazy var logoView = UIView().then {
+        $0.backgroundColor = .clear
+        $0.addSubview(logoImageView)
+        logoImageView.snp.makeConstraints {
+            $0.centerX.centerY.equalToSuperview()
+        }
     }
-    let signInButton = UIButton().then {
-        $0.setTitle("로그인", for: .normal)
-        $0.setTitleColor(.systemBlue, for: .normal)
-    }
-    let signUpButton = UIButton().then {
-        $0.setTitle("가입하기", for: .normal)
-        $0.setTitleColor(.systemBlue, for: .normal)
-    }
-    
     
     // MARK: - LifeCycle
     
@@ -61,47 +45,48 @@ class SignInViewController: UIViewController {
         configureSNSLogin()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        firebaseStateListener = Auth.auth().addStateDidChangeListener { (auth, user) in
-            print(auth, user ?? "No User")
+    // MARK: - Selectors
+    
+    @objc func emailSignEvent(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            print("Email SignIn")
+        case 1:
+            print("Email SignUp")
+        default:
+            break
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        Auth.auth().removeStateDidChangeListener(firebaseStateListener!)
-    }
-    
-    
-    // MARK: - Selectors
-    
-    @objc func handleLoginNaver() {
-        NaverLoginService.shared.loginInstance?.requestThirdPartyLogin()
-    }
-    
-    @objc func clickedKakaoLogin() {
-        KakaoLoginService.shared.registerKakaoAuth()
-    }
-    
-    @objc private func handleAuthorizationAppleIDButton(_ sender: ASAuthorizationAppleIDButton) {
-        AppleLoginService.shared.appleRequestAuthorization()
+    @objc func snsLoginEvent(_ sender: UITapGestureRecognizer) {
+        guard let tagValue = sender.view?.tag else { return }
+        
+        switch tagValue {
+        case 0: // kakao
+            KakaoLoginService.shared.registerKakaoAuth()
+        case 1: // naver
+            NaverLoginService.shared.loginInstance?.requestThirdPartyLogin()
+        case 2: // google
+            GoogleLoginService.shared.instance?.signIn()
+        case 3: // apple
+            AppleLoginService.shared.appleRequestAuthorization()
+        default:
+            break
+        }
     }
     
     @objc private func handleSignInButton(_ sender: UIButton) {
-        guard let email = idTextField.text else { return }
-        guard let password = passwordTextField.text else { return }
-        Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                print("Logged In Successfully")
-            }
-        }
+//        Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
+//            if let error = error {
+//                print(error.localizedDescription)
+//            } else {
+//                print("Logged In Successfully")
+//            }
+//        }
     }
     
     @objc private func handleSignUpButton(_ sender: UIButton) {
-                logoutMethod()
+        logoutMethod()
         let nextVC = SignUpViewController()
         nextVC.modalPresentationStyle = .fullScreen
         present(nextVC, animated: true)
@@ -111,28 +96,9 @@ class SignInViewController: UIViewController {
     // MARK: - Helpers
     
     private func configureSNSLogin() {
-        authorizationAppleIDButton.addTarget(self,
-                                             action: #selector(handleAuthorizationAppleIDButton(_:)),
-                                             for: .touchUpInside)
-        kakaoLoginButton.addTarget(self,
-                                   action: #selector(clickedKakaoLogin),
-                                   for: .touchUpInside)
-        naverLoginButton.addTarget(self,
-                                   action: #selector(handleLoginNaver),
-                                   for: .touchUpInside)
-        
         AppleLoginService.shared.appleLoginInit(delegateView: self)
         NaverLoginService.shared.loginInstance?.delegate = self
         GoogleLoginService.shared.instance?.presentingViewController = self
-    }
-    
-    private func configurePropertyAttributes() {
-        signInButton.addTarget(self,
-                               action: #selector(handleSignInButton(_:)),
-                               for: .touchUpInside)
-        signUpButton.addTarget(self,
-                               action: #selector(handleSignUpButton(_:)),
-                               for: .touchUpInside)
     }
     
     private func logoutMethod() {
@@ -145,61 +111,115 @@ class SignInViewController: UIViewController {
     }
     
     private func configureUI() {
-        configurePropertyAttributes()
         view.backgroundColor = .systemBackground
-        [idTextField, passwordTextField, signInButton, authorizationAppleIDButton, googleLoginButton, naverLoginButton, kakaoLoginButton, signUpButton].forEach {
-            view.addSubview($0)
+        
+        let snsButtonStack = UIStackView(arrangedSubviews: [
+            makeSnsSignInButton(imageName: "kakaoicon",
+                                withText: "카카오톡으로 시작하기",
+                                tag: 0),
+            makeSnsSignInButton(imageName: "navericon",
+                                withText: "네이버로 시작하기",
+                                tag: 1),
+            makeSnsSignInButton(imageName: "googleicon",
+                                withText: "Google로 시작하기",
+                                tag: 2),
+            makeSnsSignInButton(imageName: "appleicon",
+                                withText: "Apple로 시작하기",
+                                tag: 3)
+        ])
+        snsButtonStack.axis = .vertical
+        snsButtonStack.spacing = 14
+        
+        
+        let lineView = UIView()
+        lineView.backgroundColor = .vegeTextBlackColor
+        lineView.snp.makeConstraints {
+            $0.width.equalTo(1)
+            $0.height.equalTo(11)
         }
         
-        idTextField.snp.makeConstraints {
+        let emailStack = UIStackView(arrangedSubviews: [
+            makeEmailButton(title: "이메일로 시작하기", tag: 0),
+            lineView,
+            makeEmailButton(title: "이메일로 가입하기", tag: 1)
+        ])
+        emailStack.axis = .horizontal
+        emailStack.spacing = 20
+        
+        view.addSubview(logoView)
+        view.addSubview(snsButtonStack)
+        view.addSubview(emailStack)
+        
+        // Layout
+        
+        logoView.snp.makeConstraints {
+            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(snsButtonStack.snp.top)
+        }
+        
+        snsButtonStack.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.bottom.equalTo(emailStack.snp.top).offset(-20)
+        }
+        
+        emailStack.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.width.equalToSuperview().offset(-50)
-            $0.height.equalTo(45)
-            $0.bottom.equalTo(passwordTextField.snp.top).offset(-25)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-80)
         }
+    }
+    
+    func makeEmailButton(title: String, tag: Int) -> UIButton {
+        let button = UIButton(type: .system)
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(.vegeTextBlackColor, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 12)
+        button.addTarget(self, action: #selector(emailSignEvent), for: .touchUpInside)
+        button.tag = tag
+        return button
+    }
+    
+    func makeSnsSignInButton(imageName: String, withText: String, tag: Int) -> UIView {
+        let view = UIView()
+        let snsImageView = UIImageView()
+        let snsLabel = UILabel()
+        let tapGesture = UITapGestureRecognizer(target: self,
+                                                action: #selector(snsLoginEvent))
         
-        passwordTextField.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(idTextField)
-            $0.height.equalTo(45)
-            $0.bottom.equalTo(signInButton.snp.top).offset(-100)
-        }
+        view.addSubview(snsLabel)
+        view.addSubview(snsImageView)
+        view.addGestureRecognizer(tapGesture)
         
-        signInButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(idTextField)
-            $0.height.equalTo(45)
-            $0.bottom.equalTo(authorizationAppleIDButton.snp.top).offset(-50)
-        }
         
-        authorizationAppleIDButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(googleLoginButton.snp.top).offset(-16)
+        view.tag = tag
+        view.backgroundColor = .clear
+        view.isUserInteractionEnabled = true
+        
+        snsImageView.image = UIImage(named: imageName)
+        snsImageView.contentMode = .scaleAspectFill
+        
+        snsLabel.text = withText
+        snsLabel.textColor = .vegeTextBlackColor
+        snsLabel.textAlignment = .center
+        snsLabel.font = .systemFont(ofSize: 12)
+        snsLabel.layer.borderColor = UIColor.vegeLightGrayBorderColor.cgColor
+        snsLabel.layer.borderWidth = 0.5
+        
+        view.snp.makeConstraints {
             $0.height.equalTo(50)
         }
-
-        googleLoginButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(naverLoginButton.snp.top).offset(-16)
-            $0.height.equalTo(50)
-        }
-
-        naverLoginButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(kakaoLoginButton.snp.top).offset(-16)
-            $0.height.equalTo(50)
-        }
-     
-        kakaoLoginButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(signUpButton.snp.top).offset(-16)
-            $0.height.equalTo(50)
+        
+        snsImageView.snp.makeConstraints {
+            $0.top.leading.bottom.equalToSuperview()
+            $0.width.equalTo(snsImageView.snp.height)
         }
         
-        signUpButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(-50)
+        snsLabel.snp.makeConstraints {
+            $0.leading.equalTo(snsImageView.snp.trailing).offset(-0.5)
+            $0.top.bottom.trailing.equalToSuperview()
         }
+        
+        return view
     }
 }
 

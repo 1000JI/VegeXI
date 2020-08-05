@@ -70,6 +70,7 @@ class SignUpViewController: UIViewController {
     
     
     // MARK: - UI
+    
     private func configureUI() {
         setPropertyAttribites()
         setConstraints()
@@ -113,6 +114,8 @@ class SignUpViewController: UIViewController {
         guard let email = idTextField.text else { return }
         guard let nickname = nicknameTextField.text else { return }
         guard let password = passwordTextField.text else { return }
+        
+        
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -134,7 +137,6 @@ class SignUpViewController: UIViewController {
             }
         }
     }
-    
     
     
     // MARK: - Selectors
