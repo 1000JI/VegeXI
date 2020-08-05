@@ -9,9 +9,12 @@
 /* Begin PBXBuildFile section */
 		42299CBF24D974AF00AE9253 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42299CBE24D974AF00AE9253 /* SignUpViewController.swift */; };
 		8E845E39A055B87E3285FCA4 /* Pods_VegeXI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 943E4B56E189F1F7F3E0DE26 /* Pods_VegeXI.framework */; };
-		AF27F3DE24D5F29800CFEF9C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AF27F3DD24D5F29800CFEF9C /* Alamofire */; };
-		AF2EE70224D86C4C00A956BD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2EE70124D86C4C00A956BD /* User.swift */; };
+		AF27F3DE24D5F29800CFEF9C /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = AF27F3DD24D5F29800CFEF9C /* SwiftPackageProductDependency */; };
 		AF2EE70424D87B4800A956BD /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2EE70324D87B4800A956BD /* AuthService.swift */; };
+		AF561E4024D9CCB80063D51F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF561E3F24D9CCB80063D51F /* Extensions.swift */; };
+		AF561E4224D9CEE80063D51F /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF561E4124D9CEE80063D51F /* UserService.swift */; };
+		AF5634DC24DA64F200A606EA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5634DB24DA64F200A606EA /* HomeViewController.swift */; };
+		AF5634DF24DA6AF300A606EA /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = AF5634DE24DA6AF300A606EA /* SwiftPackageProductDependency */; };
 		AF58173224D7DF9200F2683D /* SNSLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58173124D7DF9200F2683D /* SNSLoginService.swift */; };
 		AF88436924D6C902000ABC2A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF88436824D6C902000ABC2A /* GoogleService-Info.plist */; };
 		AF9E8D1C24D58E160047F0C4 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9E8D1A24D58E020047F0C4 /* KakaoOpenSDK.framework */; };
@@ -20,8 +23,8 @@
 		AFC1185724D3AEE1005B2E44 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC1185624D3AEE1005B2E44 /* SignInViewController.swift */; };
 		AFC1185C24D3AEE3005B2E44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFC1185B24D3AEE3005B2E44 /* Assets.xcassets */; };
 		AFC1185F24D3AEE3005B2E44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFC1185D24D3AEE3005B2E44 /* LaunchScreen.storyboard */; };
-		AFC1186D24D3B08C005B2E44 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AFC1186C24D3B08C005B2E44 /* SnapKit */; };
-		AFC1187024D3B0BD005B2E44 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = AFC1186F24D3B0BD005B2E44 /* Then */; };
+		AFC1186D24D3B08C005B2E44 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = AFC1186C24D3B08C005B2E44 /* SwiftPackageProductDependency */; };
+		AFC1187024D3B0BD005B2E44 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = AFC1186F24D3B0BD005B2E44 /* SwiftPackageProductDependency */; };
 		AFF46CAD24D85A00008F118E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF46CAC24D85A00008F118E /* Constants.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,8 +48,10 @@
 		42299CBD24D93E6A00AE9253 /* VegeXI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VegeXI.entitlements; sourceTree = "<group>"; };
 		42299CBE24D974AF00AE9253 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		943E4B56E189F1F7F3E0DE26 /* Pods_VegeXI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VegeXI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AF2EE70124D86C4C00A956BD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AF2EE70324D87B4800A956BD /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		AF561E3F24D9CCB80063D51F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		AF561E4124D9CEE80063D51F /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		AF5634DB24DA64F200A606EA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		AF58173124D7DF9200F2683D /* SNSLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLoginService.swift; sourceTree = "<group>"; };
 		AF88436824D6C902000ABC2A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AF9E8D1A24D58E020047F0C4 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoOpenSDK.framework; path = Frameworks/KakaoOpenSDK.framework; sourceTree = "<group>"; };
@@ -65,10 +70,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF27F3DE24D5F29800CFEF9C /* Alamofire in Frameworks */,
-				AFC1186D24D3B08C005B2E44 /* SnapKit in Frameworks */,
-				AFC1187024D3B0BD005B2E44 /* Then in Frameworks */,
+				AF27F3DE24D5F29800CFEF9C /* BuildFile in Frameworks */,
+				AFC1186D24D3B08C005B2E44 /* BuildFile in Frameworks */,
+				AFC1187024D3B0BD005B2E44 /* BuildFile in Frameworks */,
 				AF9E8D1C24D58E160047F0C4 /* KakaoOpenSDK.framework in Frameworks */,
+				AF5634DF24DA6AF300A606EA /* BuildFile in Frameworks */,
 				8E845E39A055B87E3285FCA4 /* Pods_VegeXI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,6 +101,7 @@
 			children = (
 				AFC1185624D3AEE1005B2E44 /* SignInViewController.swift */,
 				42299CBE24D974AF00AE9253 /* SignUpViewController.swift */,
+				AF5634DB24DA64F200A606EA /* HomeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -111,7 +118,6 @@
 		AF2EE70024D86C4100A956BD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AF2EE70124D86C4C00A956BD /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -158,11 +164,11 @@
 				AFC1186724D3AFEE005B2E44 /* Challenge */,
 				AFC1186824D3AFFA005B2E44 /* MyPage */,
 				AFC1186A24D3B00F005B2E44 /* Service */,
+				AF9E8D0F24D51A220047F0C4 /* Header */,
+				AFF46CAB24D859DE008F118E /* Utils */,
 				AFC1186924D3B004005B2E44 /* Supporting */,
 				AFC1186024D3AEE3005B2E44 /* Info.plist */,
 				42299CBD24D93E6A00AE9253 /* VegeXI.entitlements */,
-				AF9E8D0F24D51A220047F0C4 /* Header */,
-				AFF46CAB24D859DE008F118E /* Utils */,
 			);
 			path = VegeXI;
 			sourceTree = "<group>";
@@ -208,6 +214,7 @@
 			children = (
 				AF58173124D7DF9200F2683D /* SNSLoginService.swift */,
 				AF2EE70324D87B4800A956BD /* AuthService.swift */,
+				AF561E4124D9CEE80063D51F /* UserService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -216,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				AFF46CAC24D85A00008F118E /* Constants.swift */,
+				AF561E3F24D9CCB80063D51F /* Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -233,7 +241,7 @@
 				AFC1184D24D3AEE1005B2E44 /* Resources */,
 				AF9E8D0D24D517530047F0C4 /* Embed Frameworks */,
 				1090FBDED66D56E7C4434AD4 /* [CP] Embed Pods Frameworks */,
-				E9074EC22C6974E37C87405F /* [CP] Copy Pods Resources */,
+				152047E1C25DE40A5637A192 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -241,9 +249,10 @@
 			);
 			name = VegeXI;
 			packageProductDependencies = (
-				AFC1186C24D3B08C005B2E44 /* SnapKit */,
-				AFC1186F24D3B0BD005B2E44 /* Then */,
-				AF27F3DD24D5F29800CFEF9C /* Alamofire */,
+				AFC1186C24D3B08C005B2E44 /* SwiftPackageProductDependency */,
+				AFC1186F24D3B0BD005B2E44 /* SwiftPackageProductDependency */,
+				AF27F3DD24D5F29800CFEF9C /* SwiftPackageProductDependency */,
+				AF5634DE24DA6AF300A606EA /* SwiftPackageProductDependency */,
 			);
 			productName = VegeXI;
 			productReference = AFC1184F24D3AEE1005B2E44 /* VegeXI.app */;
@@ -274,9 +283,10 @@
 			);
 			mainGroup = AFC1184624D3AEE1005B2E44;
 			packageReferences = (
-				AFC1186B24D3B08B005B2E44 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				AFC1186E24D3B0BD005B2E44 /* XCRemoteSwiftPackageReference "Then" */,
-				AF27F3DC24D5F29800CFEF9C /* XCRemoteSwiftPackageReference "Alamofire" */,
+				AFC1186B24D3B08B005B2E44 /* RemoteSwiftPackageReference */,
+				AFC1186E24D3B0BD005B2E44 /* RemoteSwiftPackageReference */,
+				AF27F3DC24D5F29800CFEF9C /* RemoteSwiftPackageReference */,
+				AF5634DD24DA6AF300A606EA /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = AFC1185024D3AEE1005B2E44 /* Products */;
 			projectDirPath = "";
@@ -318,6 +328,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		152047E1C25DE40A5637A192 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B54E07590A02FA2604096F77 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -340,23 +367,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E9074EC22C6974E37C87405F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -366,10 +376,12 @@
 			files = (
 				AFC1185724D3AEE1005B2E44 /* SignInViewController.swift in Sources */,
 				42299CBF24D974AF00AE9253 /* SignUpViewController.swift in Sources */,
+				AF561E4224D9CEE80063D51F /* UserService.swift in Sources */,
 				AFC1185324D3AEE1005B2E44 /* AppDelegate.swift in Sources */,
+				AF561E4024D9CCB80063D51F /* Extensions.swift in Sources */,
+				AF5634DC24DA64F200A606EA /* HomeViewController.swift in Sources */,
 				AF58173224D7DF9200F2683D /* SNSLoginService.swift in Sources */,
 				AF2EE70424D87B4800A956BD /* AuthService.swift in Sources */,
-				AF2EE70224D86C4C00A956BD /* User.swift in Sources */,
 				AFF46CAD24D85A00008F118E /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -592,7 +604,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		AF27F3DC24D5F29800CFEF9C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		AF27F3DC24D5F29800CFEF9C /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -600,7 +612,15 @@
 				minimumVersion = 5.2.2;
 			};
 		};
-		AFC1186B24D3B08B005B2E44 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		AF5634DD24DA6AF300A606EA /* RemoteSwiftPackageReference */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.0;
+			};
+		};
+		AFC1186B24D3B08B005B2E44 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -608,7 +628,7 @@
 				minimumVersion = 5.0.1;
 			};
 		};
-		AFC1186E24D3B0BD005B2E44 /* XCRemoteSwiftPackageReference "Then" */ = {
+		AFC1186E24D3B0BD005B2E44 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/devxoul/Then.git";
 			requirement = {
@@ -619,19 +639,24 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AF27F3DD24D5F29800CFEF9C /* Alamofire */ = {
+		AF27F3DD24D5F29800CFEF9C /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AF27F3DC24D5F29800CFEF9C /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = AF27F3DC24D5F29800CFEF9C /* RemoteSwiftPackageReference */;
 			productName = Alamofire;
 		};
-		AFC1186C24D3B08C005B2E44 /* SnapKit */ = {
+		AF5634DE24DA6AF300A606EA /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AFC1186B24D3B08B005B2E44 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = AF5634DD24DA6AF300A606EA /* RemoteSwiftPackageReference */;
+			productName = JGProgressHUD;
+		};
+		AFC1186C24D3B08C005B2E44 /* SwiftPackageProductDependency */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AFC1186B24D3B08B005B2E44 /* RemoteSwiftPackageReference */;
 			productName = SnapKit;
 		};
-		AFC1186F24D3B0BD005B2E44 /* Then */ = {
+		AFC1186F24D3B0BD005B2E44 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AFC1186E24D3B0BD005B2E44 /* XCRemoteSwiftPackageReference "Then" */;
+			package = AFC1186E24D3B0BD005B2E44 /* RemoteSwiftPackageReference */;
 			productName = Then;
 		};
 /* End XCSwiftPackageProductDependency section */

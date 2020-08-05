@@ -6,7 +6,7 @@
 //  Copyright © 2020 TeamSloth. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum LoginType: String {
     case kakao
@@ -19,8 +19,7 @@ enum LoginType: String {
 struct AuthModel {
     let email: String
     let nickname: String
-    let id: String
-    let imageUrl: String
+    let uuid: String
     let loginType: LoginType
 }
 
@@ -28,16 +27,12 @@ struct AuthService {
     static let shared = AuthService()
     private init() { }
     
-    func registerUser(registerData: AuthModel) {
-        var imageData: Data!
-        do {
-            imageData = try Data(contentsOf: URL(string: registerData.imageUrl)!)
-        } catch {
-            print("DEBUG: URL -> Data Error >", error.localizedDescription)
-            return
-        }
+    func authServiceUser(authData: AuthModel) {
+        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
         
-        guard let jpegProfileImageData = UIImage(data: imageData)?.jpegData(compressionQuality: 0.3) else { return }
+        window.rootViewController?.showLoader(true)
+        
+        guard let jpegProfileImageData = UIImage(named: "slowvegexicon")?.jpegData(compressionQuality: 0.3) else { return }
         let filename = UUID().uuidString
         let storageRef = STORAGE_PROFILE_IMAGES.child(filename)
         
@@ -54,22 +49,55 @@ struct AuthService {
                 }
                 
                 guard let profileImageUrl = url?.absoluteString else { return }
-                let uid = "\(registerData.loginType.rawValue)\(registerData.id)"
                 
-                let values = [
-                    "email": registerData.email,
-                    "nickname": registerData.nickname,
-                    "profileImageUrl": profileImageUrl,
-                    "type": registerData.loginType.rawValue]
+                var uid: String
+                switch authData.loginType {
+                case .kakao: fallthrough
+                case .naver: uid = "\(authData.loginType.rawValue)\(authData.uuid)"
+                case .google: fallthrough
+                case .apple: fallthrough
+                case .basic: uid = authData.uuid
+                }
                 
-                REF_USERS.child(uid).updateChildValues(values) { (error, ref) in
-                    if let error = error {
-                        print("DEBUG: Register error \(error.localizedDescription)")
+                self.saveUserDefaultUID(withUid: uid)
+                REF_USERS.child(uid).observeSingleEvent(of: .value) { snapshot in
+                    guard let dictionary = snapshot.value as? [String: Any] else {
+                        print("DEBUG: No User")
+                        
+                        let values = [
+                            "email": authData.email,
+                            "nickname": authData.nickname,
+                            "profileImageUrl": profileImageUrl,
+                            "type": authData.loginType.rawValue]
+
+                        REF_USERS.child(uid).updateChildValues(values) { (error, ref) in
+                            if let error = error {
+                                print("DEBUG: Register error \(error.localizedDescription)")
+                                return
+                            }
+                            print("DEBUG: User Register Successful")
+                            
+                            window.rootViewController?.showLoader(false)
+                            window.rootViewController = HomeViewController()
+                            window.frame = UIScreen.main.bounds
+                            window.makeKeyAndVisible()
+                        }
                         return
                     }
-                    print("DEBUG: User Register Successful")
+                    print("DEBUG: Find User ", dictionary)
+                    UserService.shared.user = User(dictionary: dictionary)
+                    
+                    window.rootViewController?.showLoader(false)
+                    window.rootViewController = HomeViewController()
+                    window.frame = UIScreen.main.bounds
+                    window.makeKeyAndVisible()
                 }
             }
         }
+    }
+    
+    func saveUserDefaultUID(withUid: String) {
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(withUid, forKey: "saveUid")
     }
 }

@@ -28,16 +28,11 @@ class SignInViewController: UIViewController {
     }
     
     // Buttons
-    let authorizationAppleIDButton = ASAuthorizationAppleIDButton()
     let googleLoginButton = GIDSignInButton()
-    private lazy var kakaoLoginButton = KOLoginButton().then {
-        $0.addTarget(self,
-                     action: #selector(clickedKakaoLogin),
-                     for: .touchUpInside)
-    }
-    private lazy var naverLoginButton = UIButton(type: .system).then {
+    let kakaoLoginButton = KOLoginButton()
+    let authorizationAppleIDButton = ASAuthorizationAppleIDButton()
+    let naverLoginButton = UIButton(type: .system).then {
         $0.setImage(UIImage(named: "naver_login_short_white")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        $0.addTarget(self, action: #selector(handleLoginNaver), for: .touchUpInside)
     }
     let signUpButton = UIButton().then {
         $0.setTitle("가입하기", for: .normal)
@@ -66,13 +61,7 @@ class SignInViewController: UIViewController {
     }
     
     @objc private func handleAuthorizationAppleIDButton(_ sender: ASAuthorizationAppleIDButton) {
-        let provider = ASAuthorizationAppleIDProvider()
-        let request = provider.createRequest()
-        request.requestedScopes = [.fullName, .email]
-        let controller = ASAuthorizationController(authorizationRequests: [request])
-        controller.delegate = self
-        controller.presentationContextProvider = self
-        controller.performRequests()
+        AppleLoginService.shared.appleRequestAuthorization()
     }
     
     @objc private func handleSignUpButton(_ sender: UIButton) {
@@ -87,9 +76,22 @@ class SignInViewController: UIViewController {
         authorizationAppleIDButton.addTarget(self,
                                              action: #selector(handleAuthorizationAppleIDButton(_:)),
                                              for: .touchUpInside)
+        kakaoLoginButton.addTarget(self,
+                                   action: #selector(clickedKakaoLogin),
+                                   for: .touchUpInside)
+        naverLoginButton.addTarget(self,
+                                   action: #selector(handleLoginNaver),
+                                   for: .touchUpInside)
+        
+        AppleLoginService.shared.appleLoginInit(delegateView: self)
         NaverLoginService.shared.loginInstance?.delegate = self
-        GIDSignIn.sharedInstance()?.presentingViewController = self
-//        GIDSignIn.sharedInstance().signIn()
+        GoogleLoginService.shared.instance?.presentingViewController = self
+    }
+    
+    private func configurePropertyAttributes() {
+        signUpButton.addTarget(self,
+                               action: #selector(handleSignUpButton(_:)),
+                               for: .touchUpInside)
     }
     
     private func configureUI() {
@@ -142,19 +144,14 @@ class SignInViewController: UIViewController {
             $0.bottom.equalToSuperview().offset(-50)
         }
     }
-    
-    private func configurePropertyAttributes() {
-        signUpButton.addTarget(self, action: #selector(handleSignUpButton(_:)), for: .touchUpInside)
-    }
 }
 
 
 // MARK: - NaverThirdPartyLoginConnectionDelegate
+
 extension SignInViewController: NaverThirdPartyLoginConnectionDelegate {
     // 로그인 버튼을 눌렀을 경우 열게 될 브라우저
-    func oauth20ConnectionDidOpenInAppBrowser(forOAuth request: URLRequest!) {
-        print(#function)
-    }
+    func oauth20ConnectionDidOpenInAppBrowser(forOAuth request: URLRequest!) { }
     
     // 로그인에 성공했을 경우 호출
     func oauth20ConnectionDidFinishRequestACTokenWithAuthCode() {
@@ -164,14 +161,13 @@ extension SignInViewController: NaverThirdPartyLoginConnectionDelegate {
     
     // 접근 토큰 갱신
     func oauth20ConnectionDidFinishRequestACTokenWithRefreshToken() {
-        print(#function)
-        //        print("Token: ", NaverLoginService.shared.loginInstance?.accessToken)
+        print("[Success] : Success Naver Login")
+        NaverLoginService.shared.registerNaverAuth()
     }
     
     // 로그아웃 할 경우 호출(토큰 삭제)
     func oauth20ConnectionDidFinishDeleteToken() {
-        print(#function)
-        NaverLoginService.shared.loginInstance?.requestDeleteToken()
+//        NaverLoginService.shared.loginInstance?.requestDeleteToken()
     }
     
     // 모든 Error
@@ -182,40 +178,21 @@ extension SignInViewController: NaverThirdPartyLoginConnectionDelegate {
 
 
 // MARK: - Sign-in with Apple Extensions
+
 extension SignInViewController: ASAuthorizationControllerDelegate {
-    
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
-            // Create an account in your system.
-            let userIdentifier = appleIDCredential.user
-            let userFirstName = appleIDCredential.fullName?.givenName ?? "No Info"
-            let userLastName = appleIDCredential.fullName?.familyName ?? "No Info"
-            let userEmail = appleIDCredential.email ?? "No Info"
-            print(userIdentifier, userFirstName, userLastName, userEmail)
-            
-            let appleIDProvider = ASAuthorizationAppleIDProvider()
-            appleIDProvider.getCredentialState(forUserID: userIdentifier) { (credentialState, error) in
-                switch credentialState {
-                case .authorized:
-                    // The Apple ID credential is valid. Show Home UI Here
-                    break
-                case .revoked:
-                    // The Apple ID credential is revoked. Show SignIn UI Here.
-                    break
-                case .notFound:
-                    // No credential was found. Show SignIn UI Here.
-                    break
-                default: break } }
-        }
+        AppleLoginService.shared.registerAppleAuth(authorization: authorization)
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        print(error)
+        print("DEBUG: didCompleteWithError \(error.localizedDescription)")
     }
 }
 
+
+// MARK: - ASAuthorizationControllerPresentationContextProviding
+
 extension SignInViewController: ASAuthorizationControllerPresentationContextProviding {
-    
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return view.window!
     }

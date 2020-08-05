@@ -9,26 +9,30 @@
 import UIKit
 import NaverThirdPartyLogin
 import Firebase
-import FirebaseCore
 import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
-        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        GIDSignIn.sharedInstance().delegate = self
-
-        
-        NaverLoginService.shared.initNaverLogin()
+        snsLoginInit()
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = SignInViewController()
         window?.backgroundColor = .systemBackground
+        
+        if let uid = UserDefaults.standard.string(forKey: "saveUid") {
+            print("DEBUG: exist uuid")
+            let controller = HomeViewController()
+            controller.userUid = uid
+            window?.rootViewController = controller
+        } else {
+            print("DEBUG: not exist uuid")
+            window?.rootViewController = SignInViewController()
+        }
         window?.makeKeyAndVisible()
         
         return true
@@ -59,26 +63,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         KOSession.handleDidBecomeActive()
     }
     
-    // Sign-In with Google
+    func snsLoginInit() {
+        GoogleLoginService.shared.instance?.clientID = FirebaseApp.app()?.options.clientID
+        GoogleLoginService.shared.instance?.delegate = self
+
+        NaverLoginService.shared.initNaverLogin()
+    }
+}
+
+// MARK: - GIDSignInDelegate
+
+extension AppDelegate: GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
-            print(error)
+            print("DEBUG: didSignInFor Error \(error.localizedDescription)")
             return
         }
         
-        guard let authentication = user.authentication else { return }
-        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
-                                                       accessToken: authentication.accessToken)
-        
-        Auth.auth().signIn(with: credential) { (authResult, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                print("Login Successful") }
-        }
+        GoogleLoginService.shared.registerGoogleAuth(user: user)
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        print("DEBUG: didDisconnect \(error.localizedDescription)")
         // Perform any operations when the user disconnects from app here.
     }
 }
