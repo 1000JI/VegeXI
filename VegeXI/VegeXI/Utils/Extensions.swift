@@ -45,3 +45,13 @@ extension UIColor {
     static let vegeLightGrayBorderColor = UIColor(rgb: 0xD8D8D8)
     static let vegeTextBlackColor = UIColor(rgb: 0x303033)
 }
+
+extension UIFont {
+    static func spoqaHanSansBold(ofSize: CGFloat) -> UIFont? {
+        return UIFont(name: "SpoqaHanSans-Bold", size: ofSize)
+    }
+    
+    static func spoqaHanSansRegular(ofSize: CGFloat) -> UIFont? {
+        return UIFont(name: "SpoqaHanSans-Regular", size: ofSize)
+    }
+}

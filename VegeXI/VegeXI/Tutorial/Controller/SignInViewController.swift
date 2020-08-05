@@ -96,9 +96,14 @@ class SignInViewController: UIViewController {
     // MARK: - Helpers
     
     private func configureSNSLogin() {
+        GoogleLoginService.shared.instance?.clientID = FirebaseApp.app()?.options.clientID
+        GoogleLoginService.shared.instance?.delegate = self
+        GoogleLoginService.shared.instance?.presentingViewController = self
+
+        NaverLoginService.shared.initNaverLogin()
+        
         AppleLoginService.shared.appleLoginInit(delegateView: self)
         NaverLoginService.shared.loginInstance?.delegate = self
-        GoogleLoginService.shared.instance?.presentingViewController = self
     }
     
     private func logoutMethod() {
@@ -173,7 +178,7 @@ class SignInViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle(title, for: .normal)
         button.setTitleColor(.vegeTextBlackColor, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 12)
+        button.titleLabel?.font = .spoqaHanSansRegular(ofSize: 12)
         button.addTarget(self, action: #selector(emailSignEvent), for: .touchUpInside)
         button.tag = tag
         return button
@@ -201,7 +206,7 @@ class SignInViewController: UIViewController {
         snsLabel.text = withText
         snsLabel.textColor = .vegeTextBlackColor
         snsLabel.textAlignment = .center
-        snsLabel.font = .systemFont(ofSize: 12)
+        snsLabel.font = .spoqaHanSansRegular(ofSize: 12)
         snsLabel.layer.borderColor = UIColor.vegeLightGrayBorderColor.cgColor
         snsLabel.layer.borderWidth = 0.5
         
@@ -275,3 +280,21 @@ extension SignInViewController: ASAuthorizationControllerPresentationContextProv
     }
 }
 
+
+// MARK: - GIDSignInDelegate
+
+extension SignInViewController: GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+            print("DEBUG: didSignInFor Error \(error.localizedDescription)")
+            return
+        }
+        
+        GoogleLoginService.shared.registerGoogleAuth(user: user)
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        print("DEBUG: didDisconnect \(error.localizedDescription)")
+        // Perform any operations when the user disconnects from app here.
+    }
+}

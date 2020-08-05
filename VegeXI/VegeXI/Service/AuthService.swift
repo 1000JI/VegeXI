@@ -29,7 +29,6 @@ struct AuthService {
     
     func authServiceUser(authData: AuthModel) {
         guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
-        
         window.rootViewController?.showLoader(true)
         
         guard let jpegProfileImageData = UIImage(named: "slowvegexicon")?.jpegData(compressionQuality: 0.3) else { return }
@@ -61,13 +60,14 @@ struct AuthService {
                 
                 self.saveUserDefaultUID(withUid: uid)
                 REF_USERS.child(uid).observeSingleEvent(of: .value) { snapshot in
-                    guard let dictionary = snapshot.value as? [String: Any] else {
+                    guard var dictionary = snapshot.value as? [String: Any] else {
                         print("DEBUG: No User")
                         
                         let values = [
                             "email": authData.email,
                             "nickname": authData.nickname,
                             "profileImageUrl": profileImageUrl,
+                            "uid": uid,
                             "type": authData.loginType.rawValue]
 
                         REF_USERS.child(uid).updateChildValues(values) { (error, ref) in
@@ -76,21 +76,15 @@ struct AuthService {
                                 return
                             }
                             print("DEBUG: User Register Successful")
-                            
-                            window.rootViewController?.showLoader(false)
-                            window.rootViewController = HomeViewController()
-                            window.frame = UIScreen.main.bounds
-                            window.makeKeyAndVisible()
+                            UserService.shared.user = User(dictionary: values)
+                            self.rootHomeViewSetupVisible()
                         }
                         return
                     }
                     print("DEBUG: Find User ", dictionary)
+                    dictionary.updateValue(uid, forKey: "uid")
                     UserService.shared.user = User(dictionary: dictionary)
-                    
-                    window.rootViewController?.showLoader(false)
-                    window.rootViewController = HomeViewController()
-                    window.frame = UIScreen.main.bounds
-                    window.makeKeyAndVisible()
+                    self.rootHomeViewSetupVisible()
                 }
             }
         }
@@ -99,5 +93,13 @@ struct AuthService {
     func saveUserDefaultUID(withUid: String) {
         let userDefaults = UserDefaults.standard
         userDefaults.set(withUid, forKey: "saveUid")
+    }
+    
+    func rootHomeViewSetupVisible() {
+        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
+        window.rootViewController?.showLoader(false)
+        window.rootViewController = HomeViewController()
+        window.frame = UIScreen.main.bounds
+        window.makeKeyAndVisible()
     }
 }
