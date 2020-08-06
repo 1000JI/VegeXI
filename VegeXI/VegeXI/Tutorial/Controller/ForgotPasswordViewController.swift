@@ -12,13 +12,17 @@ import Firebase
 class ForgotPasswordViewController: UIViewController {
     
     // MARK: - Properties
-    let emailSignView = SignView(
+    let viewTitle = "비밀번호 찾기"
+    
+    private lazy var fakeNavigationBar = FakeNavigationBar(title: viewTitle)
+    
+    private let emailSignView = SignView(
         placeholder: "이메일",
         cautionType: .none,
         keyboardType: .emailAddress,
         secureEntry: false)
     
-    let sendButton = SignButton(title: GeneralStrings.sendButton.generateString())
+    private let sendButton = SignButton(title: GeneralStrings.sendButton.generateString())
     
     
     // MARK: - Lifecycle
@@ -36,12 +40,17 @@ class ForgotPasswordViewController: UIViewController {
     }
     
     private func setConstraints() {
-        [emailSignView, sendButton].forEach {
+        [fakeNavigationBar, emailSignView, sendButton].forEach {
             view.addSubview($0)
         }
         
+        fakeNavigationBar.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(80)
+        }
         emailSignView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(40)
+            $0.top.equalTo(fakeNavigationBar.snp.bottom)
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(70)
             $0.centerX.equalToSuperview()
@@ -56,6 +65,7 @@ class ForgotPasswordViewController: UIViewController {
     
     private func setPropertyAttributes() {
         sendButton.addTarget(self, action: #selector(handleSendButton(_:)), for: .touchUpInside)
+        fakeNavigationBar.leftBarButton.addTarget(self, action: #selector(handlePopAction), for: .touchUpInside)
         
         emailSignView.textField.delegate = self
     }
@@ -77,6 +87,10 @@ class ForgotPasswordViewController: UIViewController {
     
     
     // MARK: - Selectors
+    @objc private func handlePopAction() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     @objc private func handleSendButton(_ sender: UIButton) {
         guard let email = emailSignView.textField.text else { return }
         Auth.auth().sendPasswordReset(withEmail: email) { (error) in

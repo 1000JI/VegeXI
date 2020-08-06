@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		42299CBF24D974AF00AE9253 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42299CBE24D974AF00AE9253 /* SignUpViewController.swift */; };
+		4264F1E124DBEBAA007B3BC2 /* FakeNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4264F1E024DBEBAA007B3BC2 /* FakeNavigationBar.swift */; };
+		4264F20324DC0212007B3BC2 /* SearchFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4264F20224DC0212007B3BC2 /* SearchFilterViewController.swift */; };
 		4267C94B24DABD3E00702BAC /* FBSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C94A24DABD3E00702BAC /* FBSignInViewController.swift */; };
 		4267C94F24DACA4100702BAC /* SignButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C94E24DACA4100702BAC /* SignButton.swift */; };
 		4267C95124DAE51200702BAC /* SignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95024DAE51200702BAC /* SignView.swift */; };
@@ -57,6 +59,8 @@
 		38105EDA7625BA3CC11C87BE /* Pods-VegeXI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VegeXI.debug.xcconfig"; path = "Target Support Files/Pods-VegeXI/Pods-VegeXI.debug.xcconfig"; sourceTree = "<group>"; };
 		42299CBD24D93E6A00AE9253 /* VegeXI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VegeXI.entitlements; sourceTree = "<group>"; };
 		42299CBE24D974AF00AE9253 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		4264F1E024DBEBAA007B3BC2 /* FakeNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeNavigationBar.swift; sourceTree = "<group>"; };
+		4264F20224DC0212007B3BC2 /* SearchFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchFilterViewController.swift; path = ../../../../../Documents/SearchFilterViewController.swift; sourceTree = "<group>"; };
 		4267C94A24DABD3E00702BAC /* FBSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBSignInViewController.swift; sourceTree = "<group>"; };
 		4267C94E24DACA4100702BAC /* SignButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignButton.swift; sourceTree = "<group>"; };
 		4267C95024DAE51200702BAC /* SignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignView.swift; sourceTree = "<group>"; };
@@ -116,6 +120,7 @@
 		42299CB724D9367800AE9253 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4264F1E024DBEBAA007B3BC2 /* FakeNavigationBar.swift */,
 				4267C95024DAE51200702BAC /* SignView.swift */,
 				4267C94E24DACA4100702BAC /* SignButton.swift */,
 			);
@@ -223,6 +228,7 @@
 		AFC1186724D3AFEE005B2E44 /* Challenge */ = {
 			isa = PBXGroup;
 			children = (
+				4264F20224DC0212007B3BC2 /* SearchFilterViewController.swift */,
 			);
 			path = Challenge;
 			sourceTree = "<group>";
@@ -415,6 +421,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4267C95924DB1D3D00702BAC /* SignInStrings.swift in Sources */,
+				4264F20324DC0212007B3BC2 /* SearchFilterViewController.swift in Sources */,
 				4267C95324DAF61400702BAC /* SignErrors.swift in Sources */,
 				AFC1185724D3AEE1005B2E44 /* SignInViewController.swift in Sources */,
 				42299CBF24D974AF00AE9253 /* SignUpViewController.swift in Sources */,
@@ -422,6 +429,7 @@
 				AF561E4224D9CEE80063D51F /* UserService.swift in Sources */,
 				AFC1185324D3AEE1005B2E44 /* AppDelegate.swift in Sources */,
 				AF561E4024D9CCB80063D51F /* Extensions.swift in Sources */,
+				4264F1E124DBEBAA007B3BC2 /* FakeNavigationBar.swift in Sources */,
 				AF5634DC24DA64F200A606EA /* HomeViewController.swift in Sources */,
 				4267C95724DB1D2F00702BAC /* GeneralStrings.swift in Sources */,
 				4267C94F24DACA4100702BAC /* SignButton.swift in Sources */,

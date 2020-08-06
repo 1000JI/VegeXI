@@ -13,8 +13,9 @@ import FirebaseAuth
 class FBSignInViewController: UIViewController {
     
     // MARK: - Properties
-    let viewTitle = "로그인"
+    private let viewTitle = "로그인"
     
+    private lazy var fakeNavigationBar = FakeNavigationBar(title: viewTitle)
     private lazy var textFieldStackView = UIStackView(arrangedSubviews: [idInputView, passwordInputView]).then {
         $0.alignment = .center
         $0.axis = .vertical
@@ -66,12 +67,18 @@ class FBSignInViewController: UIViewController {
     }
     
     private func setConstraints() {
-        [textFieldStackView, signInButton, forgotPasswordButton, signUpButton].forEach {
+        [fakeNavigationBar, textFieldStackView, signInButton, forgotPasswordButton, signUpButton].forEach {
             view.addSubview($0)
         }
         
-        textFieldStackView.snp.makeConstraints {
+        fakeNavigationBar.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(80)
+        }
+        
+        textFieldStackView.snp.makeConstraints {
+            $0.top.equalTo(fakeNavigationBar.snp.bottom)
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(100)
         }
@@ -100,6 +107,7 @@ class FBSignInViewController: UIViewController {
         signInButton.addTarget(self, action: #selector(handleSignInButton(_:)), for: .touchUpInside)
         forgotPasswordButton.addTarget(self, action: #selector(handleForgotPasswordButton(_:)), for: .touchUpInside)
         signUpButton.addTarget(self, action: #selector(handleSignUpButton(_:)), for: .touchUpInside)
+        fakeNavigationBar.leftBarButton.addTarget(self, action: #selector(handlePopAction), for: .touchUpInside)
         
         idInputView.textField.becomeFirstResponder()
         idInputView.textField.delegate = self
@@ -108,6 +116,10 @@ class FBSignInViewController: UIViewController {
     
     
     // MARK: - Selectors
+    @objc private func handlePopAction() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     @objc private func handleSignInButton(_ sender: UIButton) {
         guard let email = idInputView.textField.text else { return }
         guard let password = passwordInputView.textField.text else { return }
@@ -122,19 +134,18 @@ class FBSignInViewController: UIViewController {
     
     @objc private func handleSignUpButton(_ sender: UIButton) {
         let nextVC = SignUpViewController()
-        nextVC.modalPresentationStyle = .fullScreen
-        present(nextVC, animated: true)
+        navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @objc private func handleForgotPasswordButton(_ sender: UIButton) {
         let nextVC = ForgotPasswordViewController()
-        present(nextVC, animated: true)
+        navigationController?.pushViewController(nextVC, animated: true)
     }
     
     
     // MARK: - Helpers
     private func generateErrorMessages(error: Error) {
-        switch AuthErrorCode.init(rawValue: error._code) {
+        switch AuthErrorCode(rawValue: error._code) {
         case .invalidEmail:
             let message = SignErrors.invalidEmail.generateErrorMessage()
             showWarnings(view: idInputView, message: message)

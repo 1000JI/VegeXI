@@ -15,6 +15,8 @@ class SignUpViewController: UIViewController {
     // MARK: - Properties
     let viewTitle = "회원가입"
     
+    private lazy var fakeNavigationBar = FakeNavigationBar(title: viewTitle)
+    
     // TextFields
     lazy var signViewStackView = UIStackView(arrangedSubviews: [idInputView, passwordInputView, retypePasswordInputView, nicknameInputView]).then {
         $0.alignment = .center
@@ -75,6 +77,7 @@ class SignUpViewController: UIViewController {
         [signUpButton].forEach {
             $0.addTarget(self, action: #selector(handleButtons(_:)), for: .touchUpInside)
         }
+        fakeNavigationBar.leftBarButton.addTarget(self, action: #selector(handlePopAction), for: .touchUpInside)
         
         [idInputView, passwordInputView, retypePasswordInputView, nicknameInputView].forEach {
             $0.textField.delegate = self
@@ -82,15 +85,21 @@ class SignUpViewController: UIViewController {
     }
     
     private func setConstraints() {
-        [signViewStackView, signUpButton, descriptionLabel].forEach {
+        [fakeNavigationBar, signViewStackView, signUpButton, descriptionLabel].forEach {
             view.addSubview($0)
         }
         
+        fakeNavigationBar.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(80)
+        }
+        
         signViewStackView.snp.makeConstraints {
+            $0.top.equalTo(fakeNavigationBar.snp.bottom)
             $0.width.equalToSuperview().offset(20)
             $0.height.equalTo(250)
             $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().offset(-150)
         }
         
         signUpButton.snp.makeConstraints {
@@ -114,6 +123,10 @@ class SignUpViewController: UIViewController {
     
     
     // MARK: - Selectors
+    @objc private func handlePopAction() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     @objc private func handleButtons(_ sender: UIButton) {
             AuthService.shared.createUser(
                 errorHandler: generateErrorMessages(error:),
