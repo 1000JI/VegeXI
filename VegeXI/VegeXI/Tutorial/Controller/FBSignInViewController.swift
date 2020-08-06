@@ -95,6 +95,7 @@ class FBSignInViewController: UIViewController {
     
     private func setPropertyAttributes() {
         signInButton.addTarget(self, action: #selector(handleSignInButton(_:)), for: .touchUpInside)
+        forgotPasswordButton.addTarget(self, action: #selector(handleForgotPasswordButton(_:)), for: .touchUpInside)
         signUpButton.addTarget(self, action: #selector(handleSignUpButton(_:)), for: .touchUpInside)
         
         idInputView.textField.becomeFirstResponder()
@@ -119,6 +120,11 @@ class FBSignInViewController: UIViewController {
     @objc private func handleSignUpButton(_ sender: UIButton) {
         let nextVC = SignUpViewController()
         nextVC.modalPresentationStyle = .fullScreen
+        present(nextVC, animated: true)
+    }
+    
+    @objc private func handleForgotPasswordButton(_ sender: UIButton) {
+        let nextVC = ForgotPasswordViewController()
         present(nextVC, animated: true)
     }
     

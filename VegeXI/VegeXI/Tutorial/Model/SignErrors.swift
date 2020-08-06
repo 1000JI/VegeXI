@@ -20,6 +20,7 @@ enum SignErrors {
     case weakPassword
     case passwordNotMatching
     case fillNickName
+    case missingEmail
     
     func generateErrorMessage() -> String {
         switch self {
@@ -45,6 +46,8 @@ enum SignErrors {
             return "비밀번호가 일치하지 않아요."
         case .fillNickName:
             return "닉네임을 입력해주세요."
+        case .missingEmail:
+            return "이메일 주소를 입력해주세요"
         }
     }
 }

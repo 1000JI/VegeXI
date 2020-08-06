@@ -16,11 +16,11 @@ enum SignInStrings {
     func generateString() -> String {
         switch self {
         case .email:
-            return " 이메일"
+            return "이메일"
         case .password:
-            return " 비밀번호"
+            return "비밀번호"
         case .nickname:
-            return " 닉네임"
+            return "닉네임"
         }
     }
 }

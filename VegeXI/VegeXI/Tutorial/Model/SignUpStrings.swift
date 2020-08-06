@@ -18,13 +18,13 @@ enum SignUpStrings {
     func generateString() -> String {
         switch self {
         case .email:
-            return " 아이디"
+            return "아이디"
         case .password:
-            return " 비밀번호 최소 6자 이상"
+            return "비밀번호 최소 6자 이상"
         case .retypePassword:
-            return " 비밀번호 확인 최소 6자 이상"
+            return "비밀번호 확인 최소 6자 이상"
         case .nickname:
-            return " 닉네임"
+            return "닉네임"
         case .agreement:
             return "느린채식의 서비스 이용약관, 개인정보 수집 및 이용에 동의합니다"
         }

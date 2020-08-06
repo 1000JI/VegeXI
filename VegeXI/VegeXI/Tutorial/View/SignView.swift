@@ -56,7 +56,8 @@ class SignView: UIView {
             addSubview($0)
         }
         textField.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(10)
         }
         
         underBar.snp.makeConstraints {
