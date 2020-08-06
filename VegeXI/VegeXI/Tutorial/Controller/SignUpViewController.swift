@@ -191,7 +191,7 @@ extension SignUpViewController: UITextFieldDelegate {
             password1 != "",
             password2 != "" else { return }
         
-      Password(password1: password1, password2: password2)
+      checkPassword(password1: password1, password2: password2)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

@@ -23,7 +23,7 @@ extension UIViewController {
             UIViewController.hud.dismiss()
         }
     }
-  
+    
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -31,6 +31,7 @@ extension UIViewController {
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
 }
 
 extension UIColor {
@@ -58,10 +59,9 @@ extension UIFont {
     static func spoqaHanSansBold(ofSize: CGFloat) -> UIFont? {
         return UIFont(name: "SpoqaHanSans-Bold", size: ofSize)
     }
-
+    
     static func spoqaHanSansRegular(ofSize: CGFloat) -> UIFont? {
         return UIFont(name: "SpoqaHanSans-Regular", size: ofSize)
-
     }
 }
 

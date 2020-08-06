@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 
 class FBSignInViewController: UIViewController {
     
@@ -58,6 +59,8 @@ class FBSignInViewController: UIViewController {
     
     // MARK: - UI
     private func configureUI() {
+        view.backgroundColor = .white
+        
         setPropertyAttributes()
         setConstraints()
     }

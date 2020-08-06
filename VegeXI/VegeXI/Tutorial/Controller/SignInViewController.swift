@@ -10,6 +10,7 @@ import Alamofire
 import AuthenticationServices
 import Firebase
 import FirebaseAuth
+import FirebaseCore
 import GoogleSignIn
 import KakaoOpenSDK
 import NaverThirdPartyLogin
@@ -46,14 +47,22 @@ class SignInViewController: UIViewController {
         configureSNSLogin()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        configureNavi()
+    }
+    
     // MARK: - Selectors
     
     @objc func emailSignEvent(_ sender: UIButton) {
         switch sender.tag {
         case 0:
-            print("Email SignIn")
+            let controller = FBSignInViewController()
+            navigationController?.pushViewController(controller, animated: true)
         case 1:
-            print("Email SignUp")
+            let controller = SignUpViewController()
+            navigationController?.pushViewController(controller, animated: true)
         default:
             break
         }
@@ -99,12 +108,6 @@ class SignInViewController: UIViewController {
 
     }
     
-    private func configurePropertyAttributes() {
-        signUpButton.addTarget(self,
-                               action: #selector(handleSignUpButton(_:)),
-                               for: .touchUpInside)
-    }
-    
     private func logoutMethod() {
         do {
             try Auth.auth().signOut()
@@ -114,9 +117,12 @@ class SignInViewController: UIViewController {
         }
     }
     
+    private func configureNavi() {
+        navigationController?.navigationBar.isHidden = true
+    }
+    
     private func configureUI() {
         view.backgroundColor = .systemBackground
-        
         
         let snsButtonStack = UIStackView(arrangedSubviews: [
             makeSnsSignInButton(imageName: "kakaoicon",

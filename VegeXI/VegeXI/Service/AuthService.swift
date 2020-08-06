@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 
 enum LoginType: String {
     case kakao
@@ -70,7 +71,7 @@ struct AuthService {
                             "profileImageUrl": profileImageUrl,
                             "uid": uid,
                             "type": authData.loginType.rawValue]
-
+                        
                         REF_USERS.child(uid).updateChildValues(values) { (error, ref) in
                             if let error = error {
                                 print("DEBUG: Register error \(error.localizedDescription)")
@@ -119,7 +120,8 @@ struct AuthService {
                 view.dismiss(animated: true)
             }
         }
-      
+    }
+    
     func rootHomeViewSetupVisible() {
         guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
         window.rootViewController?.showLoader(false)

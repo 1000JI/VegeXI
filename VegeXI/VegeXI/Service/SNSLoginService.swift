@@ -88,7 +88,6 @@ final class KakaoLoginService {
     func registerKakaoAuth() {
         guard let session = KOSession.shared() else { return }
         if session.isOpen() { session.close() }
-        
         session.open { (error) in
             if error != nil || !session.isOpen() {
                 print("DEBUG: error \(error!.localizedDescription)")

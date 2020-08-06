@@ -24,16 +24,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = .systemBackground
         
-//        if let uid = UserDefaults.standard.string(forKey: "saveUid") {
-//            print("DEBUG: exist uuid")
-//            let controller = HomeViewController()
-//            controller.userUid = uid
-//            window?.rootViewController = controller
-//        } else {
-//            print("DEBUG: not exist uuid")
-//            window?.rootViewController = SignInViewController()
-//        }
-        window?.rootViewController = FBSignInViewController()
+        var controller: UIViewController
+        if let uid = UserDefaults.standard.string(forKey: "saveUid") {
+            print("DEBUG: exist uuid")
+            controller = HomeViewController()
+            (controller as! HomeViewController).userUid = uid
+        } else {
+            print("DEBUG: not exist uuid")
+            controller = SignInViewController()
+        }
+        window?.rootViewController = UINavigationController(rootViewController: controller)
         window?.makeKeyAndVisible()
         
         return true

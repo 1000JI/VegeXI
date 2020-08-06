@@ -13,12 +13,7 @@ class SignButton: UIButton {
     // MARK: - Properties
     var isActive = false {
         willSet {
-            switch newValue {
-            case true:
-                self.backgroundColor = .green
-            case false:
-                self.backgroundColor = .lightGray
-            }
+            self.backgroundColor = newValue ? .green : .lightGray
         }
     }
     
