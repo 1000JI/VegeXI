@@ -220,7 +220,7 @@ class SignInViewController: UIViewController {
         }
         
         snsLabel.snp.makeConstraints {
-            $0.leading.equalTo(snsImageView.snp.trailing).offset(-0.5)
+            $0.leading.equalToSuperview().offset(-0.5)
             $0.top.bottom.trailing.equalToSuperview()
         }
         
