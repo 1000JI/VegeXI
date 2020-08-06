@@ -13,6 +13,7 @@ class SignView: UIView {
     // MARK: - Properties
     let textField = UITextField().then {
         $0.autocapitalizationType = .none
+        $0.clearButtonMode = .whileEditing
     }
     let underBar = UIView().then {
         $0.backgroundColor = .lightGray
@@ -20,13 +21,17 @@ class SignView: UIView {
     let cautionMessageLabel = UILabel().then {
         $0.textColor = .red
         $0.font = UIFont.systemFont(ofSize: 12)
+        $0.alpha = 0
     }
     
     
     // MARK: - Lifecycle
-    init(placeholder: String?, cautionType: SignErrors?) {
+    init(placeholder: String?, cautionType: SignErrors?, keyboardType: UIKeyboardType, secureEntry: Bool) {
         super.init(frame: .zero)
         configureUI()
+        
+        textField.keyboardType = keyboardType
+        textField.isSecureTextEntry = secureEntry
         
         guard let placeholder = placeholder else { return }
         let placeholderString = NSAttributedString(string: "  \(placeholder)", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13.5) ])
@@ -61,8 +66,7 @@ class SignView: UIView {
         }
         cautionMessageLabel.snp.makeConstraints {
             $0.top.equalTo(underBar.snp.bottom).offset(8)
-            $0.leading.equalTo(textField)
+            $0.leading.trailing.equalTo(textField)
         }
     }
-    
 }

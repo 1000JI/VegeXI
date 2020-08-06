@@ -15,7 +15,7 @@ enum SignErrors {
     case invalidEmail
     case userNotFound
     case wrongPassword
-    case emailAddressAlreadyExists
+    case emailAlreadyInUse
     case fillPassword
     case weakPassword
     case passwordNotMatching
@@ -35,7 +35,7 @@ enum SignErrors {
             return "존재하지 않는 아이디입니다"
         case .wrongPassword:
             return "잘못된 비밀번호 입니다."
-        case .emailAddressAlreadyExists:
+        case .emailAlreadyInUse:
             return "중복된 이메일 주소입니다."
         case .fillPassword:
             return "비밀번호를 입력해주세요."

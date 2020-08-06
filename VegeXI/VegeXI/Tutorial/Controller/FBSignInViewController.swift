@@ -12,27 +12,34 @@ import Firebase
 class FBSignInViewController: UIViewController {
     
     // MARK: - Properties
+    let viewTitle = "로그인"
+    
     private lazy var textFieldStackView = UIStackView(arrangedSubviews: [idInputView, passwordInputView]).then {
         $0.alignment = .center
         $0.axis = .vertical
         $0.distribution = .fillEqually
-        $0.spacing = 15
+        $0.spacing = 25
     }
     private let idInputView = SignView(
-        placeholder: "이메일",
-        cautionType: .none)
+        placeholder: SignInStrings.email.generateString(),
+        cautionType: .none,
+        keyboardType: .emailAddress,
+        secureEntry: false
+    )
     private let passwordInputView = SignView(
-        placeholder: "비밀번호",
-        cautionType: .unableToLogIn)
-    
-    private let signInButton = SignButton(title: "시작하기")
+        placeholder: SignInStrings.password.generateString(),
+        cautionType: .none,
+        keyboardType: .default,
+        secureEntry: true
+    )
+    private let signInButton = SignButton(title: GeneralStrings.startButton.generateString())
     private let forgotPasswordButton = UIButton().then {
-        $0.setTitle("비밀번호 찾기", for: .normal)
+        $0.setTitle(GeneralStrings.findPassword.generateString(), for: .normal)
         $0.setTitleColor(.black, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
     }
     private let signUpButton = UIButton().then {
-        $0.setTitle("이메일로 가입하기", for: .normal)
+        $0.setTitle(GeneralStrings.signupWithEmail.generateString(), for: .normal)
         $0.setTitleColor(.black, for: .normal)
         $0.backgroundColor = .white
         $0.layer.borderWidth = 0.5
@@ -45,6 +52,7 @@ class FBSignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        hideKeyboardWhenTappedAround()
     }
     
     
@@ -89,6 +97,7 @@ class FBSignInViewController: UIViewController {
         signInButton.addTarget(self, action: #selector(handleSignInButton(_:)), for: .touchUpInside)
         signUpButton.addTarget(self, action: #selector(handleSignUpButton(_:)), for: .touchUpInside)
         
+        idInputView.textField.becomeFirstResponder()
         idInputView.textField.delegate = self
         passwordInputView.textField.delegate = self
     }
@@ -133,15 +142,31 @@ class FBSignInViewController: UIViewController {
     }
     
     private func showWarnings(view: SignView, message: String) {
-        view.textField.alpha = 1
+        view.cautionMessageLabel.alpha = 1
         view.cautionMessageLabel.text = message
+    }
+    
+    private func hideWarnings() {
+        [idInputView, passwordInputView].forEach {
+            $0.cautionMessageLabel.alpha = 0
+        }
     }
 }
 
 
 // MARK: - UITextFieldDelegate
 extension FBSignInViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if idInputView.textField.text != "" && passwordInputView.textField.text != "" {
+            signInButton.isActive = true
+        } else {
+            signInButton.isActive = false
+        }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        hideWarnings()
+        return true
     }
 }
+
