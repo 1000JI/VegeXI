@@ -24,6 +24,12 @@
 		AF5634DC24DA64F200A606EA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5634DB24DA64F200A606EA /* HomeViewController.swift */; };
 		AF5634DF24DA6AF300A606EA /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = AF5634DE24DA6AF300A606EA /* JGProgressHUD */; };
 		AF58173224D7DF9200F2683D /* SNSLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58173124D7DF9200F2683D /* SNSLoginService.swift */; };
+		AF6652CA24DBFD71005FC74B /* CustomMainNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6652C924DBFD71005FC74B /* CustomMainNavigationBar.swift */; };
+		AF6652CC24DC0415005FC74B /* CategoryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6652CB24DC0415005FC74B /* CategoryCollectionView.swift */; };
+		AF6652CE24DC132C005FC74B /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6652CD24DC132C005FC74B /* CategoryCell.swift */; };
+		AF6652D024DC2EA5005FC74B /* MainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6652CF24DC2EA5005FC74B /* MainTableView.swift */; };
+		AF6652D224DC2F5A005FC74B /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6652D124DC2F5A005FC74B /* MainTableViewCell.swift */; };
+		AF8193DB24DC80D900B948CF /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8193DA24DC80D900B948CF /* MainTabBarController.swift */; };
 		AF88436924D6C902000ABC2A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF88436824D6C902000ABC2A /* GoogleService-Info.plist */; };
 		AF8B261124DB15590075156C /* SpoqaHanSansBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF8B260D24DB12100075156C /* SpoqaHanSansBold.ttf */; };
 		AF8B261224DB15630075156C /* SpoqaHanSansRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF8B260C24DB12100075156C /* SpoqaHanSansRegular.ttf */; };
@@ -71,6 +77,12 @@
 		AF561E4124D9CEE80063D51F /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		AF5634DB24DA64F200A606EA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		AF58173124D7DF9200F2683D /* SNSLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLoginService.swift; sourceTree = "<group>"; };
+		AF6652C924DBFD71005FC74B /* CustomMainNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMainNavigationBar.swift; sourceTree = "<group>"; };
+		AF6652CB24DC0415005FC74B /* CategoryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionView.swift; sourceTree = "<group>"; };
+		AF6652CD24DC132C005FC74B /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		AF6652CF24DC2EA5005FC74B /* MainTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableView.swift; sourceTree = "<group>"; };
+		AF6652D124DC2F5A005FC74B /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		AF8193DA24DC80D900B948CF /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		AF88436824D6C902000ABC2A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AF8B260C24DB12100075156C /* SpoqaHanSansRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpoqaHanSansRegular.ttf; sourceTree = "<group>"; };
 		AF8B260D24DB12100075156C /* SpoqaHanSansBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpoqaHanSansBold.ttf; sourceTree = "<group>"; };
@@ -129,7 +141,6 @@
 				4267C94A24DABD3E00702BAC /* FBSignInViewController.swift */,
 				42299CBE24D974AF00AE9253 /* SignUpViewController.swift */,
 				4267C95A24DBC36800702BAC /* ForgotPasswordViewController.swift */,
-				AF5634DB24DA64F200A606EA /* HomeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -144,6 +155,34 @@
 			sourceTree = "<group>";
 		};
 		AF2EE70024D86C4100A956BD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AF6652C624DBFD3A005FC74B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AF5634DB24DA64F200A606EA /* HomeViewController.swift */,
+				AF8193DA24DC80D900B948CF /* MainTabBarController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		AF6652C724DBFD42005FC74B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AF6652C924DBFD71005FC74B /* CustomMainNavigationBar.swift */,
+				AF6652CB24DC0415005FC74B /* CategoryCollectionView.swift */,
+				AF6652CD24DC132C005FC74B /* CategoryCell.swift */,
+				AF6652CF24DC2EA5005FC74B /* MainTableView.swift */,
+				AF6652D124DC2F5A005FC74B /* MainTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AF6652C824DBFD48005FC74B /* Model */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -198,7 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				AFC1186624D3AFE5005B2E44 /* Tutorial */,
-				AFC1186724D3AFEE005B2E44 /* Challenge */,
+				AFC1186724D3AFEE005B2E44 /* Home */,
 				AFC1186824D3AFFA005B2E44 /* MyPage */,
 				AFC1186A24D3B00F005B2E44 /* Service */,
 				AF9E8D0F24D51A220047F0C4 /* Header */,
@@ -220,11 +259,14 @@
 			path = Tutorial;
 			sourceTree = "<group>";
 		};
-		AFC1186724D3AFEE005B2E44 /* Challenge */ = {
+		AFC1186724D3AFEE005B2E44 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				AF6652C824DBFD48005FC74B /* Model */,
+				AF6652C724DBFD42005FC74B /* View */,
+				AF6652C624DBFD3A005FC74B /* Controller */,
 			);
-			path = Challenge;
+			path = Home;
 			sourceTree = "<group>";
 		};
 		AFC1186824D3AFFA005B2E44 /* MyPage */ = {
@@ -414,15 +456,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF6652D224DC2F5A005FC74B /* MainTableViewCell.swift in Sources */,
 				4267C95924DB1D3D00702BAC /* SignInStrings.swift in Sources */,
+				AF6652CC24DC0415005FC74B /* CategoryCollectionView.swift in Sources */,
 				4267C95324DAF61400702BAC /* SignErrors.swift in Sources */,
+				AF6652D024DC2EA5005FC74B /* MainTableView.swift in Sources */,
 				AFC1185724D3AEE1005B2E44 /* SignInViewController.swift in Sources */,
+				AF8193DB24DC80D900B948CF /* MainTabBarController.swift in Sources */,
 				42299CBF24D974AF00AE9253 /* SignUpViewController.swift in Sources */,
 				4267C94B24DABD3E00702BAC /* FBSignInViewController.swift in Sources */,
 				AF561E4224D9CEE80063D51F /* UserService.swift in Sources */,
 				AFC1185324D3AEE1005B2E44 /* AppDelegate.swift in Sources */,
 				AF561E4024D9CCB80063D51F /* Extensions.swift in Sources */,
 				AF5634DC24DA64F200A606EA /* HomeViewController.swift in Sources */,
+				AF6652CA24DBFD71005FC74B /* CustomMainNavigationBar.swift in Sources */,
 				4267C95724DB1D2F00702BAC /* GeneralStrings.swift in Sources */,
 				4267C94F24DACA4100702BAC /* SignButton.swift in Sources */,
 				4267C95B24DBC36800702BAC /* ForgotPasswordViewController.swift in Sources */,
@@ -431,6 +478,7 @@
 				AF2EE70424D87B4800A956BD /* AuthService.swift in Sources */,
 				4267C95524DB1BD900702BAC /* SignUpStrings.swift in Sources */,
 				AFF46CAD24D85A00008F118E /* Constants.swift in Sources */,
+				AF6652CE24DC132C005FC74B /* CategoryCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,8 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var controller: UIViewController
         if let uid = UserDefaults.standard.string(forKey: "saveUid") {
             print("DEBUG: exist uuid")
-            controller = HomeViewController()
-            (controller as! HomeViewController).userUid = uid
+            controller = MainTabBarController()
+            (controller as! MainTabBarController).userUid = uid
         } else {
             print("DEBUG: not exist uuid")
             controller = SignInViewController()

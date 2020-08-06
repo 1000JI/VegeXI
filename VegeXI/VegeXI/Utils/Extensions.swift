@@ -53,6 +53,8 @@ extension UIColor {
     
     static let vegeLightGrayBorderColor = UIColor(rgb: 0xD8D8D8)
     static let vegeTextBlackColor = UIColor(rgb: 0x303033)
+    static let vegeCategoryTextColor = UIColor(rgb: 0x707070)
+    static let tabbarGreenSelectColor = UIColor(rgb: 0x156941)
 }
 
 extension UIFont {
