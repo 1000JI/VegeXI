@@ -12,12 +12,14 @@ struct User {
     let email: String
     let nickname: String
     let profileImageUrl: String
+    let uid: String
     let type: LoginType
     
     init(dictionary: [String: Any]) {
         self.email = dictionary["email"] as? String ?? ""
         self.nickname = dictionary["nickname"] as? String ?? ""
         self.profileImageUrl = dictionary["profileImageUrl"] as? String ?? ""
+        self.uid = dictionary["uid"] as? String ?? ""
         
         let typeString = dictionary["type"] as? String ?? "basic"
         self.type = LoginType(rawValue: typeString)!

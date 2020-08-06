@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
-        snsLoginInit()
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = .systemBackground
@@ -63,31 +62,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         KOSession.handleDidBecomeActive()
-    }
-    
-    func snsLoginInit() {
-        GoogleLoginService.shared.instance?.clientID = FirebaseApp.app()?.options.clientID
-        GoogleLoginService.shared.instance?.delegate = self
-
-        NaverLoginService.shared.initNaverLogin()
-    }
-}
-
-// MARK: - GIDSignInDelegate
-
-extension AppDelegate: GIDSignInDelegate {
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if let error = error {
-            print("DEBUG: didSignInFor Error \(error.localizedDescription)")
-            return
-        }
-        
-        GoogleLoginService.shared.registerGoogleAuth(user: user)
-    }
-    
-    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-        print("DEBUG: didDisconnect \(error.localizedDescription)")
-        // Perform any operations when the user disconnects from app here.
     }
 }
 

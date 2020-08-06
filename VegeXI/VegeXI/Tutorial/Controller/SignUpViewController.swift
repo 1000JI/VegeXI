@@ -65,6 +65,7 @@ class SignUpViewController: UIViewController {
     
     
     // MARK: - UI
+    
     private func configureUI() {
         setPropertyAttribites()
         setConstraints()
@@ -124,6 +125,7 @@ class SignUpViewController: UIViewController {
     
     
     // MARK: - Helpers
+
     private func generateErrorMessages(error: Error) {
         switch AuthErrorCode.init(rawValue: error._code) {
         case .invalidEmail:
@@ -169,6 +171,7 @@ class SignUpViewController: UIViewController {
         case false:
             let message = SignErrors.passwordNotMatching.generateErrorMessage()
             showWarnings(view: retypePasswordInputView, message: message)
+
         }
     }
 }
@@ -187,7 +190,8 @@ extension SignUpViewController: UITextFieldDelegate {
             let password2 = retypePasswordInputView.textField.text,
             password1 != "",
             password2 != "" else { return }
-        checkPassword(password1: password1, password2: password2)
+        
+      Password(password1: password1, password2: password2)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
