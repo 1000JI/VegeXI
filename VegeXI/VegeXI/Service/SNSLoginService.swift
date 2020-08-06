@@ -8,11 +8,12 @@
 
 
 import Foundation
-import NaverThirdPartyLogin
+import Firebase
+import FirebaseAuth
 import Alamofire
 import AuthenticationServices
 import GoogleSignIn
-import Firebase
+import NaverThirdPartyLogin
 
 // MARK: - Naver Login Service
 

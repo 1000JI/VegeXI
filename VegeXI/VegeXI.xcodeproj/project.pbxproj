@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		42299CBF24D974AF00AE9253 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42299CBE24D974AF00AE9253 /* SignUpViewController.swift */; };
+		4267C94B24DABD3E00702BAC /* FBSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C94A24DABD3E00702BAC /* FBSignInViewController.swift */; };
+		4267C94F24DACA4100702BAC /* SignButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C94E24DACA4100702BAC /* SignButton.swift */; };
+		4267C95124DAE51200702BAC /* SignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95024DAE51200702BAC /* SignView.swift */; };
+		4267C95324DAF61400702BAC /* SignErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95224DAF61400702BAC /* SignErrors.swift */; };
+		4267C95524DB1BD900702BAC /* SignUpStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95424DB1BD900702BAC /* SignUpStrings.swift */; };
+		4267C95724DB1D2F00702BAC /* GeneralStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95624DB1D2F00702BAC /* GeneralStrings.swift */; };
+		4267C95924DB1D3D00702BAC /* SignInStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95824DB1D3D00702BAC /* SignInStrings.swift */; };
+		4267C95B24DBC36800702BAC /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95A24DBC36800702BAC /* ForgotPasswordViewController.swift */; };
 		8E845E39A055B87E3285FCA4 /* Pods_VegeXI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 943E4B56E189F1F7F3E0DE26 /* Pods_VegeXI.framework */; };
 		AF27F3DE24D5F29800CFEF9C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AF27F3DD24D5F29800CFEF9C /* Alamofire */; };
 		AF2EE70424D87B4800A956BD /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2EE70324D87B4800A956BD /* AuthService.swift */; };
@@ -49,6 +57,14 @@
 		38105EDA7625BA3CC11C87BE /* Pods-VegeXI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VegeXI.debug.xcconfig"; path = "Target Support Files/Pods-VegeXI/Pods-VegeXI.debug.xcconfig"; sourceTree = "<group>"; };
 		42299CBD24D93E6A00AE9253 /* VegeXI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VegeXI.entitlements; sourceTree = "<group>"; };
 		42299CBE24D974AF00AE9253 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		4267C94A24DABD3E00702BAC /* FBSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBSignInViewController.swift; sourceTree = "<group>"; };
+		4267C94E24DACA4100702BAC /* SignButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignButton.swift; sourceTree = "<group>"; };
+		4267C95024DAE51200702BAC /* SignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignView.swift; sourceTree = "<group>"; };
+		4267C95224DAF61400702BAC /* SignErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignErrors.swift; sourceTree = "<group>"; };
+		4267C95424DB1BD900702BAC /* SignUpStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpStrings.swift; sourceTree = "<group>"; };
+		4267C95624DB1D2F00702BAC /* GeneralStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralStrings.swift; sourceTree = "<group>"; };
+		4267C95824DB1D3D00702BAC /* SignInStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInStrings.swift; sourceTree = "<group>"; };
+		4267C95A24DBC36800702BAC /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		943E4B56E189F1F7F3E0DE26 /* Pods_VegeXI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VegeXI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF2EE70324D87B4800A956BD /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		AF561E3F24D9CCB80063D51F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -89,6 +105,10 @@
 		42299CB624D9367400AE9253 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4267C95224DAF61400702BAC /* SignErrors.swift */,
+				4267C95624DB1D2F00702BAC /* GeneralStrings.swift */,
+				4267C95824DB1D3D00702BAC /* SignInStrings.swift */,
+				4267C95424DB1BD900702BAC /* SignUpStrings.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -96,6 +116,8 @@
 		42299CB724D9367800AE9253 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4267C95024DAE51200702BAC /* SignView.swift */,
+				4267C94E24DACA4100702BAC /* SignButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -104,7 +126,9 @@
 			isa = PBXGroup;
 			children = (
 				AFC1185624D3AEE1005B2E44 /* SignInViewController.swift */,
+				4267C94A24DABD3E00702BAC /* FBSignInViewController.swift */,
 				42299CBE24D974AF00AE9253 /* SignUpViewController.swift */,
+				4267C95A24DBC36800702BAC /* ForgotPasswordViewController.swift */,
 				AF5634DB24DA64F200A606EA /* HomeViewController.swift */,
 			);
 			path = Controller;
@@ -390,14 +414,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4267C95924DB1D3D00702BAC /* SignInStrings.swift in Sources */,
+				4267C95324DAF61400702BAC /* SignErrors.swift in Sources */,
 				AFC1185724D3AEE1005B2E44 /* SignInViewController.swift in Sources */,
 				42299CBF24D974AF00AE9253 /* SignUpViewController.swift in Sources */,
+				4267C94B24DABD3E00702BAC /* FBSignInViewController.swift in Sources */,
 				AF561E4224D9CEE80063D51F /* UserService.swift in Sources */,
 				AFC1185324D3AEE1005B2E44 /* AppDelegate.swift in Sources */,
 				AF561E4024D9CCB80063D51F /* Extensions.swift in Sources */,
 				AF5634DC24DA64F200A606EA /* HomeViewController.swift in Sources */,
+				4267C95724DB1D2F00702BAC /* GeneralStrings.swift in Sources */,
+				4267C94F24DACA4100702BAC /* SignButton.swift in Sources */,
+				4267C95B24DBC36800702BAC /* ForgotPasswordViewController.swift in Sources */,
+				4267C95124DAE51200702BAC /* SignView.swift in Sources */,
 				AF58173224D7DF9200F2683D /* SNSLoginService.swift in Sources */,
 				AF2EE70424D87B4800A956BD /* AuthService.swift in Sources */,
+				4267C95524DB1BD900702BAC /* SignUpStrings.swift in Sources */,
 				AFF46CAD24D85A00008F118E /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -539,7 +571,7 @@
 				CODE_SIGN_ENTITLEMENTS = VegeXI/VegeXI.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZLCDRXJTXW;
+				DEVELOPMENT_TEAM = DX4KVUBK56;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -554,7 +586,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.teamsloth.VegeXII;
+				PRODUCT_BUNDLE_IDENTIFIER = com.teamsloth.VegeXI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "VegeXI/Header/KakaoOpenSDK-Bridging-Header.h";
@@ -572,7 +604,7 @@
 				CODE_SIGN_ENTITLEMENTS = VegeXI/VegeXI.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZLCDRXJTXW;
+				DEVELOPMENT_TEAM = DX4KVUBK56;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -587,7 +619,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.teamsloth.VegeXII;
+				PRODUCT_BUNDLE_IDENTIFIER = com.teamsloth.VegeXI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "VegeXI/Header/KakaoOpenSDK-Bridging-Header.h";

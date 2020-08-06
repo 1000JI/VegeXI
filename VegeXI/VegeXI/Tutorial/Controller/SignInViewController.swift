@@ -20,7 +20,7 @@ import UIKit
 class SignInViewController: UIViewController {
     
     // MARK: - Properties
-    
+ 
     private let logoImageView = UIImageView().then {
         $0.image = UIImage(named: "slowvegexicon")
         $0.contentMode = .scaleAspectFill
@@ -35,6 +35,7 @@ class SignInViewController: UIViewController {
         logoImageView.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
         }
+
     }
     
     // MARK: - LifeCycle
@@ -56,6 +57,7 @@ class SignInViewController: UIViewController {
         default:
             break
         }
+
     }
     
     @objc func snsLoginEvent(_ sender: UITapGestureRecognizer) {
@@ -73,16 +75,6 @@ class SignInViewController: UIViewController {
         default:
             break
         }
-    }
-    
-    @objc private func handleSignInButton(_ sender: UIButton) {
-//        Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
-//            if let error = error {
-//                print(error.localizedDescription)
-//            } else {
-//                print("Logged In Successfully")
-//            }
-//        }
     }
     
     @objc private func handleSignUpButton(_ sender: UIButton) {
@@ -104,6 +96,13 @@ class SignInViewController: UIViewController {
         
         AppleLoginService.shared.appleLoginInit(delegateView: self)
         NaverLoginService.shared.loginInstance?.delegate = self
+
+    }
+    
+    private func configurePropertyAttributes() {
+        signUpButton.addTarget(self,
+                               action: #selector(handleSignUpButton(_:)),
+                               for: .touchUpInside)
     }
     
     private func logoutMethod() {
@@ -117,6 +116,7 @@ class SignInViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .systemBackground
+        
         
         let snsButtonStack = UIStackView(arrangedSubviews: [
             makeSnsSignInButton(imageName: "kakaoicon",
