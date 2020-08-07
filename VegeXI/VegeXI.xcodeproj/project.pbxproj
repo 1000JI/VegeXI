@@ -42,6 +42,10 @@
 		AF8B261224DB15630075156C /* SpoqaHanSansRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF8B260C24DB12100075156C /* SpoqaHanSansRegular.ttf */; };
 		AF8E0D5924DD092E00D08D58 /* WriteEmptyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E0D5824DD092E00D08D58 /* WriteEmptyController.swift */; };
 		AF8E0D5B24DD277C00D08D58 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E0D5A24DD277C00D08D58 /* Feed.swift */; };
+		AF8E0D5D24DD320700D08D58 /* FeedRegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E0D5C24DD320700D08D58 /* FeedRegisterController.swift */; };
+		AF8E0D6024DD43FF00D08D58 /* BSImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = AF8E0D5F24DD43FF00D08D58 /* BSImagePicker */; };
+		AF8E0D6224DD5D5800D08D58 /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E0D6124DD5D5800D08D58 /* FeedService.swift */; };
+		AF8E0D6524DDC3A700D08D58 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = AF8E0D6424DDC3A700D08D58 /* SDWebImage */; };
 		AF9E8D1C24D58E160047F0C4 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9E8D1A24D58E020047F0C4 /* KakaoOpenSDK.framework */; };
 		AF9E8D1D24D58E160047F0C4 /* KakaoOpenSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AF9E8D1A24D58E020047F0C4 /* KakaoOpenSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AFC1185324D3AEE1005B2E44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC1185224D3AEE1005B2E44 /* AppDelegate.swift */; };
@@ -104,6 +108,8 @@
 		AF8B260D24DB12100075156C /* SpoqaHanSansBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpoqaHanSansBold.ttf; sourceTree = "<group>"; };
 		AF8E0D5824DD092E00D08D58 /* WriteEmptyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteEmptyController.swift; sourceTree = "<group>"; };
 		AF8E0D5A24DD277C00D08D58 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
+		AF8E0D5C24DD320700D08D58 /* FeedRegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRegisterController.swift; sourceTree = "<group>"; };
+		AF8E0D6124DD5D5800D08D58 /* FeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; };
 		AF9E8D1A24D58E020047F0C4 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoOpenSDK.framework; path = Frameworks/KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		AF9E8D1E24D58E3C0047F0C4 /* KakaoOpenSDK-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KakaoOpenSDK-Bridging-Header.h"; sourceTree = "<group>"; };
 		AFC1184F24D3AEE1005B2E44 /* VegeXI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VegeXI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,7 +126,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF8E0D6024DD43FF00D08D58 /* BSImagePicker in Frameworks */,
 				AF27F3DE24D5F29800CFEF9C /* Alamofire in Frameworks */,
+				AF8E0D6524DDC3A700D08D58 /* SDWebImage in Frameworks */,
 				AFC1186D24D3B08C005B2E44 /* SnapKit in Frameworks */,
 				AFC1187024D3B0BD005B2E44 /* Then in Frameworks */,
 				AF9E8D1C24D58E160047F0C4 /* KakaoOpenSDK.framework in Frameworks */,
@@ -209,7 +217,6 @@
 		AF6652C824DBFD48005FC74B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AF8E0D5A24DD277C00D08D58 /* Feed.swift */,
 				4257EF4924DD07FD00CFF4C6 /* MockData.swift */,
 			);
 			path = Model;
@@ -237,6 +244,8 @@
 		AF8E0D5524DD090500D08D58 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				AF8E0D5824DD092E00D08D58 /* WriteEmptyController.swift */,
+				AF8E0D5C24DD320700D08D58 /* FeedRegisterController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -244,7 +253,6 @@
 		AF8E0D5624DD091000D08D58 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				AF8E0D5824DD092E00D08D58 /* WriteEmptyController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -252,6 +260,7 @@
 		AF8E0D5724DD091800D08D58 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AF8E0D5A24DD277C00D08D58 /* Feed.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -354,6 +363,7 @@
 				AF58173124D7DF9200F2683D /* SNSLoginService.swift */,
 				AF2EE70324D87B4800A956BD /* AuthService.swift */,
 				AF561E4124D9CEE80063D51F /* UserService.swift */,
+				AF8E0D6124DD5D5800D08D58 /* FeedService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -392,6 +402,8 @@
 				AFC1186F24D3B0BD005B2E44 /* Then */,
 				AF27F3DD24D5F29800CFEF9C /* Alamofire */,
 				AF5634DE24DA6AF300A606EA /* JGProgressHUD */,
+				AF8E0D5F24DD43FF00D08D58 /* BSImagePicker */,
+				AF8E0D6424DDC3A700D08D58 /* SDWebImage */,
 			);
 			productName = VegeXI;
 			productReference = AFC1184F24D3AEE1005B2E44 /* VegeXI.app */;
@@ -426,6 +438,8 @@
 				AFC1186E24D3B0BD005B2E44 /* XCRemoteSwiftPackageReference "Then" */,
 				AF27F3DC24D5F29800CFEF9C /* XCRemoteSwiftPackageReference "Alamofire" */,
 				AF5634DD24DA6AF300A606EA /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
+				AF8E0D5E24DD43FF00D08D58 /* XCRemoteSwiftPackageReference "BSImagePicker" */,
+				AF8E0D6324DDC3A700D08D58 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = AFC1185024D3AEE1005B2E44 /* Products */;
 			projectDirPath = "";
@@ -537,6 +551,7 @@
 				4264F1E124DBEBAA007B3BC2 /* FakeNavigationBar.swift in Sources */,
 				AF5634DC24DA64F200A606EA /* HomeViewController.swift in Sources */,
 				AF6652CA24DBFD71005FC74B /* CustomMainNavigationBar.swift in Sources */,
+				AF8E0D5D24DD320700D08D58 /* FeedRegisterController.swift in Sources */,
 				4267C95724DB1D2F00702BAC /* GeneralStrings.swift in Sources */,
 				4267C94F24DACA4100702BAC /* SignButton.swift in Sources */,
 				4267C95B24DBC36800702BAC /* ForgotPasswordViewController.swift in Sources */,
@@ -547,6 +562,7 @@
 				4257EF4224DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift in Sources */,
 				AFF46CAD24D85A00008F118E /* Constants.swift in Sources */,
 				AF6652CE24DC132C005FC74B /* CategoryCell.swift in Sources */,
+				AF8E0D6224DD5D5800D08D58 /* FeedService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -784,6 +800,22 @@
 				minimumVersion = 2.1.0;
 			};
 		};
+		AF8E0D5E24DD43FF00D08D58 /* XCRemoteSwiftPackageReference "BSImagePicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mikaoj/BSImagePicker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.1;
+			};
+		};
+		AF8E0D6324DDC3A700D08D58 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.4;
+			};
+		};
 		AFC1186B24D3B08B005B2E44 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -812,6 +844,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AF5634DD24DA6AF300A606EA /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
 			productName = JGProgressHUD;
+		};
+		AF8E0D5F24DD43FF00D08D58 /* BSImagePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF8E0D5E24DD43FF00D08D58 /* XCRemoteSwiftPackageReference "BSImagePicker" */;
+			productName = BSImagePicker;
+		};
+		AF8E0D6424DDC3A700D08D58 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF8E0D6324DDC3A700D08D58 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 		AFC1186C24D3B08C005B2E44 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

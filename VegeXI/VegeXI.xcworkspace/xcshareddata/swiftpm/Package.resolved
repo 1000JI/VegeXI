@@ -11,12 +11,30 @@
         }
       },
       {
+        "package": "BSImagePicker",
+        "repositoryURL": "https://github.com/mikaoj/BSImagePicker.git",
+        "state": {
+          "branch": null,
+          "revision": "afc6b934b92cd2f450832ce450e491429766bd28",
+          "version": "3.2.1"
+        }
+      },
+      {
         "package": "JGProgressHUD",
         "repositoryURL": "https://github.com/JonasGessner/JGProgressHUD.git",
         "state": {
           "branch": null,
           "revision": "08d130dd614a743f813286f096804c43a6ffa3f6",
           "version": "2.1.0"
+        }
+      },
+      {
+        "package": "SDWebImage",
+        "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
+        "state": {
+          "branch": null,
+          "revision": "2f9ef53b99a25bdfba97660c69c42cb54e323b78",
+          "version": "5.8.4"
         }
       },
       {

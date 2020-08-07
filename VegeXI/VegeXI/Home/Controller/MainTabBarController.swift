@@ -121,6 +121,9 @@ class MainTabBarController: UITabBarController {
     
     @objc private func registerButtonAction(sender: UIButton?) {
         selectedIndex = 0
+        
+        let controller = FeedRegisterController()
+        present(controller, animated: true)
     }
     
     func clickedWriteTabbar() {

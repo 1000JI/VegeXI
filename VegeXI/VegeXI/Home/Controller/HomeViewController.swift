@@ -16,11 +16,16 @@ class HomeViewController: UIViewController {
     private let categoryView = CategoryCollectionView()
     private let mainTableView = MainTableView(frame: .zero, style: .grouped)
     
+    private var feeds = [Feed]() {
+        didSet { mainTableView.feeds = feeds }
+    }
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        fetchFeeds()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,6 +44,17 @@ class HomeViewController: UIViewController {
         categoryView.collectionView(
             categoryView.collectionView,
             didSelectItemAt: indexPath)
+    }
+    
+    
+    // MARK: - API
+    
+    func fetchFeeds() {
+        showLoader(true)
+        FeedService.shared.fetchFeeds { feeds in
+            self.showLoader(false)
+            self.feeds = feeds
+        }
     }
     
     

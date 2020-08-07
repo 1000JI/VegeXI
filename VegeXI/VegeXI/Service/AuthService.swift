@@ -125,7 +125,7 @@ struct AuthService {
     func rootHomeViewSetupVisible() {
         guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
         window.rootViewController?.showLoader(false)
-        window.rootViewController = HomeViewController()
+        window.rootViewController = MainTabBarController()
         window.frame = UIScreen.main.bounds
         window.makeKeyAndVisible()
     }

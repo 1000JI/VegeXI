@@ -12,6 +12,9 @@ import FirebaseStorage
 
 let STORAGE_REF = Storage.storage().reference()
 let STORAGE_PROFILE_IMAGES = STORAGE_REF.child("profile_images")
+let STORAGE_FEED_IMAGES = STORAGE_REF.child("feed_images")
 
 let DB_REF = Database.database().reference()
 let REF_USERS = DB_REF.child("users")
+let REF_FEEDS = DB_REF.child("feeds")
+let REF_USER_FEEDS = DB_REF.child("user-feeds")

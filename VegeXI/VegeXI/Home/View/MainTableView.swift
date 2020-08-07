@@ -12,6 +12,10 @@ class MainTableView: UITableView {
     
     // MARK: - Properties
     
+    var feeds = [Feed]() {
+        didSet { reloadData() }
+    }
+    
     private let headerViewHeight: CGFloat = 56
     private let cellHeight: CGFloat = 500
     
@@ -98,7 +102,7 @@ class MainTableView: UITableView {
 
 extension MainTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return feeds.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
