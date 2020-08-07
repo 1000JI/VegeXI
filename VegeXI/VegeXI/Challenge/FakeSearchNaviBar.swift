@@ -1,5 +1,5 @@
 //
-//  FakeNavigationBar.swift
+//  FakeSearchNaviBar.swift
 //  VegeXI
 //
 //  Created by Doyoung Song on 8/6/20.
@@ -8,20 +8,19 @@
 
 import UIKit
 
-class FakeNavigationBar: UIView {
+class FakeSearchNaviBar: UIView {
     
     // MARK: - Properties
-    let leftBarButton = UIButton().then {
+    private let leftBarButton = UIButton().then {
         $0.setImage(UIImage(named: "naviBar_BackBtnIcon"), for: .normal)
     }
-    let mainTitle = UILabel()
+    private let fakeSearchBar = FakeSearchBar()
     
     
     // MARK: - Lifecycle
-    init(title: String) {
-        super.init(frame: .zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         configureUI()
-        mainTitle.text = title
     }
     
     required init?(coder: NSCoder) {
@@ -35,7 +34,7 @@ class FakeNavigationBar: UIView {
     }
     
     private func setConstraints() {
-        [leftBarButton, mainTitle].forEach {
+        [leftBarButton, fakeSearchBar].forEach {
             addSubview($0)
         }
         
@@ -43,9 +42,10 @@ class FakeNavigationBar: UIView {
             $0.leading.equalToSuperview().offset(12)
             $0.centerY.equalToSuperview()
         }
-        
-        mainTitle.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
+        fakeSearchBar.snp.makeConstraints {
+            $0.leading.equalTo(leftBarButton.snp.trailing).offset(10)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(36)
             $0.centerY.equalToSuperview()
         }
     }

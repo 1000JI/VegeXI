@@ -27,7 +27,9 @@ class FBSignInViewController: UIViewController {
         cautionType: .none,
         keyboardType: .emailAddress,
         secureEntry: false
-    )
+    ).then {
+        $0.textField.becomeFirstResponder()
+    }
     private let passwordInputView = SignView(
         placeholder: SignInStrings.password.generateString(),
         cautionType: .none,
@@ -90,7 +92,7 @@ class FBSignInViewController: UIViewController {
         signInButton.snp.makeConstraints {
             $0.top.equalTo(textFieldStackView.snp.bottom).offset(35)
             $0.leading.trailing.equalTo(textFieldStackView)
-            $0.height.equalTo(50)
+            $0.height.equalTo(48)
         }
         forgotPasswordButton.snp.makeConstraints {
             $0.top.equalTo(signInButton.snp.bottom).offset(20)
@@ -109,7 +111,6 @@ class FBSignInViewController: UIViewController {
         signUpButton.addTarget(self, action: #selector(handleSignUpButton(_:)), for: .touchUpInside)
         fakeNavigationBar.leftBarButton.addTarget(self, action: #selector(handlePopAction), for: .touchUpInside)
         
-        idInputView.textField.becomeFirstResponder()
         idInputView.textField.delegate = self
         passwordInputView.textField.delegate = self
     }
@@ -162,13 +163,13 @@ class FBSignInViewController: UIViewController {
     }
     
     private func showWarnings(view: SignView, message: String) {
-        view.cautionMessageLabel.alpha = 1
+        view.needToShowWarning = true
         view.cautionMessageLabel.text = message
     }
     
     private func hideWarnings() {
         [idInputView, passwordInputView].forEach {
-            $0.cautionMessageLabel.alpha = 0
+            $0.needToShowWarning = false
         }
     }
 }

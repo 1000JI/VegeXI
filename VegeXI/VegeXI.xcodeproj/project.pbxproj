@@ -8,8 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		42299CBF24D974AF00AE9253 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42299CBE24D974AF00AE9253 /* SignUpViewController.swift */; };
+		4257EF4224DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257EF4124DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift */; };
+		4257EF4424DC3FF200CFF4C6 /* FakeSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257EF4324DC3FF200CFF4C6 /* FakeSearchBar.swift */; };
+		4257EF4624DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257EF4524DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift */; };
+		4257EF4A24DD07FD00CFF4C6 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257EF4924DD07FD00CFF4C6 /* MockData.swift */; };
+		4257EF4C24DD0BC700CFF4C6 /* SearchHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257EF4B24DD0BC700CFF4C6 /* SearchHistoryTableViewCell.swift */; };
 		4264F1E124DBEBAA007B3BC2 /* FakeNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4264F1E024DBEBAA007B3BC2 /* FakeNavigationBar.swift */; };
-		4264F20324DC0212007B3BC2 /* SearchFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4264F20224DC0212007B3BC2 /* SearchFilterViewController.swift */; };
+		4264F20324DC0212007B3BC2 /* SearchHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4264F20224DC0212007B3BC2 /* SearchHistoryViewController.swift */; };
 		4267C94B24DABD3E00702BAC /* FBSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C94A24DABD3E00702BAC /* FBSignInViewController.swift */; };
 		4267C94F24DACA4100702BAC /* SignButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C94E24DACA4100702BAC /* SignButton.swift */; };
 		4267C95124DAE51200702BAC /* SignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95024DAE51200702BAC /* SignView.swift */; };
@@ -59,8 +64,13 @@
 		38105EDA7625BA3CC11C87BE /* Pods-VegeXI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VegeXI.debug.xcconfig"; path = "Target Support Files/Pods-VegeXI/Pods-VegeXI.debug.xcconfig"; sourceTree = "<group>"; };
 		42299CBD24D93E6A00AE9253 /* VegeXI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VegeXI.entitlements; sourceTree = "<group>"; };
 		42299CBE24D974AF00AE9253 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		4257EF4124DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSearchNaviBar.swift; sourceTree = "<group>"; };
+		4257EF4324DC3FF200CFF4C6 /* FakeSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSearchBar.swift; sourceTree = "<group>"; };
+		4257EF4524DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryHeaderView.swift; sourceTree = "<group>"; };
+		4257EF4924DD07FD00CFF4C6 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		4257EF4B24DD0BC700CFF4C6 /* SearchHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		4264F1E024DBEBAA007B3BC2 /* FakeNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeNavigationBar.swift; sourceTree = "<group>"; };
-		4264F20224DC0212007B3BC2 /* SearchFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchFilterViewController.swift; path = ../../../../../Documents/SearchFilterViewController.swift; sourceTree = "<group>"; };
+		4264F20224DC0212007B3BC2 /* SearchHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchHistoryViewController.swift; path = ../../../../../Documents/SearchHistoryViewController.swift; sourceTree = "<group>"; };
 		4267C94A24DABD3E00702BAC /* FBSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBSignInViewController.swift; sourceTree = "<group>"; };
 		4267C94E24DACA4100702BAC /* SignButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignButton.swift; sourceTree = "<group>"; };
 		4267C95024DAE51200702BAC /* SignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignView.swift; sourceTree = "<group>"; };
@@ -228,7 +238,12 @@
 		AFC1186724D3AFEE005B2E44 /* Challenge */ = {
 			isa = PBXGroup;
 			children = (
-				4264F20224DC0212007B3BC2 /* SearchFilterViewController.swift */,
+				4264F20224DC0212007B3BC2 /* SearchHistoryViewController.swift */,
+				4257EF4524DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift */,
+				4257EF4B24DD0BC700CFF4C6 /* SearchHistoryTableViewCell.swift */,
+				4257EF4124DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift */,
+				4257EF4324DC3FF200CFF4C6 /* FakeSearchBar.swift */,
+				4257EF4924DD07FD00CFF4C6 /* MockData.swift */,
 			);
 			path = Challenge;
 			sourceTree = "<group>";
@@ -420,8 +435,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4257EF4624DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift in Sources */,
 				4267C95924DB1D3D00702BAC /* SignInStrings.swift in Sources */,
-				4264F20324DC0212007B3BC2 /* SearchFilterViewController.swift in Sources */,
+				4257EF4A24DD07FD00CFF4C6 /* MockData.swift in Sources */,
+				4257EF4424DC3FF200CFF4C6 /* FakeSearchBar.swift in Sources */,
+				4257EF4C24DD0BC700CFF4C6 /* SearchHistoryTableViewCell.swift in Sources */,
+				4264F20324DC0212007B3BC2 /* SearchHistoryViewController.swift in Sources */,
 				4267C95324DAF61400702BAC /* SignErrors.swift in Sources */,
 				AFC1185724D3AEE1005B2E44 /* SignInViewController.swift in Sources */,
 				42299CBF24D974AF00AE9253 /* SignUpViewController.swift in Sources */,
@@ -438,6 +457,7 @@
 				AF58173224D7DF9200F2683D /* SNSLoginService.swift in Sources */,
 				AF2EE70424D87B4800A956BD /* AuthService.swift in Sources */,
 				4267C95524DB1BD900702BAC /* SignUpStrings.swift in Sources */,
+				4257EF4224DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift in Sources */,
 				AFF46CAD24D85A00008F118E /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

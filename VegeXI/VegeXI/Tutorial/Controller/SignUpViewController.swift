@@ -18,32 +18,34 @@ class SignUpViewController: UIViewController {
     private lazy var fakeNavigationBar = FakeNavigationBar(title: viewTitle)
     
     // TextFields
-    lazy var signViewStackView = UIStackView(arrangedSubviews: [idInputView, passwordInputView, retypePasswordInputView, nicknameInputView]).then {
+    private lazy var signViewStackView = UIStackView(arrangedSubviews: [idInputView, passwordInputView, retypePasswordInputView, nicknameInputView]).then {
         $0.alignment = .center
         $0.axis = .vertical
         $0.distribution = .fillEqually
         $0.spacing = 20
     }
-    let idInputView = SignView(
+    private let idInputView = SignView(
         placeholder: SignUpStrings.email.generateString(),
         cautionType: .none,
         keyboardType: .emailAddress,
         secureEntry: false
-    )
-    let passwordInputView = SignView(
+    ).then {
+        $0.textField.becomeFirstResponder()
+    }
+    private let passwordInputView = SignView(
         placeholder: SignUpStrings.password.generateString(),
         cautionType: .none,
         keyboardType: .default,
         secureEntry: true
     )
     
-    let retypePasswordInputView = SignView(
+    private let retypePasswordInputView = SignView(
         placeholder: SignUpStrings.retypePassword.generateString(),
         cautionType: .none,
         keyboardType: .default,
         secureEntry: true
     )
-    let nicknameInputView = SignView(
+    private let nicknameInputView = SignView(
         placeholder: SignUpStrings.nickname.generateString(),
         cautionType: .none,
         keyboardType: .emailAddress,
@@ -51,8 +53,8 @@ class SignUpViewController: UIViewController {
     )
     
     // Buttons
-    let signUpButton = SignButton(title: GeneralStrings.startButton.generateString())
-    let descriptionLabel = UILabel().then {
+    private let signUpButton = SignButton(title: GeneralStrings.startButton.generateString())
+    private let descriptionLabel = UILabel().then {
         $0.text = SignUpStrings.agreement.generateString()
         $0.font = UIFont.systemFont(ofSize: 10)
     }
@@ -98,15 +100,15 @@ class SignUpViewController: UIViewController {
         signViewStackView.snp.makeConstraints {
             $0.top.equalTo(fakeNavigationBar.snp.bottom)
             $0.width.equalToSuperview().offset(20)
-            $0.height.equalTo(250)
+            $0.height.equalTo(210)
             $0.centerX.equalToSuperview()
         }
         
         signUpButton.snp.makeConstraints {
+            $0.top.equalTo(signViewStackView.snp.bottom).offset(36)
+            $0.height.equalTo(48)
             $0.width.equalToSuperview().inset(20)
-            $0.height.equalTo(50)
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(signViewStackView.snp.bottom).offset(30)
         }
         
         descriptionLabel.snp.makeConstraints {
@@ -116,7 +118,7 @@ class SignUpViewController: UIViewController {
         
         signViewStackView.arrangedSubviews.forEach {
             $0.snp.makeConstraints {
-                $0.width.equalToSuperview().inset(40)
+                $0.width.equalToSuperview().inset(30)
             }
         }
     }
@@ -164,23 +166,23 @@ class SignUpViewController: UIViewController {
     }
     
     private func showWarnings(view: SignView, message: String) {
-        view.underBar.backgroundColor = .red
-        view.cautionMessageLabel.alpha = 1
+        view.underBarNeedToTurnRed = true
+        view.needToShowWarning = true
         view.cautionMessageLabel.text = message
     }
     
     private func hideWarnings() {
         [idInputView, nicknameInputView, passwordInputView].forEach {
-            $0.underBar.backgroundColor = .lightGray
-            $0.cautionMessageLabel.alpha = 0
+            $0.underBarNeedToTurnRed = false
+            $0.needToShowWarning = false
         }
     }
     
     private func checkPassword(password1: String, password2: String) {
         switch password1 == password2 {
         case true:
-            retypePasswordInputView.cautionMessageLabel.alpha = 0
-            retypePasswordInputView.underBar.backgroundColor = .lightGray
+            retypePasswordInputView.needToShowWarning = false
+            retypePasswordInputView.underBarNeedToTurnRed = false
         case false:
             let message = SignErrors.passwordNotMatching.generateErrorMessage()
             showWarnings(view: retypePasswordInputView, message: message)

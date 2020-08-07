@@ -16,11 +16,18 @@ class ForgotPasswordViewController: UIViewController {
     
     private lazy var fakeNavigationBar = FakeNavigationBar(title: viewTitle)
     
+    private let infoLabel = UILabel().then {
+        $0.text = SignUpStrings.passwordInfo.generateString()
+        $0.font = UIFont.spoqaHanSansRegular(ofSize: 14)
+        $0.numberOfLines = 0
+    }
     private let emailSignView = SignView(
         placeholder: "이메일",
         cautionType: .none,
         keyboardType: .emailAddress,
-        secureEntry: false)
+        secureEntry: false).then {
+            $0.textField.becomeFirstResponder()
+    }
     
     private let sendButton = SignButton(title: GeneralStrings.sendButton.generateString())
     
@@ -40,7 +47,7 @@ class ForgotPasswordViewController: UIViewController {
     }
     
     private func setConstraints() {
-        [fakeNavigationBar, emailSignView, sendButton].forEach {
+        [fakeNavigationBar, infoLabel, emailSignView, sendButton].forEach {
             view.addSubview($0)
         }
         
@@ -49,16 +56,21 @@ class ForgotPasswordViewController: UIViewController {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(80)
         }
-        emailSignView.snp.makeConstraints {
+        infoLabel.snp.makeConstraints {
             $0.top.equalTo(fakeNavigationBar.snp.bottom)
+            $0.leading.equalToSuperview().inset(30)
+            $0.centerX.equalToSuperview()
+        }
+        emailSignView.snp.makeConstraints {
+            $0.top.equalTo(infoLabel.snp.bottom).offset(31)
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(70)
+            $0.height.equalTo(30)
             $0.centerX.equalToSuperview()
         }
         sendButton.snp.makeConstraints {
-            $0.top.equalTo(emailSignView.snp.bottom).offset(20)
+            $0.top.equalTo(emailSignView.snp.bottom).offset(36)
             $0.leading.trailing.equalTo(emailSignView)
-            $0.height.equalTo(50)
+            $0.height.equalTo(48)
             $0.centerX.equalToSuperview()
         }
     }
@@ -73,15 +85,15 @@ class ForgotPasswordViewController: UIViewController {
     
     // MARK: - Helpers
     private func showWarnings(view: SignView, message: String) {
-        view.underBar.backgroundColor = .red
-        view.cautionMessageLabel.alpha = 1
+        view.underBarNeedToTurnRed = true
+        view.needToShowWarning = true
         view.cautionMessageLabel.text = message
     }
     
     private func hideWarnings() {
         [emailSignView].forEach {
-            $0.underBar.backgroundColor = .lightGray
-            $0.cautionMessageLabel.alpha = 0
+            $0.underBarNeedToTurnRed = false
+            $0.needToShowWarning = false
         }
     }
     
