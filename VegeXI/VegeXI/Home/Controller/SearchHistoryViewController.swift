@@ -13,7 +13,6 @@ class SearchHistoryViewController: UIViewController {
     // MARK: - Properties
     private let fakeSearchNaviBar = FakeSearchNaviBar()
     private let historyTableView = UITableView(frame: .zero, style: .plain).then {
-        $0.allowsSelection = false
         $0.separatorStyle = .none
         $0.rowHeight = 42
     }
@@ -24,6 +23,7 @@ class SearchHistoryViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
     }
+    
     
     // MARK: - UI
     private func configureUI() {
@@ -50,6 +50,9 @@ class SearchHistoryViewController: UIViewController {
         historyTableView.dataSource = self
         historyTableView.delegate = self
         historyTableView.register(SearchHistoryTableViewCell.self, forCellReuseIdentifier: SearchHistoryTableViewCell.identifier)
+        
+        fakeSearchNaviBar.fakeSearchBar.searchTextField.delegate = self
+        fakeSearchNaviBar.configureSearchNaviBar(leftBarButtonActionHandler: handleLeftBackBarButton)
     }
     
     
@@ -74,8 +77,13 @@ class SearchHistoryViewController: UIViewController {
         historyTableView.reloadData()
     }
     
+    private func handleLeftBackBarButton() {
+        print(#function)
+    }
 }
 
+
+// MARK: -  UITableViewDataSource
 extension SearchHistoryViewController: UITableViewDataSource {
     
     // Section
@@ -101,11 +109,27 @@ extension SearchHistoryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = historyTableView.dequeueReusableCell(withIdentifier: SearchHistoryTableViewCell.identifier, for: indexPath) as? SearchHistoryTableViewCell else { fatalError("No Cell Info") }
         let text = MockData.searchHistory[indexPath.row]
+        cell.selectionStyle = .none
         cell.configureCell(text: text, tag: indexPath.row, tapActionHandler: handleDeleteButton(cellNumber:))
         return cell
     }
 }
 
+
+// MARK: - UITableViewDelegate
 extension SearchHistoryViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = historyTableView.cellForRow(at: indexPath) as? SearchHistoryTableViewCell else { return }
+        fakeSearchNaviBar.fakeSearchBar.currentText = cell.leftLable.text!
+        fakeSearchNaviBar.fakeSearchBar.isSearching = fakeSearchNaviBar.fakeSearchBar.searchTextField.text != "" ? true : false
+    }
+}
+
+
+// MARK: - UITextFieldDelegate
+extension SearchHistoryViewController: UITextFieldDelegate {
     
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        fakeSearchNaviBar.fakeSearchBar.isSearching = fakeSearchNaviBar.fakeSearchBar.searchTextField.text != "" ? true : false
+    }
 }

@@ -17,10 +17,10 @@ class SearchHistoryTableViewCell: UITableViewCell {
         $0.font = UIFont.spoqaHanSansRegular(ofSize: 15)
         $0.textColor = .vegeTextBlackColor
     }
-    let rightAccessoryImageView = UIImageView().then {
+    private let rightAccessoryImageView = UIImageView().then {
         $0.image = UIImage(named: "searchHistory_ClearButton")
     }
-    var tapActionHandler: (Int) -> Void = { _ in return }
+    private var tapActionHandler: (Int) -> Void = { _ in return }
     
     
     // MARK: - Lifecycle

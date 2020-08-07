@@ -14,7 +14,8 @@ class FakeSearchNaviBar: UIView {
     private let leftBarButton = UIButton().then {
         $0.setImage(UIImage(named: "naviBar_BackBtnIcon"), for: .normal)
     }
-    private let fakeSearchBar = FakeSearchBar()
+    let fakeSearchBar = FakeSearchBar()
+    private var leftBarButtonActionHandler: () -> Void = { return }
     
     
     // MARK: - Lifecycle
@@ -30,7 +31,12 @@ class FakeSearchNaviBar: UIView {
     
     // MARK: - UI
     private func configureUI() {
+        setPropertyAttributes()
         setConstraints()
+    }
+    
+    private func setPropertyAttributes() {
+        leftBarButton.addTarget(self, action: #selector(handleLeftBarButton(_:)), for: .touchUpInside)
     }
     
     private func setConstraints() {
@@ -48,5 +54,17 @@ class FakeSearchNaviBar: UIView {
             $0.height.equalTo(36)
             $0.centerY.equalToSuperview()
         }
+    }
+    
+    
+    // MARK: - Helpers
+    func configureSearchNaviBar(leftBarButtonActionHandler: @escaping () -> Void) {
+        self.leftBarButtonActionHandler = leftBarButtonActionHandler
+    }
+    
+    
+    // MARK: - Selectors
+    @objc private func handleLeftBarButton(_ sender: UIButton) {
+        leftBarButtonActionHandler()
     }
 }

@@ -16,6 +16,8 @@ enum GeneralStrings {
     case searchFieldPlaceholder
     case recentSearchHistory
     case eraseAll
+    case filterViewTitle
+    case filterBottomViewTitle
     
     func generateString() -> String {
         switch self {
@@ -33,6 +35,10 @@ enum GeneralStrings {
             return "최근 검색어"
         case .eraseAll:
             return "모두 지우기"
+        case .filterViewTitle:
+            return "필터"
+        case .filterBottomViewTitle:
+            return "필터 적용"
         }
     }
 }

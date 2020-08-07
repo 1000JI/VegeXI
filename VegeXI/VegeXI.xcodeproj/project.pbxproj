@@ -23,6 +23,11 @@
 		4267C95724DB1D2F00702BAC /* GeneralStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95624DB1D2F00702BAC /* GeneralStrings.swift */; };
 		4267C95924DB1D3D00702BAC /* SignInStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95824DB1D3D00702BAC /* SignInStrings.swift */; };
 		4267C95B24DBC36800702BAC /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95A24DBC36800702BAC /* ForgotPasswordViewController.swift */; };
+		42BE29EA24DD2E4600449221 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29E924DD2E4600449221 /* FilterViewController.swift */; };
+		42BE29EC24DD307E00449221 /* FilterViewTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29EB24DD307E00449221 /* FilterViewTopBar.swift */; };
+		42BE29EE24DD322600449221 /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29ED24DD322600449221 /* FilterTableViewCell.swift */; };
+		42BE29F024DD35C900449221 /* FilterTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29EF24DD35C900449221 /* FilterTableViewHeader.swift */; };
+		42BE29F224DD424400449221 /* FilterViewBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29F124DD424400449221 /* FilterViewBottomBar.swift */; };
 		8E845E39A055B87E3285FCA4 /* Pods_VegeXI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 943E4B56E189F1F7F3E0DE26 /* Pods_VegeXI.framework */; };
 		AF27F3DE24D5F29800CFEF9C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AF27F3DD24D5F29800CFEF9C /* Alamofire */; };
 		AF2EE70424D87B4800A956BD /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2EE70324D87B4800A956BD /* AuthService.swift */; };
@@ -92,6 +97,11 @@
 		4267C95624DB1D2F00702BAC /* GeneralStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralStrings.swift; sourceTree = "<group>"; };
 		4267C95824DB1D3D00702BAC /* SignInStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInStrings.swift; sourceTree = "<group>"; };
 		4267C95A24DBC36800702BAC /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		42BE29E924DD2E4600449221 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		42BE29EB24DD307E00449221 /* FilterViewTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewTopBar.swift; sourceTree = "<group>"; };
+		42BE29ED24DD322600449221 /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
+		42BE29EF24DD35C900449221 /* FilterTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewHeader.swift; sourceTree = "<group>"; };
+		42BE29F124DD424400449221 /* FilterViewBottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewBottomBar.swift; sourceTree = "<group>"; };
 		943E4B56E189F1F7F3E0DE26 /* Pods_VegeXI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VegeXI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF2EE70324D87B4800A956BD /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		AF561E3F24D9CCB80063D51F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -194,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				4243D57C24DD290F003F3761 /* SearchHistoryViewController.swift */,
+				42BE29E924DD2E4600449221 /* FilterViewController.swift */,
 				AF5634DB24DA64F200A606EA /* HomeViewController.swift */,
 				AF8193DA24DC80D900B948CF /* MainTabBarController.swift */,
 			);
@@ -205,6 +216,10 @@
 			children = (
 				4257EF4124DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift */,
 				4257EF4324DC3FF200CFF4C6 /* FakeSearchBar.swift */,
+				42BE29EB24DD307E00449221 /* FilterViewTopBar.swift */,
+				42BE29F124DD424400449221 /* FilterViewBottomBar.swift */,
+				42BE29EF24DD35C900449221 /* FilterTableViewHeader.swift */,
+				42BE29ED24DD322600449221 /* FilterTableViewCell.swift */,
 				4257EF4524DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift */,
 				4257EF4B24DD0BC700CFF4C6 /* SearchHistoryTableViewCell.swift */,
 				AF6652C924DBFD71005FC74B /* CustomMainNavigationBar.swift */,
@@ -545,6 +560,7 @@
 				4243D57D24DD290F003F3761 /* SearchHistoryViewController.swift in Sources */,
 				4257EF4A24DD07FD00CFF4C6 /* MockData.swift in Sources */,
 				4257EF4424DC3FF200CFF4C6 /* FakeSearchBar.swift in Sources */,
+				42BE29F024DD35C900449221 /* FilterTableViewHeader.swift in Sources */,
 				4257EF4C24DD0BC700CFF4C6 /* SearchHistoryTableViewCell.swift in Sources */,
 				AF6652D224DC2F5A005FC74B /* MainTableViewCell.swift in Sources */,
 				4267C95924DB1D3D00702BAC /* SignInStrings.swift in Sources */,
@@ -567,11 +583,15 @@
 				4267C95724DB1D2F00702BAC /* GeneralStrings.swift in Sources */,
 				4267C94F24DACA4100702BAC /* SignButton.swift in Sources */,
 				4267C95B24DBC36800702BAC /* ForgotPasswordViewController.swift in Sources */,
+				42BE29EA24DD2E4600449221 /* FilterViewController.swift in Sources */,
 				4267C95124DAE51200702BAC /* SignView.swift in Sources */,
+				42BE29F224DD424400449221 /* FilterViewBottomBar.swift in Sources */,
 				AF58173224D7DF9200F2683D /* SNSLoginService.swift in Sources */,
+				42BE29EC24DD307E00449221 /* FilterViewTopBar.swift in Sources */,
 				AF2EE70424D87B4800A956BD /* AuthService.swift in Sources */,
 				4267C95524DB1BD900702BAC /* SignUpStrings.swift in Sources */,
 				4257EF4224DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift in Sources */,
+				42BE29EE24DD322600449221 /* FilterTableViewCell.swift in Sources */,
 				AFF46CAD24D85A00008F118E /* Constants.swift in Sources */,
 				AF6652CE24DC132C005FC74B /* CategoryCell.swift in Sources */,
 				AF8E0D6224DD5D5800D08D58 /* FeedService.swift in Sources */,
