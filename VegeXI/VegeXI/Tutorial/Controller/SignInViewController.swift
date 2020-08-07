@@ -36,7 +36,6 @@ class SignInViewController: UIViewController {
         logoImageView.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
         }
-
     }
     
     // MARK: - LifeCycle
