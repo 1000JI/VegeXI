@@ -17,6 +17,9 @@ class MainTableViewCell: UITableViewCell {
     private let defaultSidePadding: CGFloat = 20
     private let buttonSize: CGFloat = 34
     
+    var feed: Feed? {
+        didSet { configure() }
+    }
     
     // Views
     
@@ -35,7 +38,7 @@ class MainTableViewCell: UITableViewCell {
     }
     
     private let writeDateLabel = UILabel().then {
-        $0.text = "2020.08.08"
+        $0.text = "2020.01.01"
         $0.textColor = .vegeCategoryTextColor
         $0.font = UIFont.spoqaHanSansRegular(ofSize: 10)
     }
@@ -59,7 +62,7 @@ class MainTableViewCell: UITableViewCell {
     }
     
     private lazy var feedImageView = UIImageView().then {
-        $0.backgroundColor = .systemIndigo
+        $0.backgroundColor = .white
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 8
         $0.clipsToBounds = true
@@ -81,13 +84,13 @@ class MainTableViewCell: UITableViewCell {
     }
     
     private let feedTitleLabel = UILabel().then {
-        $0.text = "[비건 브랜드] 멜릭서 립밤 추천드려요!"
+        $0.text = "제목"
         $0.textColor = .vegeTextBlackColor
         $0.font = UIFont.spoqaHanSansBold(ofSize: 16)
     }
     
     private let feedContentsLabel = UILabel().then {
-        $0.text = "립밤마저도 비건 립밤이라니 평소 비건에 관심 있으셨던 분들께 추천 드리고파요:) 케이스도 깔끔하고 립밤도 끈적이지 않아서 수시로 바르기도 편합니다."
+        $0.text = "컨텐츠 내용"
         $0.textColor = .vegeTextBlackColor
         $0.font = UIFont.spoqaHanSansRegular(ofSize: 12)
         $0.numberOfLines = 2
@@ -219,6 +222,20 @@ class MainTableViewCell: UITableViewCell {
             $0.centerY.equalTo(heartButton.snp.centerY)
             $0.width.height.equalTo(buttonSize)
         }
+    }
+    
+    func configure() {
+        guard let feed = feed else { return }
+        let viewModel = FeedViewModel(feed: feed)
+        profileImageView.sd_setImage(with: viewModel.profileImageURL)
+        writerLabel.text = feed.writerUser.nickname
+        writeDateLabel.text = viewModel.writeDate
+        feedTitleLabel.text = feed.title
+        feedContentsLabel.text = feed.content
+        heartCountLabel.text = "\(feed.likes)"
+        commentCountLabel.text = "\(feed.comments)"
         
+        feedImageView.sd_setImage(with: viewModel.titleFeedImageURL)
+        moreImageCountLabel.text = viewModel.moreImageCount
     }
 }

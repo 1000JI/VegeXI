@@ -46,6 +46,7 @@
 		AF8E0D6024DD43FF00D08D58 /* BSImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = AF8E0D5F24DD43FF00D08D58 /* BSImagePicker */; };
 		AF8E0D6224DD5D5800D08D58 /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E0D6124DD5D5800D08D58 /* FeedService.swift */; };
 		AF8E0D6524DDC3A700D08D58 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = AF8E0D6424DDC3A700D08D58 /* SDWebImage */; };
+		AF8E0D6824DDD83900D08D58 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E0D6724DDD83900D08D58 /* FeedViewModel.swift */; };
 		AF9E8D1C24D58E160047F0C4 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9E8D1A24D58E020047F0C4 /* KakaoOpenSDK.framework */; };
 		AF9E8D1D24D58E160047F0C4 /* KakaoOpenSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AF9E8D1A24D58E020047F0C4 /* KakaoOpenSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AFC1185324D3AEE1005B2E44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC1185224D3AEE1005B2E44 /* AppDelegate.swift */; };
@@ -110,6 +111,7 @@
 		AF8E0D5A24DD277C00D08D58 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		AF8E0D5C24DD320700D08D58 /* FeedRegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRegisterController.swift; sourceTree = "<group>"; };
 		AF8E0D6124DD5D5800D08D58 /* FeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; };
+		AF8E0D6724DDD83900D08D58 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		AF9E8D1A24D58E020047F0C4 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoOpenSDK.framework; path = Frameworks/KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		AF9E8D1E24D58E3C0047F0C4 /* KakaoOpenSDK-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KakaoOpenSDK-Bridging-Header.h"; sourceTree = "<group>"; };
 		AFC1184F24D3AEE1005B2E44 /* VegeXI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VegeXI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -235,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				AF8E0D5724DD091800D08D58 /* Model */,
+				AF8E0D6624DDD81C00D08D58 /* ViewModel */,
 				AF8E0D5624DD091000D08D58 /* View */,
 				AF8E0D5524DD090500D08D58 /* Controller */,
 			);
@@ -263,6 +266,14 @@
 				AF8E0D5A24DD277C00D08D58 /* Feed.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		AF8E0D6624DDD81C00D08D58 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AF8E0D6724DDD83900D08D58 /* FeedViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		AF9E8D0F24D51A220047F0C4 /* Header */ = {
@@ -529,6 +540,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF8E0D6824DDD83900D08D58 /* FeedViewModel.swift in Sources */,
 				4257EF4624DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift in Sources */,
 				4243D57D24DD290F003F3761 /* SearchHistoryViewController.swift in Sources */,
 				4257EF4A24DD07FD00CFF4C6 /* MockData.swift in Sources */,
