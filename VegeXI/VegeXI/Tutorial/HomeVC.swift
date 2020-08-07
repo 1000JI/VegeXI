@@ -11,25 +11,24 @@ import SnapKit
 import KakaoOpenSDK
 import NaverThirdPartyLogin
 import Alamofire
-import Then
 
 class HomeVC: UIViewController {
     
     // MARK: - Properties
     
-    private lazy var loginButton = KOLoginButton().then {
-        $0.addTarget(self,
-                     action: #selector(clickedKakaoLogin),
-                     for: .touchUpInside)
-    }
+    private lazy var loginButton: KOLoginButton = {
+        let button = KOLoginButton()
+        button.addTarget(self, action: #selector(clickedKakaoLogin), for: .touchUpInside)
+        return button
+    }()
     
-    private lazy var naverLoginButton = UIButton(type: .system).then {
-        $0.setImage(UIImage(named: "naver_login_short_white")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        $0.addTarget(self,
-                     action: #selector(handleLoginNaver),
-                     for: .touchUpInside)
-    }
-    
+    private lazy var naverLoginButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "naver_login_short_white")?.withRenderingMode(.alwaysOriginal), for: .normal)
+//        button.backgroundColor = .red
+        button.addTarget(self, action: #selector(handleLoginNaver), for: .touchUpInside)
+        return button
+    }()
     
     // MARK: - LifeCycle
     
@@ -40,7 +39,6 @@ class HomeVC: UIViewController {
         configureSNSLogin()
     }
     
-    
     // MARK: - Selectors
     
     @objc func handleLoginNaver() {
@@ -48,9 +46,8 @@ class HomeVC: UIViewController {
     }
     
     @objc func clickedKakaoLogin() {
-        KakaoLoginService.shared.registerKakaoAuth()
+        KakaoLoginService.shared.getKakaoInfo()
     }
-    
     
     // MARK: - Helpers
     
@@ -76,7 +73,6 @@ class HomeVC: UIViewController {
     }
 }
 
-
 // MARK: - NaverThirdPartyLoginConnectionDelegate
 
 extension HomeVC: NaverThirdPartyLoginConnectionDelegate {
@@ -88,13 +84,13 @@ extension HomeVC: NaverThirdPartyLoginConnectionDelegate {
     // 로그인에 성공했을 경우 호출
     func oauth20ConnectionDidFinishRequestACTokenWithAuthCode() {
         print("[Success] : Success Naver Login")
-        NaverLoginService.shared.registerNaverAuth()
+        NaverLoginService.shared.getNaverInfo()
     }
     
     // 접근 토큰 갱신
     func oauth20ConnectionDidFinishRequestACTokenWithRefreshToken() {
         print(#function)
-//        print("Token: ", NaverLoginService.shared.loginInstance?.accessToken)
+        print("Token: ", NaverLoginService.shared.loginInstance?.accessToken)
     }
     
     // 로그아웃 할 경우 호출(토큰 삭제)

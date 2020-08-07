@@ -12,6 +12,5 @@ target 'VegeXI' do
   pod 'Firebase/Storage'
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
-  pod 'GoogleSignIn'
 
 end

@@ -7,48 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		42299CBF24D974AF00AE9253 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42299CBE24D974AF00AE9253 /* SignUpViewController.swift */; };
-		4243D57D24DD290F003F3761 /* SearchHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4243D57C24DD290F003F3761 /* SearchHistoryViewController.swift */; };
-		4257EF4224DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257EF4124DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift */; };
-		4257EF4424DC3FF200CFF4C6 /* FakeSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257EF4324DC3FF200CFF4C6 /* FakeSearchBar.swift */; };
-		4257EF4624DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257EF4524DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift */; };
-		4257EF4A24DD07FD00CFF4C6 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257EF4924DD07FD00CFF4C6 /* MockData.swift */; };
-		4257EF4C24DD0BC700CFF4C6 /* SearchHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257EF4B24DD0BC700CFF4C6 /* SearchHistoryTableViewCell.swift */; };
-		4264F1E124DBEBAA007B3BC2 /* FakeNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4264F1E024DBEBAA007B3BC2 /* FakeNavigationBar.swift */; };
-		4267C94B24DABD3E00702BAC /* FBSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C94A24DABD3E00702BAC /* FBSignInViewController.swift */; };
-		4267C94F24DACA4100702BAC /* SignButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C94E24DACA4100702BAC /* SignButton.swift */; };
-		4267C95124DAE51200702BAC /* SignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95024DAE51200702BAC /* SignView.swift */; };
-		4267C95324DAF61400702BAC /* SignErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95224DAF61400702BAC /* SignErrors.swift */; };
-		4267C95524DB1BD900702BAC /* SignUpStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95424DB1BD900702BAC /* SignUpStrings.swift */; };
-		4267C95724DB1D2F00702BAC /* GeneralStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95624DB1D2F00702BAC /* GeneralStrings.swift */; };
-		4267C95924DB1D3D00702BAC /* SignInStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95824DB1D3D00702BAC /* SignInStrings.swift */; };
-		4267C95B24DBC36800702BAC /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95A24DBC36800702BAC /* ForgotPasswordViewController.swift */; };
-		42BE29EA24DD2E4600449221 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29E924DD2E4600449221 /* FilterViewController.swift */; };
-		42BE29EC24DD307E00449221 /* FilterViewTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29EB24DD307E00449221 /* FilterViewTopBar.swift */; };
-		42BE29EE24DD322600449221 /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29ED24DD322600449221 /* FilterTableViewCell.swift */; };
-		42BE29F024DD35C900449221 /* FilterTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29EF24DD35C900449221 /* FilterTableViewHeader.swift */; };
-		42BE29F224DD424400449221 /* FilterViewBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29F124DD424400449221 /* FilterViewBottomBar.swift */; };
 		8E845E39A055B87E3285FCA4 /* Pods_VegeXI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 943E4B56E189F1F7F3E0DE26 /* Pods_VegeXI.framework */; };
 		AF27F3DE24D5F29800CFEF9C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AF27F3DD24D5F29800CFEF9C /* Alamofire */; };
+		AF2EE70224D86C4C00A956BD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2EE70124D86C4C00A956BD /* User.swift */; };
 		AF2EE70424D87B4800A956BD /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2EE70324D87B4800A956BD /* AuthService.swift */; };
-		AF561E4024D9CCB80063D51F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF561E3F24D9CCB80063D51F /* Extensions.swift */; };
-		AF561E4224D9CEE80063D51F /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF561E4124D9CEE80063D51F /* UserService.swift */; };
-		AF5634DC24DA64F200A606EA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5634DB24DA64F200A606EA /* HomeViewController.swift */; };
-		AF5634DF24DA6AF300A606EA /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = AF5634DE24DA6AF300A606EA /* JGProgressHUD */; };
 		AF58173224D7DF9200F2683D /* SNSLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF58173124D7DF9200F2683D /* SNSLoginService.swift */; };
-		AF6652CA24DBFD71005FC74B /* CustomMainNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6652C924DBFD71005FC74B /* CustomMainNavigationBar.swift */; };
-		AF6652CC24DC0415005FC74B /* CategoryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6652CB24DC0415005FC74B /* CategoryCollectionView.swift */; };
-		AF6652CE24DC132C005FC74B /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6652CD24DC132C005FC74B /* CategoryCell.swift */; };
-		AF6652D024DC2EA5005FC74B /* MainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6652CF24DC2EA5005FC74B /* MainTableView.swift */; };
-		AF6652D224DC2F5A005FC74B /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6652D124DC2F5A005FC74B /* MainTableViewCell.swift */; };
-		AF8193DB24DC80D900B948CF /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8193DA24DC80D900B948CF /* MainTabBarController.swift */; };
 		AF88436924D6C902000ABC2A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF88436824D6C902000ABC2A /* GoogleService-Info.plist */; };
-		AF8B261124DB15590075156C /* SpoqaHanSansBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF8B260D24DB12100075156C /* SpoqaHanSansBold.ttf */; };
-		AF8B261224DB15630075156C /* SpoqaHanSansRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF8B260C24DB12100075156C /* SpoqaHanSansRegular.ttf */; };
 		AF9E8D1C24D58E160047F0C4 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9E8D1A24D58E020047F0C4 /* KakaoOpenSDK.framework */; };
 		AF9E8D1D24D58E160047F0C4 /* KakaoOpenSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AF9E8D1A24D58E020047F0C4 /* KakaoOpenSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AFC1185324D3AEE1005B2E44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC1185224D3AEE1005B2E44 /* AppDelegate.swift */; };
-		AFC1185724D3AEE1005B2E44 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC1185624D3AEE1005B2E44 /* SignInViewController.swift */; };
+		AFC1185724D3AEE1005B2E44 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC1185624D3AEE1005B2E44 /* HomeVC.swift */; };
 		AFC1185C24D3AEE3005B2E44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFC1185B24D3AEE3005B2E44 /* Assets.xcassets */; };
 		AFC1185F24D3AEE3005B2E44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFC1185D24D3AEE3005B2E44 /* LaunchScreen.storyboard */; };
 		AFC1186D24D3B08C005B2E44 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AFC1186C24D3B08C005B2E44 /* SnapKit */; };
@@ -73,48 +41,16 @@
 /* Begin PBXFileReference section */
 		09A17A193B26B7E3D5AFF37D /* Pods-VegeXI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VegeXI.release.xcconfig"; path = "Target Support Files/Pods-VegeXI/Pods-VegeXI.release.xcconfig"; sourceTree = "<group>"; };
 		38105EDA7625BA3CC11C87BE /* Pods-VegeXI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VegeXI.debug.xcconfig"; path = "Target Support Files/Pods-VegeXI/Pods-VegeXI.debug.xcconfig"; sourceTree = "<group>"; };
-		42299CBD24D93E6A00AE9253 /* VegeXI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VegeXI.entitlements; sourceTree = "<group>"; };
-		42299CBE24D974AF00AE9253 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		4243D57C24DD290F003F3761 /* SearchHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewController.swift; sourceTree = "<group>"; };
-		4257EF4124DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSearchNaviBar.swift; sourceTree = "<group>"; };
-		4257EF4324DC3FF200CFF4C6 /* FakeSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSearchBar.swift; sourceTree = "<group>"; };
-		4257EF4524DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryHeaderView.swift; sourceTree = "<group>"; };
-		4257EF4924DD07FD00CFF4C6 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
-		4257EF4B24DD0BC700CFF4C6 /* SearchHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryTableViewCell.swift; sourceTree = "<group>"; };
-		4264F1E024DBEBAA007B3BC2 /* FakeNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeNavigationBar.swift; sourceTree = "<group>"; };
-		4267C94A24DABD3E00702BAC /* FBSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBSignInViewController.swift; sourceTree = "<group>"; };
-		4267C94E24DACA4100702BAC /* SignButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignButton.swift; sourceTree = "<group>"; };
-		4267C95024DAE51200702BAC /* SignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignView.swift; sourceTree = "<group>"; };
-		4267C95224DAF61400702BAC /* SignErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignErrors.swift; sourceTree = "<group>"; };
-		4267C95424DB1BD900702BAC /* SignUpStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpStrings.swift; sourceTree = "<group>"; };
-		4267C95624DB1D2F00702BAC /* GeneralStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralStrings.swift; sourceTree = "<group>"; };
-		4267C95824DB1D3D00702BAC /* SignInStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInStrings.swift; sourceTree = "<group>"; };
-		4267C95A24DBC36800702BAC /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
-		42BE29E924DD2E4600449221 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
-		42BE29EB24DD307E00449221 /* FilterViewTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewTopBar.swift; sourceTree = "<group>"; };
-		42BE29ED24DD322600449221 /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
-		42BE29EF24DD35C900449221 /* FilterTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewHeader.swift; sourceTree = "<group>"; };
-		42BE29F124DD424400449221 /* FilterViewBottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewBottomBar.swift; sourceTree = "<group>"; };
 		943E4B56E189F1F7F3E0DE26 /* Pods_VegeXI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VegeXI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF2EE70124D86C4C00A956BD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AF2EE70324D87B4800A956BD /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
-		AF561E3F24D9CCB80063D51F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		AF561E4124D9CEE80063D51F /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
-		AF5634DB24DA64F200A606EA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		AF58173124D7DF9200F2683D /* SNSLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLoginService.swift; sourceTree = "<group>"; };
-		AF6652C924DBFD71005FC74B /* CustomMainNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMainNavigationBar.swift; sourceTree = "<group>"; };
-		AF6652CB24DC0415005FC74B /* CategoryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionView.swift; sourceTree = "<group>"; };
-		AF6652CD24DC132C005FC74B /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
-		AF6652CF24DC2EA5005FC74B /* MainTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableView.swift; sourceTree = "<group>"; };
-		AF6652D124DC2F5A005FC74B /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
-		AF8193DA24DC80D900B948CF /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		AF88436824D6C902000ABC2A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		AF8B260C24DB12100075156C /* SpoqaHanSansRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpoqaHanSansRegular.ttf; sourceTree = "<group>"; };
-		AF8B260D24DB12100075156C /* SpoqaHanSansBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpoqaHanSansBold.ttf; sourceTree = "<group>"; };
 		AF9E8D1A24D58E020047F0C4 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoOpenSDK.framework; path = Frameworks/KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		AF9E8D1E24D58E3C0047F0C4 /* KakaoOpenSDK-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KakaoOpenSDK-Bridging-Header.h"; sourceTree = "<group>"; };
 		AFC1184F24D3AEE1005B2E44 /* VegeXI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VegeXI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFC1185224D3AEE1005B2E44 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AFC1185624D3AEE1005B2E44 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		AFC1185624D3AEE1005B2E44 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		AFC1185B24D3AEE3005B2E44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFC1185E24D3AEE3005B2E44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AFC1186024D3AEE3005B2E44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -130,7 +66,6 @@
 				AFC1186D24D3B08C005B2E44 /* SnapKit in Frameworks */,
 				AFC1187024D3B0BD005B2E44 /* Then in Frameworks */,
 				AF9E8D1C24D58E160047F0C4 /* KakaoOpenSDK.framework in Frameworks */,
-				AF5634DF24DA6AF300A606EA /* JGProgressHUD in Frameworks */,
 				8E845E39A055B87E3285FCA4 /* Pods_VegeXI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,38 +73,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		42299CB624D9367400AE9253 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				4267C95224DAF61400702BAC /* SignErrors.swift */,
-				4267C95624DB1D2F00702BAC /* GeneralStrings.swift */,
-				4267C95824DB1D3D00702BAC /* SignInStrings.swift */,
-				4267C95424DB1BD900702BAC /* SignUpStrings.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		42299CB724D9367800AE9253 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				4264F1E024DBEBAA007B3BC2 /* FakeNavigationBar.swift */,
-				4267C95024DAE51200702BAC /* SignView.swift */,
-				4267C94E24DACA4100702BAC /* SignButton.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		42299CB824D9367B00AE9253 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				AFC1185624D3AEE1005B2E44 /* SignInViewController.swift */,
-				4267C94A24DABD3E00702BAC /* FBSignInViewController.swift */,
-				42299CBE24D974AF00AE9253 /* SignUpViewController.swift */,
-				4267C95A24DBC36800702BAC /* ForgotPasswordViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
 		4EDD59B61593B9AB8AD2819E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,56 +85,9 @@
 		AF2EE70024D86C4100A956BD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AF2EE70124D86C4C00A956BD /* User.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		AF6652C624DBFD3A005FC74B /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				4243D57C24DD290F003F3761 /* SearchHistoryViewController.swift */,
-				42BE29E924DD2E4600449221 /* FilterViewController.swift */,
-				AF5634DB24DA64F200A606EA /* HomeViewController.swift */,
-				AF8193DA24DC80D900B948CF /* MainTabBarController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		AF6652C724DBFD42005FC74B /* View */ = {
-			isa = PBXGroup;
-			children = (
-				4257EF4124DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift */,
-				4257EF4324DC3FF200CFF4C6 /* FakeSearchBar.swift */,
-				42BE29EB24DD307E00449221 /* FilterViewTopBar.swift */,
-				42BE29F124DD424400449221 /* FilterViewBottomBar.swift */,
-				42BE29EF24DD35C900449221 /* FilterTableViewHeader.swift */,
-				42BE29ED24DD322600449221 /* FilterTableViewCell.swift */,
-				4257EF4524DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift */,
-				4257EF4B24DD0BC700CFF4C6 /* SearchHistoryTableViewCell.swift */,
-				AF6652C924DBFD71005FC74B /* CustomMainNavigationBar.swift */,
-				AF6652CB24DC0415005FC74B /* CategoryCollectionView.swift */,
-				AF6652CD24DC132C005FC74B /* CategoryCell.swift */,
-				AF6652CF24DC2EA5005FC74B /* MainTableView.swift */,
-				AF6652D124DC2F5A005FC74B /* MainTableViewCell.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		AF6652C824DBFD48005FC74B /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				4257EF4924DD07FD00CFF4C6 /* MockData.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		AF8B260B24DB11A20075156C /* Font */ = {
-			isa = PBXGroup;
-			children = (
-				AF8B260D24DB12100075156C /* SpoqaHanSansBold.ttf */,
-				AF8B260C24DB12100075156C /* SpoqaHanSansRegular.ttf */,
-			);
-			path = Font;
 			sourceTree = "<group>";
 		};
 		AF9E8D0F24D51A220047F0C4 /* Header */ = {
@@ -273,14 +129,13 @@
 			isa = PBXGroup;
 			children = (
 				AFC1186624D3AFE5005B2E44 /* Tutorial */,
-				AFC1186724D3AFEE005B2E44 /* Home */,
+				AFC1186724D3AFEE005B2E44 /* Challenge */,
 				AFC1186824D3AFFA005B2E44 /* MyPage */,
 				AFC1186A24D3B00F005B2E44 /* Service */,
-				AF9E8D0F24D51A220047F0C4 /* Header */,
-				AFF46CAB24D859DE008F118E /* Utils */,
 				AFC1186924D3B004005B2E44 /* Supporting */,
 				AFC1186024D3AEE3005B2E44 /* Info.plist */,
-				42299CBD24D93E6A00AE9253 /* VegeXI.entitlements */,
+				AF9E8D0F24D51A220047F0C4 /* Header */,
+				AFF46CAB24D859DE008F118E /* Utils */,
 			);
 			path = VegeXI;
 			sourceTree = "<group>";
@@ -288,21 +143,16 @@
 		AFC1186624D3AFE5005B2E44 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				42299CB824D9367B00AE9253 /* Controller */,
-				42299CB724D9367800AE9253 /* View */,
-				42299CB624D9367400AE9253 /* Model */,
+				AFC1185624D3AEE1005B2E44 /* HomeVC.swift */,
 			);
 			path = Tutorial;
 			sourceTree = "<group>";
 		};
-		AFC1186724D3AFEE005B2E44 /* Home */ = {
+		AFC1186724D3AFEE005B2E44 /* Challenge */ = {
 			isa = PBXGroup;
 			children = (
-				AF6652C824DBFD48005FC74B /* Model */,
-				AF6652C724DBFD42005FC74B /* View */,
-				AF6652C624DBFD3A005FC74B /* Controller */,
 			);
-			path = Home;
+			path = Challenge;
 			sourceTree = "<group>";
 		};
 		AFC1186824D3AFFA005B2E44 /* MyPage */ = {
@@ -316,11 +166,10 @@
 		AFC1186924D3B004005B2E44 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
-				AF8B260B24DB11A20075156C /* Font */,
+				AFC1185224D3AEE1005B2E44 /* AppDelegate.swift */,
+				AFC1185D24D3AEE3005B2E44 /* LaunchScreen.storyboard */,
 				AFC1185B24D3AEE3005B2E44 /* Assets.xcassets */,
 				AF88436824D6C902000ABC2A /* GoogleService-Info.plist */,
-				AFC1185D24D3AEE3005B2E44 /* LaunchScreen.storyboard */,
-				AFC1185224D3AEE1005B2E44 /* AppDelegate.swift */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -330,7 +179,6 @@
 			children = (
 				AF58173124D7DF9200F2683D /* SNSLoginService.swift */,
 				AF2EE70324D87B4800A956BD /* AuthService.swift */,
-				AF561E4124D9CEE80063D51F /* UserService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -339,7 +187,6 @@
 			isa = PBXGroup;
 			children = (
 				AFF46CAC24D85A00008F118E /* Constants.swift */,
-				AF561E3F24D9CCB80063D51F /* Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -356,8 +203,7 @@
 				AFC1184C24D3AEE1005B2E44 /* Frameworks */,
 				AFC1184D24D3AEE1005B2E44 /* Resources */,
 				AF9E8D0D24D517530047F0C4 /* Embed Frameworks */,
-				1090FBDED66D56E7C4434AD4 /* [CP] Embed Pods Frameworks */,
-				152047E1C25DE40A5637A192 /* [CP] Copy Pods Resources */,
+				C733A60595BA37C1A7B93773 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -368,7 +214,6 @@
 				AFC1186C24D3B08C005B2E44 /* SnapKit */,
 				AFC1186F24D3B0BD005B2E44 /* Then */,
 				AF27F3DD24D5F29800CFEF9C /* Alamofire */,
-				AF5634DE24DA6AF300A606EA /* JGProgressHUD */,
 			);
 			productName = VegeXI;
 			productReference = AFC1184F24D3AEE1005B2E44 /* VegeXI.app */;
@@ -402,7 +247,6 @@
 				AFC1186B24D3B08B005B2E44 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				AFC1186E24D3B0BD005B2E44 /* XCRemoteSwiftPackageReference "Then" */,
 				AF27F3DC24D5F29800CFEF9C /* XCRemoteSwiftPackageReference "Alamofire" */,
-				AF5634DD24DA6AF300A606EA /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
 			);
 			productRefGroup = AFC1185024D3AEE1005B2E44 /* Products */;
 			projectDirPath = "";
@@ -421,48 +265,12 @@
 				AFC1185F24D3AEE3005B2E44 /* LaunchScreen.storyboard in Resources */,
 				AFC1185C24D3AEE3005B2E44 /* Assets.xcassets in Resources */,
 				AF88436924D6C902000ABC2A /* GoogleService-Info.plist in Resources */,
-				AF8B261124DB15590075156C /* SpoqaHanSansBold.ttf in Resources */,
-				AF8B261224DB15630075156C /* SpoqaHanSansRegular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1090FBDED66D56E7C4434AD4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		152047E1C25DE40A5637A192 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		B54E07590A02FA2604096F77 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -485,6 +293,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C733A60595BA37C1A7B93773 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VegeXI/Pods-VegeXI-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -492,41 +317,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4257EF4624DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift in Sources */,
-				4243D57D24DD290F003F3761 /* SearchHistoryViewController.swift in Sources */,
-				4257EF4A24DD07FD00CFF4C6 /* MockData.swift in Sources */,
-				4257EF4424DC3FF200CFF4C6 /* FakeSearchBar.swift in Sources */,
-				42BE29F024DD35C900449221 /* FilterTableViewHeader.swift in Sources */,
-				4257EF4C24DD0BC700CFF4C6 /* SearchHistoryTableViewCell.swift in Sources */,
-				AF6652D224DC2F5A005FC74B /* MainTableViewCell.swift in Sources */,
-				4267C95924DB1D3D00702BAC /* SignInStrings.swift in Sources */,
-				AF6652CC24DC0415005FC74B /* CategoryCollectionView.swift in Sources */,
-				4267C95324DAF61400702BAC /* SignErrors.swift in Sources */,
-				AF6652D024DC2EA5005FC74B /* MainTableView.swift in Sources */,
-				AFC1185724D3AEE1005B2E44 /* SignInViewController.swift in Sources */,
-				AF8193DB24DC80D900B948CF /* MainTabBarController.swift in Sources */,
-				42299CBF24D974AF00AE9253 /* SignUpViewController.swift in Sources */,
-				4267C94B24DABD3E00702BAC /* FBSignInViewController.swift in Sources */,
-				AF561E4224D9CEE80063D51F /* UserService.swift in Sources */,
+				AFC1185724D3AEE1005B2E44 /* HomeVC.swift in Sources */,
 				AFC1185324D3AEE1005B2E44 /* AppDelegate.swift in Sources */,
-				AF561E4024D9CCB80063D51F /* Extensions.swift in Sources */,
-				4264F1E124DBEBAA007B3BC2 /* FakeNavigationBar.swift in Sources */,
-				AF5634DC24DA64F200A606EA /* HomeViewController.swift in Sources */,
-				AF6652CA24DBFD71005FC74B /* CustomMainNavigationBar.swift in Sources */,
-				4267C95724DB1D2F00702BAC /* GeneralStrings.swift in Sources */,
-				4267C94F24DACA4100702BAC /* SignButton.swift in Sources */,
-				4267C95B24DBC36800702BAC /* ForgotPasswordViewController.swift in Sources */,
-				42BE29EA24DD2E4600449221 /* FilterViewController.swift in Sources */,
-				4267C95124DAE51200702BAC /* SignView.swift in Sources */,
-				42BE29F224DD424400449221 /* FilterViewBottomBar.swift in Sources */,
 				AF58173224D7DF9200F2683D /* SNSLoginService.swift in Sources */,
-				42BE29EC24DD307E00449221 /* FilterViewTopBar.swift in Sources */,
 				AF2EE70424D87B4800A956BD /* AuthService.swift in Sources */,
-				4267C95524DB1BD900702BAC /* SignUpStrings.swift in Sources */,
-				4257EF4224DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift in Sources */,
-				42BE29EE24DD322600449221 /* FilterTableViewCell.swift in Sources */,
+				AF2EE70224D86C4C00A956BD /* User.swift in Sources */,
 				AFF46CAD24D85A00008F118E /* Constants.swift in Sources */,
-				AF6652CE24DC132C005FC74B /* CategoryCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,10 +460,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)\n$(EMBEDDED_CONTENT_CONTAINS_SWIFT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = VegeXI/VegeXI.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DX4KVUBK56;
+				DEVELOPMENT_TEAM = ZLCDRXJTXW;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -684,7 +478,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.teamsloth.VegeXI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "VegeXI/Header/KakaoOpenSDK-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -697,10 +490,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)\n$(EMBEDDED_CONTENT_CONTAINS_SWIFT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = VegeXI/VegeXI.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DX4KVUBK56;
+				DEVELOPMENT_TEAM = ZLCDRXJTXW;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -717,7 +508,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.teamsloth.VegeXI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "VegeXI/Header/KakaoOpenSDK-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -756,14 +546,6 @@
 				minimumVersion = 5.2.2;
 			};
 		};
-		AF5634DD24DA6AF300A606EA /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.1.0;
-			};
-		};
 		AFC1186B24D3B08B005B2E44 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -787,11 +569,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AF27F3DC24D5F29800CFEF9C /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		AF5634DE24DA6AF300A606EA /* JGProgressHUD */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AF5634DD24DA6AF300A606EA /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
-			productName = JGProgressHUD;
 		};
 		AFC1186C24D3B08C005B2E44 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
