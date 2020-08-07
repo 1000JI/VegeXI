@@ -61,6 +61,7 @@ extension UIColor {
     static let vegeWarningRedColor = UIColor(rgb: 0xD51D1D)
     static let vegeCategoryTextColor = UIColor(rgb: 0x707070)
     static let tabbarGreenSelectColor = UIColor(rgb: 0x156941)
+    static let vegeSelectedGreend = UIColor(rgb: 0x0AB682)
 }
 
 extension UIFont {

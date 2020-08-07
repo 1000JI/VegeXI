@@ -48,7 +48,6 @@ class FakeSearchBar: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .vegeLightGraySearchBarColor
-        searchTextField.delegate = self
         configureUI()
         setTapGesture()
     }
@@ -102,12 +101,5 @@ class FakeSearchBar: UIView {
     // MARK: - Selectors
     @objc private func handleTapGesture(_ sender: UITapGestureRecognizer) {
         searchTextField.text = ""
-    }
-}
-
-
-extension FakeSearchBar: UITextFieldDelegate {
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        isSearching = searchTextField.text != "" ? true : false
     }
 }
