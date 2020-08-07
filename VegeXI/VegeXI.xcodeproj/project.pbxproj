@@ -33,6 +33,8 @@
 		AF88436924D6C902000ABC2A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF88436824D6C902000ABC2A /* GoogleService-Info.plist */; };
 		AF8B261124DB15590075156C /* SpoqaHanSansBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF8B260D24DB12100075156C /* SpoqaHanSansBold.ttf */; };
 		AF8B261224DB15630075156C /* SpoqaHanSansRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF8B260C24DB12100075156C /* SpoqaHanSansRegular.ttf */; };
+		AF8E0D5924DD092E00D08D58 /* WriteEmptyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E0D5824DD092E00D08D58 /* WriteEmptyController.swift */; };
+		AF8E0D5B24DD277C00D08D58 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E0D5A24DD277C00D08D58 /* Feed.swift */; };
 		AF9E8D1C24D58E160047F0C4 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9E8D1A24D58E020047F0C4 /* KakaoOpenSDK.framework */; };
 		AF9E8D1D24D58E160047F0C4 /* KakaoOpenSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AF9E8D1A24D58E020047F0C4 /* KakaoOpenSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AFC1185324D3AEE1005B2E44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC1185224D3AEE1005B2E44 /* AppDelegate.swift */; };
@@ -86,6 +88,8 @@
 		AF88436824D6C902000ABC2A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AF8B260C24DB12100075156C /* SpoqaHanSansRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpoqaHanSansRegular.ttf; sourceTree = "<group>"; };
 		AF8B260D24DB12100075156C /* SpoqaHanSansBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpoqaHanSansBold.ttf; sourceTree = "<group>"; };
+		AF8E0D5824DD092E00D08D58 /* WriteEmptyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteEmptyController.swift; sourceTree = "<group>"; };
+		AF8E0D5A24DD277C00D08D58 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		AF9E8D1A24D58E020047F0C4 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoOpenSDK.framework; path = Frameworks/KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		AF9E8D1E24D58E3C0047F0C4 /* KakaoOpenSDK-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KakaoOpenSDK-Bridging-Header.h"; sourceTree = "<group>"; };
 		AFC1184F24D3AEE1005B2E44 /* VegeXI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VegeXI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -185,6 +189,7 @@
 		AF6652C824DBFD48005FC74B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AF8E0D5A24DD277C00D08D58 /* Feed.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -196,6 +201,38 @@
 				AF8B260C24DB12100075156C /* SpoqaHanSansRegular.ttf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		AF8E0D5424DD08F500D08D58 /* Write */ = {
+			isa = PBXGroup;
+			children = (
+				AF8E0D5724DD091800D08D58 /* Model */,
+				AF8E0D5624DD091000D08D58 /* View */,
+				AF8E0D5524DD090500D08D58 /* Controller */,
+			);
+			path = Write;
+			sourceTree = "<group>";
+		};
+		AF8E0D5524DD090500D08D58 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		AF8E0D5624DD091000D08D58 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AF8E0D5824DD092E00D08D58 /* WriteEmptyController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AF8E0D5724DD091800D08D58 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		AF9E8D0F24D51A220047F0C4 /* Header */ = {
@@ -238,6 +275,7 @@
 			children = (
 				AFC1186624D3AFE5005B2E44 /* Tutorial */,
 				AFC1186724D3AFEE005B2E44 /* Home */,
+				AF8E0D5424DD08F500D08D58 /* Write */,
 				AFC1186824D3AFFA005B2E44 /* MyPage */,
 				AFC1186A24D3B00F005B2E44 /* Service */,
 				AF9E8D0F24D51A220047F0C4 /* Header */,
@@ -459,8 +497,10 @@
 				AF6652D224DC2F5A005FC74B /* MainTableViewCell.swift in Sources */,
 				4267C95924DB1D3D00702BAC /* SignInStrings.swift in Sources */,
 				AF6652CC24DC0415005FC74B /* CategoryCollectionView.swift in Sources */,
+				AF8E0D5924DD092E00D08D58 /* WriteEmptyController.swift in Sources */,
 				4267C95324DAF61400702BAC /* SignErrors.swift in Sources */,
 				AF6652D024DC2EA5005FC74B /* MainTableView.swift in Sources */,
+				AF8E0D5B24DD277C00D08D58 /* Feed.swift in Sources */,
 				AFC1185724D3AEE1005B2E44 /* SignInViewController.swift in Sources */,
 				AF8193DB24DC80D900B948CF /* MainTabBarController.swift in Sources */,
 				42299CBF24D974AF00AE9253 /* SignUpViewController.swift in Sources */,

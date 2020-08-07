@@ -55,10 +55,11 @@ class MainTabBarController: UITabBarController {
         let naviHome = UINavigationController(rootViewController: homeViewController)
         naviHome.tabBarItem = UITabBarItem(
             title: "홈",
-            image: UIImage(systemName: "house"),
-            selectedImage: nil)
+            image: UIImage(named: "tabbar_Home_Default"),
+            selectedImage: UIImage(named: "tabbar_Home_Checked"))
         
-        let writeViewController = UIViewController()
+        let writeViewController = WriteEmptyController()
+        writeViewController.returnMethod = clickedWriteTabbar
         let naviWrite = UINavigationController(rootViewController: writeViewController)
         naviWrite.tabBarItem = UITabBarItem(
             title: "글쓰기",
@@ -69,8 +70,8 @@ class MainTabBarController: UITabBarController {
         let naviMyPage = UINavigationController(rootViewController: myPageViewController)
         naviMyPage.tabBarItem = UITabBarItem(
             title: "마이페이지",
-            image: UIImage(systemName: "person"),
-            selectedImage: nil)
+            image: UIImage(named: "tabbar_MyPage_Default"),
+            selectedImage: UIImage(named: "tabbar_MyPage_Checked"))
         
         viewControllers = [naviHome, naviWrite, naviMyPage]
         
@@ -118,7 +119,11 @@ class MainTabBarController: UITabBarController {
     
     // MARK: - Actions
     
-    @objc private func registerButtonAction(sender: UIButton) {
+    @objc private func registerButtonAction(sender: UIButton?) {
         selectedIndex = 0
+    }
+    
+    func clickedWriteTabbar() {
+        registerButtonAction(sender: nil)
     }
 }
