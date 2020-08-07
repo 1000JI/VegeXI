@@ -8,17 +8,29 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 
 class ForgotPasswordViewController: UIViewController {
     
     // MARK: - Properties
-    let emailSignView = SignView(
+    let viewTitle = "비밀번호 찾기"
+    
+    private lazy var fakeNavigationBar = FakeNavigationBar(title: viewTitle)
+    
+    private let infoLabel = UILabel().then {
+        $0.text = SignUpStrings.passwordInfo.generateString()
+        $0.font = UIFont.spoqaHanSansRegular(ofSize: 14)
+        $0.numberOfLines = 0
+    }
+    private let emailSignView = SignView(
         placeholder: "이메일",
         cautionType: .none,
         keyboardType: .emailAddress,
-        secureEntry: false)
+        secureEntry: false).then {
+            $0.textField.becomeFirstResponder()
+    }
     
-    let sendButton = SignButton(title: GeneralStrings.sendButton.generateString())
+    private let sendButton = SignButton(title: GeneralStrings.sendButton.generateString())
     
     
     // MARK: - Lifecycle
@@ -36,26 +48,37 @@ class ForgotPasswordViewController: UIViewController {
     }
     
     private func setConstraints() {
-        [emailSignView, sendButton].forEach {
+        [fakeNavigationBar, infoLabel, emailSignView, sendButton].forEach {
             view.addSubview($0)
         }
         
+        fakeNavigationBar.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(80)
+        }
+        infoLabel.snp.makeConstraints {
+            $0.top.equalTo(fakeNavigationBar.snp.bottom)
+            $0.leading.equalToSuperview().inset(30)
+            $0.centerX.equalToSuperview()
+        }
         emailSignView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(40)
+            $0.top.equalTo(infoLabel.snp.bottom).offset(31)
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(70)
+            $0.height.equalTo(30)
             $0.centerX.equalToSuperview()
         }
         sendButton.snp.makeConstraints {
-            $0.top.equalTo(emailSignView.snp.bottom).offset(20)
+            $0.top.equalTo(emailSignView.snp.bottom).offset(36)
             $0.leading.trailing.equalTo(emailSignView)
-            $0.height.equalTo(50)
+            $0.height.equalTo(48)
             $0.centerX.equalToSuperview()
         }
     }
     
     private func setPropertyAttributes() {
         sendButton.addTarget(self, action: #selector(handleSendButton(_:)), for: .touchUpInside)
+        fakeNavigationBar.leftBarButton.addTarget(self, action: #selector(handlePopAction), for: .touchUpInside)
         
         emailSignView.textField.delegate = self
     }
@@ -63,20 +86,24 @@ class ForgotPasswordViewController: UIViewController {
     
     // MARK: - Helpers
     private func showWarnings(view: SignView, message: String) {
-        view.underBar.backgroundColor = .red
-        view.cautionMessageLabel.alpha = 1
+        view.underBarNeedToTurnRed = true
+        view.needToShowWarning = true
         view.cautionMessageLabel.text = message
     }
     
     private func hideWarnings() {
         [emailSignView].forEach {
-            $0.underBar.backgroundColor = .lightGray
-            $0.cautionMessageLabel.alpha = 0
+            $0.underBarNeedToTurnRed = false
+            $0.needToShowWarning = false
         }
     }
     
     
     // MARK: - Selectors
+    @objc private func handlePopAction() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     @objc private func handleSendButton(_ sender: UIButton) {
         guard let email = emailSignView.textField.text else { return }
         Auth.auth().sendPasswordReset(withEmail: email) { (error) in
