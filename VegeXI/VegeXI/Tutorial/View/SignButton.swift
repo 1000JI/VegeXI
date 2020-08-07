@@ -13,7 +13,7 @@ class SignButton: UIButton {
     // MARK: - Properties
     var isActive = false {
         willSet {
-            self.backgroundColor = newValue ? .green : .lightGray
+            self.backgroundColor = newValue ? .vegeGreenButtonColor : .vegeLightGrayButtonColor
         }
     }
     
@@ -32,9 +32,10 @@ class SignButton: UIButton {
     
     // MARK: - UI
     private func configureUI() {
+        self.frame.size.height = 48
         self.setTitleColor(.white, for: .normal)
         self.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        self.backgroundColor = .lightGray
+        self.backgroundColor = .vegeLightGrayButtonColor
     }
     
     

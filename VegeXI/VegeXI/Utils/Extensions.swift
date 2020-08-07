@@ -51,8 +51,14 @@ extension UIColor {
         )
     }
     
+    static let vegeGreenButtonColor = UIColor(rgb: 0x71A08A)
     static let vegeLightGrayBorderColor = UIColor(rgb: 0xD8D8D8)
+    static let vegeLightGrayButtonColor = UIColor(rgb: 0xD7D6D5)
+    static let vegeLightGraySearchBarColor = UIColor(rgb: 0xF0F0F0)
+    static let vegeLightGraySearchHistoryClearButtonColor = UIColor(rgb: 0x707070)
+    static let vegeGraySearchBarPlaceHolderColor = UIColor(rgb: 0x9F9F9F)
     static let vegeTextBlackColor = UIColor(rgb: 0x303033)
+    static let vegeWarningRedColor = UIColor(rgb: 0xD51D1D)
     static let vegeCategoryTextColor = UIColor(rgb: 0x707070)
     static let tabbarGreenSelectColor = UIColor(rgb: 0x156941)
 }

@@ -16,12 +16,24 @@ class SignView: UIView {
         $0.clearButtonMode = .whileEditing
     }
     let underBar = UIView().then {
-        $0.backgroundColor = .lightGray
+        $0.backgroundColor = .vegeLightGrayBorderColor
     }
     let cautionMessageLabel = UILabel().then {
-        $0.textColor = .red
+        $0.textColor = .vegeWarningRedColor
         $0.font = UIFont.systemFont(ofSize: 12)
         $0.alpha = 0
+    }
+    
+    var underBarNeedToTurnRed = false {
+        willSet {
+            underBar.backgroundColor = newValue ? .vegeWarningRedColor : .vegeLightGrayBorderColor
+        }
+    }
+    
+    var needToShowWarning = false {
+        willSet {
+            cautionMessageLabel.alpha = newValue ? 1 : 0
+        }
     }
     
     
@@ -57,7 +69,7 @@ class SignView: UIView {
         }
         textField.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(10)
+            $0.leading.trailing.equalToSuperview()
         }
         
         underBar.snp.makeConstraints {
@@ -66,7 +78,7 @@ class SignView: UIView {
             $0.height.equalTo(1)
         }
         cautionMessageLabel.snp.makeConstraints {
-            $0.top.equalTo(underBar.snp.bottom).offset(8)
+            $0.top.equalTo(underBar.snp.bottom).offset(4)
             $0.leading.trailing.equalTo(textField)
         }
     }
