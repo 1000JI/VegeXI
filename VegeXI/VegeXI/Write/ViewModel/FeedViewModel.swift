@@ -27,6 +27,11 @@ struct FeedViewModel {
         return "+\(imageURLs.count - 1)"
     }
     
+    var moreLabelIsHidden: Bool {
+        guard let imageURLs = feed.imageUrls else { return true}
+        return imageURLs.count > 1 ? false : true
+    }
+    
     var writeDate: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"

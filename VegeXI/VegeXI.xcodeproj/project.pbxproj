@@ -203,10 +203,10 @@
 		AF6652C624DBFD3A005FC74B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				AF8193DA24DC80D900B948CF /* MainTabBarController.swift */,
+				AF5634DB24DA64F200A606EA /* HomeViewController.swift */,
 				4243D57C24DD290F003F3761 /* SearchHistoryViewController.swift */,
 				42BE29E924DD2E4600449221 /* FilterViewController.swift */,
-				AF5634DB24DA64F200A606EA /* HomeViewController.swift */,
-				AF8193DA24DC80D900B948CF /* MainTabBarController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

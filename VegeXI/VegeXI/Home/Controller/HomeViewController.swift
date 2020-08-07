@@ -15,6 +15,7 @@ class HomeViewController: UIViewController {
     private let homeCustomNavigationBar = CustomMainNavigationBar()
     private let categoryView = CategoryCollectionView()
     private let mainTableView = MainTableView(frame: .zero, style: .grouped)
+    private let refreshControl = UIRefreshControl()
     
     private var feeds = [Feed]() {
         didSet { mainTableView.feeds = feeds }
@@ -25,6 +26,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        configureTableView()
         fetchFeeds()
     }
     
@@ -53,8 +55,16 @@ class HomeViewController: UIViewController {
         showLoader(true)
         FeedService.shared.fetchFeeds { feeds in
             self.showLoader(false)
+            self.refreshControl.endRefreshing()
             self.feeds = feeds
         }
+    }
+    
+    
+    // MARK: - Selectors
+    
+    @objc func handleRefresh() {
+        fetchFeeds()
     }
     
     
@@ -89,5 +99,10 @@ class HomeViewController: UIViewController {
     
     func configureNavi() {
         navigationController?.navigationBar.isHidden = true
+    }
+    
+    func configureTableView() {
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        mainTableView.refreshControl = refreshControl
     }
 }

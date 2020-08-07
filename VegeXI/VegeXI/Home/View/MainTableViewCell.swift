@@ -235,6 +235,9 @@ class MainTableViewCell: UITableViewCell {
         heartCountLabel.text = "\(feed.likes)"
         commentCountLabel.text = "\(feed.comments)"
         
+        moreImageCountLabel.isHidden = viewModel.moreLabelIsHidden
+        moreCountLabelBackView.isHidden = viewModel.moreLabelIsHidden
+        
         feedImageView.sd_setImage(with: viewModel.titleFeedImageURL)
         moreImageCountLabel.text = viewModel.moreImageCount
     }

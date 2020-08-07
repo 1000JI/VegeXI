@@ -25,6 +25,7 @@ struct FeedService {
                 self.fetchFeedPictures(findKey: snapshot.key) { urls in
                     let feed = Feed(dictionary: dictionary, user: user, imageUrlArray: urls)
                     feeds.append(feed)
+                    feeds.sort { $0.writeDate > $1.writeDate }
                     completion(feeds)
                 }
             }
