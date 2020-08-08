@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "navericon.png",
+      "filename" : "peed_Heart_Fill.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "navericon@2x.png",
+      "filename" : "peed_Heart_Fill@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "navericon@3x.png",
+      "filename" : "peed_Heart_Fill@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

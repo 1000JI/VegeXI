@@ -43,7 +43,6 @@ class MainTabBarController: UITabBarController {
             self.showLoader(false)
             
             UserService.shared.user = user
-            print(#function, UserService.shared.user ?? "findUser")
         }
     }
     

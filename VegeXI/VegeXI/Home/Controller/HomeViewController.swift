@@ -27,12 +27,12 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         configureTableView()
-        fetchFeeds()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavi()
+        fetchFeeds()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -57,7 +57,6 @@ class HomeViewController: UIViewController {
             self.showLoader(false)
             self.refreshControl.endRefreshing()
             self.feeds = feeds
-//            print(feedsr)
         }
     }
     

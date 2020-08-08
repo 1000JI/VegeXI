@@ -149,7 +149,6 @@ final class AppleLoginService {
             let userFirstName = appleIDCredential.fullName?.givenName ?? "No Info"
             let userLastName = appleIDCredential.fullName?.familyName ?? "No Info"
             let userEmail = appleIDCredential.email ?? "No Info"
-            print(userIdentifier, userFirstName, userLastName, userEmail)
             
             
             let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -157,14 +156,14 @@ final class AppleLoginService {
                 switch credentialState {
                 case .authorized:
                     // The Apple ID credential is valid. Show Home UI Here
-                    print("authorized")
+//                    print("authorized")
                     break
                 case .revoked:
                     // The Apple ID credential is revoked. Show SignIn UI Here.
-                    print("revoked")
+//                    print("revoked")
                     break
                 case .notFound:
-                    print("notFound")
+//                    print("notFound")
                     // No credential was found. Show SignIn UI Here.
                     break
                 default: break
@@ -203,8 +202,6 @@ final class GoogleLoginService {
             if let error = error {
                 print(error.localizedDescription)
             } else {
-                print("Login Successful")
-                
                 guard let uuid = Auth.auth().currentUser?.uid else { return }
                 guard let email = user.profile.email else { return }
                 guard let name = user.profile.name else { return }

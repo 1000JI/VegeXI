@@ -111,15 +111,15 @@ class FeedRegisterController: UIViewController {
         option.isNetworkAccessAllowed = false
         option.resizeMode = .exact
         
-        let start = Date()
+//        let start = Date()
         self.presentImagePicker(imagePicker, select: { (asset) in
-            print("Selected: \(asset)")
+//            print("Selected: \(asset)")
         }, deselect: { (asset) in
-            print("Deselected: \(asset)")
+//            print("Deselected: \(asset)")
         }, cancel: { (assets) in
-            print("Canceled with selections: \(assets)")
+//            print("Canceled with selections: \(assets)")
         }, finish: { (assets) in
-            debugPrint("Finished with selections: \(assets)")
+//            debugPrint("Finished with selections: \(assets)")
             // https://zeddios.tistory.com/620
             // https://stackoverflow.com/questions/57658263/ios13-get-original-image-using-phimagemanager
             assets.forEach {
@@ -134,8 +134,8 @@ class FeedRegisterController: UIViewController {
                 }
             }
         }, completion: {
-            let finish = Date()
-            print(finish.timeIntervalSince(start))
+//            let finish = Date()
+//            print(finish.timeIntervalSince(start))
         })
     }
     

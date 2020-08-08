@@ -17,7 +17,7 @@ class MainTableView: UITableView {
     }
     
     private let headerViewHeight: CGFloat = 56
-    private let textCellHeight: CGFloat = 154
+    private let textCellHeight: CGFloat = 168
     private let picAndTextCellHeight: CGFloat = 500
     
     private let sortTitleLabel = UILabel()
@@ -66,6 +66,44 @@ class MainTableView: UITableView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    // MARK: - Action
+    
+    func tappedLikeButton(cell: MainTableViewCell) {
+        guard let feed = cell.feed else { return }
+        
+        FeedService.shared.likeFeed(feed: feed) { (error, ref) in
+            cell.feed?.didLike.toggle()
+            let likes = feed.didLike ? feed.likes - 1 : feed.likes + 1
+            cell.feed?.likes = likes
+            
+            let row = self.indexPath(for: cell)!.row
+            self.feeds[row].didLike = cell.feed?.didLike ?? false
+            self.feeds[row].likes = cell.feed?.likes ?? 0
+        }
+        
+    }
+    
+    func tappedCommentButton(cell: MainTableViewCell) {
+        print(#function)
+    }
+    
+    func tappedBookmarkButton(cell: MainTableViewCell) {
+        guard let feed = cell.feed else { return }
+        
+        FeedService.shared.bookmarkFeed(feed: feed) { (error, ref) in
+            if let error = error {
+                print("DEBUG: Bookmark Tapped Error \(error.localizedDescription)")
+            }
+            
+            cell.feed?.didBookmark.toggle()
+            
+            let row = self.indexPath(for: cell)!.row
+            self.feeds[row].didBookmark = cell.feed?.didBookmark ?? false
+        }
+    }
+    
+    
     // MARK: - Helpers
     
     func configureTableView() {
@@ -109,6 +147,9 @@ extension MainTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier, for: indexPath) as! MainTableViewCell
         cell.feed = feeds[indexPath.row]
+        cell.tappedLikeButton = tappedLikeButton(cell:)
+        cell.tappedCommentButton = tappedCommentButton(cell:)
+        cell.tappedBookmarkButton = tappedBookmarkButton(cell:)
         return cell
     }
 }

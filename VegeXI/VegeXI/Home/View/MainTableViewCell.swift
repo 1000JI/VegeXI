@@ -17,6 +17,10 @@ class MainTableViewCell: UITableViewCell {
     private let defaultSidePadding: CGFloat = 20
     private let buttonSize: CGFloat = 34
     
+    var tappedLikeButton: ((MainTableViewCell) -> Void)?
+    var tappedCommentButton: ((MainTableViewCell) -> Void)?
+    var tappedBookmarkButton: ((MainTableViewCell) -> Void)?
+    
     var feed: Feed? {
         didSet { configure() }
     }
@@ -74,7 +78,7 @@ class MainTableViewCell: UITableViewCell {
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 8
         $0.clipsToBounds = true
-        $0.image = UIImage(named: "peed_Example")
+        $0.image = UIImage(named: "feed_Example")
         
         $0.addSubview(moreCountLabelBackView)
         $0.addSubview(moreImageCountLabel)
@@ -108,20 +112,22 @@ class MainTableViewCell: UITableViewCell {
         feedTitleLabel, feedContentsLabel
     ])
     
-    private let heartButton = UIButton(type: .system).then {
-        $0.setImage(UIImage(named: "peed_Heart"), for: .normal)
+    private lazy var likeButton = UIButton(type: .system).then {
+        $0.setImage(UIImage(named: "feed_Heart"), for: .normal)
         $0.tintColor = .vegeTextBlackColor
+        $0.addTarget(self, action: #selector(tappedLikeButton(_:)), for: .touchUpInside)
     }
     
-    private let heartCountLabel = UILabel().then {
+    private let likesCountLabel = UILabel().then {
         $0.text = "12"
         $0.textColor = .vegeTextBlackColor
         $0.font = UIFont.spoqaHanSansRegular(ofSize: 11)
     }
     
-    private let commentButton = UIButton(type: .system).then {
-        $0.setImage(UIImage(named: "peed_Comment"), for: .normal)
+    private lazy var commentButton = UIButton(type: .system).then {
+        $0.setImage(UIImage(named: "feed_Comment"), for: .normal)
         $0.tintColor = .vegeTextBlackColor
+        $0.addTarget(self, action: #selector(tappedCommentButton(_:)), for: .touchUpInside)
     }
     
     private let commentCountLabel = UILabel().then {
@@ -130,9 +136,10 @@ class MainTableViewCell: UITableViewCell {
         $0.font = UIFont.spoqaHanSansRegular(ofSize: 11)
     }
     
-    private let bookmarkButton = UIButton(type: .system).then {
-        $0.setImage(UIImage(named: "peed_Bookmark_Check"), for: .normal)
+    private lazy var bookmarkButton = UIButton(type: .system).then {
+        $0.setImage(UIImage(named: "feed_Bookmark"), for: .normal)
         $0.tintColor = .vegeTextBlackColor
+        $0.addTarget(self, action: #selector(tappedBookmarkButton(_:)), for: .touchUpInside)
     }
     
     
@@ -153,6 +160,21 @@ class MainTableViewCell: UITableViewCell {
         moreCountLabelBackView.layer.cornerRadius = moreCountLabelBackView.frame.height / 2
     }
     
+    // MARK: - Selectors
+    
+    @objc func tappedLikeButton(_ sender: UIButton) {
+        tappedLikeButton?(self)
+    }
+    
+    @objc func tappedCommentButton(_ sender: UIButton) {
+        tappedCommentButton?(self)
+    }
+    
+    @objc func tappedBookmarkButton(_ sender: UIButton) {
+        tappedBookmarkButton?(self)
+    }
+    
+    
     // MARK: - Helpers
     
     func configureUI() {
@@ -168,7 +190,7 @@ class MainTableViewCell: UITableViewCell {
         feedContentsStack.spacing = 4
         
         
-        [profileStack, moreButton, feedImageView, feedContentsStack, heartButton, heartCountLabel, commentButton, commentCountLabel, bookmarkButton].forEach {
+        [profileStack, moreButton, feedImageView, feedContentsStack, likeButton, likesCountLabel, commentButton, commentCountLabel, bookmarkButton].forEach {
             addSubview($0)
         }
         
@@ -195,33 +217,33 @@ class MainTableViewCell: UITableViewCell {
             $0.trailing.equalToSuperview().offset(-defaultSidePadding)
         }
         
-        heartButton.snp.makeConstraints {
+        likeButton.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(12)
-            $0.bottom.equalToSuperview().offset(-8)
+            $0.top.equalTo(feedContentsStack.snp.bottom).offset(8)
             $0.width.height.equalTo(buttonSize)
         }
         
-        heartCountLabel.snp.makeConstraints {
-            $0.leading.equalTo(heartButton.snp.trailing).offset(-4)
-            $0.centerY.equalTo(heartButton.snp.centerY)
+        likesCountLabel.snp.makeConstraints {
+            $0.leading.equalTo(likeButton.snp.trailing).offset(-4)
+            $0.centerY.equalTo(likeButton.snp.centerY)
             $0.width.equalTo(24)
         }
         
         commentButton.snp.makeConstraints {
-            $0.leading.equalTo(heartCountLabel.snp.trailing).offset(8)
-            $0.centerY.equalTo(heartButton.snp.centerY)
+            $0.leading.equalTo(likesCountLabel.snp.trailing).offset(8)
+            $0.centerY.equalTo(likeButton.snp.centerY)
             $0.width.height.equalTo(buttonSize)
         }
         
         commentCountLabel.snp.makeConstraints {
             $0.leading.equalTo(commentButton.snp.trailing).offset(-4)
-            $0.centerY.equalTo(heartButton.snp.centerY)
+            $0.centerY.equalTo(likeButton.snp.centerY)
             $0.width.equalTo(24)
         }
         
         bookmarkButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().offset(-10)
-            $0.centerY.equalTo(heartButton.snp.centerY)
+            $0.centerY.equalTo(likeButton.snp.centerY)
             $0.width.height.equalTo(buttonSize)
         }
     }
@@ -234,8 +256,10 @@ class MainTableViewCell: UITableViewCell {
         writeDateLabel.text = viewModel.writeDate
         feedTitleLabel.text = feed.title
         feedContentsLabel.text = feed.content
-        heartCountLabel.text = "\(feed.likes)"
+        likeButton.setImage(viewModel.likeImage, for: .normal)
+        likesCountLabel.text = "\(feed.likes)"
         commentCountLabel.text = "\(feed.comments)"
+        bookmarkButton.setImage(viewModel.bookmarkImage, for: .normal)
         
         switch feed.feedType {
         case .textType:

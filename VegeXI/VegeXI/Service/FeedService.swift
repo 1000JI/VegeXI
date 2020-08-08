@@ -14,6 +14,57 @@ struct FeedService {
     static let shared = FeedService()
     private init() { }
     
+    func checkIfUserLikedAndBookmarkFeed(feedID: String, completion: @escaping((Bool, Bool)) -> Void){
+        guard let userUid = UserService.shared.user?.uid else { return }
+        
+        REF_USER_LIKES.child(userUid).child(feedID).observeSingleEvent(of: .value) { likeSnapshot in
+            REF_USER_BOOKMARKS.child(userUid).child(feedID).observeSingleEvent(of: .value) { bookmarkSnapshot in
+                completion((likeSnapshot.exists(),
+                            bookmarkSnapshot.exists()))
+            }
+        }
+    }
+    
+    func checkIfUserBookmarkedFeed(feedID: String, completion: @escaping(Bool) -> Void) {
+        guard let userUid = UserService.shared.user?.uid else { return }
+        
+        REF_USER_BOOKMARKS.child(userUid).child(feedID).observeSingleEvent(of: .value) { snapshot in
+            completion(snapshot.exists())
+        }
+    }
+    
+    func bookmarkFeed(feed: Feed, completion: @escaping((Error?, DatabaseReference) -> Void)) {
+        guard let userUid = UserService.shared.user?.uid else { return }
+        
+        if feed.didBookmark {
+            REF_USER_BOOKMARKS.child(userUid).child(feed.feedID).removeValue(completionBlock: completion)
+        } else {
+            REF_USER_BOOKMARKS.child(userUid).updateChildValues([feed.feedID:1], withCompletionBlock: completion)
+        }
+    }
+    
+    func checkIfUserLikedFeed(feedID: String, completion: @escaping(Bool) -> Void){
+        guard let userUid = UserService.shared.user?.uid else { return }
+        
+        REF_USER_LIKES.child(userUid).child(feedID).observeSingleEvent(of: .value) { snapshot in
+            completion(snapshot.exists())
+        }
+    }
+    
+    func likeFeed(feed: Feed, completion: @escaping((Error?, DatabaseReference) -> Void)) {
+        guard let userUid = UserService.shared.user?.uid else { return }
+        
+        let likes = feed.didLike ? feed.likes - 1 : feed.likes + 1
+        REF_FEEDS.child(feed.feedID).child("likes").setValue(likes)
+        
+        if feed.didLike {
+            REF_USER_LIKES.child(userUid).child(feed.feedID).removeValue(completionBlock: completion)
+        } else {
+            REF_USER_LIKES.child(userUid)
+                .updateChildValues([feed.feedID:1], withCompletionBlock: completion)
+        }
+    }
+    
     func fetchFeeds(completion: @escaping([Feed]) -> Void) {
         var feeds = [Feed]()
         
@@ -24,18 +75,31 @@ struct FeedService {
             let feedID = snapshot.key
             
             UserService.shared.fetchUser(uid: userUid) { user in
-                switch FeedType(rawValue: writeType)! {
-                case .textType:
-                    let feed = Feed(dictionary: dictionary, user: user, feedID: feedID)
-                    feeds.append(feed)
-                    feeds.sort { $0.writeDate > $1.writeDate }
-                    completion(feeds)
-                case .picAndTextType:
-                    self.fetchFeedPictures(findKey: snapshot.key) { urls in
-                        let feed = Feed(dictionary: dictionary, user: user, feedID: feedID, imageUrlArray: urls)
+                self.checkIfUserLikedAndBookmarkFeed(feedID: feedID) { (likeDidLike, bookmarkDidLike) in
+                    switch FeedType(rawValue: writeType)! {
+                    case .textType:
+                        let feed = Feed(
+                            dictionary: dictionary,
+                            user: user,
+                            feedID: feedID,
+                            likeDidLike: likeDidLike,
+                            bookmarkDidLike: bookmarkDidLike)
                         feeds.append(feed)
                         feeds.sort { $0.writeDate > $1.writeDate }
                         completion(feeds)
+                    case .picAndTextType:
+                        self.fetchFeedPictures(findKey: snapshot.key) { urls in
+                            let feed = Feed(
+                                dictionary: dictionary,
+                                user: user,
+                                feedID: feedID,
+                                likeDidLike: likeDidLike,
+                                bookmarkDidLike: bookmarkDidLike,
+                                imageUrlArray: urls)
+                            feeds.append(feed)
+                            feeds.sort { $0.writeDate > $1.writeDate }
+                            completion(feeds)
+                        }
                     }
                 }
             }
@@ -49,6 +113,7 @@ struct FeedService {
         STORAGE_FEED_IMAGES.child(findKey).listAll { (result, error) in
             if let error = error {
                 print("DEBUG: Image Get Error \(error.localizedDescription)")
+                return
             }
             
             result.items.forEach {
@@ -95,7 +160,6 @@ struct FeedService {
             case .textType: break
             case .picAndTextType:
                 imageArray.enumerated().forEach {
-                    print($0, $1)
                     guard let jpegProfileImageData = $1.jpegData(compressionQuality: 0.3) else { return }
                     STORAGE_FEED_IMAGES.child(feedID).child("picture\($0)").putData(jpegProfileImageData, metadata: nil) { (meta, error) in
                         if let error = error {

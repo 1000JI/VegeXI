@@ -20,11 +20,13 @@ struct Feed {
     let writeDate: Date
     let title: String
     let content: String
-    let likes: Int
+    var likes: Int
+    var didLike: Bool = false
     let comments: Int
     let imageUrls: [URL]?
+    var didBookmark: Bool = false
     
-    init(dictionary: [String : Any], user: User, feedID: String, imageUrlArray: [URL]? = nil) {
+    init(dictionary: [String : Any], user: User, feedID: String, likeDidLike: Bool, bookmarkDidLike: Bool, imageUrlArray: [URL]? = nil) {
         let type = dictionary["type"] as? String ?? "textType"
         self.feedType = FeedType(rawValue: type)!
         self.writerUser = user
@@ -35,6 +37,9 @@ struct Feed {
         
         self.title = dictionary["title"] as? String ?? ""
         self.content = dictionary["content"] as? String ?? ""
+        
+        self.didLike = likeDidLike
+        self.didBookmark = bookmarkDidLike
         self.likes = dictionary["likes"] as? Int ?? 0
         self.comments = dictionary["comments"] as? Int ?? 0
         
