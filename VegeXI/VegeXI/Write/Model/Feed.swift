@@ -16,6 +16,7 @@ enum FeedType: String {
 struct Feed {
     let feedType: FeedType
     let writerUser: User
+    let feedID: String
     let writeDate: Date
     let title: String
     let content: String
@@ -23,10 +24,11 @@ struct Feed {
     let comments: Int
     let imageUrls: [URL]?
     
-    init(dictionary: [String : Any], user: User, imageUrlArray: [URL]?) {
+    init(dictionary: [String : Any], user: User, feedID: String, imageUrlArray: [URL]? = nil) {
         let type = dictionary["type"] as? String ?? "textType"
         self.feedType = FeedType(rawValue: type)!
         self.writerUser = user
+        self.feedID = feedID
         
         let timestamp = dictionary["timestamp"] as? Int ?? 0
         self.writeDate = Date(timeIntervalSince1970: TimeInterval(exactly: timestamp)!)

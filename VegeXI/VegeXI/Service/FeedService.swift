@@ -20,13 +20,23 @@ struct FeedService {
         REF_FEEDS.observe(.childAdded, with: { snapshot in
             guard let dictionary = snapshot.value as? [String : Any] else { return }
             guard let userUid = dictionary["writerUid"] as? String else { return }
+            guard let writeType = dictionary["type"] as? String else { return }
+            let feedID = snapshot.key
             
             UserService.shared.fetchUser(uid: userUid) { user in
-                self.fetchFeedPictures(findKey: snapshot.key) { urls in
-                    let feed = Feed(dictionary: dictionary, user: user, imageUrlArray: urls)
+                switch FeedType(rawValue: writeType)! {
+                case .textType:
+                    let feed = Feed(dictionary: dictionary, user: user, feedID: feedID)
                     feeds.append(feed)
                     feeds.sort { $0.writeDate > $1.writeDate }
                     completion(feeds)
+                case .picAndTextType:
+                    self.fetchFeedPictures(findKey: snapshot.key) { urls in
+                        let feed = Feed(dictionary: dictionary, user: user, feedID: feedID, imageUrlArray: urls)
+                        feeds.append(feed)
+                        feeds.sort { $0.writeDate > $1.writeDate }
+                        completion(feeds)
+                    }
                 }
             }
         }) { error in
@@ -60,7 +70,7 @@ struct FeedService {
     func uploadFeed(title: String, content: String, imageArray: [UIImage], completion: @escaping((Error?, DatabaseReference) -> Void)) {
         guard let writerUid = UserService.shared.user?.uid else { return }
         
-        let feedType = imageArray.count >= 0 ?
+        let feedType = imageArray.count > 0 ?
             FeedType.picAndTextType: FeedType.textType
         
         let values = [

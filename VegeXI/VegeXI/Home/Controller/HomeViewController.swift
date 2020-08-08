@@ -57,6 +57,7 @@ class HomeViewController: UIViewController {
             self.showLoader(false)
             self.refreshControl.endRefreshing()
             self.feeds = feeds
+//            print(feedsr)
         }
     }
     

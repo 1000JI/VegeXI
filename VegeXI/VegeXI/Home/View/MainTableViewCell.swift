@@ -43,6 +43,14 @@ class MainTableViewCell: UITableViewCell {
         $0.font = UIFont.spoqaHanSansRegular(ofSize: 10)
     }
     
+    private lazy var writeStack = UIStackView(arrangedSubviews: [
+        writerLabel, writeDateLabel
+    ])
+    
+    private lazy var profileStack = UIStackView(arrangedSubviews: [
+        profileImageView, writeStack
+    ])
+    
     private let moreButton = UIButton(type: .system).then {
         let image = UIImage(named: "cell_MoreButton")?.withRenderingMode(.alwaysOriginal)
         $0.setImage(image, for: .normal)
@@ -96,6 +104,10 @@ class MainTableViewCell: UITableViewCell {
         $0.numberOfLines = 2
     }
     
+    private lazy var feedContentsStack = UIStackView(arrangedSubviews: [
+        feedTitleLabel, feedContentsLabel
+    ])
+    
     private let heartButton = UIButton(type: .system).then {
         $0.setImage(UIImage(named: "peed_Heart"), for: .normal)
         $0.tintColor = .vegeTextBlackColor
@@ -146,22 +158,12 @@ class MainTableViewCell: UITableViewCell {
     func configureUI() {
         backgroundColor = .white
         
-        let writeStack = UIStackView(arrangedSubviews: [
-            writerLabel, writeDateLabel
-        ])
         writeStack.axis = .vertical
         
-        let profileStack = UIStackView(arrangedSubviews: [
-            profileImageView, writeStack
-        ])
         profileStack.axis = .horizontal
         profileStack.spacing = 8
         profileStack.alignment = .center
         
-        
-        let feedContentsStack = UIStackView(arrangedSubviews: [
-            feedTitleLabel, feedContentsLabel
-        ])
         feedContentsStack.axis = .vertical
         feedContentsStack.spacing = 4
         
@@ -235,10 +237,39 @@ class MainTableViewCell: UITableViewCell {
         heartCountLabel.text = "\(feed.likes)"
         commentCountLabel.text = "\(feed.comments)"
         
+        switch feed.feedType {
+        case .textType:
+            feedImageHiddenConstraintSetup(isHidden: true)
+            return
+        case .picAndTextType:
+            feedImageHiddenConstraintSetup(isHidden: false)
+        }
+        
         moreImageCountLabel.isHidden = viewModel.moreLabelIsHidden
         moreCountLabelBackView.isHidden = viewModel.moreLabelIsHidden
         
         feedImageView.sd_setImage(with: viewModel.titleFeedImageURL)
         moreImageCountLabel.text = viewModel.moreImageCount
+    }
+    
+    func feedImageHiddenConstraintSetup(isHidden: Bool) {
+        feedImageView.isHidden = isHidden
+        feedContentsStack.snp.removeConstraints()
+        feedContentsStack.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(defaultSidePadding)
+            $0.trailing.equalToSuperview().offset(-defaultSidePadding)
+        }
+        
+        switch isHidden {
+        case true:
+            feedContentsStack.snp.makeConstraints {
+                $0.top.equalTo(profileStack.snp.bottom).offset(12)
+            }
+        case false:
+            feedContentsStack.snp.makeConstraints {
+                $0.top.equalTo(feedImageView.snp.bottom).offset(8)
+            }
+        }
+        layoutIfNeeded()
     }
 }

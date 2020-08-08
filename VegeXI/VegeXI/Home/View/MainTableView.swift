@@ -17,7 +17,8 @@ class MainTableView: UITableView {
     }
     
     private let headerViewHeight: CGFloat = 56
-    private let cellHeight: CGFloat = 500
+    private let textCellHeight: CGFloat = 154
+    private let picAndTextCellHeight: CGFloat = 500
     
     private let sortTitleLabel = UILabel()
     private let sortImageView = UIImageView()
@@ -117,7 +118,8 @@ extension MainTableView: UITableViewDataSource {
 
 extension MainTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellHeight
+        return feeds[indexPath.row].feedType == .textType ?
+            textCellHeight : picAndTextCellHeight
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
