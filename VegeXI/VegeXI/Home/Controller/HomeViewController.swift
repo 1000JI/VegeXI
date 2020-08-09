@@ -27,6 +27,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         configureTableView()
+        configureViewEvent()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +62,28 @@ class HomeViewController: UIViewController {
     }
     
     
+    // MARK: - Actions
+    
+    func tappedSearchButton() {
+        print(#function)
+        let controller = SearchHistoryViewController()
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func tappedAlertButton() {
+        print(#function)
+    }
+    
+    func tappedSortEvent() {
+        present(UIViewController(), animated: true)
+    }
+    
+    func tappedFilterEvent() {
+        let filterController = FilterViewController()
+        present(filterController, animated: true)
+    }
+    
+    
     // MARK: - Selectors
     
     @objc func handleRefresh() {
@@ -69,6 +92,11 @@ class HomeViewController: UIViewController {
     
     
     // MARK: - Helpers
+    
+    func configureViewEvent() {
+        homeCustomNavigationBar.tappedSearchButton = tappedSearchButton
+        homeCustomNavigationBar.tappedAlertButton = tappedAlertButton
+    }
     
     func configureUI() {
         view.backgroundColor = .white
@@ -104,5 +132,7 @@ class HomeViewController: UIViewController {
     func configureTableView() {
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         mainTableView.refreshControl = refreshControl
+        mainTableView.handleSortTapped = tappedSortEvent
+        mainTableView.handleFilterTapped = tappedFilterEvent
     }
 }

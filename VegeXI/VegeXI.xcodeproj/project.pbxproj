@@ -235,8 +235,31 @@
 			isa = PBXGroup;
 			children = (
 				4257EF4924DD07FD00CFF4C6 /* MockData.swift */,
+				AF8E0D5A24DD277C00D08D58 /* Feed.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		AF89EAC624E0031400F2A5E5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AF89EAC724E0031A00F2A5E5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		AF89EAC824E0037100F2A5E5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AF8E0D6724DDD83900D08D58 /* FeedViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		AF8B260B24DB11A20075156C /* Font */ = {
@@ -278,7 +301,6 @@
 		AF8E0D5724DD091800D08D58 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AF8E0D5A24DD277C00D08D58 /* Feed.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -286,7 +308,6 @@
 		AF8E0D6624DDD81C00D08D58 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				AF8E0D6724DDD83900D08D58 /* FeedViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -357,6 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				AF6652C824DBFD48005FC74B /* Model */,
+				AF89EAC824E0037100F2A5E5 /* ViewModel */,
 				AF6652C724DBFD42005FC74B /* View */,
 				AF6652C624DBFD3A005FC74B /* Controller */,
 			);
@@ -366,6 +388,8 @@
 		AFC1186824D3AFFA005B2E44 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				AF89EAC724E0031A00F2A5E5 /* Controller */,
+				AF89EAC624E0031400F2A5E5 /* View */,
 				AF2EE70024D86C4100A956BD /* Model */,
 			);
 			path = MyPage;

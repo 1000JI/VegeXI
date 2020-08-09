@@ -26,6 +26,9 @@ class MainTableView: UITableView {
     private let filterTitleLabel = UILabel()
     private let filterImageView = UIImageView()
     
+    var handleSortTapped: (() -> Void)?
+    var handleFilterTapped: (() -> Void)?
+    
     private lazy var headerView = UIView().then {
         $0.backgroundColor = .white
         
@@ -34,12 +37,16 @@ class MainTableView: UITableView {
             filterName: "최신순",
             filterImageView: sortImageView,
             imageName: "feed_DownButton")
+        let sortTapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedSortButton))
+        sortStack.addGestureRecognizer(sortTapGesture)
         
         let filterStack = makeFilterView(
             filterLabel: filterTitleLabel,
             filterName: "필터",
             filterImageView: filterImageView,
             imageName: "feed_PlusButton")
+        let filterTapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedFilterButton))
+        filterStack.addGestureRecognizer(filterTapGesture)
         
         $0.addSubview(sortStack)
         $0.addSubview(filterStack)
@@ -66,6 +73,16 @@ class MainTableView: UITableView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    // MARK: - Seletors
+    
+    @objc func tappedSortButton() {
+        handleSortTapped?()
+    }
+    
+    @objc func tappedFilterButton() {
+        handleFilterTapped?()
+    }
     
     // MARK: - Action
     

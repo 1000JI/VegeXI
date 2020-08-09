@@ -21,6 +21,8 @@ class CustomMainNavigationBar: UIView {
     private lazy var searchButton = makeButton(imageName: "naviBar_SearchBtnIcon")
     private lazy var alertButton = makeButton(imageName: "naviBar_AlertBtnIcon")
     
+    var tappedSearchButton: (() -> ())?
+    var tappedAlertButton: (() -> ())?
     
     // MARK: - LifeCycle
     
@@ -32,6 +34,21 @@ class CustomMainNavigationBar: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
+    // MARK: - Selectors
+    
+    @objc func handleButtonEvent(_ sender: UIButton) {
+        switch sender {
+        case searchButton:
+            tappedSearchButton?()
+        case alertButton:
+            tappedAlertButton?()
+        default:
+            return
+        }
+    }
+    
     
     // MARK: - Helpers
     
@@ -61,6 +78,7 @@ class CustomMainNavigationBar: UIView {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: imageName), for: .normal)
         button.tintColor = .black
+        button.addTarget(self, action: #selector(handleButtonEvent), for: .touchUpInside)
         button.snp.makeConstraints {
             $0.width.height.equalTo(44)
         }
