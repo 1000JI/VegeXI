@@ -130,7 +130,7 @@ class SignUpViewController: UIViewController {
     }
     
     @objc private func handleButtons(_ sender: UIButton) {
-            AuthService.shared.createUser(
+            BasicLoginService.shared.createUser(
                 errorHandler: generateErrorMessages(error:),
                 email: idInputView.textField.text,
                 nickname: nicknameInputView.textField.text,

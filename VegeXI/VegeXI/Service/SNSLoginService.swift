@@ -226,4 +226,28 @@ final class BasicLoginService {
     func registerBasicAuth() {
         
     }
+    
+    // Google 로그인
+    func createUser (errorHandler: @escaping (Error) -> (), email: String?, nickname: String?, password: String?, dismiss view: UIViewController) {
+        guard let email = email else { return }
+        guard let nickname = nickname else { return }
+        guard let password = password else { return }
+        Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+            if let error = error {
+                errorHandler(error)
+            } else {
+                guard let authResult = authResult else { return print("No Auth Result") }
+                let uid = authResult.user.uid
+                let email = email
+                let nickname = nickname
+
+                let authModel = AuthModel(
+                    email: email,
+                    nickname: nickname,
+                    uuid: uid,
+                    loginType: .basic)
+                AuthService.shared.authServiceUser(authData: authModel)
+            }
+        }
+    }
 }

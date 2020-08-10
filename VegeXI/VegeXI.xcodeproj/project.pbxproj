@@ -23,6 +23,10 @@
 		4267C95724DB1D2F00702BAC /* GeneralStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95624DB1D2F00702BAC /* GeneralStrings.swift */; };
 		4267C95924DB1D3D00702BAC /* SignInStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95824DB1D3D00702BAC /* SignInStrings.swift */; };
 		4267C95B24DBC36800702BAC /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95A24DBC36800702BAC /* ForgotPasswordViewController.swift */; };
+		42ABADB424E140490094CA9A /* NewFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADB324E140490094CA9A /* NewFilterViewController.swift */; };
+		42ABADB624E14FFF0094CA9A /* VegetarianInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADB524E14FFF0094CA9A /* VegetarianInfoView.swift */; };
+		42ABADB824E15CE30094CA9A /* NewFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADB724E15CE30094CA9A /* NewFilterTableViewCell.swift */; };
+		42ABADBA24E16D4E0094CA9A /* FilterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADB924E16D4E0094CA9A /* FilterCollectionViewCell.swift */; };
 		42BE29EA24DD2E4600449221 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29E924DD2E4600449221 /* FilterViewController.swift */; };
 		42BE29EC24DD307E00449221 /* FilterViewTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29EB24DD307E00449221 /* FilterViewTopBar.swift */; };
 		42BE29EE24DD322600449221 /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29ED24DD322600449221 /* FilterTableViewCell.swift */; };
@@ -97,6 +101,10 @@
 		4267C95624DB1D2F00702BAC /* GeneralStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralStrings.swift; sourceTree = "<group>"; };
 		4267C95824DB1D3D00702BAC /* SignInStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInStrings.swift; sourceTree = "<group>"; };
 		4267C95A24DBC36800702BAC /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		42ABADB324E140490094CA9A /* NewFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFilterViewController.swift; sourceTree = "<group>"; };
+		42ABADB524E14FFF0094CA9A /* VegetarianInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VegetarianInfoView.swift; sourceTree = "<group>"; };
+		42ABADB724E15CE30094CA9A /* NewFilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFilterTableViewCell.swift; sourceTree = "<group>"; };
+		42ABADB924E16D4E0094CA9A /* FilterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCollectionViewCell.swift; sourceTree = "<group>"; };
 		42BE29E924DD2E4600449221 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		42BE29EB24DD307E00449221 /* FilterViewTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewTopBar.swift; sourceTree = "<group>"; };
 		42BE29ED24DD322600449221 /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
@@ -207,6 +215,7 @@
 				AF5634DB24DA64F200A606EA /* HomeViewController.swift */,
 				4243D57C24DD290F003F3761 /* SearchHistoryViewController.swift */,
 				42BE29E924DD2E4600449221 /* FilterViewController.swift */,
+				42ABADB324E140490094CA9A /* NewFilterViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -220,6 +229,9 @@
 				42BE29F124DD424400449221 /* FilterViewBottomBar.swift */,
 				42BE29EF24DD35C900449221 /* FilterTableViewHeader.swift */,
 				42BE29ED24DD322600449221 /* FilterTableViewCell.swift */,
+				42ABADB724E15CE30094CA9A /* NewFilterTableViewCell.swift */,
+				42ABADB924E16D4E0094CA9A /* FilterCollectionViewCell.swift */,
+				42ABADB524E14FFF0094CA9A /* VegetarianInfoView.swift */,
 				4257EF4524DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift */,
 				4257EF4B24DD0BC700CFF4C6 /* SearchHistoryTableViewCell.swift */,
 				AF6652C924DBFD71005FC74B /* CustomMainNavigationBar.swift */,
@@ -581,6 +593,7 @@
 			files = (
 				AF8E0D6824DDD83900D08D58 /* FeedViewModel.swift in Sources */,
 				4257EF4624DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift in Sources */,
+				42ABADB424E140490094CA9A /* NewFilterViewController.swift in Sources */,
 				4243D57D24DD290F003F3761 /* SearchHistoryViewController.swift in Sources */,
 				4257EF4A24DD07FD00CFF4C6 /* MockData.swift in Sources */,
 				4257EF4424DC3FF200CFF4C6 /* FakeSearchBar.swift in Sources */,
@@ -592,6 +605,7 @@
 				AF8E0D5924DD092E00D08D58 /* WriteEmptyController.swift in Sources */,
 				4267C95324DAF61400702BAC /* SignErrors.swift in Sources */,
 				AF6652D024DC2EA5005FC74B /* MainTableView.swift in Sources */,
+				42ABADB824E15CE30094CA9A /* NewFilterTableViewCell.swift in Sources */,
 				AF8E0D5B24DD277C00D08D58 /* Feed.swift in Sources */,
 				AFC1185724D3AEE1005B2E44 /* SignInViewController.swift in Sources */,
 				AF8193DB24DC80D900B948CF /* MainTabBarController.swift in Sources */,
@@ -603,7 +617,9 @@
 				4264F1E124DBEBAA007B3BC2 /* FakeNavigationBar.swift in Sources */,
 				AF5634DC24DA64F200A606EA /* HomeViewController.swift in Sources */,
 				AF6652CA24DBFD71005FC74B /* CustomMainNavigationBar.swift in Sources */,
+				42ABADBA24E16D4E0094CA9A /* FilterCollectionViewCell.swift in Sources */,
 				AF8E0D5D24DD320700D08D58 /* FeedRegisterController.swift in Sources */,
+				42ABADB624E14FFF0094CA9A /* VegetarianInfoView.swift in Sources */,
 				4267C95724DB1D2F00702BAC /* GeneralStrings.swift in Sources */,
 				4267C94F24DACA4100702BAC /* SignButton.swift in Sources */,
 				4267C95B24DBC36800702BAC /* ForgotPasswordViewController.swift in Sources */,
