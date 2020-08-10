@@ -25,14 +25,6 @@ struct FeedService {
         }
     }
     
-    func checkIfUserBookmarkedFeed(feedID: String, completion: @escaping(Bool) -> Void) {
-        guard let userUid = UserService.shared.user?.uid else { return }
-        
-        REF_USER_BOOKMARKS.child(userUid).child(feedID).observeSingleEvent(of: .value) { snapshot in
-            completion(snapshot.exists())
-        }
-    }
-    
     func bookmarkFeed(feed: Feed, completion: @escaping((Error?, DatabaseReference) -> Void)) {
         guard let userUid = UserService.shared.user?.uid else { return }
         
@@ -40,14 +32,6 @@ struct FeedService {
             REF_USER_BOOKMARKS.child(userUid).child(feed.feedID).removeValue(completionBlock: completion)
         } else {
             REF_USER_BOOKMARKS.child(userUid).updateChildValues([feed.feedID:1], withCompletionBlock: completion)
-        }
-    }
-    
-    func checkIfUserLikedFeed(feedID: String, completion: @escaping(Bool) -> Void){
-        guard let userUid = UserService.shared.user?.uid else { return }
-        
-        REF_USER_LIKES.child(userUid).child(feedID).observeSingleEvent(of: .value) { snapshot in
-            completion(snapshot.exists())
         }
     }
     

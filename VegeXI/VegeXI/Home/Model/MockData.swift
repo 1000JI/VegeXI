@@ -10,7 +10,7 @@ import Foundation
 
 struct MockData {
     
-    static var searchHistory = ["레시피", "이지호립밤", "주방세제"]
+    static var searchHistory = ["레시피", "이지호립밤", "주방세제", "Cat"]
     static var filterList = [
         ["채식타입":
             ["전체", "비건", "오보", "릭토", "락토오보", "페스코"]

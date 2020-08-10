@@ -11,6 +11,11 @@ import UIKit
 class SearchHistoryViewController: UIViewController {
 
     // MARK: - Properties
+    var feeds: [Feed]?
+    var searchFeeds = [Feed]() {
+        didSet { mainTableView.feeds = searchFeeds }
+    }
+    
     private let fakeSearchNaviBar = FakeSearchNaviBar()
     private let historyTableView = UITableView(frame: .zero, style: .plain).then {
         $0.separatorStyle = .none
@@ -166,6 +171,9 @@ extension SearchHistoryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = historyTableView.cellForRow(at: indexPath) as? SearchHistoryTableViewCell else { return }
         fakeSearchNaviBar.fakeSearchBar.currentText = cell.leftLable.text!
+        
+        _ = textFieldShouldReturn(fakeSearchNaviBar.fakeSearchBar.searchTextField)
+        
         fakeSearchNaviBar.fakeSearchBar.isSearching = fakeSearchNaviBar.fakeSearchBar.searchTextField.text != "" ? true : false
     }
 }
@@ -178,11 +186,19 @@ extension SearchHistoryViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let text = textField.text else { return false }
+        guard let text = textField.text?.lowercased() else { return false }
+        view.endEditing(true)
+        
         if text.isEmpty {
             showSearchTableView(isShow: false)
         } else {
             showSearchTableView(isShow: true)
+            
+            guard let feeds = feeds else { return false }
+            searchFeeds = feeds.filter {
+                $0.title.lowercased().contains(text) ||
+                    $0.content.lowercased().contains(text)
+            }
         }
         return true
     }

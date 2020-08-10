@@ -350,7 +350,7 @@
 		AFC1185124D3AEE1005B2E44 /* VegeXI */ = {
 			isa = PBXGroup;
 			children = (
-				AFC1186624D3AFE5005B2E44 /* Tutorial */,
+				AFC1186624D3AFE5005B2E44 /* Auth */,
 				AFC1186724D3AFEE005B2E44 /* Home */,
 				AF8E0D5424DD08F500D08D58 /* Write */,
 				AFC1186824D3AFFA005B2E44 /* MyPage */,
@@ -364,14 +364,14 @@
 			path = VegeXI;
 			sourceTree = "<group>";
 		};
-		AFC1186624D3AFE5005B2E44 /* Tutorial */ = {
+		AFC1186624D3AFE5005B2E44 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
 				42299CB824D9367B00AE9253 /* Controller */,
 				42299CB724D9367800AE9253 /* View */,
 				42299CB624D9367400AE9253 /* Model */,
 			);
-			path = Tutorial;
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		AFC1186724D3AFEE005B2E44 /* Home */ = {

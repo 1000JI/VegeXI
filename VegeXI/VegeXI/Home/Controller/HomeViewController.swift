@@ -65,8 +65,8 @@ class HomeViewController: UIViewController {
     // MARK: - Actions
     
     func tappedSearchButton() {
-        print(#function)
         let controller = SearchHistoryViewController()
+        controller.feeds = feeds
         navigationController?.pushViewController(controller, animated: true)
     }
     
