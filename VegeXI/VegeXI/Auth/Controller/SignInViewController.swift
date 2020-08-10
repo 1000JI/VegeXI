@@ -48,7 +48,6 @@ class SignInViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         configureNavi()
     }
     
@@ -104,7 +103,6 @@ class SignInViewController: UIViewController {
         
         AppleLoginService.shared.appleLoginInit(delegateView: self)
         NaverLoginService.shared.loginInstance?.delegate = self
-
     }
     
     private func logoutMethod() {
@@ -121,7 +119,7 @@ class SignInViewController: UIViewController {
     }
     
     private func configureUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .white
         
         let snsButtonStack = UIStackView(arrangedSubviews: [
             makeSnsSignInButton(imageName: "kakaoicon",

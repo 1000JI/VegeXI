@@ -146,25 +146,27 @@ final class AppleLoginService {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             // Create an account in your system.
             let userIdentifier = appleIDCredential.user
+            let filteredIdentifier = userIdentifier.filter { $0 != "." }
             let userFirstName = appleIDCredential.fullName?.givenName ?? "No Info"
             let userLastName = appleIDCredential.fullName?.familyName ?? "No Info"
             let userEmail = appleIDCredential.email ?? "No Info"
             
+            print(userIdentifier)
             
             let appleIDProvider = ASAuthorizationAppleIDProvider()
             appleIDProvider.getCredentialState(forUserID: userIdentifier) { (credentialState, error) in
                 switch credentialState {
                 case .authorized:
-                    // The Apple ID credential is valid. Show Home UI Here
-//                    print("authorized")
+//                    The Apple ID credential is valid. Show Home UI Here
+                    print("authorized")
                     break
                 case .revoked:
-                    // The Apple ID credential is revoked. Show SignIn UI Here.
-//                    print("revoked")
+//                    The Apple ID credential is revoked. Show SignIn UI Here.
+                    print("revoked")
                     break
                 case .notFound:
-//                    print("notFound")
-                    // No credential was found. Show SignIn UI Here.
+//                    No credential was found. Show SignIn UI Here.
+                    print("notFound")
                     break
                 default: break
                 }
@@ -173,7 +175,7 @@ final class AppleLoginService {
             let authModel = AuthModel(
                 email: userEmail,
                 nickname: "\(userLastName)\(userFirstName)",
-                uuid: userIdentifier,
+                uuid: filteredIdentifier,
                 loginType: .apple)
             print(authModel)
 
