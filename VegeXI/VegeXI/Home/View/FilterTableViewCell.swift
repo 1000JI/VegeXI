@@ -60,7 +60,7 @@ class FilterTableViewCell: UITableViewCell {
     
     // MARK: - Methods
     func handleDidSelected(selected: Bool) {
-        leftLabel.textColor = selected ? .vegeSelectedGreend : .vegeTextBlackColor
+        leftLabel.textColor = selected ? .vegeSelectedGreen : .vegeTextBlackColor
         leftLabel.font = selected ? UIFont.spoqaHanSansBold(ofSize: 15) : UIFont.spoqaHanSansRegular(ofSize: 15)
         rightAccessoryImageView.alpha = selected ? 1 : 0
     }
