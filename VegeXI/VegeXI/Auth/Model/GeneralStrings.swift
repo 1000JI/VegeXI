@@ -18,6 +18,8 @@ enum GeneralStrings {
     case eraseAll
     case filterViewTitle
     case filterBottomViewTitle
+    case notification
+    case emptyNotification
     
     func generateString() -> String {
         switch self {
@@ -39,6 +41,10 @@ enum GeneralStrings {
             return "필터"
         case .filterBottomViewTitle:
             return "필터 적용"
+        case .notification:
+            return "알림"
+        case .emptyNotification:
+            return "알림이 없습니다"
         }
     }
 }

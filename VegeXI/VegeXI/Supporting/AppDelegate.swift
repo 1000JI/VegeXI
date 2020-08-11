@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             controller = SignInViewController()
         }
         window?.rootViewController = UINavigationController(rootViewController: controller)
-        window?.rootViewController = NewFilterViewController()
+        window?.rootViewController = NotificationViewController()
         window?.makeKeyAndVisible()
         
         return true

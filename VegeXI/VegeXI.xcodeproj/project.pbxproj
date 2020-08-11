@@ -28,6 +28,9 @@
 		42ABADB824E15CE30094CA9A /* NewFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADB724E15CE30094CA9A /* NewFilterTableViewCell.swift */; };
 		42ABADBA24E16D4E0094CA9A /* FilterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADB924E16D4E0094CA9A /* FilterCollectionViewCell.swift */; };
 		42ABADBC24E2219D0094CA9A /* AlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADBB24E2219D0094CA9A /* AlignedCollectionViewFlowLayout.swift */; };
+		42ABADBE24E28CB70094CA9A /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADBD24E28CB70094CA9A /* NotificationViewController.swift */; };
+		42ABADC024E28D070094CA9A /* NotificationViewTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADBF24E28D070094CA9A /* NotificationViewTopBar.swift */; };
+		42ABADC224E292870094CA9A /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADC124E292870094CA9A /* NotificationTableViewCell.swift */; };
 		42BE29EA24DD2E4600449221 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29E924DD2E4600449221 /* FilterViewController.swift */; };
 		42BE29EC24DD307E00449221 /* FilterViewTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29EB24DD307E00449221 /* FilterViewTopBar.swift */; };
 		42BE29EE24DD322600449221 /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29ED24DD322600449221 /* FilterTableViewCell.swift */; };
@@ -114,6 +117,9 @@
 		42ABADB724E15CE30094CA9A /* NewFilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFilterTableViewCell.swift; sourceTree = "<group>"; };
 		42ABADB924E16D4E0094CA9A /* FilterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCollectionViewCell.swift; sourceTree = "<group>"; };
 		42ABADBB24E2219D0094CA9A /* AlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		42ABADBD24E28CB70094CA9A /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		42ABADBF24E28D070094CA9A /* NotificationViewTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewTopBar.swift; sourceTree = "<group>"; };
+		42ABADC124E292870094CA9A /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		42BE29E924DD2E4600449221 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		42BE29EB24DD307E00449221 /* FilterViewTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewTopBar.swift; sourceTree = "<group>"; };
 		42BE29ED24DD322600449221 /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
@@ -232,6 +238,7 @@
 				4243D57C24DD290F003F3761 /* SearchHistoryViewController.swift */,
 				42BE29E924DD2E4600449221 /* FilterViewController.swift */,
 				42ABADB324E140490094CA9A /* NewFilterViewController.swift */,
+				42ABADBD24E28CB70094CA9A /* NotificationViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -255,6 +262,8 @@
 				AF6652CD24DC132C005FC74B /* CategoryCell.swift */,
 				AF6652CF24DC2EA5005FC74B /* MainTableView.swift */,
 				AF6652D124DC2F5A005FC74B /* MainTableViewCell.swift */,
+				42ABADBF24E28D070094CA9A /* NotificationViewTopBar.swift */,
+				42ABADC124E292870094CA9A /* NotificationTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -636,8 +645,10 @@
 				AF6652D024DC2EA5005FC74B /* MainTableView.swift in Sources */,
 				42ABADB824E15CE30094CA9A /* NewFilterTableViewCell.swift in Sources */,
 				AF8E0D5B24DD277C00D08D58 /* Feed.swift in Sources */,
+				42ABADC224E292870094CA9A /* NotificationTableViewCell.swift in Sources */,
 				AFC1185724D3AEE1005B2E44 /* SignInViewController.swift in Sources */,
 				AF8193DB24DC80D900B948CF /* MainTabBarController.swift in Sources */,
+				42ABADC024E28D070094CA9A /* NotificationViewTopBar.swift in Sources */,
 				42299CBF24D974AF00AE9253 /* SignUpViewController.swift in Sources */,
 				4267C94B24DABD3E00702BAC /* FBSignInViewController.swift in Sources */,
 				AF561E4224D9CEE80063D51F /* UserService.swift in Sources */,
@@ -660,6 +671,7 @@
 				42BE29EC24DD307E00449221 /* FilterViewTopBar.swift in Sources */,
 				AF58B5F824E14D7A00BA2224 /* FeedDetailController.swift in Sources */,
 				AF2EE70424D87B4800A956BD /* AuthService.swift in Sources */,
+				42ABADBE24E28CB70094CA9A /* NotificationViewController.swift in Sources */,
 				4267C95524DB1BD900702BAC /* SignUpStrings.swift in Sources */,
 				4257EF4224DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift in Sources */,
 				42BE29EE24DD322600449221 /* FilterTableViewCell.swift in Sources */,

@@ -68,9 +68,9 @@ class NewFilterTableViewCell: UITableViewCell {
         filterCollectionView.register(FilterCollectionViewCell.self, forCellWithReuseIdentifier: FilterCollectionViewCell.identifier)
         filterCollectionView.dataSource = self
         filterCollectionView.delegate = self
-        filterCollectionView.backgroundColor = .white
         filterCollectionView.allowsMultipleSelection = true
         filterCollectionView.isScrollEnabled = false
+        filterCollectionView.backgroundColor = .white
     }
     
     private func setConstraints() {
