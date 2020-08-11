@@ -28,12 +28,14 @@ class HomeViewController: UIViewController {
         configureUI()
         configureTableView()
         configureViewEvent()
+        fetchFeeds()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavi()
-        fetchFeeds()
+//        fetchFeeds()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -81,6 +83,12 @@ class HomeViewController: UIViewController {
     func tappedFilterEvent() {
         let filterController = FilterViewController()
         present(filterController, animated: true)
+    }
+    
+    func tappedCommentEvent(feed: Feed) {
+        let controller = FeedDetailController()
+        controller.feed = feed
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     
@@ -134,5 +142,6 @@ class HomeViewController: UIViewController {
         mainTableView.refreshControl = refreshControl
         mainTableView.handleSortTapped = tappedSortEvent
         mainTableView.handleFilterTapped = tappedFilterEvent
+        mainTableView.handleCommentTapped = tappedCommentEvent(feed:)
     }
 }

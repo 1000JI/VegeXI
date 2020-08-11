@@ -221,7 +221,5 @@ final class BasicLoginService {
     static let shared = BasicLoginService()
     private init() { }
     
-    func registerBasicAuth() {
-        
-    }
+   
 }

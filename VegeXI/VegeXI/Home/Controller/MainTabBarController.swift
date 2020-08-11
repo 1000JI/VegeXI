@@ -16,6 +16,8 @@ class MainTabBarController: UITabBarController {
         didSet { fetchUser() }
     }
     
+    var registerButton: UIButton!
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -43,6 +45,13 @@ class MainTabBarController: UITabBarController {
             self.showLoader(false)
             
             UserService.shared.user = user
+        }
+    }
+    
+    override var hidesBottomBarWhenPushed: Bool {
+        didSet {
+            registerButton.isHidden = hidesBottomBarWhenPushed
+            view.layoutIfNeeded()
         }
     }
     
@@ -97,7 +106,7 @@ class MainTabBarController: UITabBarController {
     
     func setupMiddleButton() {
         let buttonSize: CGFloat = 52
-        let registerButton = UIButton(
+        registerButton = UIButton(
             frame: CGRect(
                 x: 0, y: 0,
                 width: buttonSize, height: buttonSize))
