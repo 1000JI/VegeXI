@@ -1,35 +1,19 @@
 //
-//  FeedViewModel.swift
+//  DetailViewModel.swift
 //  VegeXI
 //
-//  Created by 천지운 on 2020/08/08.
+//  Created by 천지운 on 2020/08/11.
 //  Copyright © 2020 TeamSloth. All rights reserved.
 //
 
 import UIKit
 
-struct FeedViewModel {
+struct DetailViewModel {
     let feed: Feed
     
     var profileImageURL: URL? {
-        return URL(string: feed.writerUser.profileImageUrl)
-    }
-    
-    var titleFeedImageURL: URL? {
-        switch feed.feedType {
-        case .textType: return nil
-        case .picAndTextType: return feed.imageUrls?.first
-        }
-    }
-    
-    var moreImageCount: String {
-        guard let imageURLs = feed.imageUrls else { return "0"}
-        return "+\(imageURLs.count - 1)"
-    }
-    
-    var moreLabelIsHidden: Bool {
-        guard let imageURLs = feed.imageUrls else { return true}
-        return imageURLs.count > 1 ? false : true
+        let imageURL = URL(string: feed.writerUser.profileImageUrl)
+        return imageURL
     }
     
     var writeDate: String {

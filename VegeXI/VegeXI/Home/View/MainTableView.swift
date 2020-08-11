@@ -28,6 +28,7 @@ class MainTableView: UITableView {
     
     var handleSortTapped: (() -> Void)?
     var handleFilterTapped: (() -> Void)?
+    var handleCommentTapped: ((Feed) -> Void)?
     
     private lazy var headerView = UIView().then {
         $0.backgroundColor = .white
@@ -102,7 +103,8 @@ class MainTableView: UITableView {
     }
     
     func tappedCommentButton(cell: MainTableViewCell) {
-        print(#function)
+        guard let feed = cell.feed else { return }
+        handleCommentTapped?(feed)
     }
     
     func tappedBookmarkButton(cell: MainTableViewCell) {
@@ -126,7 +128,7 @@ class MainTableView: UITableView {
     func configureTableView() {
         backgroundColor = .white
         separatorStyle = .none
-        allowsSelection = false
+        allowsSelection = true
         dataSource = self
         delegate = self
         
@@ -186,5 +188,12 @@ extension MainTableView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return headerViewHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! MainTableViewCell
+        guard let feed = cell.feed else { return }
+        handleCommentTapped?(feed)
+        tableView.selectRow(at: nil, animated: false, scrollPosition: .none)
     }
 }

@@ -32,6 +32,30 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
+    func isTabbarHidden(isHidden: Bool) {
+        guard let mainTabbarController = tabBarController as? MainTabBarController else { return }
+        mainTabbarController.registerButton.isHidden = isHidden
+        tabBarController?.tabBar.isHidden = isHidden
+    }
+    
+    func keyboardWillShowNotification(handler: @escaping((Notification) -> ())) {
+        NotificationCenter.default.addObserver(
+            forName: UIResponder.keyboardWillShowNotification,
+            object: nil,
+            queue: nil) { notification in
+                handler(notification)
+        }
+    }
+    
+    func keyboardWillHideNotification(handler: @escaping((Notification) -> ())) {
+        NotificationCenter.default.addObserver(
+            forName: UIResponder.keyboardWillHideNotification,
+            object: nil,
+            queue: nil) { notification in
+                handler(notification)
+        }
+    }
 }
 
 extension UIColor {
@@ -64,6 +88,7 @@ extension UIColor {
     static let vegeCategoryTextColor = UIColor(rgb: 0x707070)
     static let tabbarGreenSelectColor = UIColor(rgb: 0x156941)
     static let vegeSelectedGreen = UIColor(rgb: 0x0AB682)
+    static let vegeCommentDateColor = UIColor(rgb: 0xB7B7B7)
 }
 
 extension UIFont {
@@ -77,3 +102,6 @@ extension UIFont {
 }
 
 
+extension UIImage {
+    static let basicHumanImage = UIImage(named: "cell_Human")?.withRenderingMode(.alwaysOriginal)
+}

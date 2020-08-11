@@ -14,6 +14,11 @@ struct FeedService {
     static let shared = FeedService()
     private init() { }
     
+    func uploadComment() {
+        guard let userUid = UserService.shared.user?.uid else { return }
+        
+    }
+    
     func checkIfUserLikedAndBookmarkFeed(feedID: String, completion: @escaping((Bool, Bool)) -> Void){
         guard let userUid = UserService.shared.user?.uid else { return }
         
