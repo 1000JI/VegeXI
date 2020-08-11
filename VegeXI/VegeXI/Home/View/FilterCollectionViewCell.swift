@@ -13,17 +13,15 @@ class FilterCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     static let identifier = "FilterCollectionViewCell"
     
-    private let title = UILabel().then {
+    private let cellTitle = UILabel().then {
         $0.font = UIFont.spoqaHanSansRegular(ofSize: 13)
         $0.textColor = .vegeTextBlackColor
     }
     
-    override var isSelected: Bool {
-        willSet {
-            configureSelectedEffects(selected: newValue)
-        }
+    var isClicked: Bool = false {
+        willSet { configureSelectedEffects(selected: newValue) }
     }
-    
+        
     
     // MARK: - Lifecycle
     override init(frame: CGRect) {
@@ -40,14 +38,14 @@ class FilterCollectionViewCell: UICollectionViewCell {
     // MARK: - UI
     private func configureUI() {
         setConstraints()
-        self.layer.cornerRadius = 10
+        self.layer.cornerRadius = 15
         self.layer.borderColor = UIColor.vegeLightGrayBorderColor.cgColor
         self.layer.borderWidth = 1
     }
     
     private func setConstraints() {
-        addSubview(title)
-        title.snp.makeConstraints {
+        addSubview(cellTitle)
+        cellTitle.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
         }
     }
@@ -55,12 +53,13 @@ class FilterCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Helpers
     func configureCell(title: String) {
-        self.title.text = title
+        self.cellTitle.text = title
     }
     
     func configureSelectedEffects(selected: Bool) {
         self.backgroundColor = selected ? .vegeSelectedGreen : .white
-        title.font = selected ? UIFont.spoqaHanSansBold(ofSize: 13) : UIFont.spoqaHanSansRegular(ofSize: 13)
-        title.textColor = selected ? .white : .vegeTextBlackColor
+        cellTitle.font = selected ? UIFont.spoqaHanSansBold(ofSize: 13) : UIFont.spoqaHanSansRegular(ofSize: 13)
+        cellTitle.textColor = selected ? .white : .vegeTextBlackColor
     }
+    
 }

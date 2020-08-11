@@ -14,13 +14,25 @@ class NewFilterTableViewCell: UITableViewCell {
     static let identifier = "NewFilterTableViewCell"
     
     lazy var filterCollectionView: UICollectionView = {
-        let flowLayout = UICollectionViewFlowLayout()
+//        let flowLayout = UICollectionViewFlowLayout()
+        let flowLayout = AlignedCollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
+        flowLayout.horizontalAlignment = .leading
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         return collectionView
     }()
+    private let infoImageView = UIImageView().then {
+        $0.clipsToBounds = true
+        $0.backgroundColor = .lightGray
+    }
     
-    var collectionViewData: [String] = []
+    private var collectionViewData: [String] = []
+//    private var selectionInfo: Set<IndexPath> = []
+    private var cellTag = 0
+    
+    private var selectedCells = [IndexPath]()
+    private var saveSelectedCellInfo: (Int, IndexPath) -> Void = { _, _ in return }
+    private var deleteSelectedCellInfo: (Int, IndexPath) -> Void = { _, _ in return }
     
     
     // MARK: - Lifecycle
@@ -33,6 +45,18 @@ class NewFilterTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if cellTag == 0 {
+            addSubview(infoImageView)
+            infoImageView.snp.makeConstraints {
+                $0.top.equalTo(filterCollectionView.snp.bottom)
+                $0.leading.trailing.equalToSuperview()
+                $0.bottom.equalToSuperview().inset(26)
+            }
+        }
+    }
+
     
     // MARK: - UI
     private func configureUI() {
@@ -43,22 +67,49 @@ class NewFilterTableViewCell: UITableViewCell {
     private func setPropertyAttributes() {
         filterCollectionView.register(FilterCollectionViewCell.self, forCellWithReuseIdentifier: FilterCollectionViewCell.identifier)
         filterCollectionView.dataSource = self
+        filterCollectionView.delegate = self
         filterCollectionView.backgroundColor = .white
         filterCollectionView.allowsMultipleSelection = true
+        filterCollectionView.isScrollEnabled = false
     }
     
     private func setConstraints() {
         addSubview(filterCollectionView)
         filterCollectionView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(90)
         }
     }
     
     
     // MARK: - Helpers
-    func configureCell(data: [String], delegateView: UICollectionViewDelegate) {
+    func configureCell(
+        data: [String],
+        tag: Int,
+        selectedCells: [IndexPath],
+        savingDataMethod: @escaping (Int, IndexPath) -> Void,
+        deletingDataMethod: @escaping (Int, IndexPath) -> Void) {
         collectionViewData = data
-        filterCollectionView.delegate = delegateView
+        cellTag = tag
+        self.selectedCells = selectedCells
+        saveSelectedCellInfo = savingDataMethod
+        deleteSelectedCellInfo = deletingDataMethod
+    }
+    
+    func getTextSize(indexPath: IndexPath) -> CGSize {
+        let text = collectionViewData[indexPath.item]
+        let font = UIFont.spoqaHanSansRegular(ofSize: 13)
+        let fontAttributes = [NSAttributedString.Key.font: font]
+        let size = (text as NSString).size(withAttributes: fontAttributes as [NSAttributedString.Key : Any])
+        return size
+    }
+    
+    func checkSelectionStatus(cell: FilterCollectionViewCell, indexPath: IndexPath) {
+        if selectedCells.contains(indexPath) {
+            cell.configureSelectedEffects(selected: true)
+        } else {
+            cell.configureSelectedEffects(selected: false)
+        }
     }
     
 }
@@ -66,7 +117,7 @@ class NewFilterTableViewCell: UITableViewCell {
 
 // MARK: - UICollectionViewDataSource
 extension NewFilterTableViewCell: UICollectionViewDataSource {
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return collectionViewData.count
     }
@@ -75,9 +126,50 @@ extension NewFilterTableViewCell: UICollectionViewDataSource {
         guard let cell = filterCollectionView.dequeueReusableCell(withReuseIdentifier: FilterCollectionViewCell.identifier, for: indexPath) as? FilterCollectionViewCell else { fatalError("No Cell Info") }
         let data = collectionViewData[indexPath.row]
         cell.configureCell(title: data)
+        checkSelectionStatus(cell: cell, indexPath: indexPath)
         return cell
     }
     
 }
 
 
+// MARK: - UICollectionViewDelegateFlowLayout
+extension NewFilterTableViewCell: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let padding: CGFloat = 26
+        let width = getTextSize(indexPath: indexPath).width + padding
+        return CGSize(width: width, height: 29)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 6
+    }
+    
+}
+
+
+// MARK: - UICollectionViewDelegate
+extension NewFilterTableViewCell: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        saveSelectedCellInfo(cellTag, indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        deleteSelectedCellInfo(cellTag, indexPath)
+    }
+    
+}

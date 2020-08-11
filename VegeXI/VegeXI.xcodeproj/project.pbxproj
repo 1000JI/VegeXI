@@ -27,6 +27,7 @@
 		42ABADB624E14FFF0094CA9A /* VegetarianInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADB524E14FFF0094CA9A /* VegetarianInfoView.swift */; };
 		42ABADB824E15CE30094CA9A /* NewFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADB724E15CE30094CA9A /* NewFilterTableViewCell.swift */; };
 		42ABADBA24E16D4E0094CA9A /* FilterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADB924E16D4E0094CA9A /* FilterCollectionViewCell.swift */; };
+		42ABADBC24E2219D0094CA9A /* AlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADBB24E2219D0094CA9A /* AlignedCollectionViewFlowLayout.swift */; };
 		42BE29EA24DD2E4600449221 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29E924DD2E4600449221 /* FilterViewController.swift */; };
 		42BE29EC24DD307E00449221 /* FilterViewTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29EB24DD307E00449221 /* FilterViewTopBar.swift */; };
 		42BE29EE24DD322600449221 /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29ED24DD322600449221 /* FilterTableViewCell.swift */; };
@@ -105,6 +106,7 @@
 		42ABADB524E14FFF0094CA9A /* VegetarianInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VegetarianInfoView.swift; sourceTree = "<group>"; };
 		42ABADB724E15CE30094CA9A /* NewFilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFilterTableViewCell.swift; sourceTree = "<group>"; };
 		42ABADB924E16D4E0094CA9A /* FilterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCollectionViewCell.swift; sourceTree = "<group>"; };
+		42ABADBB24E2219D0094CA9A /* AlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		42BE29E924DD2E4600449221 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		42BE29EB24DD307E00449221 /* FilterViewTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewTopBar.swift; sourceTree = "<group>"; };
 		42BE29ED24DD322600449221 /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
@@ -435,6 +437,7 @@
 			children = (
 				AFF46CAC24D85A00008F118E /* Constants.swift */,
 				AF561E3F24D9CCB80063D51F /* Extensions.swift */,
+				42ABADBB24E2219D0094CA9A /* AlignedCollectionViewFlowLayout.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -624,6 +627,7 @@
 				4267C94F24DACA4100702BAC /* SignButton.swift in Sources */,
 				4267C95B24DBC36800702BAC /* ForgotPasswordViewController.swift in Sources */,
 				42BE29EA24DD2E4600449221 /* FilterViewController.swift in Sources */,
+				42ABADBC24E2219D0094CA9A /* AlignedCollectionViewFlowLayout.swift in Sources */,
 				4267C95124DAE51200702BAC /* SignView.swift in Sources */,
 				42BE29F224DD424400449221 /* FilterViewBottomBar.swift in Sources */,
 				AF58173224D7DF9200F2683D /* SNSLoginService.swift in Sources */,

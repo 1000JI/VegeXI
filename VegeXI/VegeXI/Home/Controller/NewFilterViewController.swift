@@ -14,7 +14,11 @@ class NewFilterViewController: UIViewController {
     let topBar = FilterViewTopBar()
     let filterTableView = UITableView(frame: .zero, style: .grouped)
     let bottomBar = FilterViewBottomBar()
-    var selectedCells = [IndexPath]()
+    var selectedCells: [Int: [IndexPath]] = [:] {
+        willSet {
+            print(newValue)
+        }
+    }
     
     
     // MARK: - Lifecycle
@@ -33,12 +37,11 @@ class NewFilterViewController: UIViewController {
     
     
     private func setPropertyAttributes() {
-        filterTableView.register(NewFilterTableViewCell.self, forCellReuseIdentifier: NewFilterTableViewCell.identifier)
         filterTableView.dataSource = self
         filterTableView.delegate = self
-        filterTableView.rowHeight = 134
         filterTableView.separatorStyle = .none
         filterTableView.backgroundColor = .white
+        filterTableView.showsVerticalScrollIndicator = false
         
         topBar.configureTopBar(closeFilterAction: closeFilterView)
         bottomBar.configureBottomBar(filterActionHandler: applyFilter)
@@ -54,7 +57,7 @@ class NewFilterViewController: UIViewController {
         }
         filterTableView.snp.makeConstraints {
             $0.top.equalTo(topBar.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(28)
             $0.bottom.equalTo(bottomBar.snp.top)
         }
         bottomBar.snp.makeConstraints {
@@ -62,7 +65,7 @@ class NewFilterViewController: UIViewController {
             $0.height.equalTo(75)
         }
     }
-
+    
     
     // MARK: - Helpers
     private func closeFilterView() {
@@ -71,6 +74,19 @@ class NewFilterViewController: UIViewController {
     
     private func applyFilter() {
         print(#function)
+    }
+    
+    private func saveSelectionData(cellTag: Int, indexPath: IndexPath) {
+        if selectedCells[cellTag] == nil {
+            selectedCells[cellTag] = [indexPath]
+        } else {
+            selectedCells[cellTag]?.append(indexPath)
+        }
+    }
+    
+    private func deleteSelectionData(cellTag: Int, indexPath: IndexPath) {
+        guard let index = selectedCells[cellTag]?.firstIndex(of: indexPath) else { return }
+        selectedCells[cellTag]?.remove(at: index)
     }
     
 }
@@ -93,18 +109,38 @@ extension NewFilterViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         35
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = filterTableView.dequeueReusableCell(withIdentifier: NewFilterTableViewCell.identifier, for: indexPath) as? NewFilterTableViewCell else { fatalError("No Cell Info") }
+        let cell = NewFilterTableViewCell()
         let key = MockData.newFilteredList[indexPath.section].first?.key ?? ""
         let data = MockData.newFilteredList[indexPath.section][key] ?? []
-        cell.configureCell(data: data, delegateView: self)
-        cell.filterCollectionView.reloadData()
+        cell.configureCell(
+            data: data,
+            tag: indexPath.section,
+            selectedCells: selectedCells[indexPath.section] ?? [],
+            savingDataMethod: saveSelectionData(cellTag:indexPath:),
+            deletingDataMethod: deleteSelectionData(cellTag:indexPath:)
+        )
+        cell.selectionStyle = .none
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0:
+            return 303
+        case 1,2:
+            return 134
+        case 3,4:
+            return 100
+        default:
+            print("No Cell Height Info")
+            return 134
+        }
     }
     
 }
@@ -114,45 +150,4 @@ extension NewFilterViewController: UITableViewDataSource {
 extension NewFilterViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     }
-}
-
-
-// MARK: - UICollectionViewDelegate
-extension NewFilterViewController: UICollectionViewDelegate {
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if selectedCells.contains(indexPath) == false {
-            selectedCells.append(indexPath)
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        if selectedCells.contains(indexPath) == true {
-            guard let index = selectedCells.firstIndex(of: indexPath) else { return }
-            selectedCells.remove(at: index)
-        }
-    }
-    
-}
-
-
-// MARK: - UICollectionViewDelegateFlowLayout
-extension NewFilterViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 12, left: 28, bottom: 12, right: 28)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 81, height: 29)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 6
-    }
-
 }
