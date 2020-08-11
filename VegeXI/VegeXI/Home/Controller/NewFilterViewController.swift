@@ -14,7 +14,9 @@ class NewFilterViewController: UIViewController {
     let topBar = FilterViewTopBar()
     let filterTableView = UITableView(frame: .zero, style: .grouped)
     let bottomBar = FilterViewBottomBar()
-    var selectedCells: [Int: [IndexPath]] = [:] {
+    typealias setIndexPath = Set<IndexPath>
+    
+    var selectedCells: [Int: setIndexPath] = [:] {
         willSet {
             print(newValue)
         }
@@ -80,7 +82,7 @@ class NewFilterViewController: UIViewController {
         if selectedCells[cellTag] == nil {
             selectedCells[cellTag] = [indexPath]
         } else {
-            selectedCells[cellTag]?.append(indexPath)
+            selectedCells[cellTag]?.insert(indexPath)
         }
     }
     

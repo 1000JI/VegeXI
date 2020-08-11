@@ -14,23 +14,23 @@ class NewFilterTableViewCell: UITableViewCell {
     static let identifier = "NewFilterTableViewCell"
     
     lazy var filterCollectionView: UICollectionView = {
-//        let flowLayout = UICollectionViewFlowLayout()
         let flowLayout = AlignedCollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         flowLayout.horizontalAlignment = .leading
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         return collectionView
     }()
+    
     private let infoImageView = UIImageView().then {
         $0.clipsToBounds = true
         $0.backgroundColor = .lightGray
+        $0.image = UIImage(named: "VegeInfo")
     }
     
     private var collectionViewData: [String] = []
-//    private var selectionInfo: Set<IndexPath> = []
     private var cellTag = 0
     
-    private var selectedCells = [IndexPath]()
+    private var selectedCells = Set<IndexPath>()
     private var saveSelectedCellInfo: (Int, IndexPath) -> Void = { _, _ in return }
     private var deleteSelectedCellInfo: (Int, IndexPath) -> Void = { _, _ in return }
     
@@ -86,7 +86,7 @@ class NewFilterTableViewCell: UITableViewCell {
     func configureCell(
         data: [String],
         tag: Int,
-        selectedCells: [IndexPath],
+        selectedCells: Set<IndexPath>,
         savingDataMethod: @escaping (Int, IndexPath) -> Void,
         deletingDataMethod: @escaping (Int, IndexPath) -> Void) {
         collectionViewData = data
@@ -106,6 +106,7 @@ class NewFilterTableViewCell: UITableViewCell {
     
     func checkSelectionStatus(cell: FilterCollectionViewCell, indexPath: IndexPath) {
         if selectedCells.contains(indexPath) {
+            cell.isClicked = true
             cell.configureSelectedEffects(selected: true)
         } else {
             cell.configureSelectedEffects(selected: false)
@@ -160,16 +161,22 @@ extension NewFilterTableViewCell: UICollectionViewDelegateFlowLayout {
 // MARK: - UICollectionViewDelegate
 extension NewFilterTableViewCell: UICollectionViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
-    }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = filterCollectionView.cellForItem(at: indexPath) as? FilterCollectionViewCell else { return }
         saveSelectedCellInfo(cellTag, indexPath)
+        cell.isClicked.toggle()
+        if cell.isClicked == false {
+            deleteSelectedCellInfo(cellTag, indexPath)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard let cell = filterCollectionView.cellForItem(at: indexPath) as? FilterCollectionViewCell else { return }
         deleteSelectedCellInfo(cellTag, indexPath)
+        cell.isClicked.toggle()
+        if cell.isClicked == true {
+            saveSelectedCellInfo(cellTag, indexPath)
+        }
     }
     
 }
