@@ -56,6 +56,76 @@ extension UIViewController {
                 handler(notification)
         }
     }
+    
+    func showMoreBasicButtnAlert(viewController: UIViewController,
+                            reportHandler: ((UIAlertAction) -> Void)?,
+                            linkCopyHandler: ((UIAlertAction) -> Void)?,
+                            shareHandler: ((UIAlertAction) -> Void)?) {
+        let moreAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let reportAction = UIAlertAction(
+            title: "신고",
+            style: .destructive,
+            handler: reportHandler)
+        let linkCopyAction = UIAlertAction(
+            title: "링크복사",
+            style: .default,
+            handler: linkCopyHandler)
+        let shareAction = UIAlertAction(
+            title: "공유하기",
+            style: .default,
+            handler: shareHandler)
+        let cancelAction = UIAlertAction(
+            title: "취소",
+            style: .cancel,
+            handler: nil)
+        
+        moreAlert.addAction(reportAction)
+        moreAlert.addAction(linkCopyAction)
+        moreAlert.addAction(shareAction)
+        moreAlert.addAction(cancelAction)
+        moreAlert.view.tintColor = .black
+        
+        viewController.present(moreAlert, animated: true)
+    }
+    
+    func showMoreWriterButtnAlert(viewController: UIViewController,
+                            editHandler: ((UIAlertAction) -> Void)?,
+                            linkCopyHandler: ((UIAlertAction) -> Void)?,
+                            shareHandler: ((UIAlertAction) -> Void)?,
+                            deleteHandler: ((UIAlertAction) -> Void)?) {
+        let moreAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let editAction = UIAlertAction(
+            title: "수정",
+            style: .destructive,
+            handler: editHandler)
+        let linkCopyAction = UIAlertAction(
+            title: "링크복사",
+            style: .default,
+            handler: linkCopyHandler)
+        let shareAction = UIAlertAction(
+            title: "공유하기",
+            style: .default,
+            handler: shareHandler)
+        let deleteAction = UIAlertAction(
+            title: "삭제",
+            style: .default,
+            handler: deleteHandler)
+        let cancelAction = UIAlertAction(
+            title: "취소",
+            style: .cancel,
+            handler: nil)
+        
+        moreAlert.addAction(editAction)
+        moreAlert.addAction(linkCopyAction)
+        moreAlert.addAction(shareAction)
+        moreAlert.addAction(deleteAction)
+        moreAlert.addAction(cancelAction)
+        moreAlert.view.tintColor = .black
+        
+        viewController.present(moreAlert, animated: true)
+    }
 }
 
 extension UIColor {
@@ -89,6 +159,9 @@ extension UIColor {
     static let tabbarGreenSelectColor = UIColor(rgb: 0x156941)
     static let vegeSelectedGreen = UIColor(rgb: 0x0AB682)
     static let vegeCommentDateColor = UIColor(rgb: 0xB7B7B7)
+    static let buttonDisabledTextColor = UIColor(rgb: 0xD8D8D8)
+    static let buttonEnabledTextcolor = UIColor(rgb: 0x0AB682)
+    static let textViewPlaceholderTextColor = UIColor(rgb: 0xA5A5A5)
 }
 
 extension UIFont {

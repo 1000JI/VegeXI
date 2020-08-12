@@ -25,8 +25,9 @@ class SearchHistoryViewController: UIViewController {
     private let categoryView = CategoryCollectionView().then {
         $0.isHidden = true
     }
-    private let mainTableView = MainTableView(frame: .zero, style: .grouped).then {
+    private lazy var mainTableView = MainTableView(frame: .zero, style: .grouped).then {
         $0.isHidden = true
+        $0.handleCommentTapped = tappedCommentEvent(feed:)
     }
     private let refreshControl = UIRefreshControl()
     
@@ -105,6 +106,14 @@ class SearchHistoryViewController: UIViewController {
                 categoryView.collectionView,
                 didSelectItemAt: indexPath)
         }
+    }
+    
+    // MARK: - Actions
+    
+    private func tappedCommentEvent(feed: Feed) {
+        let controller = FeedDetailController()
+        controller.feed = feed
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     private func handleDeleteButton(cellNumber: Int) {

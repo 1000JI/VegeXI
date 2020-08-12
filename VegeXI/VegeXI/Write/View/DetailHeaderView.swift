@@ -20,6 +20,10 @@ class DetailHeaderView: UIView {
     private let defaultSidePadding: CGFloat = 20
     private let buttonSize: CGFloat = 34
     
+    var tappedMoreButton: (() -> ())?
+    var tappedLikeButton: (() -> ())?
+    var tappedBookmarkButton: (() -> ())?
+    
     private let layout = UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
     }
@@ -36,14 +40,13 @@ class DetailHeaderView: UIView {
             $0.isPagingEnabled = true
             $0.showsHorizontalScrollIndicator = false
     }
-    
-    private let pageControl = UIPageControl().then {
-        $0.currentPage = 0
-        $0.numberOfPages = 10
-        $0.hidesForSinglePage = true
-        $0.pageIndicatorTintColor = UIColor(rgb: 0xDADBDA)
-        $0.currentPageIndicatorTintColor = UIColor(rgb: 0x0095F6)
-        $0.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+    private let moreImageCountLabel = UILabel().then {
+        $0.text = "1/3"
+        $0.textColor = .white
+        $0.font = UIFont.spoqaHanSansRegular(ofSize: 12)
+    }
+    private let moreCountLabelBackView = UIView().then {
+        $0.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.55)
     }
     
     private let profileImageView = UIImageView().then {
@@ -72,12 +75,13 @@ class DetailHeaderView: UIView {
     private lazy var profileStack = UIStackView(
         arrangedSubviews: [profileImageView, writeStack])
     
-    private let moreButton = UIButton(type: .system).then {
+    private lazy var moreButton = UIButton(type: .system).then {
         let image = UIImage(named: "cell_MoreButton")?.withRenderingMode(.alwaysOriginal)
         $0.setImage(image, for: .normal)
         $0.snp.makeConstraints {
             $0.height.width.equalTo(44)
         }
+        $0.addTarget(self, action: #selector(buttonEvent), for: .touchUpInside)
     }
     
     private let detailTitleLabel = UILabel().then {
@@ -90,6 +94,7 @@ class DetailHeaderView: UIView {
     private lazy var likeButton = UIButton(type: .system).then {
         $0.setImage(UIImage(named: "feed_Heart"), for: .normal)
         $0.tintColor = .vegeTextBlackColor
+        $0.addTarget(self, action: #selector(buttonEvent), for: .touchUpInside)
     }
     
     private let likesCountLabel = UILabel().then {
@@ -112,6 +117,7 @@ class DetailHeaderView: UIView {
     private lazy var bookmarkButton = UIButton(type: .system).then {
         $0.setImage(UIImage(named: "feed_Bookmark"), for: .normal)
         $0.tintColor = .vegeTextBlackColor
+        $0.addTarget(self, action: #selector(buttonEvent), for: .touchUpInside)
     }
     
     private let contentLabel = UILabel().then {
@@ -133,6 +139,28 @@ class DetailHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        moreCountLabelBackView.layer.cornerRadius = moreCountLabelBackView.frame.height / 2
+    }
+    
+    
+    // MARK: - Actions
+    
+    @objc func buttonEvent(_ sender: UIButton) {
+        switch sender {
+        case likeButton:
+            tappedLikeButton?()
+        case bookmarkButton:
+            tappedBookmarkButton?()
+        case moreButton:
+            tappedMoreButton?()
+        default:
+            break
+        }
+    }
+    
     
     // MARK: - Helpers
     
@@ -145,7 +173,7 @@ class DetailHeaderView: UIView {
         profileStack.spacing = 8
         profileStack.alignment = .center
         
-        [profileStack, moreButton, detailTitleLabel, collectionView, pageControl, likeButton, likesCountLabel, commentButton, commentCountLabel, bookmarkButton, contentLabel].forEach {
+        [profileStack, moreButton, detailTitleLabel, collectionView, likeButton, likesCountLabel, commentButton, commentCountLabel, bookmarkButton, contentLabel, moreCountLabelBackView, moreImageCountLabel].forEach {
             addSubview($0)
         }
         profileStack.snp.makeConstraints {
@@ -157,7 +185,7 @@ class DetailHeaderView: UIView {
             $0.top.trailing.equalToSuperview()
         }
         detailTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(profileStack.snp.bottom).offset(4)
+            $0.top.equalTo(profileStack.snp.bottom).offset(16)
             $0.leading.equalToSuperview().offset(defaultSidePadding)
             $0.trailing.equalToSuperview().offset(-defaultSidePadding)
         }
@@ -167,14 +195,19 @@ class DetailHeaderView: UIView {
             $0.trailing.equalToSuperview().offset(-defaultSidePadding)
             $0.height.equalTo(collectionView.snp.width)
         }
-        pageControl.snp.makeConstraints {
-            $0.centerX.equalTo(collectionView.snp.centerX)
-            $0.top.equalTo(collectionView.snp.bottom).offset(4)
+        moreCountLabelBackView.snp.makeConstraints {
+            $0.center.equalTo(moreImageCountLabel.snp.center)
+            $0.width.equalTo(moreImageCountLabel.snp.width).offset(24)
+            $0.height.equalTo(moreImageCountLabel.snp.height).offset(8)
+        }
+        moreImageCountLabel.snp.makeConstraints {
+            $0.top.equalTo(collectionView.snp.top).offset(16)
+            $0.trailing.equalTo(collectionView.snp.trailing).offset(-20)
         }
         
         likeButton.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(12)
-            $0.top.equalTo(pageControl.snp.bottom).offset(0)
+            $0.top.equalTo(collectionView.snp.bottom).offset(0)
             $0.width.height.equalTo(buttonSize)
         }
         likesCountLabel.snp.makeConstraints {
@@ -204,7 +237,6 @@ class DetailHeaderView: UIView {
             $0.trailing.equalToSuperview().offset(-defaultSidePadding)
         }
         
-        
         let finishLineView = UIView()
         finishLineView.backgroundColor = UIColor(rgb: 0xDADBDA)
         addSubview(finishLineView)
@@ -221,11 +253,10 @@ class DetailHeaderView: UIView {
         
         switch feed.feedType {
         case .textType:
-            print(#function)
             showDetailImages(isShow: false)
         case .picAndTextType:
-            print(#function)
             showDetailImages(isShow: true)
+            moreImageCountLabel.text = "1/\(feed.imageUrls!.count)"
             collectionView.reloadData()
         }
         
@@ -243,8 +274,10 @@ class DetailHeaderView: UIView {
     
     func showDetailImages(isShow: Bool) {
         collectionView.snp.removeConstraints()
-        pageControl.snp.removeConstraints()
         likeButton.snp.removeConstraints()
+        
+        moreImageCountLabel.isHidden = !isShow
+        moreCountLabelBackView.isHidden = !isShow
         
         if isShow {
             collectionView.snp.makeConstraints {
@@ -253,14 +286,9 @@ class DetailHeaderView: UIView {
                 $0.trailing.equalToSuperview().offset(-defaultSidePadding)
                 $0.height.equalTo(collectionView.snp.width)
             }
-            pageControl.snp.makeConstraints {
-                $0.centerX.equalTo(collectionView.snp.centerX)
-                $0.top.equalTo(collectionView.snp.bottom).offset(4)
-            }
-            
             likeButton.snp.makeConstraints {
                 $0.leading.equalToSuperview().offset(12)
-                $0.top.equalTo(pageControl.snp.bottom).offset(0)
+                $0.top.equalTo(collectionView.snp.bottom).offset(0)
                 $0.width.height.equalTo(buttonSize)
             }
         } else {
@@ -280,7 +308,6 @@ extension DetailHeaderView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let feed = feed else { return 0 }
         let imageCount = feed.imageUrls?.count ?? 0
-        pageControl.numberOfPages = imageCount
         return imageCount
     }
     
@@ -316,8 +343,11 @@ extension DetailHeaderView: UICollectionViewDelegateFlowLayout {
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        guard let amountCount = feed?.imageUrls?.count else { return }
+        
         let width = UIScreen.main.bounds.width - (defaultSidePadding * 2)
         let presentX = scrollView.contentOffset.x
-        pageControl.currentPage = Int(presentX / width)
+        let pageNumber = Int(presentX / width) + 1
+        moreImageCountLabel.text = "\(pageNumber)/\(amountCount)"
     }
 }

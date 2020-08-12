@@ -90,8 +90,8 @@ class MainTableViewCell: UITableViewCell {
         }
         
         moreImageCountLabel.snp.makeConstraints {
-            $0.trailing.equalToSuperview().offset(-22)
-            $0.bottom.equalToSuperview().offset(-12)
+            $0.top.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-20)
         }
     }
     

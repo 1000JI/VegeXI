@@ -14,6 +14,10 @@ class CommentTableViewCell: UITableViewCell {
     
     static let identifier = "CommentTableViewCell"
     
+    var comment: Comment? {
+        didSet { configure() }
+    }
+    
     private let profileImageView = UIImageView().then {
         $0.image = UIImage.basicHumanImage
         $0.contentMode = .scaleAspectFill
@@ -65,14 +69,24 @@ class CommentTableViewCell: UITableViewCell {
             addSubview($0)
         }
         profileImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(12)
+            $0.top.equalToSuperview().offset(16)
             $0.leading.equalToSuperview().offset(20)
         }
         commentStack.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(8)
+            $0.top.equalToSuperview().offset(16)
             $0.leading.equalTo(profileImageView.snp.trailing).offset(8)
             $0.trailing.equalToSuperview().offset(-20)
             $0.bottom.equalToSuperview()
         }
+    }
+    
+    func configure() {
+        guard let comment = comment else { return }
+        let viewModel = CommentViewModel(comment: comment)
+        
+        profileImageView.sd_setImage(with: viewModel.profileImageURL)
+        writerNameLabel.text = viewModel.writerName
+        writeDateLabel.text = viewModel.writeDate
+        commentLabel.text = comment.caption
     }
 }

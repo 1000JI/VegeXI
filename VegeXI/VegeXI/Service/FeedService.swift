@@ -14,9 +14,61 @@ struct FeedService {
     static let shared = FeedService()
     private init() { }
     
-    func uploadComment() {
+    func fetchComments(feedID: String, completion: @escaping([Comment]) -> Void) {
+        var comments = [Comment]()
+        
+        REF_FEED_COMMENTS.child(feedID)
+            .observe(.childAdded,
+                     with: { snapshot in
+                        guard let dictionary = snapshot.value as? [String:Any],
+                            let userUid = dictionary["writerUid"] as? String else { return }
+                        UserService.shared.fetchUser(uid: userUid) { user in
+                            let comment = Comment(user: user, dictionary: dictionary)
+                            comments.append(comment)
+                            completion(comments)
+                        }
+                        completion(comments)
+            }) { error in
+                print("DEBUG: ERROR \(error.localizedDescription)")
+        }
+        completion(comments)
+    }
+    
+    func uploadComment(caption: String, feed: Feed, completion: @escaping(Error?, DatabaseReference) -> Void) {
         guard let userUid = UserService.shared.user?.uid else { return }
         
+        let values = [
+            "writerUid": userUid,
+            "timestamp": Int(NSDate().timeIntervalSince1970),
+            "caption": caption
+            ] as [String : Any]
+        
+        REF_FEED_COMMENTS
+            .child(feed.feedID)
+            .childByAutoId()
+            .updateChildValues(values) { (error, ref) in
+                if let error = error {
+                    print("DEBUG: COMMENTS Upload Error \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let commentID = ref.key else { return }
+                REF_USER_COMMENTS
+                    .child(userUid)
+                    .child(feed.feedID)
+                    .updateChildValues([commentID:1]) { (error, ref) in
+                        if let error = error {
+                            print("DEBUG: COMMENTS Upload Error \(error.localizedDescription)")
+                            return
+                        }
+                        
+                        let comments = feed.comments + 1
+                        REF_FEEDS
+                            .child(feed.feedID)
+                            .child("comments")
+                            .setValue(comments, withCompletionBlock: completion)
+                }
+        }
     }
     
     func checkIfUserLikedAndBookmarkFeed(feedID: String, completion: @escaping((Bool, Bool)) -> Void){
