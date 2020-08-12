@@ -11,9 +11,13 @@ import UIKit
 class SharePostViewController: UIViewController {
 
     // MARK: - Properties
-    let sharePostScrollView = SharePostScrollView()
-    let bottomShareButtonBar = FilterViewBottomBar(title: GeneralStrings.share.generateString())
-    let data = MockData.newFilteredList
+    typealias IndexPathSet = Set<IndexPath>
+    private let sharePostScrollView = SharePostScrollView()
+    private let bottomShareButtonBar = FilterViewBottomBar(title: GeneralStrings.share.generateString())
+    private let data = MockData.newFilteredList
+    private lazy var vegeInfoCollectionView = sharePostScrollView.sharePostContentView.vegeTypeInfoView.categoryCollectionView
+    private lazy var categoryCollectionViews = sharePostScrollView.sharePostContentView.categoryViews
+    private var selectedCellInfo = [Int: IndexPathSet]()
     
     
     // MARK: - Lifecycle
@@ -25,7 +29,8 @@ class SharePostViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        sharePostScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 2)
+        let view = sharePostScrollView.sharePostContentView.sharePostSettingSwitchView
+        sharePostScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: view.frame.maxY + 280)
     }
     
 
@@ -36,7 +41,13 @@ class SharePostViewController: UIViewController {
     }
     
     private func setPropertyAttributes() {
-        sharePostScrollView.sharePostContentView.vegeTypeInfoView.categoryCollectionView.delegate = self
+        vegeInfoCollectionView.delegate = self
+        categoryCollectionViews.forEach {
+            $0.collectionView.delegate = self
+        }
+        bottomShareButtonBar.configureBottomBar {
+            self.handleShareButton()
+        }
     }
     
     private func setConstraints() {
@@ -57,7 +68,7 @@ class SharePostViewController: UIViewController {
     
     
     // MARK: - Helpers
-    func getTextSize(collectionView: UICollectionView, indexPath: IndexPath) -> CGSize {
+    private func getTextSize(collectionView: UICollectionView, indexPath: IndexPath) -> CGSize {
         let key = data[collectionView.tag].keys.first!
         let text = data[collectionView.tag][key]![indexPath.item]
         let font = UIFont.spoqaHanSansRegular(ofSize: 13)
@@ -65,18 +76,8 @@ class SharePostViewController: UIViewController {
         let size = (text as NSString).size(withAttributes: fontAttributes as [NSAttributedString.Key : Any])
         return size
     }
-
-}
-
-
-// MARK: - UICollectionViewDelegate
-extension SharePostViewController: UICollectionViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(#function)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+    private func handleShareButton() {
         print(#function)
     }
     
@@ -102,6 +103,26 @@ extension SharePostViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         6
+    }
+    
+}
+
+
+
+// MARK: - UICollectionViewDelegate
+extension SharePostViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? SharePostCollectionViewCell else { print("Guare Activated, \(#function)"); return }
+        cell.isClicked = true
+        selectedCellInfo[collectionView.tag] = [indexPath]
+        print(selectedCellInfo)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+//        selectedCellInfo[collectionView.tag]?.remove(indexPath)
+        guard let cell = collectionView.cellForItem(at: indexPath) as? SharePostCollectionViewCell else { print("Guare Activated, \(#function)"); return }
+        cell.isClicked = false
     }
     
 }

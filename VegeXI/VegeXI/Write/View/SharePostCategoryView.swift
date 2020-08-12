@@ -22,7 +22,7 @@ class SharePostCategoryView: UIView {
     private let underBar = UIView().then {
         $0.backgroundColor = .vegeLightGrayVegeInfoThinBar
     }
-    private lazy var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let flowLayout = AlignedCollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         flowLayout.horizontalAlignment = .leading
@@ -40,11 +40,12 @@ class SharePostCategoryView: UIView {
     
     
     // MARK: - Lifecycle
-    init(title text: String, isFolded: Bool, data: [String]) {
+    init(title text: String, isFolded: Bool, data: [String], tag: Int) {
         super.init(frame: .zero)
         categoryTitle.text = text
         self.isFolded = isFolded
         self.data = data
+        self.tag = tag
         configureUI()
     }
 
@@ -62,7 +63,6 @@ class SharePostCategoryView: UIView {
     private func setPropertyAttributes() {
         collectionView.register(SharePostCollectionViewCell.self, forCellWithReuseIdentifier: SharePostCollectionViewCell.identifier)
         collectionView.dataSource = self
-        collectionView.delegate = self
         collectionView.backgroundColor = .white
     }
     
@@ -155,38 +155,4 @@ extension SharePostCategoryView: UICollectionViewDataSource {
         return cell
     }
     
-}
-
-
-// MARK: - UICollectionViewDelegateFlowLayout
-extension SharePostCategoryView: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let padding: CGFloat = 26
-        let width = getTextSize(indexPath: indexPath).width + padding
-        return CGSize(width: width, height: 29)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        8
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        6
-    }
-    
-}
-
-
-extension SharePostCategoryView: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(self.tag)
-    }
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        
-    }
 }

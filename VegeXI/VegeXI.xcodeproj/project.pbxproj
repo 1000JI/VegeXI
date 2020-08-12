@@ -10,6 +10,7 @@
 		42299CBF24D974AF00AE9253 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42299CBE24D974AF00AE9253 /* SignUpViewController.swift */; };
 		4243D57D24DD290F003F3761 /* SearchHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4243D57C24DD290F003F3761 /* SearchHistoryViewController.swift */; };
 		424C6FF524E38507005859BF /* SharePostCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424C6FF424E38507005859BF /* SharePostCategoryView.swift */; };
+		424C6FF724E437EA005859BF /* SharePostSettingSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424C6FF624E437EA005859BF /* SharePostSettingSwitchView.swift */; };
 		4257EF4224DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257EF4124DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift */; };
 		4257EF4424DC3FF200CFF4C6 /* FakeSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257EF4324DC3FF200CFF4C6 /* FakeSearchBar.swift */; };
 		4257EF4624DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257EF4524DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift */; };
@@ -105,6 +106,7 @@
 		42299CBE24D974AF00AE9253 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4243D57C24DD290F003F3761 /* SearchHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewController.swift; sourceTree = "<group>"; };
 		424C6FF424E38507005859BF /* SharePostCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostCategoryView.swift; sourceTree = "<group>"; };
+		424C6FF624E437EA005859BF /* SharePostSettingSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostSettingSwitchView.swift; sourceTree = "<group>"; };
 		4257EF4124DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSearchNaviBar.swift; sourceTree = "<group>"; };
 		4257EF4324DC3FF200CFF4C6 /* FakeSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSearchBar.swift; sourceTree = "<group>"; };
 		4257EF4524DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryHeaderView.swift; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 				42ABADC524E35DC50094CA9A /* SharePostScrollView.swift */,
 				424C6FF424E38507005859BF /* SharePostCategoryView.swift */,
 				425B461F24E368BE00242D12 /* SharePostVegeTypeView.swift */,
+				424C6FF624E437EA005859BF /* SharePostSettingSwitchView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -696,6 +699,7 @@
 				AF2EE70424D87B4800A956BD /* AuthService.swift in Sources */,
 				42ABADBE24E28CB70094CA9A /* NotificationViewController.swift in Sources */,
 				4267C95524DB1BD900702BAC /* SignUpStrings.swift in Sources */,
+				424C6FF724E437EA005859BF /* SharePostSettingSwitchView.swift in Sources */,
 				4257EF4224DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift in Sources */,
 				42BE29EE24DD322600449221 /* FilterTableViewCell.swift in Sources */,
 				AFF46CAD24D85A00008F118E /* Constants.swift in Sources */,

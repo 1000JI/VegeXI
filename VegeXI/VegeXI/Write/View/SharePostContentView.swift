@@ -24,6 +24,8 @@ class SharePostContentView: UIView {
         $0.textColor = .vegeTextBlackColor
     }
     var categoryViews = [SharePostCategoryView]()
+    let sharePostSettingSwitchView = SharePostSettingSwitchView()
+    
     private let data = MockData.newFilteredList
     
     
@@ -50,7 +52,7 @@ class SharePostContentView: UIView {
     }
     
     private func setConstraints() {
-        [topIndicatorBar, vegeTypeInfoView, categoryLabel].forEach {
+        [topIndicatorBar, vegeTypeInfoView, categoryLabel, sharePostSettingSwitchView].forEach {
             addSubview($0)
         }
         topIndicatorBar.snp.makeConstraints {
@@ -70,6 +72,12 @@ class SharePostContentView: UIView {
             $0.leading.equalToSuperview().inset(20)
         }
         generateCategoryViews()
+        sharePostSettingSwitchView.snp.makeConstraints {
+            let view = categoryViews.last!
+            $0.top.equalTo(view.snp.bottom).offset(8)
+            $0.leading.trailing.equalToSuperview().inset(22)
+            $0.height.equalTo(100)
+        }
     }
     
     private func generateCategoryViews() {
@@ -77,9 +85,7 @@ class SharePostContentView: UIView {
         for index in 1..<count {
             guard let title = data[index].keys.first, let data = self.data[index][title] else { return }
             let isFolded = index == 1 ? false : true
-            let view = SharePostCategoryView(title: title, isFolded: isFolded, data: data).then {
-                $0.tag = index
-            }
+            let view = SharePostCategoryView(title: title, isFolded: isFolded, data: data, tag: index)
             self.addSubview(view)
             if categoryViews.count == 0 {
                 view.snp.makeConstraints {
