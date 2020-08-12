@@ -30,9 +30,9 @@ class SharePostCategoryView: UIView {
         collectionView.tag = self.tag
         return collectionView
     }()
-    var data = [String]()
+    private var data = [String]()
     
-    private var isFolded: Bool = false {
+    var isFolded: Bool = false {
         willSet {
             foldButton.setImage(configureButtonImage(newValue: newValue), for: .normal)
         }
@@ -64,6 +64,7 @@ class SharePostCategoryView: UIView {
         collectionView.register(SharePostCollectionViewCell.self, forCellWithReuseIdentifier: SharePostCollectionViewCell.identifier)
         collectionView.dataSource = self
         collectionView.backgroundColor = .white
+        foldButton.tag = self.tag
     }
     
     private func setConstraints() {

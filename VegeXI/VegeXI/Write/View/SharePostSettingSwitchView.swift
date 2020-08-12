@@ -16,7 +16,9 @@ class SharePostSettingSwitchView: UIView {
         $0.font = UIFont.spoqaHanSansRegular(ofSize: 17)
         $0.textColor = .vegeTextBlackColor
     }
-    private let shareSwitch = UISwitch()
+    private let shareSwitch = UISwitch().then {
+        $0.isOn = true
+    }
     private let shareSubtitle = UILabel().then {
         $0.text = SharePostStrings.shareModeInfo.generateString()
         $0.font = UIFont.spoqaHanSansRegular(ofSize: 10)

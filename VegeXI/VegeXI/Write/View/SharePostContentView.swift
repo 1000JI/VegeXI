@@ -80,12 +80,15 @@ class SharePostContentView: UIView {
         }
     }
     
+    
+    // MARK: - Helpers
     private func generateCategoryViews() {
         let count = data.count
         for index in 1..<count {
             guard let title = data[index].keys.first, let data = self.data[index][title] else { return }
-            let isFolded = index == 1 ? false : true
+            let isFolded = true
             let view = SharePostCategoryView(title: title, isFolded: isFolded, data: data, tag: index)
+            view.foldButton.addTarget(self, action: #selector(handleFoldButtons(_:)), for: .touchUpInside)
             self.addSubview(view)
             if categoryViews.count == 0 {
                 view.snp.makeConstraints {
@@ -102,6 +105,37 @@ class SharePostContentView: UIView {
             }
             categoryViews.append(view)
         }
+    }
+    
+    
+    // MARK: - Selectors
+    @objc
+    private func handleFoldButtons(_ sender: UIButton) {
+        let index = sender.tag - 1
+        let view = categoryViews[index]
+        UIView.animate(withDuration: 0.01) {
+            switch view.isFolded {
+            case true:
+                view.collectionView.snp.updateConstraints {
+                    $0.height.equalTo(0)
+                }
+                view.layoutIfNeeded()
+                view.snp.updateConstraints {
+                    $0.height.equalTo(50)
+                }
+            case false:
+                view.collectionView.snp.updateConstraints {
+                    $0.height.equalTo(90)
+                }
+                view.layoutIfNeeded()
+                view.snp.updateConstraints {
+                    $0.height.equalTo(130)
+                }
+                break
+            }
+            
+        }
+        view.isFolded.toggle()
     }
     
 }
