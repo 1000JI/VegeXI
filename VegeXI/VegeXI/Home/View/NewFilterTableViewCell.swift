@@ -24,7 +24,7 @@ class NewFilterTableViewCell: UITableViewCell {
     private let infoImageView = UIImageView().then {
         $0.clipsToBounds = true
         $0.backgroundColor = .lightGray
-        $0.image = UIImage(named: "VegeInfo")
+        $0.image = UIImage(named: "newVegeInfo")
     }
     
     private var collectionViewData: [String] = []

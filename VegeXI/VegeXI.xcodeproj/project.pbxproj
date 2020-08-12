@@ -9,11 +9,14 @@
 /* Begin PBXBuildFile section */
 		42299CBF24D974AF00AE9253 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42299CBE24D974AF00AE9253 /* SignUpViewController.swift */; };
 		4243D57D24DD290F003F3761 /* SearchHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4243D57C24DD290F003F3761 /* SearchHistoryViewController.swift */; };
+		424C6FF524E38507005859BF /* SharePostCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424C6FF424E38507005859BF /* SharePostCategoryView.swift */; };
 		4257EF4224DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257EF4124DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift */; };
 		4257EF4424DC3FF200CFF4C6 /* FakeSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257EF4324DC3FF200CFF4C6 /* FakeSearchBar.swift */; };
 		4257EF4624DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257EF4524DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift */; };
 		4257EF4A24DD07FD00CFF4C6 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257EF4924DD07FD00CFF4C6 /* MockData.swift */; };
 		4257EF4C24DD0BC700CFF4C6 /* SearchHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257EF4B24DD0BC700CFF4C6 /* SearchHistoryTableViewCell.swift */; };
+		425B462024E368BE00242D12 /* SharePostVegeTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425B461F24E368BE00242D12 /* SharePostVegeTypeView.swift */; };
+		425B462224E3796200242D12 /* SharePostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425B462124E3796200242D12 /* SharePostCollectionViewCell.swift */; };
 		4264F1E124DBEBAA007B3BC2 /* FakeNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4264F1E024DBEBAA007B3BC2 /* FakeNavigationBar.swift */; };
 		4267C94B24DABD3E00702BAC /* FBSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C94A24DABD3E00702BAC /* FBSignInViewController.swift */; };
 		4267C94F24DACA4100702BAC /* SignButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C94E24DACA4100702BAC /* SignButton.swift */; };
@@ -31,6 +34,9 @@
 		42ABADBE24E28CB70094CA9A /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADBD24E28CB70094CA9A /* NotificationViewController.swift */; };
 		42ABADC024E28D070094CA9A /* NotificationViewTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADBF24E28D070094CA9A /* NotificationViewTopBar.swift */; };
 		42ABADC224E292870094CA9A /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADC124E292870094CA9A /* NotificationTableViewCell.swift */; };
+		42ABADC424E2CCAF0094CA9A /* SharePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADC324E2CCAF0094CA9A /* SharePostViewController.swift */; };
+		42ABADC624E35DC50094CA9A /* SharePostScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADC524E35DC50094CA9A /* SharePostScrollView.swift */; };
+		42ABADC824E35EC20094CA9A /* SharePostContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADC724E35EC20094CA9A /* SharePostContentView.swift */; };
 		42BE29EA24DD2E4600449221 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29E924DD2E4600449221 /* FilterViewController.swift */; };
 		42BE29EC24DD307E00449221 /* FilterViewTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29EB24DD307E00449221 /* FilterViewTopBar.swift */; };
 		42BE29EE24DD322600449221 /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29ED24DD322600449221 /* FilterTableViewCell.swift */; };
@@ -98,11 +104,14 @@
 		42299CBD24D93E6A00AE9253 /* VegeXI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VegeXI.entitlements; sourceTree = "<group>"; };
 		42299CBE24D974AF00AE9253 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4243D57C24DD290F003F3761 /* SearchHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewController.swift; sourceTree = "<group>"; };
+		424C6FF424E38507005859BF /* SharePostCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostCategoryView.swift; sourceTree = "<group>"; };
 		4257EF4124DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSearchNaviBar.swift; sourceTree = "<group>"; };
 		4257EF4324DC3FF200CFF4C6 /* FakeSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSearchBar.swift; sourceTree = "<group>"; };
 		4257EF4524DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryHeaderView.swift; sourceTree = "<group>"; };
 		4257EF4924DD07FD00CFF4C6 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		4257EF4B24DD0BC700CFF4C6 /* SearchHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		425B461F24E368BE00242D12 /* SharePostVegeTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostVegeTypeView.swift; sourceTree = "<group>"; };
+		425B462124E3796200242D12 /* SharePostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostCollectionViewCell.swift; sourceTree = "<group>"; };
 		4264F1E024DBEBAA007B3BC2 /* FakeNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeNavigationBar.swift; sourceTree = "<group>"; };
 		4267C94A24DABD3E00702BAC /* FBSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBSignInViewController.swift; sourceTree = "<group>"; };
 		4267C94E24DACA4100702BAC /* SignButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignButton.swift; sourceTree = "<group>"; };
@@ -120,6 +129,9 @@
 		42ABADBD24E28CB70094CA9A /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		42ABADBF24E28D070094CA9A /* NotificationViewTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewTopBar.swift; sourceTree = "<group>"; };
 		42ABADC124E292870094CA9A /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		42ABADC324E2CCAF0094CA9A /* SharePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostViewController.swift; sourceTree = "<group>"; };
+		42ABADC524E35DC50094CA9A /* SharePostScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostScrollView.swift; sourceTree = "<group>"; };
+		42ABADC724E35EC20094CA9A /* SharePostContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostContentView.swift; sourceTree = "<group>"; };
 		42BE29E924DD2E4600449221 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		42BE29EB24DD307E00449221 /* FilterViewTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewTopBar.swift; sourceTree = "<group>"; };
 		42BE29ED24DD322600449221 /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
@@ -323,6 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				AF8E0D5824DD092E00D08D58 /* WriteEmptyController.swift */,
+				42ABADC324E2CCAF0094CA9A /* SharePostViewController.swift */,
 				AF8E0D5C24DD320700D08D58 /* FeedRegisterController.swift */,
 				AF58B5F724E14D7A00BA2224 /* FeedDetailController.swift */,
 			);
@@ -337,6 +350,11 @@
 				AF57570C24E18C8B0018A9FE /* CommentTableViewCell.swift */,
 				AF8A36F824E1A26F001292CA /* DetailHeaderView.swift */,
 				AF8A36FA24E1A9B3001292CA /* DetailHeaderCell.swift */,
+				42ABADC724E35EC20094CA9A /* SharePostContentView.swift */,
+				425B462124E3796200242D12 /* SharePostCollectionViewCell.swift */,
+				42ABADC524E35DC50094CA9A /* SharePostScrollView.swift */,
+				424C6FF424E38507005859BF /* SharePostCategoryView.swift */,
+				425B461F24E368BE00242D12 /* SharePostVegeTypeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -632,9 +650,12 @@
 				4257EF4424DC3FF200CFF4C6 /* FakeSearchBar.swift in Sources */,
 				42BE29F024DD35C900449221 /* FilterTableViewHeader.swift in Sources */,
 				4257EF4C24DD0BC700CFF4C6 /* SearchHistoryTableViewCell.swift in Sources */,
+				424C6FF524E38507005859BF /* SharePostCategoryView.swift in Sources */,
+				42ABADC424E2CCAF0094CA9A /* SharePostViewController.swift in Sources */,
 				AF8A36FB24E1A9B3001292CA /* DetailHeaderCell.swift in Sources */,
 				AF6652D224DC2F5A005FC74B /* MainTableViewCell.swift in Sources */,
 				4267C95924DB1D3D00702BAC /* SignInStrings.swift in Sources */,
+				42ABADC624E35DC50094CA9A /* SharePostScrollView.swift in Sources */,
 				AF58B5FA24E1576300BA2224 /* DetailCustomBar.swift in Sources */,
 				AF58B5FC24E169E100BA2224 /* CustomInputAccessoryView.swift in Sources */,
 				AF57570D24E18C8B0018A9FE /* CommentTableViewCell.swift in Sources */,
@@ -654,9 +675,11 @@
 				AF561E4224D9CEE80063D51F /* UserService.swift in Sources */,
 				AFC1185324D3AEE1005B2E44 /* AppDelegate.swift in Sources */,
 				AF561E4024D9CCB80063D51F /* Extensions.swift in Sources */,
+				425B462224E3796200242D12 /* SharePostCollectionViewCell.swift in Sources */,
 				4264F1E124DBEBAA007B3BC2 /* FakeNavigationBar.swift in Sources */,
 				AF5634DC24DA64F200A606EA /* HomeViewController.swift in Sources */,
 				AF6652CA24DBFD71005FC74B /* CustomMainNavigationBar.swift in Sources */,
+				42ABADC824E35EC20094CA9A /* SharePostContentView.swift in Sources */,
 				42ABADBA24E16D4E0094CA9A /* FilterCollectionViewCell.swift in Sources */,
 				AF8E0D5D24DD320700D08D58 /* FeedRegisterController.swift in Sources */,
 				42ABADB624E14FFF0094CA9A /* VegetarianInfoView.swift in Sources */,
@@ -678,6 +701,7 @@
 				AFF46CAD24D85A00008F118E /* Constants.swift in Sources */,
 				AF6652CE24DC132C005FC74B /* CategoryCell.swift in Sources */,
 				AF8E0D6224DD5D5800D08D58 /* FeedService.swift in Sources */,
+				425B462024E368BE00242D12 /* SharePostVegeTypeView.swift in Sources */,
 				AF8A36F924E1A26F001292CA /* DetailHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

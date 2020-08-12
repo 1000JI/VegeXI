@@ -89,6 +89,7 @@ extension UIColor {
     static let tabbarGreenSelectColor = UIColor(rgb: 0x156941)
     static let vegeSelectedGreen = UIColor(rgb: 0x0AB682)
     static let vegeCommentDateColor = UIColor(rgb: 0xB7B7B7)
+    static let vegeLightGrayVegeInfoThinBar = UIColor(rgb: 0xE5E5E5)
 }
 
 extension UIFont {

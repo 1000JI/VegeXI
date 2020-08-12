@@ -20,6 +20,7 @@ enum GeneralStrings {
     case filterBottomViewTitle
     case notification
     case emptyNotification
+    case share
     
     func generateString() -> String {
         switch self {
@@ -45,6 +46,29 @@ enum GeneralStrings {
             return "알림"
         case .emptyNotification:
             return "알림이 없습니다"
+        case .share:
+            return "공유하기"
+        }
+    }
+}
+
+
+enum SharePostStrings {
+    case vegeType
+    case category
+    case setShareMode
+    case shareModeInfo
+    
+    func generateString() -> String {
+        switch self {
+        case .vegeType:
+            return "이 글의 채식타입"
+        case .category:
+            return "카테고리"
+        case .setShareMode:
+            return "공개설정"
+        case .shareModeInfo:
+            return "* 공개설정을 하지 않은 글은 마이페이지에서 확인할 수 있습니다."
         }
     }
 }

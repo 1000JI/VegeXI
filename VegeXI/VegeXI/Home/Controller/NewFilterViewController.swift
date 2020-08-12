@@ -13,7 +13,7 @@ class NewFilterViewController: UIViewController {
     // MARK: - Properties
     let topBar = FilterViewTopBar()
     let filterTableView = UITableView(frame: .zero, style: .grouped)
-    let bottomBar = FilterViewBottomBar()
+    let bottomBar = FilterViewBottomBar(title: GeneralStrings.filterBottomViewTitle.generateString())
     typealias setIndexPath = Set<IndexPath>
     
     var selectedCells: [Int: setIndexPath] = [:] {
@@ -71,6 +71,7 @@ class NewFilterViewController: UIViewController {
     
     // MARK: - Helpers
     private func closeFilterView() {
+        present(SharePostViewController(), animated: true)
         print(#function)
     }
     
