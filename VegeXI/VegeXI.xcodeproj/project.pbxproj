@@ -352,12 +352,12 @@
 				AF57570C24E18C8B0018A9FE /* CommentTableViewCell.swift */,
 				AF8A36F824E1A26F001292CA /* DetailHeaderView.swift */,
 				AF8A36FA24E1A9B3001292CA /* DetailHeaderCell.swift */,
+				424C6FF424E38507005859BF /* SharePostCategoryView.swift */,
 				42ABADC724E35EC20094CA9A /* SharePostContentView.swift */,
 				425B462124E3796200242D12 /* SharePostCollectionViewCell.swift */,
 				42ABADC524E35DC50094CA9A /* SharePostScrollView.swift */,
-				424C6FF424E38507005859BF /* SharePostCategoryView.swift */,
-				425B461F24E368BE00242D12 /* SharePostVegeTypeView.swift */,
 				424C6FF624E437EA005859BF /* SharePostSettingSwitchView.swift */,
+				425B461F24E368BE00242D12 /* SharePostVegeTypeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

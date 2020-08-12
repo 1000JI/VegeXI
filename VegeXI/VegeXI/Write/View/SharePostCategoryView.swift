@@ -15,8 +15,9 @@ class SharePostCategoryView: UIView {
         $0.font = UIFont.spoqaHanSansBold(ofSize: 14)
         $0.textColor = .vegeTextBlackColor
     }
-    let foldButton = UIButton().then {
-        let image = UIImage(systemName: "chevron.down")?.withTintColor(.vegeTextBlackColor, renderingMode: .alwaysOriginal)
+    lazy var foldButton = UIButton().then {
+        let image = configureButtonImage(newValue: isFolded)
+//        let image = UIImage(systemName: "chevron.down")?.withTintColor(.vegeTextBlackColor, renderingMode: .alwaysOriginal)
         $0.setImage(image, for: .normal)
     }
     private let underBar = UIView().then {

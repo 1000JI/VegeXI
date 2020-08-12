@@ -94,13 +94,19 @@ class SharePostContentView: UIView {
                 view.snp.makeConstraints {
                     $0.top.equalTo(categoryLabel.snp.bottom).offset(12)
                     $0.leading.trailing.equalToSuperview().inset(20)
-                    $0.height.equalTo(130)
+                    $0.height.equalTo(50)
+                }
+                view.collectionView.snp.updateConstraints {
+                    $0.height.equalTo(0)
                 }
             } else {
                 view.snp.makeConstraints {
                     $0.top.equalTo(categoryViews.last!.snp.bottom).offset(12)
                     $0.leading.trailing.equalToSuperview().inset(20)
-                    $0.height.equalTo(130)
+                    $0.height.equalTo(50)
+                }
+                view.collectionView.snp.updateConstraints {
+                    $0.height.equalTo(0)
                 }
             }
             categoryViews.append(view)
@@ -117,19 +123,19 @@ class SharePostContentView: UIView {
             switch view.isFolded {
             case true:
                 view.collectionView.snp.updateConstraints {
-                    $0.height.equalTo(0)
-                }
-                view.layoutIfNeeded()
-                view.snp.updateConstraints {
-                    $0.height.equalTo(50)
-                }
-            case false:
-                view.collectionView.snp.updateConstraints {
                     $0.height.equalTo(90)
                 }
                 view.layoutIfNeeded()
                 view.snp.updateConstraints {
                     $0.height.equalTo(130)
+                }
+            case false:
+                view.collectionView.snp.updateConstraints {
+                    $0.height.equalTo(0)
+                }
+                view.layoutIfNeeded()
+                view.snp.updateConstraints {
+                    $0.height.equalTo(50)
                 }
                 break
             }

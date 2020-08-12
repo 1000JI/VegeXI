@@ -27,8 +27,8 @@ class SharePostViewController: UIViewController {
         configureUI()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         let view = sharePostScrollView.sharePostContentView.sharePostSettingSwitchView
         sharePostScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: view.frame.maxY + 280)
     }
