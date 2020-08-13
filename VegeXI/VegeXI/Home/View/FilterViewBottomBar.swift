@@ -12,7 +12,6 @@ class FilterViewBottomBar: UIView {
     
     // MARK: - Properties
     let titleLabel = UILabel().then {
-        $0.text = GeneralStrings.filterBottomViewTitle.generateString()
         $0.font = UIFont.spoqaHanSansBold(ofSize: 14)
         $0.textColor = .white
     }
@@ -20,9 +19,10 @@ class FilterViewBottomBar: UIView {
     
     
     // MARK: - Lifecycle
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .vegeSelectedGreend
+    init(title text: String) {
+        super.init(frame: .zero)
+        titleLabel.text = text
+        backgroundColor = .vegeSelectedGreen
         configureUI()
         addTapGesture()
     }

@@ -21,6 +21,7 @@ class FakeSearchBar: UIView {
     let searchTextField = UITextField().then {
         $0.font = UIFont.spoqaHanSansBold(ofSize: 14)
         $0.textColor = .vegeTextBlackColor
+        $0.returnKeyType = .search
     }
     private let searchFieldPlaceHolder = UILabel().then {
         $0.text = GeneralStrings.searchFieldPlaceholder.generateString()
@@ -101,5 +102,6 @@ class FakeSearchBar: UIView {
     // MARK: - Selectors
     @objc private func handleTapGesture(_ sender: UITapGestureRecognizer) {
         searchTextField.text = ""
+        _ = searchTextField.delegate?.textFieldShouldClear?(searchTextField)
     }
 }

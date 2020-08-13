@@ -16,6 +16,8 @@ class MainTabBarController: UITabBarController {
         didSet { fetchUser() }
     }
     
+    var registerButton: UIButton!
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -43,7 +45,13 @@ class MainTabBarController: UITabBarController {
             self.showLoader(false)
             
             UserService.shared.user = user
-            print(#function, UserService.shared.user ?? "findUser")
+        }
+    }
+    
+    override var hidesBottomBarWhenPushed: Bool {
+        didSet {
+            registerButton.isHidden = hidesBottomBarWhenPushed
+            view.layoutIfNeeded()
         }
     }
     
@@ -55,10 +63,11 @@ class MainTabBarController: UITabBarController {
         let naviHome = UINavigationController(rootViewController: homeViewController)
         naviHome.tabBarItem = UITabBarItem(
             title: "홈",
-            image: UIImage(systemName: "house"),
-            selectedImage: nil)
+            image: UIImage(named: "tabbar_Home_Default"),
+            selectedImage: UIImage(named: "tabbar_Home_Checked"))
         
-        let writeViewController = UIViewController()
+        let writeViewController = WriteEmptyController()
+        writeViewController.returnMethod = clickedWriteTabbar
         let naviWrite = UINavigationController(rootViewController: writeViewController)
         naviWrite.tabBarItem = UITabBarItem(
             title: "글쓰기",
@@ -69,8 +78,8 @@ class MainTabBarController: UITabBarController {
         let naviMyPage = UINavigationController(rootViewController: myPageViewController)
         naviMyPage.tabBarItem = UITabBarItem(
             title: "마이페이지",
-            image: UIImage(systemName: "person"),
-            selectedImage: nil)
+            image: UIImage(named: "tabbar_MyPage_Default"),
+            selectedImage: UIImage(named: "tabbar_MyPage_Checked"))
         
         viewControllers = [naviHome, naviWrite, naviMyPage]
         
@@ -97,7 +106,7 @@ class MainTabBarController: UITabBarController {
     
     func setupMiddleButton() {
         let buttonSize: CGFloat = 52
-        let registerButton = UIButton(
+        registerButton = UIButton(
             frame: CGRect(
                 x: 0, y: 0,
                 width: buttonSize, height: buttonSize))
@@ -118,7 +127,16 @@ class MainTabBarController: UITabBarController {
     
     // MARK: - Actions
     
-    @objc private func registerButtonAction(sender: UIButton) {
+    @objc private func registerButtonAction(sender: UIButton?) {
         selectedIndex = 0
+        
+        let controller = FeedWriteController()
+        let naviContoller = UINavigationController(rootViewController: controller)
+        naviContoller.modalPresentationStyle = .fullScreen
+        present(naviContoller, animated: true)
+    }
+    
+    func clickedWriteTabbar() {
+        registerButtonAction(sender: nil)
     }
 }

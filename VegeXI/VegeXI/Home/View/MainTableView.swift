@@ -12,14 +12,23 @@ class MainTableView: UITableView {
     
     // MARK: - Properties
     
+    var feeds = [Feed]() {
+        didSet { reloadData() }
+    }
+    
     private let headerViewHeight: CGFloat = 56
-    private let cellHeight: CGFloat = 500
+    private let textCellHeight: CGFloat = 168
+    private let picAndTextCellHeight: CGFloat = 500
     
     private let sortTitleLabel = UILabel()
     private let sortImageView = UIImageView()
     
     private let filterTitleLabel = UILabel()
     private let filterImageView = UIImageView()
+    
+    var handleSortTapped: (() -> Void)?
+    var handleFilterTapped: (() -> Void)?
+    var handleCommentTapped: ((Feed) -> Void)?
     
     private lazy var headerView = UIView().then {
         $0.backgroundColor = .white
@@ -29,12 +38,16 @@ class MainTableView: UITableView {
             filterName: "최신순",
             filterImageView: sortImageView,
             imageName: "feed_DownButton")
+        let sortTapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedSortButton))
+        sortStack.addGestureRecognizer(sortTapGesture)
         
         let filterStack = makeFilterView(
             filterLabel: filterTitleLabel,
             filterName: "필터",
             filterImageView: filterImageView,
             imageName: "feed_PlusButton")
+        let filterTapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedFilterButton))
+        filterStack.addGestureRecognizer(filterTapGesture)
         
         $0.addSubview(sortStack)
         $0.addSubview(filterStack)
@@ -61,12 +74,61 @@ class MainTableView: UITableView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    // MARK: - Seletors
+    
+    @objc func tappedSortButton() {
+        handleSortTapped?()
+    }
+    
+    @objc func tappedFilterButton() {
+        handleFilterTapped?()
+    }
+    
+    // MARK: - Action
+    
+    func tappedLikeButton(cell: MainTableViewCell) {
+        guard let feed = cell.feed else { return }
+        
+        FeedService.shared.likeFeed(feed: feed) { (error, ref) in
+            cell.feed?.didLike.toggle()
+            let likes = feed.didLike ? feed.likes - 1 : feed.likes + 1
+            cell.feed?.likes = likes
+            
+            let row = self.indexPath(for: cell)!.row
+            self.feeds[row].didLike = cell.feed?.didLike ?? false
+            self.feeds[row].likes = cell.feed?.likes ?? 0
+        }
+        
+    }
+    
+    func tappedCommentButton(cell: MainTableViewCell) {
+        guard let feed = cell.feed else { return }
+        handleCommentTapped?(feed)
+    }
+    
+    func tappedBookmarkButton(cell: MainTableViewCell) {
+        guard let feed = cell.feed else { return }
+        
+        FeedService.shared.bookmarkFeed(feed: feed) { (error, ref) in
+            if let error = error {
+                print("DEBUG: Bookmark Tapped Error \(error.localizedDescription)")
+            }
+            
+            cell.feed?.didBookmark.toggle()
+            
+            let row = self.indexPath(for: cell)!.row
+            self.feeds[row].didBookmark = cell.feed?.didBookmark ?? false
+        }
+    }
+    
+    
     // MARK: - Helpers
     
     func configureTableView() {
         backgroundColor = .white
         separatorStyle = .none
-        allowsSelection = false
+        allowsSelection = true
         dataSource = self
         delegate = self
         
@@ -98,12 +160,15 @@ class MainTableView: UITableView {
 
 extension MainTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return feeds.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier, for: indexPath) as! MainTableViewCell
-        
+        cell.feed = feeds[indexPath.row]
+        cell.tappedLikeButton = tappedLikeButton(cell:)
+        cell.tappedCommentButton = tappedCommentButton(cell:)
+        cell.tappedBookmarkButton = tappedBookmarkButton(cell:)
         return cell
     }
 }
@@ -113,7 +178,8 @@ extension MainTableView: UITableViewDataSource {
 
 extension MainTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellHeight
+        return feeds[indexPath.row].feedType == .textType ?
+            textCellHeight : picAndTextCellHeight
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -122,5 +188,12 @@ extension MainTableView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return headerViewHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! MainTableViewCell
+        guard let feed = cell.feed else { return }
+        handleCommentTapped?(feed)
+        tableView.selectRow(at: nil, animated: false, scrollPosition: .none)
     }
 }

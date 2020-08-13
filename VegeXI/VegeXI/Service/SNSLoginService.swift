@@ -146,26 +146,27 @@ final class AppleLoginService {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             // Create an account in your system.
             let userIdentifier = appleIDCredential.user
+            let filteredIdentifier = userIdentifier.filter { $0 != "." }
             let userFirstName = appleIDCredential.fullName?.givenName ?? "No Info"
             let userLastName = appleIDCredential.fullName?.familyName ?? "No Info"
             let userEmail = appleIDCredential.email ?? "No Info"
-            print(userIdentifier, userFirstName, userLastName, userEmail)
             
+            print(userIdentifier)
             
             let appleIDProvider = ASAuthorizationAppleIDProvider()
             appleIDProvider.getCredentialState(forUserID: userIdentifier) { (credentialState, error) in
                 switch credentialState {
                 case .authorized:
-                    // The Apple ID credential is valid. Show Home UI Here
+//                    The Apple ID credential is valid. Show Home UI Here
                     print("authorized")
                     break
                 case .revoked:
-                    // The Apple ID credential is revoked. Show SignIn UI Here.
+//                    The Apple ID credential is revoked. Show SignIn UI Here.
                     print("revoked")
                     break
                 case .notFound:
+//                    No credential was found. Show SignIn UI Here.
                     print("notFound")
-                    // No credential was found. Show SignIn UI Here.
                     break
                 default: break
                 }
@@ -174,7 +175,7 @@ final class AppleLoginService {
             let authModel = AuthModel(
                 email: userEmail,
                 nickname: "\(userLastName)\(userFirstName)",
-                uuid: userIdentifier,
+                uuid: filteredIdentifier,
                 loginType: .apple)
             print(authModel)
 
@@ -203,8 +204,6 @@ final class GoogleLoginService {
             if let error = error {
                 print(error.localizedDescription)
             } else {
-                print("Login Successful")
-                
                 guard let uuid = Auth.auth().currentUser?.uid else { return }
                 guard let email = user.profile.email else { return }
                 guard let name = user.profile.name else { return }
@@ -226,5 +225,29 @@ final class BasicLoginService {
     
     func registerBasicAuth() {
         
+    }
+    
+    // Google 로그인
+    func createUser (errorHandler: @escaping (Error) -> (), email: String?, nickname: String?, password: String?, dismiss view: UIViewController) {
+        guard let email = email else { return }
+        guard let nickname = nickname else { return }
+        guard let password = password else { return }
+        Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+            if let error = error {
+                errorHandler(error)
+            } else {
+                guard let authResult = authResult else { return print("No Auth Result") }
+                let uid = authResult.user.uid
+                let email = email
+                let nickname = nickname
+
+                let authModel = AuthModel(
+                    email: email,
+                    nickname: nickname,
+                    uuid: uid,
+                    loginType: .basic)
+                AuthService.shared.authServiceUser(authData: authModel)
+            }
+        }
     }
 }

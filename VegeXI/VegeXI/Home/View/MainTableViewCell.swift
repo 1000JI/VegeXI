@@ -17,6 +17,13 @@ class MainTableViewCell: UITableViewCell {
     private let defaultSidePadding: CGFloat = 20
     private let buttonSize: CGFloat = 34
     
+    var tappedLikeButton: ((MainTableViewCell) -> Void)?
+    var tappedCommentButton: ((MainTableViewCell) -> Void)?
+    var tappedBookmarkButton: ((MainTableViewCell) -> Void)?
+    
+    var feed: Feed? {
+        didSet { configure() }
+    }
     
     // Views
     
@@ -35,10 +42,18 @@ class MainTableViewCell: UITableViewCell {
     }
     
     private let writeDateLabel = UILabel().then {
-        $0.text = "2020.08.08"
+        $0.text = "2020.01.01"
         $0.textColor = .vegeCategoryTextColor
         $0.font = UIFont.spoqaHanSansRegular(ofSize: 10)
     }
+    
+    private lazy var writeStack = UIStackView(arrangedSubviews: [
+        writerLabel, writeDateLabel
+    ])
+    
+    private lazy var profileStack = UIStackView(arrangedSubviews: [
+        profileImageView, writeStack
+    ])
     
     private let moreButton = UIButton(type: .system).then {
         let image = UIImage(named: "cell_MoreButton")?.withRenderingMode(.alwaysOriginal)
@@ -59,11 +74,11 @@ class MainTableViewCell: UITableViewCell {
     }
     
     private lazy var feedImageView = UIImageView().then {
-        $0.backgroundColor = .systemIndigo
+        $0.backgroundColor = .white
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 8
         $0.clipsToBounds = true
-        $0.image = UIImage(named: "peed_Example")
+        $0.image = UIImage(named: "feed_Example")
         
         $0.addSubview(moreCountLabelBackView)
         $0.addSubview(moreImageCountLabel)
@@ -75,38 +90,44 @@ class MainTableViewCell: UITableViewCell {
         }
         
         moreImageCountLabel.snp.makeConstraints {
-            $0.trailing.equalToSuperview().offset(-22)
-            $0.bottom.equalToSuperview().offset(-12)
+            $0.top.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-20)
         }
     }
     
     private let feedTitleLabel = UILabel().then {
-        $0.text = "[비건 브랜드] 멜릭서 립밤 추천드려요!"
+        $0.text = "제목"
         $0.textColor = .vegeTextBlackColor
         $0.font = UIFont.spoqaHanSansBold(ofSize: 16)
     }
     
     private let feedContentsLabel = UILabel().then {
-        $0.text = "립밤마저도 비건 립밤이라니 평소 비건에 관심 있으셨던 분들께 추천 드리고파요:) 케이스도 깔끔하고 립밤도 끈적이지 않아서 수시로 바르기도 편합니다."
+        $0.text = "컨텐츠 내용"
         $0.textColor = .vegeTextBlackColor
         $0.font = UIFont.spoqaHanSansRegular(ofSize: 12)
         $0.numberOfLines = 2
     }
     
-    private let heartButton = UIButton(type: .system).then {
-        $0.setImage(UIImage(named: "peed_Heart"), for: .normal)
+    private lazy var feedContentsStack = UIStackView(arrangedSubviews: [
+        feedTitleLabel, feedContentsLabel
+    ])
+    
+    private lazy var likeButton = UIButton(type: .system).then {
+        $0.setImage(UIImage(named: "feed_Heart"), for: .normal)
         $0.tintColor = .vegeTextBlackColor
+        $0.addTarget(self, action: #selector(tappedLikeButton(_:)), for: .touchUpInside)
     }
     
-    private let heartCountLabel = UILabel().then {
+    private let likesCountLabel = UILabel().then {
         $0.text = "12"
         $0.textColor = .vegeTextBlackColor
         $0.font = UIFont.spoqaHanSansRegular(ofSize: 11)
     }
     
-    private let commentButton = UIButton(type: .system).then {
-        $0.setImage(UIImage(named: "peed_Comment"), for: .normal)
+    private lazy var commentButton = UIButton(type: .system).then {
+        $0.setImage(UIImage(named: "feed_Comment"), for: .normal)
         $0.tintColor = .vegeTextBlackColor
+        $0.addTarget(self, action: #selector(tappedCommentButton(_:)), for: .touchUpInside)
     }
     
     private let commentCountLabel = UILabel().then {
@@ -115,9 +136,10 @@ class MainTableViewCell: UITableViewCell {
         $0.font = UIFont.spoqaHanSansRegular(ofSize: 11)
     }
     
-    private let bookmarkButton = UIButton(type: .system).then {
-        $0.setImage(UIImage(named: "peed_Bookmark_Check"), for: .normal)
+    private lazy var bookmarkButton = UIButton(type: .system).then {
+        $0.setImage(UIImage(named: "feed_Bookmark"), for: .normal)
         $0.tintColor = .vegeTextBlackColor
+        $0.addTarget(self, action: #selector(tappedBookmarkButton(_:)), for: .touchUpInside)
     }
     
     
@@ -138,32 +160,37 @@ class MainTableViewCell: UITableViewCell {
         moreCountLabelBackView.layer.cornerRadius = moreCountLabelBackView.frame.height / 2
     }
     
+    // MARK: - Selectors
+    
+    @objc func tappedLikeButton(_ sender: UIButton) {
+        tappedLikeButton?(self)
+    }
+    
+    @objc func tappedCommentButton(_ sender: UIButton) {
+        tappedCommentButton?(self)
+    }
+    
+    @objc func tappedBookmarkButton(_ sender: UIButton) {
+        tappedBookmarkButton?(self)
+    }
+    
+    
     // MARK: - Helpers
     
     func configureUI() {
         backgroundColor = .white
         
-        let writeStack = UIStackView(arrangedSubviews: [
-            writerLabel, writeDateLabel
-        ])
         writeStack.axis = .vertical
         
-        let profileStack = UIStackView(arrangedSubviews: [
-            profileImageView, writeStack
-        ])
         profileStack.axis = .horizontal
         profileStack.spacing = 8
         profileStack.alignment = .center
         
-        
-        let feedContentsStack = UIStackView(arrangedSubviews: [
-            feedTitleLabel, feedContentsLabel
-        ])
         feedContentsStack.axis = .vertical
         feedContentsStack.spacing = 4
         
         
-        [profileStack, moreButton, feedImageView, feedContentsStack, heartButton, heartCountLabel, commentButton, commentCountLabel, bookmarkButton].forEach {
+        [profileStack, moreButton, feedImageView, feedContentsStack, likeButton, likesCountLabel, commentButton, commentCountLabel, bookmarkButton].forEach {
             addSubview($0)
         }
         
@@ -190,35 +217,83 @@ class MainTableViewCell: UITableViewCell {
             $0.trailing.equalToSuperview().offset(-defaultSidePadding)
         }
         
-        heartButton.snp.makeConstraints {
+        likeButton.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(12)
-            $0.bottom.equalToSuperview().offset(-8)
+            $0.top.equalTo(feedContentsStack.snp.bottom).offset(8)
             $0.width.height.equalTo(buttonSize)
         }
         
-        heartCountLabel.snp.makeConstraints {
-            $0.leading.equalTo(heartButton.snp.trailing).offset(-4)
-            $0.centerY.equalTo(heartButton.snp.centerY)
+        likesCountLabel.snp.makeConstraints {
+            $0.leading.equalTo(likeButton.snp.trailing).offset(-4)
+            $0.centerY.equalTo(likeButton.snp.centerY)
             $0.width.equalTo(24)
         }
         
         commentButton.snp.makeConstraints {
-            $0.leading.equalTo(heartCountLabel.snp.trailing).offset(8)
-            $0.centerY.equalTo(heartButton.snp.centerY)
+            $0.leading.equalTo(likesCountLabel.snp.trailing).offset(8)
+            $0.centerY.equalTo(likeButton.snp.centerY)
             $0.width.height.equalTo(buttonSize)
         }
         
         commentCountLabel.snp.makeConstraints {
             $0.leading.equalTo(commentButton.snp.trailing).offset(-4)
-            $0.centerY.equalTo(heartButton.snp.centerY)
+            $0.centerY.equalTo(likeButton.snp.centerY)
             $0.width.equalTo(24)
         }
         
         bookmarkButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().offset(-10)
-            $0.centerY.equalTo(heartButton.snp.centerY)
+            $0.centerY.equalTo(likeButton.snp.centerY)
             $0.width.height.equalTo(buttonSize)
         }
+    }
+    
+    func configure() {
+        guard let feed = feed else { return }
+        let viewModel = FeedViewModel(feed: feed)
+        profileImageView.sd_setImage(with: viewModel.profileImageURL)
+        writerLabel.text = feed.writerUser.nickname
+        writeDateLabel.text = viewModel.writeDate
+        feedTitleLabel.text = feed.title
+        feedContentsLabel.text = feed.content
+        likeButton.setImage(viewModel.likeImage, for: .normal)
+        likesCountLabel.text = "\(feed.likes)"
+        commentCountLabel.text = "\(feed.comments)"
+        bookmarkButton.setImage(viewModel.bookmarkImage, for: .normal)
         
+        switch feed.feedType {
+        case .textType:
+            feedImageHiddenConstraintSetup(isHidden: true)
+            return
+        case .picAndTextType:
+            feedImageHiddenConstraintSetup(isHidden: false)
+        }
+        
+        moreImageCountLabel.isHidden = viewModel.moreLabelIsHidden
+        moreCountLabelBackView.isHidden = viewModel.moreLabelIsHidden
+        
+        feedImageView.sd_setImage(with: viewModel.titleFeedImageURL)
+        moreImageCountLabel.text = viewModel.moreImageCount
+    }
+    
+    func feedImageHiddenConstraintSetup(isHidden: Bool) {
+        feedImageView.isHidden = isHidden
+        feedContentsStack.snp.removeConstraints()
+        feedContentsStack.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(defaultSidePadding)
+            $0.trailing.equalToSuperview().offset(-defaultSidePadding)
+        }
+        
+        switch isHidden {
+        case true:
+            feedContentsStack.snp.makeConstraints {
+                $0.top.equalTo(profileStack.snp.bottom).offset(12)
+            }
+        case false:
+            feedContentsStack.snp.makeConstraints {
+                $0.top.equalTo(feedImageView.snp.bottom).offset(8)
+            }
+        }
+        layoutIfNeeded()
     }
 }

@@ -11,28 +11,49 @@ import UIKit
 class SearchHistoryViewController: UIViewController {
 
     // MARK: - Properties
+    var feeds: [Feed]?
+    var searchFeeds = [Feed]() {
+        didSet { mainTableView.feeds = searchFeeds }
+    }
+    
     private let fakeSearchNaviBar = FakeSearchNaviBar()
     private let historyTableView = UITableView(frame: .zero, style: .plain).then {
         $0.separatorStyle = .none
         $0.rowHeight = 42
     }
     
+    private let categoryView = CategoryCollectionView().then {
+        $0.isHidden = true
+    }
+    private lazy var mainTableView = MainTableView(frame: .zero, style: .grouped).then {
+        $0.isHidden = true
+        $0.handleCommentTapped = tappedCommentEvent(feed:)
+    }
+    private let refreshControl = UIRefreshControl()
+    
     
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        showSearchTableView(isShow: false)
+    }
+    
     
     // MARK: - UI
     private func configureUI() {
+        view.backgroundColor = .white
         setPropertyAttributes()
         setConstraints()
     }
 
     private func setConstraints() {
-        [fakeSearchNaviBar, historyTableView].forEach {
+        [fakeSearchNaviBar, historyTableView, categoryView, mainTableView].forEach {
             view.addSubview($0)
         }
         
@@ -43,6 +64,15 @@ class SearchHistoryViewController: UIViewController {
         historyTableView.snp.makeConstraints {
             $0.top.equalTo(fakeSearchNaviBar.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
+        }
+        categoryView.snp.makeConstraints {
+            $0.top.equalTo(fakeSearchNaviBar.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(56)
+        }
+        mainTableView.snp.makeConstraints {
+            $0.top.equalTo(categoryView.snp.bottom)
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
@@ -57,6 +87,35 @@ class SearchHistoryViewController: UIViewController {
     
     
     // MARK: - Helpers
+    private func showSearchTableView(isShow: Bool) {
+        if isShow {
+            historyTableView.isHidden = true
+            categoryView.isHidden = false
+            mainTableView.isHidden = false
+        } else {
+            historyTableView.isHidden = false
+            categoryView.isHidden = true
+            mainTableView.isHidden = true
+            
+            let indexPath = IndexPath(item: 0, section: 0)
+            categoryView.collectionView.selectItem(
+                at: indexPath,
+                animated: false,
+                scrollPosition: .centeredHorizontally)
+            categoryView.collectionView(
+                categoryView.collectionView,
+                didSelectItemAt: indexPath)
+        }
+    }
+    
+    // MARK: - Actions
+    
+    private func tappedCommentEvent(feed: Feed) {
+        let controller = FeedDetailController()
+        controller.feed = feed
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
     private func handleDeleteButton(cellNumber: Int) {
         removeData(index: cellNumber)
     }
@@ -78,7 +137,7 @@ class SearchHistoryViewController: UIViewController {
     }
     
     private func handleLeftBackBarButton() {
-        print(#function)
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -121,6 +180,9 @@ extension SearchHistoryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = historyTableView.cellForRow(at: indexPath) as? SearchHistoryTableViewCell else { return }
         fakeSearchNaviBar.fakeSearchBar.currentText = cell.leftLable.text!
+        
+        _ = textFieldShouldReturn(fakeSearchNaviBar.fakeSearchBar.searchTextField)
+        
         fakeSearchNaviBar.fakeSearchBar.isSearching = fakeSearchNaviBar.fakeSearchBar.searchTextField.text != "" ? true : false
     }
 }
@@ -128,8 +190,30 @@ extension SearchHistoryViewController: UITableViewDelegate {
 
 // MARK: - UITextFieldDelegate
 extension SearchHistoryViewController: UITextFieldDelegate {
-    
     func textFieldDidChangeSelection(_ textField: UITextField) {
         fakeSearchNaviBar.fakeSearchBar.isSearching = fakeSearchNaviBar.fakeSearchBar.searchTextField.text != "" ? true : false
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let text = textField.text?.lowercased() else { return false }
+        view.endEditing(true)
+        
+        if text.isEmpty {
+            showSearchTableView(isShow: false)
+        } else {
+            showSearchTableView(isShow: true)
+            
+            guard let feeds = feeds else { return false }
+            searchFeeds = feeds.filter {
+                $0.title.lowercased().contains(text) ||
+                    $0.content.lowercased().contains(text)
+            }
+        }
+        return true
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        showSearchTableView(isShow: false)
+        return true
     }
 }

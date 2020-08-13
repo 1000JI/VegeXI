@@ -15,17 +15,26 @@ class HomeViewController: UIViewController {
     private let homeCustomNavigationBar = CustomMainNavigationBar()
     private let categoryView = CategoryCollectionView()
     private let mainTableView = MainTableView(frame: .zero, style: .grouped)
+    private let refreshControl = UIRefreshControl()
+    
+    private var feeds = [Feed]() {
+        didSet { mainTableView.feeds = feeds }
+    }
     
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        configureTableView()
+        configureViewEvent()
+        fetchFeeds()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavi()
+        fetchFeeds()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -42,7 +51,59 @@ class HomeViewController: UIViewController {
     }
     
     
+    // MARK: - API
+    
+    func fetchFeeds() {
+        showLoader(true)
+        FeedService.shared.fetchFeeds { feeds in
+            self.showLoader(false)
+            self.refreshControl.endRefreshing()
+            self.feeds = feeds
+        }
+    }
+    
+    
+    // MARK: - Actions
+    
+    func tappedSearchButton() {
+        let controller = SearchHistoryViewController()
+        controller.feeds = feeds
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func tappedAlertButton() {
+        print(#function)
+    }
+    
+    func tappedSortEvent() {
+        present(UIViewController(), animated: true)
+    }
+    
+    func tappedFilterEvent() {
+        let filterController = FilterViewController()
+        present(filterController, animated: true)
+    }
+    
+    func tappedCommentEvent(feed: Feed) {
+        let controller = FeedDetailController()
+        controller.feed = feed
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    
+    // MARK: - Selectors
+    
+    @objc func handleRefresh() {
+        fetchFeeds()
+    }
+    
+    
     // MARK: - Helpers
+    
+    func configureViewEvent() {
+        homeCustomNavigationBar.tappedSearchButton = tappedSearchButton
+        homeCustomNavigationBar.tappedAlertButton = tappedAlertButton
+    }
     
     func configureUI() {
         view.backgroundColor = .white
@@ -73,5 +134,13 @@ class HomeViewController: UIViewController {
     
     func configureNavi() {
         navigationController?.navigationBar.isHidden = true
+    }
+    
+    func configureTableView() {
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        mainTableView.refreshControl = refreshControl
+        mainTableView.handleSortTapped = tappedSortEvent
+        mainTableView.handleFilterTapped = tappedFilterEvent
+        mainTableView.handleCommentTapped = tappedCommentEvent(feed:)
     }
 }

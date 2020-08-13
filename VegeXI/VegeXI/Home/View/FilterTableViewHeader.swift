@@ -23,6 +23,7 @@ class FilterTableViewHeader: UIView {
     // MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .white
         setConstraints()
     }
     
@@ -41,11 +42,11 @@ class FilterTableViewHeader: UIView {
             addSubview($0)
         }
         leftLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(26)
-            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(0)
+            $0.bottom.equalTo(underBar.snp.top).offset(-10)
         }
         underBar.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.leading.trailing.equalToSuperview().inset(-5)
             $0.bottom.equalToSuperview()
             $0.height.equalTo(1)
         }
