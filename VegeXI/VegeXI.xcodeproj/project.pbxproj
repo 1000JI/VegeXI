@@ -11,6 +11,9 @@
 		4243D57D24DD290F003F3761 /* SearchHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4243D57C24DD290F003F3761 /* SearchHistoryViewController.swift */; };
 		424C6FF524E38507005859BF /* SharePostCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424C6FF424E38507005859BF /* SharePostCategoryView.swift */; };
 		424C6FF724E437EA005859BF /* SharePostSettingSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424C6FF624E437EA005859BF /* SharePostSettingSwitchView.swift */; };
+		424C6FF924E4B5EA005859BF /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424C6FF824E4B5EA005859BF /* MyPageViewController.swift */; };
+		424C6FFB24E4B611005859BF /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424C6FFA24E4B611005859BF /* EditProfileViewController.swift */; };
+		424C6FFD24E4B664005859BF /* MyPageProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424C6FFC24E4B664005859BF /* MyPageProfileView.swift */; };
 		4257EF4224DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257EF4124DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift */; };
 		4257EF4424DC3FF200CFF4C6 /* FakeSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257EF4324DC3FF200CFF4C6 /* FakeSearchBar.swift */; };
 		4257EF4624DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4257EF4524DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift */; };
@@ -19,6 +22,10 @@
 		425B462024E368BE00242D12 /* SharePostVegeTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425B461F24E368BE00242D12 /* SharePostVegeTypeView.swift */; };
 		425B462224E3796200242D12 /* SharePostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425B462124E3796200242D12 /* SharePostCollectionViewCell.swift */; };
 		4264F1E124DBEBAA007B3BC2 /* FakeNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4264F1E024DBEBAA007B3BC2 /* FakeNavigationBar.swift */; };
+		426750B924E4B71100511163 /* MyPagePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426750B824E4B71100511163 /* MyPagePostView.swift */; };
+		426750BB24E4B73300511163 /* MyPageBookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426750BA24E4B73300511163 /* MyPageBookmarkView.swift */; };
+		426750BD24E4B95200511163 /* MyPageTopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426750BC24E4B95200511163 /* MyPageTopBarView.swift */; };
+		426750BF24E4C6A600511163 /* MyPageCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426750BE24E4C6A600511163 /* MyPageCategoryView.swift */; };
 		4267C94B24DABD3E00702BAC /* FBSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C94A24DABD3E00702BAC /* FBSignInViewController.swift */; };
 		4267C94F24DACA4100702BAC /* SignButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C94E24DACA4100702BAC /* SignButton.swift */; };
 		4267C95124DAE51200702BAC /* SignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95024DAE51200702BAC /* SignView.swift */; };
@@ -107,6 +114,9 @@
 		4243D57C24DD290F003F3761 /* SearchHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewController.swift; sourceTree = "<group>"; };
 		424C6FF424E38507005859BF /* SharePostCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostCategoryView.swift; sourceTree = "<group>"; };
 		424C6FF624E437EA005859BF /* SharePostSettingSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostSettingSwitchView.swift; sourceTree = "<group>"; };
+		424C6FF824E4B5EA005859BF /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPageViewController.swift; path = VegeXI/Write/View/MyPageViewController.swift; sourceTree = SOURCE_ROOT; };
+		424C6FFA24E4B611005859BF /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileViewController.swift; path = VegeXI/Write/View/EditProfileViewController.swift; sourceTree = SOURCE_ROOT; };
+		424C6FFC24E4B664005859BF /* MyPageProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPageProfileView.swift; path = VegeXI/Write/View/MyPageProfileView.swift; sourceTree = SOURCE_ROOT; };
 		4257EF4124DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSearchNaviBar.swift; sourceTree = "<group>"; };
 		4257EF4324DC3FF200CFF4C6 /* FakeSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSearchBar.swift; sourceTree = "<group>"; };
 		4257EF4524DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryHeaderView.swift; sourceTree = "<group>"; };
@@ -115,6 +125,10 @@
 		425B461F24E368BE00242D12 /* SharePostVegeTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostVegeTypeView.swift; sourceTree = "<group>"; };
 		425B462124E3796200242D12 /* SharePostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostCollectionViewCell.swift; sourceTree = "<group>"; };
 		4264F1E024DBEBAA007B3BC2 /* FakeNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeNavigationBar.swift; sourceTree = "<group>"; };
+		426750B824E4B71100511163 /* MyPagePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPagePostView.swift; path = VegeXI/Write/View/MyPagePostView.swift; sourceTree = SOURCE_ROOT; };
+		426750BA24E4B73300511163 /* MyPageBookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPageBookmarkView.swift; path = VegeXI/Write/View/MyPageBookmarkView.swift; sourceTree = SOURCE_ROOT; };
+		426750BC24E4B95200511163 /* MyPageTopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPageTopBarView.swift; path = VegeXI/Write/View/MyPageTopBarView.swift; sourceTree = SOURCE_ROOT; };
+		426750BE24E4C6A600511163 /* MyPageCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPageCategoryView.swift; path = VegeXI/Write/View/MyPageCategoryView.swift; sourceTree = SOURCE_ROOT; };
 		4267C94A24DABD3E00702BAC /* FBSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBSignInViewController.swift; sourceTree = "<group>"; };
 		4267C94E24DACA4100702BAC /* SignButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignButton.swift; sourceTree = "<group>"; };
 		4267C95024DAE51200702BAC /* SignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignView.swift; sourceTree = "<group>"; };
@@ -294,6 +308,11 @@
 		AF89EAC624E0031400F2A5E5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				426750BA24E4B73300511163 /* MyPageBookmarkView.swift */,
+				426750BE24E4C6A600511163 /* MyPageCategoryView.swift */,
+				426750B824E4B71100511163 /* MyPagePostView.swift */,
+				424C6FFC24E4B664005859BF /* MyPageProfileView.swift */,
+				426750BC24E4B95200511163 /* MyPageTopBarView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -301,6 +320,8 @@
 		AF89EAC724E0031A00F2A5E5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				424C6FF824E4B5EA005859BF /* MyPageViewController.swift */,
+				424C6FFA24E4B611005859BF /* EditProfileViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -647,6 +668,7 @@
 			files = (
 				AF8E0D6824DDD83900D08D58 /* FeedViewModel.swift in Sources */,
 				4257EF4624DC5F0900CFF4C6 /* SearchHistoryHeaderView.swift in Sources */,
+				426750BF24E4C6A600511163 /* MyPageCategoryView.swift in Sources */,
 				42ABADB424E140490094CA9A /* NewFilterViewController.swift in Sources */,
 				4243D57D24DD290F003F3761 /* SearchHistoryViewController.swift in Sources */,
 				4257EF4A24DD07FD00CFF4C6 /* MockData.swift in Sources */,
@@ -661,8 +683,10 @@
 				42ABADC624E35DC50094CA9A /* SharePostScrollView.swift in Sources */,
 				AF58B5FA24E1576300BA2224 /* DetailCustomBar.swift in Sources */,
 				AF58B5FC24E169E100BA2224 /* CustomInputAccessoryView.swift in Sources */,
+				424C6FFB24E4B611005859BF /* EditProfileViewController.swift in Sources */,
 				AF57570D24E18C8B0018A9FE /* CommentTableViewCell.swift in Sources */,
 				AF6652CC24DC0415005FC74B /* CategoryCollectionView.swift in Sources */,
+				424C6FFD24E4B664005859BF /* MyPageProfileView.swift in Sources */,
 				AF8E0D5924DD092E00D08D58 /* WriteEmptyController.swift in Sources */,
 				AF60418C24E247FA00720B0B /* DetailViewModel.swift in Sources */,
 				4267C95324DAF61400702BAC /* SignErrors.swift in Sources */,
@@ -680,8 +704,11 @@
 				AF561E4024D9CCB80063D51F /* Extensions.swift in Sources */,
 				425B462224E3796200242D12 /* SharePostCollectionViewCell.swift in Sources */,
 				4264F1E124DBEBAA007B3BC2 /* FakeNavigationBar.swift in Sources */,
+				426750BB24E4B73300511163 /* MyPageBookmarkView.swift in Sources */,
 				AF5634DC24DA64F200A606EA /* HomeViewController.swift in Sources */,
 				AF6652CA24DBFD71005FC74B /* CustomMainNavigationBar.swift in Sources */,
+				426750B924E4B71100511163 /* MyPagePostView.swift in Sources */,
+				424C6FF924E4B5EA005859BF /* MyPageViewController.swift in Sources */,
 				42ABADC824E35EC20094CA9A /* SharePostContentView.swift in Sources */,
 				42ABADBA24E16D4E0094CA9A /* FilterCollectionViewCell.swift in Sources */,
 				AF8E0D5D24DD320700D08D58 /* FeedRegisterController.swift in Sources */,
@@ -699,6 +726,7 @@
 				AF2EE70424D87B4800A956BD /* AuthService.swift in Sources */,
 				42ABADBE24E28CB70094CA9A /* NotificationViewController.swift in Sources */,
 				4267C95524DB1BD900702BAC /* SignUpStrings.swift in Sources */,
+				426750BD24E4B95200511163 /* MyPageTopBarView.swift in Sources */,
 				424C6FF724E437EA005859BF /* SharePostSettingSwitchView.swift in Sources */,
 				4257EF4224DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift in Sources */,
 				42BE29EE24DD322600449221 /* FilterTableViewCell.swift in Sources */,

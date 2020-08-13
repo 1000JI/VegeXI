@@ -72,3 +72,32 @@ enum SharePostStrings {
         }
     }
 }
+
+enum MyPageStrings {
+    case barTitle
+    case unknownNickname
+    case unknownVegeType
+    case noPost
+    case noBookmark
+    case myPost
+    case myBookmark
+    
+    func generateString() -> String {
+        switch self {
+        case .barTitle:
+            return "마이페이지"
+        case . unknownNickname:
+            return "No Nickname"
+        case .unknownVegeType:
+            return "지향하는 채식타입을 설정해보세요"
+        case .noPost:
+            return "첫번째 글을 남겨보세요🍅"
+        case .noBookmark:
+            return "좋은 글을 저장해보세요 🥦"
+        case .myPost:
+            return "내 글"
+        case .myBookmark:
+            return "북마크"
+        }
+    }
+}
