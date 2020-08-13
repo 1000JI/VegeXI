@@ -82,7 +82,7 @@ extension UIViewController {
         
         moreAlert.addAction(reportAction)
         moreAlert.addAction(linkCopyAction)
-        moreAlert.addAction(shareAction)
+            moreAlert.addAction(shareAction)
         moreAlert.addAction(cancelAction)
         moreAlert.view.tintColor = .black
         

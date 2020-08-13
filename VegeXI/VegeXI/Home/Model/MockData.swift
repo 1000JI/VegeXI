@@ -115,4 +115,14 @@ struct MockData {
             "time": "지난 달",
         ],
     ]
+    
+    static var editProfileVegeTypes =
+        [
+            ["title": "비건", "image": "Vegun_Info"],
+            ["title": "오보", "image": "Ovo_Info"],
+            ["title": "락토", "image": "Lacto_Info"],
+            ["title": "락토오보", "image": "LactoOvo_Info"],
+            ["title": "페스코", "image": "Pesco_Info"],
+            ["title": "지향없음", "image": ""]
+    ]
 }

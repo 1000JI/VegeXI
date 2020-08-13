@@ -61,5 +61,9 @@ class MyPageViewController: UIViewController {
         nextVC.modalPresentationStyle = .fullScreen
         present(nextVC, animated: true)
     }
-
+    
+    @objc
+    private func handleProfileEditButton() {
+        
+    }
 }

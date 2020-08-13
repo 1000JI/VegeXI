@@ -13,6 +13,10 @@ class EditProfileViewController: UIViewController {
     // MARK: - Properties
     private let topBarView = EditProfileTopBarView()
     private let editingView = EditProfileEditingView()
+    private let typeSelectionView = EditProfileSelectTypeView()
+    private let bottomBarView = FilterViewBottomBar(title: EditProfileStrings.confirm.generateString())
+    
+    private lazy var typeTableView = typeSelectionView.vegeTypeTableView
     
     
     // MARK: - Lifecycle
@@ -31,11 +35,18 @@ class EditProfileViewController: UIViewController {
     
     private func setStoredPropertyAttributes() {
         topBarView.leftBarButton.addTarget(self, action: #selector(handleTopBarLeftBarButton(_:)), for: .touchUpInside)
+        editingView.profileEditButton.addTarget(self, action: #selector(handleProfileEditButton(_:)), for: .touchUpInside)
         editingView.nicknameTextField.clearButton.addTarget(self, action: #selector(handleTextFieldClearButton(_:)), for: .touchUpInside)
+        bottomBarView.configureBottomBar {
+            self.handleBottomBarConfirmButton()
+        }
+        
+        editingView.nicknameTextField.textField.delegate = self
+        typeTableView.delegate = self
     }
     
     private func setConstraints() {
-        [topBarView, editingView].forEach {
+        [topBarView, editingView, typeSelectionView, bottomBarView].forEach {
             view.addSubview($0)
         }
         topBarView.snp.makeConstraints {
@@ -47,6 +58,16 @@ class EditProfileViewController: UIViewController {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(250)
         }
+        typeSelectionView.snp.makeConstraints {
+            $0.top.equalTo(editingView.snp.bottom).offset(8)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalTo(bottomBarView.snp.top).offset(-64)
+        }
+        bottomBarView.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.equalTo(75)
+        }
+        
     }
     
     
@@ -57,8 +78,52 @@ class EditProfileViewController: UIViewController {
     }
     
     @objc
+    private func handleProfileEditButton(_ sender: UIButton) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction(title: EditProfileStrings.camera.generateString(), style: .default, handler: nil)
+        let albumAction = UIAlertAction(title: EditProfileStrings.album.generateString(), style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: EditProfileStrings.cancel.generateString(), style: .cancel, handler: nil)
+        [cameraAction, albumAction, cancelAction].forEach {
+            alert.addAction($0)
+        }
+        present(alert, animated: true)
+    }
+    
+    @objc
     private func handleTextFieldClearButton(_ sender: UIButton) {
         editingView.nicknameTextField.textField.text = ""
     }
+    
+    private func handleBottomBarConfirmButton() {
+        print(#function)
+    }
 
+}
+
+
+// MARK: - UITextFieldDelegate
+extension EditProfileViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if textField.text?.isEmpty == true {
+            editingView.nicknameTextField.clearButton.isHidden = true
+        } else {
+            editingView.nicknameTextField.clearButton.isHidden = false
+        }
+    }
+}
+
+
+// MARK: - UITableViewDelegate
+extension EditProfileViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? EditProfileTypeTableViewCell else { return }
+        typeSelectionView.tableViewCells.forEach {
+            $0.isClicked = false
+        }
+        cell.isClicked = true
+    }
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? EditProfileTypeTableViewCell else { return }
+        cell.isClicked = false
+    }
 }

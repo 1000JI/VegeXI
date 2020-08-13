@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = UINavigationController(rootViewController: controller)
 
 //        window?.rootViewController = NewFilterViewController()
-//        window?.rootViewController = MyPageViewController()
+        window?.rootViewController = MyPageViewController()
 
         window?.makeKeyAndVisible()
         

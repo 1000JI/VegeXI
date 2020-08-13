@@ -29,7 +29,6 @@
 		426750C124E4DDAE00511163 /* EditProfileTopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426750C024E4DDAE00511163 /* EditProfileTopBarView.swift */; };
 		426750C324E4ED3A00511163 /* EditProfileEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426750C224E4ED3A00511163 /* EditProfileEditingView.swift */; };
 		426750C524E4ED7200511163 /* EditProfileSelectTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426750C424E4ED7200511163 /* EditProfileSelectTypeView.swift */; };
-		426750C724E4EFC200511163 /* EditProfileTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426750C624E4EFC200511163 /* EditProfileTextField.swift */; };
 		426750C924E4FA9100511163 /* EditProfileTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426750C824E4FA9100511163 /* EditProfileTextFieldView.swift */; };
 		4267C94B24DABD3E00702BAC /* FBSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C94A24DABD3E00702BAC /* FBSignInViewController.swift */; };
 		4267C94F24DACA4100702BAC /* SignButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C94E24DACA4100702BAC /* SignButton.swift */; };
@@ -39,6 +38,7 @@
 		4267C95724DB1D2F00702BAC /* GeneralStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95624DB1D2F00702BAC /* GeneralStrings.swift */; };
 		4267C95924DB1D3D00702BAC /* SignInStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95824DB1D3D00702BAC /* SignInStrings.swift */; };
 		4267C95B24DBC36800702BAC /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267C95A24DBC36800702BAC /* ForgotPasswordViewController.swift */; };
+		4296390B24E572CA00ED23C7 /* EditProfileTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4296390A24E572CA00ED23C7 /* EditProfileTypeTableViewCell.swift */; };
 		42ABADB424E140490094CA9A /* NewFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADB324E140490094CA9A /* NewFilterViewController.swift */; };
 		42ABADB624E14FFF0094CA9A /* VegetarianInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADB524E14FFF0094CA9A /* VegetarianInfoView.swift */; };
 		42ABADB824E15CE30094CA9A /* NewFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADB724E15CE30094CA9A /* NewFilterTableViewCell.swift */; };
@@ -147,7 +147,6 @@
 		426750C024E4DDAE00511163 /* EditProfileTopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileTopBarView.swift; path = VegeXI/Write/View/EditProfileTopBarView.swift; sourceTree = SOURCE_ROOT; };
 		426750C224E4ED3A00511163 /* EditProfileEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileEditingView.swift; path = VegeXI/Write/View/EditProfileEditingView.swift; sourceTree = SOURCE_ROOT; };
 		426750C424E4ED7200511163 /* EditProfileSelectTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileSelectTypeView.swift; path = VegeXI/Write/View/EditProfileSelectTypeView.swift; sourceTree = SOURCE_ROOT; };
-		426750C624E4EFC200511163 /* EditProfileTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileTextField.swift; path = VegeXI/Write/View/EditProfileTextField.swift; sourceTree = SOURCE_ROOT; };
 		426750C824E4FA9100511163 /* EditProfileTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileTextFieldView.swift; path = VegeXI/Write/View/EditProfileTextFieldView.swift; sourceTree = SOURCE_ROOT; };
 		4267C94A24DABD3E00702BAC /* FBSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBSignInViewController.swift; sourceTree = "<group>"; };
 		4267C94E24DACA4100702BAC /* SignButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignButton.swift; sourceTree = "<group>"; };
@@ -157,6 +156,7 @@
 		4267C95624DB1D2F00702BAC /* GeneralStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralStrings.swift; sourceTree = "<group>"; };
 		4267C95824DB1D3D00702BAC /* SignInStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInStrings.swift; sourceTree = "<group>"; };
 		4267C95A24DBC36800702BAC /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		4296390A24E572CA00ED23C7 /* EditProfileTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileTypeTableViewCell.swift; path = VegeXI/Write/View/EditProfileTypeTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		42ABADB324E140490094CA9A /* NewFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFilterViewController.swift; sourceTree = "<group>"; };
 		42ABADB524E14FFF0094CA9A /* VegetarianInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VegetarianInfoView.swift; sourceTree = "<group>"; };
 		42ABADB724E15CE30094CA9A /* NewFilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFilterTableViewCell.swift; sourceTree = "<group>"; };
@@ -348,8 +348,8 @@
 			children = (
 				426750C224E4ED3A00511163 /* EditProfileEditingView.swift */,
 				426750C424E4ED7200511163 /* EditProfileSelectTypeView.swift */,
+				4296390A24E572CA00ED23C7 /* EditProfileTypeTableViewCell.swift */,
 				426750C824E4FA9100511163 /* EditProfileTextFieldView.swift */,
-				426750C624E4EFC200511163 /* EditProfileTextField.swift */,
 				426750C024E4DDAE00511163 /* EditProfileTopBarView.swift */,
 				426750BA24E4B73300511163 /* MyPageBookmarkView.swift */,
 				426750BE24E4C6A600511163 /* MyPageCategoryView.swift */,
@@ -727,10 +727,10 @@
 				42ABADB424E140490094CA9A /* NewFilterViewController.swift in Sources */,
 				426750C124E4DDAE00511163 /* EditProfileTopBarView.swift in Sources */,
 				4243D57D24DD290F003F3761 /* SearchHistoryViewController.swift in Sources */,
+				4296390B24E572CA00ED23C7 /* EditProfileTypeTableViewCell.swift in Sources */,
 				AF8932FD24E3D43F00221AA6 /* WriteTitleTableCell.swift in Sources */,
 				4257EF4A24DD07FD00CFF4C6 /* MockData.swift in Sources */,
 				4257EF4424DC3FF200CFF4C6 /* FakeSearchBar.swift in Sources */,
-				426750C724E4EFC200511163 /* EditProfileTextField.swift in Sources */,
 				42BE29F024DD35C900449221 /* FilterTableViewHeader.swift in Sources */,
 				4257EF4C24DD0BC700CFF4C6 /* SearchHistoryTableViewCell.swift in Sources */,
 				424C6FF524E38507005859BF /* SharePostCategoryView.swift in Sources */,
