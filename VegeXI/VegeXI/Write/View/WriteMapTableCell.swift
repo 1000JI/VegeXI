@@ -55,17 +55,17 @@ class WriteMapTableCell: UITableViewCell {
         
         locationIcon.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(8)
-            $0.centerY.equalToSuperview()
+            $0.centerY.equalToSuperview().offset(8)
         }
         
         locationLabel.snp.makeConstraints {
             $0.leading.equalTo(locationIcon.snp.trailing).offset(-4)
-            $0.centerY.equalToSuperview()
+            $0.centerY.equalToSuperview().offset(8)
         }
         
         deleteIcon.snp.makeConstraints {
             $0.leading.equalTo(locationLabel.snp.trailing).offset(-4)
-            $0.centerY.equalToSuperview()
+            $0.centerY.equalToSuperview().offset(8)
         }
     }
 }

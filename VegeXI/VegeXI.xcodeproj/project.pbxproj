@@ -55,6 +55,7 @@
 		AF6652CE24DC132C005FC74B /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6652CD24DC132C005FC74B /* CategoryCell.swift */; };
 		AF6652D024DC2EA5005FC74B /* MainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6652CF24DC2EA5005FC74B /* MainTableView.swift */; };
 		AF6652D224DC2F5A005FC74B /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6652D124DC2F5A005FC74B /* MainTableViewCell.swift */; };
+		AF7B132A24E476B70098F7AD /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7B132924E476B70098F7AD /* MapService.swift */; };
 		AF8193DB24DC80D900B948CF /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8193DA24DC80D900B948CF /* MainTabBarController.swift */; };
 		AF88436924D6C902000ABC2A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF88436824D6C902000ABC2A /* GoogleService-Info.plist */; };
 		AF8932ED24E3AEF900221AA6 /* FeedWriteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8932EC24E3AEF900221AA6 /* FeedWriteController.swift */; };
@@ -149,6 +150,7 @@
 		AF6652CD24DC132C005FC74B /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		AF6652CF24DC2EA5005FC74B /* MainTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableView.swift; sourceTree = "<group>"; };
 		AF6652D124DC2F5A005FC74B /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		AF7B132924E476B70098F7AD /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
 		AF8193DA24DC80D900B948CF /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		AF88436824D6C902000ABC2A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AF8932EC24E3AEF900221AA6 /* FeedWriteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedWriteController.swift; sourceTree = "<group>"; };
@@ -487,6 +489,7 @@
 				AF2EE70324D87B4800A956BD /* AuthService.swift */,
 				AF561E4124D9CEE80063D51F /* UserService.swift */,
 				AF8E0D6124DD5D5800D08D58 /* FeedService.swift */,
+				AF7B132924E476B70098F7AD /* MapService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -715,6 +718,7 @@
 				AF6652CE24DC132C005FC74B /* CategoryCell.swift in Sources */,
 				AF8E0D6224DD5D5800D08D58 /* FeedService.swift in Sources */,
 				AF8A36F924E1A26F001292CA /* DetailHeaderView.swift in Sources */,
+				AF7B132A24E476B70098F7AD /* MapService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

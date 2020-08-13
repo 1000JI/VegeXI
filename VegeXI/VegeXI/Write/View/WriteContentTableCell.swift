@@ -52,7 +52,7 @@ class WriteContentTableCell: UITableViewCell {
         
         [contentTextView].forEach { addSubview($0) }
         contentTextView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(8)
+            $0.top.equalToSuperview().offset(4)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.bottom.equalToSuperview().offset(-8)

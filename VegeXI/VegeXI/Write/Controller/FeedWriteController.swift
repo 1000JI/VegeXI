@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import BSImagePicker
+import Photos
+import Alamofire
 
 class FeedWriteController: UITableViewController {
     
@@ -16,10 +19,23 @@ class FeedWriteController: UITableViewController {
     private var titleIsEmpty = true
     private var contentIsEmpty = true
     
+    private var imageArray = [UIImage]() {
+        didSet { tableView.reloadData() }
+    }
+    private let imagePicker = ImagePickerController().then {
+        $0.settings.selection.max = 10
+        $0.settings.theme.selectionStyle = .numbered
+        $0.settings.fetch.assets.supportedMediaTypes = [.image]
+        $0.settings.selection.unselectOnReachingMax = true
+    }
+    
     private lazy var customToolBarView = CustomToolBarView(
         frame: CGRect(x: 0, y: 0,
                       width: view.frame.width,
-                      height: 60))
+                      height: 60)).then {
+                        $0.tappedCameraButton = tappedCameraButton
+                        $0.tappedLocationButton = tappedLocationButton
+    }
     
     override var inputAccessoryView: UIView? {
         return customToolBarView
@@ -45,12 +61,73 @@ class FeedWriteController: UITableViewController {
     
     func titleTextDidChange(textView: UITextView) {
         titleIsEmpty = textView.text.isEmpty
-        tableViewUpdate()
+        tableViewUpdate(isContentMode: false)
     }
     
     func contentTextDidChange(textView: UITextView) {
         contentIsEmpty = textView.text.isEmpty
-        tableViewUpdate()
+        tableViewUpdate(isContentMode: true)
+    }
+    
+    func tappedCameraButton() {
+        imageArray.removeAll()
+        
+        let option = PHImageRequestOptions()
+        option.isSynchronous = true
+        option.isNetworkAccessAllowed = false
+        option.resizeMode = .exact
+        
+        self.presentImagePicker(imagePicker, select: { (asset) in
+//            print("Selected: \(asset)")
+        }, deselect: { (asset) in
+//            print("Deselected: \(asset)")
+        }, cancel: { (assets) in
+//            print("Canceled with selections: \(assets)")
+        }, finish: { (assets) in
+//            debugPrint("Finished with selections: \(assets)")
+            assets.forEach {
+                PHImageManager.default().requestImage(
+                    for: $0,
+                    targetSize: PHImageManagerMaximumSize,
+                    contentMode: .aspectFit,
+                    options: option) { (image, nil) in
+                        guard let image = image else { return }
+                        self.imageArray.append(image)
+                }
+            }
+        }, completion: {
+            
+        })
+    }
+    
+    func tappedLocationButton() {
+//        let headers: HTTPHeaders = [
+//            "X-Naver-Client-Id": "8EhU9lk1hgPFBWOpkHai",
+//            "X-Naver-Client-Secret": "HkvcjLc9kA"]
+//        let parameters: [String: Any] = [
+//            "query": "알맹상점".utf8,
+//            "display": 10,
+//            "start": 1,
+//            "sort": "random"]
+//
+//        AF.request("https://openapi.naver.com/v1/search/local.json", method: .get, parameters: parameters, headers: headers).responseJSON { response in
+//            switch response.result {
+//
+//            case .success(let value):
+//                print(value)
+//                guard let dictionary = value as? [String: Any] else { return }
+//
+//                print(dictionary["total"])
+//                guard let items = dictionary["items"] as? [[String: Any]] else { return }
+//                print(items)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+        
+        MapService.shared.searchLocations(keyword: "일루오리") { locations in
+            print(locations)
+        }
     }
     
     
@@ -112,7 +189,7 @@ class FeedWriteController: UITableViewController {
             forCellReuseIdentifier: WriteContentTableCell.identifer)
     }
     
-    func tableViewUpdate() {
+    func tableViewUpdate(isContentMode: Bool) {
         // https://www.swiftdevcenter.com/the-dynamic-height-of-uitextview-inside-uitableviewcell-swift/
         UIView.setAnimationsEnabled(false)
         tableView.beginUpdates()
@@ -123,6 +200,17 @@ class FeedWriteController: UITableViewController {
             shareBarButton.isEnabled = false
         } else {
             shareBarButton.isEnabled = true
+        }
+        
+        
+        if isContentMode {
+            let indexPath = IndexPath(
+                item: 0,
+                section: WriteSection.content.rawValue)
+            tableView.scrollToRow(
+                at: indexPath,
+                at: .bottom,
+                animated: false)
         }
     }
 }
@@ -143,7 +231,14 @@ extension FeedWriteController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        switch WriteSection(rawValue: section)! {
+        case .title: fallthrough
+        case .content: return 1
+        case .map:
+            return 1
+        case .image:
+            return imageArray.count > 0 ? 1 : 0
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -163,6 +258,7 @@ extension FeedWriteController {
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: WriteImageTableCell.identifer,
                 for: indexPath) as! WriteImageTableCell
+            cell.imageArray = imageArray
             return cell
         case .content:
             let cell = tableView.dequeueReusableCell(
