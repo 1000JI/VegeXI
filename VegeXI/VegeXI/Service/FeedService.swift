@@ -36,6 +36,7 @@ struct FeedService {
     
     func uploadComment(caption: String, feed: Feed, completion: @escaping(Error?, DatabaseReference) -> Void) {
         guard let userUid = UserService.shared.user?.uid else { return }
+        print(userUid)
         
         let values = [
             "writerUid": userUid,

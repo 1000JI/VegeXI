@@ -13,7 +13,7 @@ class FilterViewController: UIViewController {
     // MARK: - Properties
     let topBar = FilterViewTopBar()
     let filterTableView = UITableView(frame: .zero, style: .grouped)
-    let bottomBar = FilterViewBottomBar()
+    let bottomBar = FilterViewBottomBar(title: GeneralStrings.filterBottomViewTitle.generateString())
     
     
     // MARK: - Lifecycle

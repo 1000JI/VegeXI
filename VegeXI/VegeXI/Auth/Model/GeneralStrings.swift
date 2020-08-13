@@ -18,6 +18,9 @@ enum GeneralStrings {
     case eraseAll
     case filterViewTitle
     case filterBottomViewTitle
+    case notification
+    case emptyNotification
+    case share
     
     func generateString() -> String {
         switch self {
@@ -39,6 +42,79 @@ enum GeneralStrings {
             return "필터"
         case .filterBottomViewTitle:
             return "필터 적용"
+        case .notification:
+            return "알림"
+        case .emptyNotification:
+            return "알림이 없습니다"
+        case .share:
+            return "공유하기"
+        }
+    }
+}
+
+
+enum SharePostStrings {
+    case vegeType
+    case category
+    case setShareMode
+    case shareModeInfo
+    
+    func generateString() -> String {
+        switch self {
+        case .vegeType:
+            return "이 글의 채식타입"
+        case .category:
+            return "카테고리"
+        case .setShareMode:
+            return "공개설정"
+        case .shareModeInfo:
+            return "* 공개설정을 하지 않은 글은 마이페이지에서 확인할 수 있습니다."
+        }
+    }
+}
+
+enum MyPageStrings {
+    case barTitle
+    case unknownNickname
+    case unknownVegeType
+    case noPost
+    case noBookmark
+    case myPost
+    case myBookmark
+    
+    func generateString() -> String {
+        switch self {
+        case .barTitle:
+            return "마이페이지"
+        case . unknownNickname:
+            return "No Nickname"
+        case .unknownVegeType:
+            return "지향하는 채식타입을 설정해보세요"
+        case .noPost:
+            return "첫번째 글을 남겨보세요🍅"
+        case .noBookmark:
+            return "좋은 글을 저장해보세요 🥦"
+        case .myPost:
+            return "내 글"
+        case .myBookmark:
+            return "북마크"
+        }
+    }
+}
+
+enum EditProfileStrings {
+    case barTitle
+    case nickname
+    case vegeType
+    
+    func generateString() -> String {
+        switch self {
+        case .barTitle:
+            return "내 프로필 편집"
+        case .nickname:
+            return "닉네임"
+        case .vegeType:
+            return "지향하는 채식타입"
         }
     }
 }
