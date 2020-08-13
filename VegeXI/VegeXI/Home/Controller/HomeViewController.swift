@@ -34,8 +34,7 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavi()
-//        fetchFeeds()
-        
+        fetchFeeds()
     }
     
     override func viewDidAppear(_ animated: Bool) {

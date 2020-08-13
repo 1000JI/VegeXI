@@ -22,7 +22,7 @@ struct Feed {
     let content: String
     var likes: Int
     var didLike: Bool = false
-    let comments: Int
+    var comments: Int
     let imageUrls: [URL]?
     var didBookmark: Bool = false
     

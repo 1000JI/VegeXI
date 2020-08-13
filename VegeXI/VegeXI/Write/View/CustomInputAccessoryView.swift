@@ -12,6 +12,8 @@ class CustomInputAccessoryView: UIView {
     
     // MARK: - Properties
     
+    var insertCommentText: ((String) -> ())?
+    
     private let profileImageView = UIImageView().then {
         $0.image = UIImage(named: "cell_Human")
         $0.snp.makeConstraints {
@@ -19,12 +21,13 @@ class CustomInputAccessoryView: UIView {
         }
     }
     
-    private let commentTextField = UITextField().then {
+    private lazy var commentTextField = UITextField().then {
         $0.placeholder = "댓글 달기"
         $0.layer.borderColor = UIColor.vegeLightGrayBorderColor.cgColor
         $0.layer.borderWidth = 1
         $0.textColor = .vegeTextBlackColor
         $0.font = UIFont.spoqaHanSansRegular(ofSize: 12)
+        $0.delegate = self
         
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 40))
         $0.leftView = paddingView
@@ -74,5 +77,18 @@ class CustomInputAccessoryView: UIView {
             $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-10)
         }
         commentTextField.layer.cornerRadius = 40 / 2
+    }
+}
+
+
+// MARK: - UITextFieldDelegate
+
+extension CustomInputAccessoryView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let text = textField.text,
+            text.isEmpty == false else { return false }
+        insertCommentText?(text)
+        textField.text = ""
+        return true
     }
 }

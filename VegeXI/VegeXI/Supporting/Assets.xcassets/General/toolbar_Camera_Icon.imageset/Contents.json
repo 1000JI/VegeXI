@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "feed_Comment2.png",
+      "filename" : "toolbar_Camera_Icon.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "feed_Comment2@2x.png",
+      "filename" : "toolbar_Camera_Icon@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "feed_Comment2@3x.png",
+      "filename" : "toolbar_Camera_Icon@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

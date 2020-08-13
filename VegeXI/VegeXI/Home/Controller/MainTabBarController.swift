@@ -130,8 +130,10 @@ class MainTabBarController: UITabBarController {
     @objc private func registerButtonAction(sender: UIButton?) {
         selectedIndex = 0
         
-        let controller = FeedRegisterController()
-        present(controller, animated: true)
+        let controller = FeedWriteController()
+        let naviContoller = UINavigationController(rootViewController: controller)
+        naviContoller.modalPresentationStyle = .fullScreen
+        present(naviContoller, animated: true)
     }
     
     func clickedWriteTabbar() {
