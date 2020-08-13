@@ -1,5 +1,5 @@
 //
-//  MyPageProfileView.swift
+//  EditProfileEditingView.swift
 //  VegeXI
 //
 //  Created by Doyoung Song on 8/13/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyPageProfileView: UIView {
+class EditProfileEditingView: UIView {
     
     // MARK: - Properties
     let profileViewContainer = UIView()
@@ -27,16 +27,14 @@ class MyPageProfileView: UIView {
         $0.layer.borderColor = UIColor.vegeLightGrayButtonColor.cgColor
         $0.layer.borderWidth = 0.5
     }
-    let nicknameLabel = UILabel().then {
-        $0.text = MyPageStrings.unknownNickname.generateString()
-        $0.font = UIFont.spoqaHanSansBold(ofSize: 20)
+    
+    let nicknameLable = UILabel().then {
+        $0.text = EditProfileStrings.nickname.generateString()
+        $0.font = UIFont.spoqaHanSansRegular(ofSize: 16)
         $0.textColor = .vegeTextBlackColor
     }
-    let vegeTypeLabel = UILabel().then {
-        $0.text = MyPageStrings.unknownVegeType.generateString()
-        $0.font = UIFont.spoqaHanSansRegular(ofSize: 14)
-        $0.textColor = .vegeSelectedGreen
-    }
+    let nicknameTextField = EditProfileTextFieldView()
+    
     
     
     // MARK: - Lifecycle
@@ -61,7 +59,7 @@ class MyPageProfileView: UIView {
     }
     
     private func setConstraints() {
-        [profileViewContainer, nicknameLabel, vegeTypeLabel].forEach {
+        [profileViewContainer, nicknameLable, nicknameTextField].forEach {
             self.addSubview($0)
         }
         profileViewContainer.snp.makeConstraints {
@@ -69,13 +67,15 @@ class MyPageProfileView: UIView {
             $0.centerX.equalToSuperview()
             $0.width.height.equalTo(112)
         }
-        nicknameLabel.snp.makeConstraints {
-            $0.top.equalTo(profileViewContainer.snp.bottom).offset(8)
-            $0.centerX.equalToSuperview()
+        nicknameLable.snp.makeConstraints {
+            $0.top.equalTo(profileViewContainer.snp.bottom).offset(46)
+            $0.leading.equalToSuperview().inset(20)
         }
-        vegeTypeLabel.snp.makeConstraints {
-            $0.top.equalTo(nicknameLabel.snp.bottom)
-            $0.centerX.equalToSuperview()
+        nicknameTextField.snp.makeConstraints {
+            $0.leading.equalTo(nicknameLable.snp.trailing).offset(40)
+            $0.trailing.equalToSuperview().inset(9)
+            $0.centerY.equalTo(nicknameLable)
+            $0.height.equalTo(44)
         }
         
         [profileImageView, profileEditButton].forEach {

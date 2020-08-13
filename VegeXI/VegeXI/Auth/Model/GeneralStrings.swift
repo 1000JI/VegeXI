@@ -101,3 +101,20 @@ enum MyPageStrings {
         }
     }
 }
+
+enum EditProfileStrings {
+    case barTitle
+    case nickname
+    case vegeType
+    
+    func generateString() -> String {
+        switch self {
+        case .barTitle:
+            return "내 프로필 편집"
+        case .nickname:
+            return "닉네임"
+        case .vegeType:
+            return "지향하는 채식타입"
+        }
+    }
+}

@@ -1,5 +1,5 @@
 //
-//  MyPageTopBarView.swift
+//  EditProfileTopBarView.swift
 //  VegeXI
 //
 //  Created by Doyoung Song on 8/13/20.
@@ -8,16 +8,16 @@
 
 import UIKit
 
-class MyPageTopBarView: UIView {
+class EditProfileTopBarView: UIView {
     
     // MARK: - Properties
     private let barTitle = UILabel().then {
-        $0.text = MyPageStrings.barTitle.generateString()
+        $0.text = EditProfileStrings.barTitle.generateString()
         $0.font = UIFont.spoqaHanSansBold(ofSize: 16)
         $0.textColor = .vegeTextBlackColor
     }
-    let rightBarButton = UIButton().then {
-        let image = UIImage(named: "Setting_Icon")?.withTintColor(.vegeTextBlackColor, renderingMode: .alwaysOriginal)
+    let leftBarButton = UIButton().then {
+        let image = UIImage(named: "naviBar_BackBtnIcon")?.withTintColor(.vegeTextBlackColor, renderingMode: .alwaysOriginal)
         $0.setImage(image, for: .normal)
     }
     private let separator = UIView().then {
@@ -47,14 +47,14 @@ class MyPageTopBarView: UIView {
     }
     
     private func setConstraints() {
-        [barTitle, rightBarButton, separator].forEach {
+        [barTitle, leftBarButton, separator].forEach {
             self.addSubview($0)
         }
         barTitle.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
         }
-        rightBarButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(12)
+        leftBarButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(12)
             $0.centerY.equalToSuperview()
         }
         separator.snp.makeConstraints {

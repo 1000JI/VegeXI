@@ -57,7 +57,9 @@ class MyPageViewController: UIViewController {
     // MARK: - Selectors
     @objc
     private func handleTopRightBarButton(_ sender: UIButton) {
-        print(#function)
+        let nextVC = EditProfileViewController()
+        nextVC.modalPresentationStyle = .fullScreen
+        present(nextVC, animated: true)
     }
 
 }
