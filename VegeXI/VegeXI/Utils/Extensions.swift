@@ -58,9 +58,9 @@ extension UIViewController {
     }
     
     func showMoreBasicButtnAlert(viewController: UIViewController,
-                            reportHandler: ((UIAlertAction) -> Void)?,
-                            linkCopyHandler: ((UIAlertAction) -> Void)?,
-                            shareHandler: ((UIAlertAction) -> Void)?) {
+                                 reportHandler: ((UIAlertAction) -> Void)?,
+                                 linkCopyHandler: ((UIAlertAction) -> Void)?,
+                                 shareHandler: ((UIAlertAction) -> Void)?) {
         let moreAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let reportAction = UIAlertAction(
@@ -82,7 +82,7 @@ extension UIViewController {
         
         moreAlert.addAction(reportAction)
         moreAlert.addAction(linkCopyAction)
-            moreAlert.addAction(shareAction)
+        moreAlert.addAction(shareAction)
         moreAlert.addAction(cancelAction)
         moreAlert.view.tintColor = .black
         
@@ -90,10 +90,10 @@ extension UIViewController {
     }
     
     func showMoreWriterButtnAlert(viewController: UIViewController,
-                            editHandler: ((UIAlertAction) -> Void)?,
-                            linkCopyHandler: ((UIAlertAction) -> Void)?,
-                            shareHandler: ((UIAlertAction) -> Void)?,
-                            deleteHandler: ((UIAlertAction) -> Void)?) {
+                                  editHandler: ((UIAlertAction) -> Void)?,
+                                  linkCopyHandler: ((UIAlertAction) -> Void)?,
+                                  shareHandler: ((UIAlertAction) -> Void)?,
+                                  deleteHandler: ((UIAlertAction) -> Void)?) {
         let moreAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let editAction = UIAlertAction(
@@ -180,4 +180,25 @@ extension UIFont {
 
 extension UIImage {
     static let basicHumanImage = UIImage(named: "cell_Human")?.withRenderingMode(.alwaysOriginal)
+    
+    func rotate(radians: CGFloat) -> UIImage {
+        let rotatedSize = CGRect(origin: .zero, size: size)
+            .applying(CGAffineTransform(rotationAngle: CGFloat(radians)))
+            .integral.size
+        UIGraphicsBeginImageContext(rotatedSize)
+        if let context = UIGraphicsGetCurrentContext() {
+            let origin = CGPoint(x: rotatedSize.width / 2.0,
+                                 y: rotatedSize.height / 2.0)
+            context.translateBy(x: origin.x, y: origin.y)
+            context.rotate(by: radians)
+            draw(in: CGRect(x: -origin.y, y: -origin.x,
+                            width: size.width, height: size.height))
+            let rotatedImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            return rotatedImage ?? self
+        }
+        
+        return self
+    }
 }

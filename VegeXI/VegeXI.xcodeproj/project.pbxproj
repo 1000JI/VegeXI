@@ -44,6 +44,8 @@
 		42834C8B24E64C9F000C91F0 /* MyPageBookmarkableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42834C8A24E64C9F000C91F0 /* MyPageBookmarkableViewHeader.swift */; };
 		42834C8D24E65095000C91F0 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42834C8C24E65095000C91F0 /* SettingViewController.swift */; };
 		42834C8F24E654F3000C91F0 /* SettingViewCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42834C8E24E654F3000C91F0 /* SettingViewCellType.swift */; };
+		42834C9124E655C2000C91F0 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42834C9024E655C2000C91F0 /* SettingTableViewCell.swift */; };
+		42834C9324E65B7B000C91F0 /* SettingCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42834C9224E65B7B000C91F0 /* SettingCategories.swift */; };
 		4296390B24E572CA00ED23C7 /* EditProfileTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4296390A24E572CA00ED23C7 /* EditProfileTypeTableViewCell.swift */; };
 		42ABADB424E140490094CA9A /* NewFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADB324E140490094CA9A /* NewFilterViewController.swift */; };
 		42ABADB624E14FFF0094CA9A /* VegetarianInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADB524E14FFF0094CA9A /* VegetarianInfoView.swift */; };
@@ -168,6 +170,8 @@
 		42834C8A24E64C9F000C91F0 /* MyPageBookmarkableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPageBookmarkableViewHeader.swift; path = VegeXI/Write/View/MyPageBookmarkableViewHeader.swift; sourceTree = SOURCE_ROOT; };
 		42834C8C24E65095000C91F0 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingViewController.swift; path = VegeXI/Write/View/SettingViewController.swift; sourceTree = SOURCE_ROOT; };
 		42834C8E24E654F3000C91F0 /* SettingViewCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewCellType.swift; sourceTree = "<group>"; };
+		42834C9024E655C2000C91F0 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingTableViewCell.swift; path = VegeXI/MyPage/Model/SettingTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		42834C9224E65B7B000C91F0 /* SettingCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCategories.swift; sourceTree = "<group>"; };
 		4296390A24E572CA00ED23C7 /* EditProfileTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileTypeTableViewCell.swift; path = VegeXI/Write/View/EditProfileTypeTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		42ABADB324E140490094CA9A /* NewFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFilterViewController.swift; sourceTree = "<group>"; };
 		42ABADB524E14FFF0094CA9A /* VegetarianInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VegetarianInfoView.swift; sourceTree = "<group>"; };
@@ -297,6 +301,7 @@
 			isa = PBXGroup;
 			children = (
 				42834C8E24E654F3000C91F0 /* SettingViewCellType.swift */,
+				42834C9224E65B7B000C91F0 /* SettingCategories.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -373,6 +378,7 @@
 				42834C8824E6033B000C91F0 /* MyPagePostTableViewHeader.swift */,
 				424C6FFC24E4B664005859BF /* MyPageProfileView.swift */,
 				426750BC24E4B95200511163 /* MyPageTopBarView.swift */,
+				42834C9024E655C2000C91F0 /* SettingTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -759,6 +765,7 @@
 				AF646C7524E28D8E00BE0FCA /* Comment.swift in Sources */,
 				AF6652D224DC2F5A005FC74B /* MainTableViewCell.swift in Sources */,
 				4267C95924DB1D3D00702BAC /* SignInStrings.swift in Sources */,
+				42834C9324E65B7B000C91F0 /* SettingCategories.swift in Sources */,
 				42ABADC624E35DC50094CA9A /* SharePostScrollView.swift in Sources */,
 				AF58B5FA24E1576300BA2224 /* DetailCustomBar.swift in Sources */,
 				AF58B5FC24E169E100BA2224 /* CustomInputAccessoryView.swift in Sources */,
@@ -823,6 +830,7 @@
 				42BE29EE24DD322600449221 /* FilterTableViewCell.swift in Sources */,
 				AFF46CAD24D85A00008F118E /* Constants.swift in Sources */,
 				42834C8524E60143000C91F0 /* MyPagePostTableViewCell.swift in Sources */,
+				42834C9124E655C2000C91F0 /* SettingTableViewCell.swift in Sources */,
 				AF6652CE24DC132C005FC74B /* CategoryCell.swift in Sources */,
 				AF8E0D6224DD5D5800D08D58 /* FeedService.swift in Sources */,
 				425B462024E368BE00242D12 /* SharePostVegeTypeView.swift in Sources */,

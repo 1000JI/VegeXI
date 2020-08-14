@@ -13,4 +13,5 @@ enum SettingViewCellType {
     case subtitlte
     case paging
     case switcher
+    case info
 }
