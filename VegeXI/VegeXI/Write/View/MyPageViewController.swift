@@ -14,6 +14,9 @@ class MyPageViewController: UIViewController {
     private let topBarView = MyPageTopBarView()
     private let profileView = MyPageProfileView()
     private let categoryView = MyPageCategoryView()
+    private let postView = MyPagePostView()
+    private let bookmarkView = MyPageBookmarkView()
+    private lazy var categorySubviews = [postView, bookmarkView]
     
     
     // MARK: - Lifecycle
@@ -31,10 +34,15 @@ class MyPageViewController: UIViewController {
     
     private func setStoredPropertyAttributes() {
         topBarView.rightBarButton.addTarget(self, action: #selector(handleTopRightBarButton(_:)), for: .touchUpInside)
+        profileView.profileEditButton.addTarget(self, action: #selector(handleProfileEditButton), for: .touchUpInside)
+        
+        postView.tag = 0
+        bookmarkView.tag = 1
+        categoryView.prepareForActions(action: controlSections(selectedSectionNumber:))
     }
     
     private func setConstraints() {
-        [topBarView, profileView, categoryView].forEach {
+        [topBarView, profileView, categoryView, postView, bookmarkView].forEach {
             view.addSubview($0)
         }
         topBarView.snp.makeConstraints {
@@ -51,6 +59,16 @@ class MyPageViewController: UIViewController {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(44)
         }
+        postView.snp.makeConstraints {
+            $0.top.equalTo(categoryView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
+        bookmarkView.snp.makeConstraints {
+            $0.top.equalTo(categoryView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
     }
     
     
@@ -64,6 +82,20 @@ class MyPageViewController: UIViewController {
     
     @objc
     private func handleProfileEditButton() {
-        
+        print(#function)
     }
+    
+    
+    // MARK: - Helpers
+    private func controlSections(selectedSectionNumber: Int) {
+        print(#function)
+        categorySubviews.forEach {
+            if $0.tag == selectedSectionNumber {
+                $0.isHidden = false
+            } else {
+                $0.isHidden = true
+            }
+        }
+    }
+    
 }

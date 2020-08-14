@@ -1,24 +1,21 @@
 //
-//  MyPageBookmarkView.swift
+//  MyPageBookmarkableViewCell.swift
 //  VegeXI
 //
-//  Created by Doyoung Song on 8/13/20.
+//  Created by Doyoung Song on 8/14/20.
 //  Copyright © 2020 TeamSloth. All rights reserved.
 //
 
 import UIKit
 
-
-class MyPageBookmarkView: UIView {
+class MyPageBookmarkableViewCell: UITableViewCell {
     
     // MARK: - Properties
-    static let identifier = "MyPageBookmarkView"
     
     
     // MARK: - Lifecycle
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = .green
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureUI()
     }
     
@@ -34,7 +31,7 @@ class MyPageBookmarkView: UIView {
     }
     
     private func setPropertyAttributes() {
-        self.isHidden = true
+        
     }
     
     private func setConstraints() {
