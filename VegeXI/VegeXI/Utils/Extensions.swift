@@ -202,3 +202,13 @@ extension UIImage {
         return self
     }
 }
+
+extension UINavigationController {
+    func removeUnderLineWhiteNaviBar() {
+        navigationBar.barTintColor = .white
+        navigationBar.backgroundColor = .white
+        navigationBar.setBackgroundImage(UIImage(), for:.default)
+        navigationBar.shadowImage = UIImage()
+        navigationBar.layoutIfNeeded()
+    }
+}

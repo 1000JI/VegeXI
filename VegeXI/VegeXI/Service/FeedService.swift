@@ -36,7 +36,6 @@ struct FeedService {
     
     func uploadComment(caption: String, feed: Feed, completion: @escaping(Error?, DatabaseReference) -> Void) {
         guard let userUid = UserService.shared.user?.uid else { return }
-        print(userUid)
         
         let values = [
             "writerUid": userUid,
@@ -174,13 +173,17 @@ struct FeedService {
         }
     }
     
-    func uploadFeed(title: String, content: String, imageArray: [UIImage], completion: @escaping((Error?, DatabaseReference) -> Void)) {
+    func uploadFeed(title: String,
+                    content: String,
+                    imageArray: [UIImage],
+                    location: LocationModel? = nil,
+                    completion: @escaping((Error?, DatabaseReference) -> Void)) {
         guard let writerUid = UserService.shared.user?.uid else { return }
         
         let feedType = imageArray.count > 0 ?
             FeedType.picAndTextType: FeedType.textType
         
-        let values = [
+        var values = [
             "writerUid": writerUid,
             "type": feedType.rawValue,
             "timestamp": Int(NSDate().timeIntervalSince1970),
@@ -189,6 +192,22 @@ struct FeedService {
             "likes": 0,
             "comments": 0
             ] as [String : Any]
+        
+        if let location = location {
+            var locationValue = [
+                "place_name": location.placeName,
+                "address_name": location.addressName,
+                "road_address_name": location.roadAddressName,
+                "x": String(location.longitude),
+                "y": String(location.latitude),
+                "id": String(location.id)
+                ] as [String : Any]
+            
+            if let url = location.placeUrl {
+                locationValue.updateValue(url.absoluteString, forKey: "place_url")
+            }
+            values.updateValue(locationValue, forKey: "location")
+        }
         
         REF_FEEDS.childByAutoId().updateChildValues(values) { (error, ref) in
             if let error = error {

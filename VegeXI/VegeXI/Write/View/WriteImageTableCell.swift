@@ -15,6 +15,10 @@ class WriteImageTableCell: UITableViewCell {
     static let identifer = "WriteImageTableCell"
     private let sideInsetValue: CGFloat = 20
     
+    var imageArray = [UIImage]() {
+        didSet { collectionView.reloadData() }
+    }
+    
     private let layout = UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
     }
@@ -59,12 +63,12 @@ class WriteImageTableCell: UITableViewCell {
 
 extension WriteImageTableCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return imageArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WriteImageCollectionCell.identifier, for: indexPath) as! WriteImageCollectionCell
-        
+        cell.configure(image: imageArray[indexPath.item])
         return cell
     }
 }
@@ -101,6 +105,7 @@ class WriteImageCollectionCell: UICollectionViewCell {
         $0.backgroundColor = .blue
         $0.layer.cornerRadius = 8
         $0.clipsToBounds = true
+        $0.contentMode = .scaleAspectFill
     }
     
     // MARK: - LifeCycle
@@ -120,5 +125,7 @@ class WriteImageCollectionCell: UICollectionViewCell {
     
     // MARK: - Helpers
     
-    
+    func configure(image: UIImage?) {
+        imageView.image = image
+    }
 }

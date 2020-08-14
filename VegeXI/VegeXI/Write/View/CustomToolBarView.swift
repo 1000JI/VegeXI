@@ -12,6 +12,9 @@ class CustomToolBarView: UIView {
     
     // MARK: - Properties
     
+    var tappedCameraButton: (() -> ())?
+    var tappedLocationButton: (() -> ())?
+    
     override var intrinsicContentSize: CGSize {
         return .zero
     }
@@ -25,14 +28,14 @@ class CustomToolBarView: UIView {
         let cameraButton = UIBarButtonItem(
             image: UIImage(named: "toolbar_Camera_Icon"),
             style: .plain,
-            target: nil,
-            action: nil)
+            target: self,
+            action: #selector(handleCameraButton))
         
         let locationButton = UIBarButtonItem(
             image: UIImage(named: "toolbar_Location_Icon"),
             style: .plain,
-            target: nil,
-            action: nil)
+            target: self,
+            action: #selector(handleLocationButton))
         
         $0.isUserInteractionEnabled = true
         $0.sizeToFit()
@@ -56,5 +59,17 @@ class CustomToolBarView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Selectors
+    
+    @objc
+    func handleCameraButton() {
+        tappedCameraButton?()
+    }
+    
+    @objc
+    func handleLocationButton() {
+        tappedLocationButton?()
     }
 }

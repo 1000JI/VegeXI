@@ -17,6 +17,7 @@ class MainTabBarController: UITabBarController {
     }
     
     var registerButton: UIButton!
+    var registerButtonInit = false
     
     // MARK: - LifeCycle
     
@@ -32,7 +33,11 @@ class MainTabBarController: UITabBarController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setupMiddleButton()
+        if !registerButtonInit {
+            setupMiddleButton()
+            registerButtonInit.toggle()
+        }
+        
     }
     
     // MARK: - API

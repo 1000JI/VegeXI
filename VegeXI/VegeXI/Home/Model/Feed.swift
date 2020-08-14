@@ -24,6 +24,7 @@ struct Feed {
     var didLike: Bool = false
     var comments: Int
     let imageUrls: [URL]?
+    var location: LocationModel?
     var didBookmark: Bool = false
     
     init(dictionary: [String : Any], user: User, feedID: String, likeDidLike: Bool, bookmarkDidLike: Bool, imageUrlArray: [URL]? = nil) {
@@ -48,6 +49,11 @@ struct Feed {
             self.imageUrls = nil
         case .picAndTextType:
             self.imageUrls = imageUrlArray
+        }
+        
+        let getLocation = dictionary["location"] as? [String: Any] ?? nil
+        if let location = getLocation {
+            self.location = LocationModel(dictionary: location)
         }
     }
 }

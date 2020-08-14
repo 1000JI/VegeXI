@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MobileCoreServices
 import BSImagePicker
 import Photos
 

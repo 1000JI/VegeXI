@@ -23,3 +23,9 @@ let REF_USER_COMMENTS = DB_REF.child("user-comments")
 
 let REF_FEEDS = DB_REF.child("feeds")
 let REF_FEED_COMMENTS = DB_REF.child("feed-comments")
+
+
+
+// Keys
+
+let KAKAO_RESTFUL_KEY = "2e80cc01d79280aa76ae08fe62ba3aa8"

@@ -7,19 +7,41 @@
 //
 
 import UIKit
+import BSImagePicker
+import Photos
+import Alamofire
 
 class FeedWriteController: UITableViewController {
     
     // MARK: - Properties
     
     private var shareBarButton: UIBarButtonItem!
+    private var feedTitle: String = ""
     private var titleIsEmpty = true
+    private var feedContent: String = ""
     private var contentIsEmpty = true
+    
+    private var location: LocationModel? {
+        didSet { tableView.reloadData() }
+    }
+    
+    private var imageArray = [UIImage]() {
+        didSet { print(imageArray); tableView.reloadData() }
+    }
+    private let imagePicker = ImagePickerController().then {
+        $0.settings.selection.max = 10
+        $0.settings.theme.selectionStyle = .numbered
+        $0.settings.fetch.assets.supportedMediaTypes = [.image]
+        $0.settings.selection.unselectOnReachingMax = true
+    }
     
     private lazy var customToolBarView = CustomToolBarView(
         frame: CGRect(x: 0, y: 0,
                       width: view.frame.width,
-                      height: 60))
+                      height: 60)).then {
+                        $0.tappedCameraButton = tappedCameraButton
+                        $0.tappedLocationButton = tappedLocationButton
+    }
     
     override var inputAccessoryView: UIView? {
         return customToolBarView
@@ -43,14 +65,84 @@ class FeedWriteController: UITableViewController {
     
     // MARK: - Actions
     
+    func tappedLocationDelete() {
+        location = nil
+    }
+    
     func titleTextDidChange(textView: UITextView) {
-        titleIsEmpty = textView.text.isEmpty
-        tableViewUpdate()
+        feedTitle = textView.text
+        titleIsEmpty = feedTitle.isEmpty
+        tableViewUpdate(isContentMode: false)
     }
     
     func contentTextDidChange(textView: UITextView) {
-        contentIsEmpty = textView.text.isEmpty
-        tableViewUpdate()
+        feedContent = textView.text
+        contentIsEmpty = feedContent.isEmpty
+        tableViewUpdate(isContentMode: true)
+    }
+    
+    func tappedCameraButton() {
+        let option = PHImageRequestOptions()
+        option.isSynchronous = true
+        option.isNetworkAccessAllowed = true
+        option.resizeMode = .none
+        
+        self.presentImagePicker(imagePicker, select: { (asset) in
+//            print("Selected: \(asset)")
+        }, deselect: { (asset) in
+//            print("Deselected: \(asset)")
+        }, cancel: { (assets) in
+//            print("Canceled with selections: \(assets)")
+        }, finish: { (assets) in
+//            debugPrint("Finished with selections: \(assets)")
+            self.imageArray.removeAll()
+            self.showLoader(true)
+            assets.forEach {
+                PHImageManager.default().requestImage(
+                    for: $0,
+                    targetSize: PHImageManagerMaximumSize,
+                    contentMode: .aspectFill,
+                    options: option) { (image, error) in
+                        self.showLoader(false)
+                        guard let image = image else { return }
+                        self.imageArray.append(image)
+                }
+            }
+        }, completion: {
+            
+        })
+    }
+    
+    func tappedLocationButton() {
+        let controller = SearchLocationController()
+        controller.delegate = self
+        let naviController = UINavigationController(rootViewController: controller)
+        naviController.modalPresentationStyle = .fullScreen
+        present(naviController, animated: true)
+    }
+    
+    
+    // MARK: - Seletors
+    
+    @objc
+    func tappedShareButton() {
+        FeedService.shared.uploadFeed(
+            title: feedTitle,
+            content: feedContent,
+            imageArray: imageArray,
+            location: location) { (error, ref) in
+                if let error = error {
+                    print("DEBUG: \(error.localizedDescription)")
+                    return
+                }
+                print("FEED UPLOAD SUCCESS")
+                self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    @objc
+    func tappedCloseButton() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     
@@ -61,19 +153,19 @@ class FeedWriteController: UITableViewController {
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.spoqaHanSansBold(ofSize: 16)!]
         
-        let backBarButton = UIBarButtonItem(
-            image: UIImage(named: "naviBar_BackBtnIcon"),
+        let cancelBarButton = UIBarButtonItem(
+            image: UIImage(named: "write_Cancel_Icon"),
             style: .plain,
-            target: nil,
-            action: nil)
-        backBarButton.tintColor = .vegeTextBlackColor
-        navigationItem.leftBarButtonItem = backBarButton
+            target: self,
+            action: #selector(tappedCloseButton))
+        cancelBarButton.tintColor = .vegeTextBlackColor
+        navigationItem.leftBarButtonItem = cancelBarButton
         
         shareBarButton = UIBarButtonItem(
             title: "공유",
             style: .plain,
-            target: nil,
-            action: nil)
+            target: self,
+            action: #selector(tappedShareButton))
         shareBarButton.setTitleTextAttributes([
             NSAttributedString.Key.font: UIFont.spoqaHanSansBold(ofSize: 16)!,
             NSAttributedString.Key.foregroundColor: UIColor.buttonDisabledTextColor
@@ -83,7 +175,12 @@ class FeedWriteController: UITableViewController {
             NSAttributedString.Key.foregroundColor: UIColor.buttonEnabledTextcolor
         ], for: .normal)
         navigationItem.rightBarButtonItem = shareBarButton
-        shareBarButton.isEnabled = false
+        
+        if titleIsEmpty || contentIsEmpty {
+            shareBarButton.isEnabled = false
+        } else {
+            shareBarButton.isEnabled = true
+        }
         
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.backgroundColor = .white
@@ -112,7 +209,7 @@ class FeedWriteController: UITableViewController {
             forCellReuseIdentifier: WriteContentTableCell.identifer)
     }
     
-    func tableViewUpdate() {
+    func tableViewUpdate(isContentMode: Bool) {
         // https://www.swiftdevcenter.com/the-dynamic-height-of-uitextview-inside-uitableviewcell-swift/
         UIView.setAnimationsEnabled(false)
         tableView.beginUpdates()
@@ -123,6 +220,17 @@ class FeedWriteController: UITableViewController {
             shareBarButton.isEnabled = false
         } else {
             shareBarButton.isEnabled = true
+        }
+        
+        
+        if isContentMode {
+            let indexPath = IndexPath(
+                item: 0,
+                section: WriteSection.content.rawValue)
+            tableView.scrollToRow(
+                at: indexPath,
+                at: .bottom,
+                animated: false)
         }
     }
 }
@@ -143,7 +251,14 @@ extension FeedWriteController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        switch WriteSection(rawValue: section)! {
+        case .title: fallthrough
+        case .content: return 1
+        case .map:
+            return location != nil ? 1 : 0
+        case .image:
+            return imageArray.count > 0 ? 1 : 0
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -158,11 +273,14 @@ extension FeedWriteController {
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: WriteMapTableCell.identifer,
                 for: indexPath) as! WriteMapTableCell
+            cell.location = location
+            cell.tappedDeleteEvent = tappedLocationDelete
             return cell
         case .image:
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: WriteImageTableCell.identifer,
                 for: indexPath) as! WriteImageTableCell
+            cell.imageArray = imageArray
             return cell
         case .content:
             let cell = tableView.dequeueReusableCell(
@@ -182,5 +300,13 @@ extension FeedWriteController {
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
+    }
+}
+
+// MARK: - SearchLocationControllerDelegate
+
+extension FeedWriteController: SearchLocationControllerDelegate {
+    func seletedLocation(location: LocationModel) {
+        self.location = location
     }
 }
