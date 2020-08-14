@@ -127,13 +127,29 @@ extension SettingViewController: UITableViewDelegate {
         guard let title = SettingCategories.instance.categoryInfo[indexPath.row]["title"] else { return }
         switch title {
         case "비밀번호 변경":
-            print(1)
+            let nextVC = ForgotPasswordViewController()
+            present(nextVC, animated: true)
         case "문의/버그신고":
-            print(2)
+            let nextVC = BugReportViewController()
+            nextVC.modalPresentationStyle = .fullScreen
+            present(nextVC, animated: true)
         case "서비스 이용 약관":
-            print(3)
+            let nextVC = ExplanationViewController()
+            nextVC.configureViewController(title: "서비스 이용 약관", content: SettingCategories.instance.agreement)
+            nextVC.modalPresentationStyle = .fullScreen
+            present(nextVC, animated: true)
         case "개인정보 처리방침":
-            print(4)
+            let nextVC = ExplanationViewController()
+            nextVC.configureViewController(title: "개인정보 처리방침", content: SettingCategories.instance.privacyPolicy)
+            nextVC.modalPresentationStyle = .fullScreen
+            present(nextVC, animated: true)
+        case "로그아웃":
+            let alert = UIAlertController(title: "정말 로그아웃하시겠습니까?", message: nil, preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "로그아웃", style: .destructive, handler: nil)
+            let cancelAction = UIAlertAction(title: "취소", style: .default, handler: nil)
+            alert.addAction(confirmAction)
+            alert.addAction(cancelAction)
+            present(alert, animated: true)
         default:
             return
         }
