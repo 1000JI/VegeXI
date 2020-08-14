@@ -177,7 +177,6 @@ final class AppleLoginService {
                 nickname: "\(userLastName)\(userFirstName)",
                 uuid: filteredIdentifier,
                 loginType: .apple)
-            print(authModel)
 
             AuthService.shared.authServiceUser(authData: authModel)
         }

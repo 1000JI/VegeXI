@@ -16,11 +16,17 @@ class FeedWriteController: UITableViewController {
     // MARK: - Properties
     
     private var shareBarButton: UIBarButtonItem!
+    private var feedTitle: String = ""
     private var titleIsEmpty = true
+    private var feedContent: String = ""
     private var contentIsEmpty = true
     
-    private var imageArray = [UIImage]() {
+    private var location: LocationModel? {
         didSet { tableView.reloadData() }
+    }
+    
+    private var imageArray = [UIImage]() {
+        didSet { print(imageArray); tableView.reloadData() }
     }
     private let imagePicker = ImagePickerController().then {
         $0.settings.selection.max = 10
@@ -59,23 +65,27 @@ class FeedWriteController: UITableViewController {
     
     // MARK: - Actions
     
+    func tappedLocationDelete() {
+        location = nil
+    }
+    
     func titleTextDidChange(textView: UITextView) {
-        titleIsEmpty = textView.text.isEmpty
+        feedTitle = textView.text
+        titleIsEmpty = feedTitle.isEmpty
         tableViewUpdate(isContentMode: false)
     }
     
     func contentTextDidChange(textView: UITextView) {
-        contentIsEmpty = textView.text.isEmpty
+        feedContent = textView.text
+        contentIsEmpty = feedContent.isEmpty
         tableViewUpdate(isContentMode: true)
     }
     
     func tappedCameraButton() {
-        imageArray.removeAll()
-        
         let option = PHImageRequestOptions()
         option.isSynchronous = true
-        option.isNetworkAccessAllowed = false
-        option.resizeMode = .exact
+        option.isNetworkAccessAllowed = true
+        option.resizeMode = .none
         
         self.presentImagePicker(imagePicker, select: { (asset) in
 //            print("Selected: \(asset)")
@@ -85,12 +95,15 @@ class FeedWriteController: UITableViewController {
 //            print("Canceled with selections: \(assets)")
         }, finish: { (assets) in
 //            debugPrint("Finished with selections: \(assets)")
+            self.imageArray.removeAll()
+            self.showLoader(true)
             assets.forEach {
                 PHImageManager.default().requestImage(
                     for: $0,
                     targetSize: PHImageManagerMaximumSize,
-                    contentMode: .aspectFit,
-                    options: option) { (image, nil) in
+                    contentMode: .aspectFill,
+                    options: option) { (image, error) in
+                        self.showLoader(false)
                         guard let image = image else { return }
                         self.imageArray.append(image)
                 }
@@ -101,33 +114,35 @@ class FeedWriteController: UITableViewController {
     }
     
     func tappedLocationButton() {
-//        let headers: HTTPHeaders = [
-//            "X-Naver-Client-Id": "8EhU9lk1hgPFBWOpkHai",
-//            "X-Naver-Client-Secret": "HkvcjLc9kA"]
-//        let parameters: [String: Any] = [
-//            "query": "알맹상점".utf8,
-//            "display": 10,
-//            "start": 1,
-//            "sort": "random"]
-//
-//        AF.request("https://openapi.naver.com/v1/search/local.json", method: .get, parameters: parameters, headers: headers).responseJSON { response in
-//            switch response.result {
-//
-//            case .success(let value):
-//                print(value)
-//                guard let dictionary = value as? [String: Any] else { return }
-//
-//                print(dictionary["total"])
-//                guard let items = dictionary["items"] as? [[String: Any]] else { return }
-//                print(items)
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-        
-        MapService.shared.searchLocations(keyword: "일루오리") { locations in
-            print(locations)
+        let controller = SearchLocationController()
+        controller.delegate = self
+        let naviController = UINavigationController(rootViewController: controller)
+        naviController.modalPresentationStyle = .fullScreen
+        present(naviController, animated: true)
+    }
+    
+    
+    // MARK: - Seletors
+    
+    @objc
+    func tappedShareButton() {
+        FeedService.shared.uploadFeed(
+            title: feedTitle,
+            content: feedContent,
+            imageArray: imageArray,
+            location: location) { (error, ref) in
+                if let error = error {
+                    print("DEBUG: \(error.localizedDescription)")
+                    return
+                }
+                print("FEED UPLOAD SUCCESS")
+                self.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    @objc
+    func tappedCloseButton() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     
@@ -138,19 +153,19 @@ class FeedWriteController: UITableViewController {
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.spoqaHanSansBold(ofSize: 16)!]
         
-        let backBarButton = UIBarButtonItem(
-            image: UIImage(named: "naviBar_BackBtnIcon"),
+        let cancelBarButton = UIBarButtonItem(
+            image: UIImage(named: "write_Cancel_Icon"),
             style: .plain,
-            target: nil,
-            action: nil)
-        backBarButton.tintColor = .vegeTextBlackColor
-        navigationItem.leftBarButtonItem = backBarButton
+            target: self,
+            action: #selector(tappedCloseButton))
+        cancelBarButton.tintColor = .vegeTextBlackColor
+        navigationItem.leftBarButtonItem = cancelBarButton
         
         shareBarButton = UIBarButtonItem(
             title: "공유",
             style: .plain,
-            target: nil,
-            action: nil)
+            target: self,
+            action: #selector(tappedShareButton))
         shareBarButton.setTitleTextAttributes([
             NSAttributedString.Key.font: UIFont.spoqaHanSansBold(ofSize: 16)!,
             NSAttributedString.Key.foregroundColor: UIColor.buttonDisabledTextColor
@@ -160,7 +175,12 @@ class FeedWriteController: UITableViewController {
             NSAttributedString.Key.foregroundColor: UIColor.buttonEnabledTextcolor
         ], for: .normal)
         navigationItem.rightBarButtonItem = shareBarButton
-        shareBarButton.isEnabled = false
+        
+        if titleIsEmpty || contentIsEmpty {
+            shareBarButton.isEnabled = false
+        } else {
+            shareBarButton.isEnabled = true
+        }
         
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.backgroundColor = .white
@@ -235,7 +255,7 @@ extension FeedWriteController {
         case .title: fallthrough
         case .content: return 1
         case .map:
-            return 1
+            return location != nil ? 1 : 0
         case .image:
             return imageArray.count > 0 ? 1 : 0
         }
@@ -253,6 +273,8 @@ extension FeedWriteController {
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: WriteMapTableCell.identifer,
                 for: indexPath) as! WriteMapTableCell
+            cell.location = location
+            cell.tappedDeleteEvent = tappedLocationDelete
             return cell
         case .image:
             let cell = tableView.dequeueReusableCell(
@@ -278,5 +300,13 @@ extension FeedWriteController {
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
+    }
+}
+
+// MARK: - SearchLocationControllerDelegate
+
+extension FeedWriteController: SearchLocationControllerDelegate {
+    func seletedLocation(location: LocationModel) {
+        self.location = location
     }
 }

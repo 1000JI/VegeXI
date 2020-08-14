@@ -179,3 +179,13 @@ extension UIFont {
 extension UIImage {
     static let basicHumanImage = UIImage(named: "cell_Human")?.withRenderingMode(.alwaysOriginal)
 }
+
+extension UINavigationController {
+    func removeUnderLineWhiteNaviBar() {
+        navigationBar.barTintColor = .white
+        navigationBar.backgroundColor = .white
+        navigationBar.setBackgroundImage(UIImage(), for:.default)
+        navigationBar.shadowImage = UIImage()
+        navigationBar.layoutIfNeeded()
+    }
+}

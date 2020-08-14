@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 
 struct LocationModel {
+    let id: String
     let placeName: String
     let addressName: String
     let roadAddressName: String
@@ -18,6 +19,7 @@ struct LocationModel {
     let latitude: Double
     
     init(dictionary: [String: Any]) {
+        self.id = dictionary["id"] as? String ?? "느린채식"
         self.placeName = dictionary["place_name"] as? String ?? "느린채식"
         self.addressName = dictionary["address_name"] as? String ?? "느린채식"
         self.roadAddressName = dictionary["road_address_name"] as? String ?? "느린채식"

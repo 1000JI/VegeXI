@@ -13,7 +13,10 @@ class FeedDetailController: UIViewController {
     // MARK: - Properties
     
     var feed: Feed? {
-        didSet { detailHeaderView.feed = feed }
+        didSet {
+            detailHeaderView.feed = feed
+            detailTableView.reloadData()
+        }
     }
     
     var firstEnter = true
@@ -25,16 +28,7 @@ class FeedDetailController: UIViewController {
     private let detailTableView = UITableView(
         frame: .zero, style: .grouped)
     private lazy var detailHeaderView = DetailHeaderView().then {
-        $0.tappedLikeButton = tappedLikeButton
-        $0.tappedBookmarkButton = tappedBookmarkButton
         $0.tappedMoreButton = tappedMoreButton
-    }
-    private let nothingCommentLabel = UILabel().then {
-        $0.text = "첫번째 댓글을 남겨주세요🥕"
-        $0.textColor = .vegeTextBlackColor
-        $0.font = UIFont.spoqaHanSansRegular(ofSize: 14)
-        $0.textAlignment = .center
-        $0.backgroundColor = .white
     }
     
     private lazy var customInputView = CustomInputAccessoryView(frame:
@@ -81,17 +75,29 @@ class FeedDetailController: UIViewController {
             self.comments = comments
             self.showLoader(false)
             self.tableViewNewCommentMove()
-            
-            if comments.count > 0 {
-                self.showCommentRequestLabel(isShow: false)
-            } else {
-                self.showCommentRequestLabel(isShow: true)
-            }
         }
     }
     
     
     // MARK: - Actions
+    
+    func tappedLocationButton(location: LocationModel) {
+//        kakaomap://look?p=37.537229,127.005515
+//        let url = URL(string: "kakaomap://look?p=\(location.latitude),\(location.longitude)")
+        let url = URL(string: "kakaomap://place?id=\(location.id)")
+        if let appUrl = url {
+            if UIApplication.shared.canOpenURL(appUrl) {
+                UIApplication.shared.open(appUrl,
+                                          options: [:],
+                                          completionHandler: nil)
+            }
+        } else {
+            //https://apps.apple.com/us/app/id304608425
+            let appStoreURL = URL(string: "https://apps.apple.com/us/app/id304608425")!
+            UIApplication.shared.open(appStoreURL,
+                                      options: [:])
+        }
+    }
     
     func tappedLikeButton() {
         guard let feed = feed else { return }
@@ -150,7 +156,6 @@ class FeedDetailController: UIViewController {
                     print("DEBUG: COMMENT ERROR \(error.localizedDescription)")
                     return
                 }
-                print("COMMENT UPLOAD SUCCESS")
                 self.feed?.comments += 1
         }
     }
@@ -158,14 +163,10 @@ class FeedDetailController: UIViewController {
     
     // MARK: - Helpers
     
-    func showCommentRequestLabel(isShow: Bool) {
-        nothingCommentLabel.isHidden = !isShow
-    }
-    
     func configureUI() {
         view.backgroundColor = .white
         
-        [detailCustomBar, detailTableView, nothingCommentLabel].forEach {
+        [detailCustomBar, detailTableView].forEach {
             view.addSubview($0)
         }
         
@@ -176,10 +177,6 @@ class FeedDetailController: UIViewController {
             $0.top.equalTo(detailCustomBar.snp.bottom)
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-        nothingCommentLabel.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-60)
-            $0.centerX.equalToSuperview()
-        }
     }
     
     func configureTableView() {
@@ -189,8 +186,25 @@ class FeedDetailController: UIViewController {
         detailTableView.separatorStyle = .none
         detailTableView.allowsSelection = false
         detailTableView.keyboardDismissMode = .interactive
-        detailTableView.register(CommentTableViewCell.self,
-                                 forCellReuseIdentifier: CommentTableViewCell.identifier)
+        detailTableView.tableFooterView = UIView()
+        detailTableView.sectionFooterHeight = 0
+        detailTableView.contentInset = UIEdgeInsets(top: -35, left: 0, bottom: 35, right: 0)
+        
+        detailTableView.register(
+            DetailTitleTableCell.self,
+            forCellReuseIdentifier: DetailTitleTableCell.identifer)
+        detailTableView.register(
+            DetailMapTableCell.self,
+            forCellReuseIdentifier: DetailMapTableCell.identifer)
+        detailTableView.register(
+            DetailImageTableCell.self,
+            forCellReuseIdentifier: DetailImageTableCell.identifer)
+        detailTableView.register(
+            DetailContentTableCell.self,
+            forCellReuseIdentifier: DetailContentTableCell.identifer)
+        detailTableView.register(
+            CommentTableViewCell.self,
+            forCellReuseIdentifier: CommentTableViewCell.identifier)
     }
     
     func configureEvent() {
@@ -234,8 +248,10 @@ class FeedDetailController: UIViewController {
     func tableViewNewCommentMove() {
         if !self.firstEnter {
             guard comments.count > 0 else { return }
+            print(#function, comments.count)
             let commentsCount = comments.count - 1
-            let indexPath = IndexPath(row: commentsCount, section: 0)
+            let section = FeedDetailSection.comment.rawValue
+            let indexPath = IndexPath(row: commentsCount, section: section)
             detailTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
         }
     }
@@ -250,14 +266,62 @@ class FeedDetailController: UIViewController {
 // MARK: - UITableViewDataSource
 
 extension FeedDetailController: UITableViewDataSource {
+    enum FeedDetailSection: Int, CaseIterable {
+        case title
+        case map
+        case image
+        case content
+        case comment
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return FeedDetailSection.allCases.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return comments.count
+        switch FeedDetailSection(rawValue: section)! {
+        case .title: fallthrough
+        case .content: return 1
+        case .map: return feed?.location != nil ? 1 : 0
+        case .image: return feed?.imageUrls != nil ? 1 : 0
+        case .comment: return comments.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CommentTableViewCell.identifier, for: indexPath) as! CommentTableViewCell
-        cell.comment = comments[indexPath.row]
-        return cell
+        switch FeedDetailSection(rawValue: indexPath.section)! {
+        case .title:
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: DetailTitleTableCell.identifer,
+                for: indexPath) as! DetailTitleTableCell
+            cell.titleTextView.text = feed?.title
+            return cell
+        case .map:
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: DetailMapTableCell.identifer,
+                for: indexPath) as! DetailMapTableCell
+            cell.location = feed?.location
+            cell.tappedLocationEvent = tappedLocationButton(location:)
+            return cell
+        case .image:
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: DetailImageTableCell.identifer,
+                for: indexPath) as! DetailImageTableCell
+            cell.imageUrlArray = feed!.imageUrls!
+            return cell
+        case .content:
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: DetailContentTableCell.identifer,
+                for: indexPath) as! DetailContentTableCell
+            cell.tappedBookmarkButton = tappedBookmarkButton
+            cell.tappedLikeButton = tappedLikeButton
+            cell.feed = feed
+            return cell
+        case .comment:
+            let cell = tableView.dequeueReusableCell(withIdentifier: CommentTableViewCell.identifier, for: indexPath) as! CommentTableViewCell
+            cell.comment = comments[indexPath.row]
+            return cell
+        }
     }
 }
 
@@ -265,16 +329,24 @@ extension FeedDetailController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 
 extension FeedDetailController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return detailHeaderView
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == 0 ? UITableView.automaticDimension : 0
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-        return 800
+        return 100
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return section == 0 ? detailHeaderView : nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         // https://arcjeen.tistory.com/15
-        return UITableView.automaticDimension
+        return 44
     }
 }

@@ -105,6 +105,7 @@ class WriteImageCollectionCell: UICollectionViewCell {
         $0.backgroundColor = .blue
         $0.layer.cornerRadius = 8
         $0.clipsToBounds = true
+        $0.contentMode = .scaleAspectFill
     }
     
     // MARK: - LifeCycle

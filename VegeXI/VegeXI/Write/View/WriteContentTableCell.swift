@@ -27,6 +27,7 @@ class WriteContentTableCell: UITableViewCell {
         $0.font = UIFont.spoqaHanSansRegular(ofSize: 14)
         $0.delegate = self
         $0.isScrollEnabled = false
+        $0.backgroundColor = .white
         
         $0.addSubview(contentPlaceHolder)
         contentPlaceHolder.snp.makeConstraints {
