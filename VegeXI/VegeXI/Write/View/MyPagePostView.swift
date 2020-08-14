@@ -12,6 +12,7 @@ class MyPagePostView: UIView {
     
     // MARK: - Properties
     let postTableview = UITableView()
+    private let mockData = MockData.postExample
     
     
     // MARK: - Lifecycle
@@ -35,9 +36,10 @@ class MyPagePostView: UIView {
         postTableview.register(MyPagePostTableViewCell.self, forCellReuseIdentifier: MyPagePostTableViewCell.identifier)
         postTableview.dataSource = self
         postTableview.delegate = self
-        postTableview.rowHeight = 192
+        postTableview.rowHeight = 150
         postTableview.backgroundColor = .white
         postTableview.separatorStyle = .none
+        postTableview.showsVerticalScrollIndicator = false
     }
     
     private func setConstraints() {
@@ -57,18 +59,30 @@ class MyPagePostView: UIView {
 extension MyPagePostView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return mockData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            guard let cell = postTableview.dequeueReusableCell(withIdentifier: MyPagePostTableViewCell.identifier, for: indexPath) as? MyPagePostTableViewCell else { fatalError() }
-        cell.selectionStyle = .none
+        guard let cell = postTableview.dequeueReusableCell(withIdentifier: MyPagePostTableViewCell.identifier, for: indexPath) as? MyPagePostTableViewCell else { fatalError() }
+        let data = mockData[indexPath.row]
+        guard
+            let title = data["title"] as? String,
+            let subtitle = data["subtitle"] as? String,
+            let imageName = data["image"] as? String,
+            let date = data["date"] as? String,
+            let likes = data["likes"] as? Int,
+            let comments = data["comments"] as? Int
+            else { fatalError() }
+        let feedType: FeedType = imageName == "" ? .textType : .picAndTextType
+        let image = imageName != "" ? UIImage(named: imageName) ?? UIImage() : UIImage()
+        cell.configureCell(title: title, subtitle: subtitle, image: image, date: date, likes: likes, comments: comments, feedType: feedType)
         return cell
     }
     
 }
 
 
+// MARK: - UITableViewDelegate
 extension MyPagePostView: UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {

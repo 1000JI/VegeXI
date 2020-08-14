@@ -163,6 +163,8 @@ extension UIColor {
     static let buttonDisabledTextColor = UIColor(rgb: 0xD8D8D8)
     static let buttonEnabledTextcolor = UIColor(rgb: 0x0AB682)
     static let textViewPlaceholderTextColor = UIColor(rgb: 0xA5A5A5)
+    static let postGray = UIColor(rgb: 0xA5A5A5)
+    
 }
 
 extension UIFont {
