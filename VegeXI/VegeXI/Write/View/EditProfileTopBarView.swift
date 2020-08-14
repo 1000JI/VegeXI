@@ -26,8 +26,9 @@ class EditProfileTopBarView: UIView {
     
     
     // MARK: - Lifecycle
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(title text: String) {
+        super.init(frame: .zero)
+        barTitle.text = text
         configureUI()
     }
     

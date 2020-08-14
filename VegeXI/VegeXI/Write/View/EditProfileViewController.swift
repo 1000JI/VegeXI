@@ -11,7 +11,7 @@ import UIKit
 class EditProfileViewController: UIViewController {
 
     // MARK: - Properties
-    private let topBarView = EditProfileTopBarView()
+    private let topBarView = EditProfileTopBarView(title: EditProfileStrings.barTitle.generateString())
     private let editingView = EditProfileEditingView()
     private let typeSelectionView = EditProfileSelectTypeView()
     private let bottomBarView = FilterViewBottomBar(title: EditProfileStrings.confirm.generateString())

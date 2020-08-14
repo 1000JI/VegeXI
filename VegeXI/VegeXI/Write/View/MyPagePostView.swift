@@ -69,13 +69,14 @@ extension MyPagePostView: UITableViewDataSource {
             let title = data["title"] as? String,
             let subtitle = data["subtitle"] as? String,
             let imageName = data["image"] as? String,
+            let numberOfImages = data["numberOfImages"] as? Int,
             let date = data["date"] as? String,
             let likes = data["likes"] as? Int,
             let comments = data["comments"] as? Int
             else { fatalError() }
         let feedType: FeedType = imageName == "" ? .textType : .picAndTextType
         let image = imageName != "" ? UIImage(named: imageName) ?? UIImage() : UIImage()
-        cell.configureCell(title: title, subtitle: subtitle, image: image, date: date, likes: likes, comments: comments, feedType: feedType)
+        cell.configureCell(title: title, subtitle: subtitle, image: image, numberOfImages: numberOfImages, date: date, likes: likes, comments: comments, feedType: feedType)
         return cell
     }
     

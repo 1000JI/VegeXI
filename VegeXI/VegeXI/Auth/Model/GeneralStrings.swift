@@ -130,3 +130,15 @@ enum EditProfileStrings {
         }
     }
 }
+
+enum SettingViewStrings {
+    case barTitle
+    
+    func generateString() -> String {
+        switch self {
+        case .barTitle:
+            return "설정"
+        }
+    }
+    
+}

@@ -41,6 +41,9 @@
 		42834C8524E60143000C91F0 /* MyPagePostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42834C8424E60143000C91F0 /* MyPagePostTableViewCell.swift */; };
 		42834C8724E60164000C91F0 /* MyPageBookmarkableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42834C8624E60164000C91F0 /* MyPageBookmarkableViewCell.swift */; };
 		42834C8924E6033B000C91F0 /* MyPagePostTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42834C8824E6033B000C91F0 /* MyPagePostTableViewHeader.swift */; };
+		42834C8B24E64C9F000C91F0 /* MyPageBookmarkableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42834C8A24E64C9F000C91F0 /* MyPageBookmarkableViewHeader.swift */; };
+		42834C8D24E65095000C91F0 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42834C8C24E65095000C91F0 /* SettingViewController.swift */; };
+		42834C8F24E654F3000C91F0 /* SettingViewCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42834C8E24E654F3000C91F0 /* SettingViewCellType.swift */; };
 		4296390B24E572CA00ED23C7 /* EditProfileTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4296390A24E572CA00ED23C7 /* EditProfileTypeTableViewCell.swift */; };
 		42ABADB424E140490094CA9A /* NewFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADB324E140490094CA9A /* NewFilterViewController.swift */; };
 		42ABADB624E14FFF0094CA9A /* VegetarianInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADB524E14FFF0094CA9A /* VegetarianInfoView.swift */; };
@@ -162,6 +165,9 @@
 		42834C8424E60143000C91F0 /* MyPagePostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPagePostTableViewCell.swift; path = VegeXI/Write/View/MyPagePostTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		42834C8624E60164000C91F0 /* MyPageBookmarkableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPageBookmarkableViewCell.swift; path = VegeXI/Write/View/MyPageBookmarkableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		42834C8824E6033B000C91F0 /* MyPagePostTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPagePostTableViewHeader.swift; path = VegeXI/Write/View/MyPagePostTableViewHeader.swift; sourceTree = SOURCE_ROOT; };
+		42834C8A24E64C9F000C91F0 /* MyPageBookmarkableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPageBookmarkableViewHeader.swift; path = VegeXI/Write/View/MyPageBookmarkableViewHeader.swift; sourceTree = SOURCE_ROOT; };
+		42834C8C24E65095000C91F0 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingViewController.swift; path = VegeXI/Write/View/SettingViewController.swift; sourceTree = SOURCE_ROOT; };
+		42834C8E24E654F3000C91F0 /* SettingViewCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewCellType.swift; sourceTree = "<group>"; };
 		4296390A24E572CA00ED23C7 /* EditProfileTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileTypeTableViewCell.swift; path = VegeXI/Write/View/EditProfileTypeTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		42ABADB324E140490094CA9A /* NewFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFilterViewController.swift; sourceTree = "<group>"; };
 		42ABADB524E14FFF0094CA9A /* VegetarianInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VegetarianInfoView.swift; sourceTree = "<group>"; };
@@ -290,6 +296,7 @@
 		AF2EE70024D86C4100A956BD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				42834C8E24E654F3000C91F0 /* SettingViewCellType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -359,6 +366,7 @@
 				426750C024E4DDAE00511163 /* EditProfileTopBarView.swift */,
 				426750BA24E4B73300511163 /* MyPageBookmarkView.swift */,
 				42834C8624E60164000C91F0 /* MyPageBookmarkableViewCell.swift */,
+				42834C8A24E64C9F000C91F0 /* MyPageBookmarkableViewHeader.swift */,
 				426750BE24E4C6A600511163 /* MyPageCategoryView.swift */,
 				426750B824E4B71100511163 /* MyPagePostView.swift */,
 				42834C8424E60143000C91F0 /* MyPagePostTableViewCell.swift */,
@@ -374,6 +382,7 @@
 			children = (
 				424C6FFA24E4B611005859BF /* EditProfileViewController.swift */,
 				424C6FF824E4B5EA005859BF /* MyPageViewController.swift */,
+				42834C8C24E65095000C91F0 /* SettingViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -793,17 +802,20 @@
 				4267C94F24DACA4100702BAC /* SignButton.swift in Sources */,
 				4267C95B24DBC36800702BAC /* ForgotPasswordViewController.swift in Sources */,
 				42BE29EA24DD2E4600449221 /* FilterViewController.swift in Sources */,
+				42834C8F24E654F3000C91F0 /* SettingViewCellType.swift in Sources */,
 				42ABADBC24E2219D0094CA9A /* AlignedCollectionViewFlowLayout.swift in Sources */,
 				4267C95124DAE51200702BAC /* SignView.swift in Sources */,
 				42BE29F224DD424400449221 /* FilterViewBottomBar.swift in Sources */,
 				AF58173224D7DF9200F2683D /* SNSLoginService.swift in Sources */,
 				42BE29EC24DD307E00449221 /* FilterViewTopBar.swift in Sources */,
+				42834C8B24E64C9F000C91F0 /* MyPageBookmarkableViewHeader.swift in Sources */,
 				AF58B5F824E14D7A00BA2224 /* FeedDetailController.swift in Sources */,
 				AF2EE70424D87B4800A956BD /* AuthService.swift in Sources */,
 				42ABADBE24E28CB70094CA9A /* NotificationViewController.swift in Sources */,
 				4267C95524DB1BD900702BAC /* SignUpStrings.swift in Sources */,
 				426750BD24E4B95200511163 /* MyPageTopBarView.swift in Sources */,
 				424C6FF724E437EA005859BF /* SharePostSettingSwitchView.swift in Sources */,
+				42834C8D24E65095000C91F0 /* SettingViewController.swift in Sources */,
 				426750C924E4FA9100511163 /* EditProfileTextFieldView.swift in Sources */,
 				4257EF4224DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift in Sources */,
 				AF89330324E3D69D00221AA6 /* WriteContentTableCell.swift in Sources */,

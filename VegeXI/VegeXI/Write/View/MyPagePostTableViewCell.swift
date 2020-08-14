@@ -26,7 +26,16 @@ class MyPagePostTableViewCell: UITableViewCell {
     }
     private let postImage = UIImageView().then {
         $0.clipsToBounds = true
-        $0.layer.cornerRadius = 5
+        $0.layer.cornerRadius = 10
+    }
+    private let numberOfImagesLabel = UILabel().then {
+        $0.font = UIFont.spoqaHanSansRegular(ofSize: 10)
+        $0.textColor = .white
+        $0.textAlignment = .center
+        $0.layer.cornerRadius = 8
+        let backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        $0.backgroundColor = backgroundColor
+        $0.clipsToBounds = true
     }
     private let postingDate = UILabel().then {
         $0.font = UIFont.spoqaHanSansRegular(ofSize: 12)
@@ -102,13 +111,15 @@ class MyPagePostTableViewCell: UITableViewCell {
     }
     
     private func setPropertyAttributes() {
-        
+        numberOfImagesLabel.alpha = numberOfImagesLabel.text == "1" ? 0 : 1
     }
     
     private func setConstraints() {
         [postTitle, postSubtitle, postImage, postingDate, infoStackView, separator].forEach {
             self.addSubview($0)
         }
+        postImage.addSubview(numberOfImagesLabel)
+        
         switch feedType {
         case .picAndTextType:
             setConstraintsForPicAndTextType()
@@ -119,6 +130,11 @@ class MyPagePostTableViewCell: UITableViewCell {
             $0.snp.makeConstraints {
                 $0.width.height.equalTo(20)
             }
+        }
+        numberOfImagesLabel.snp.makeConstraints {
+            $0.top.trailing.equalToSuperview().inset(8)
+            $0.width.equalTo(22)
+            $0.height.equalTo(17)
         }
         separator.snp.makeConstraints {
             $0.height.equalTo(1)
@@ -174,10 +190,11 @@ class MyPagePostTableViewCell: UITableViewCell {
     
     
     // MARK: - Helpers
-    func configureCell(title: String, subtitle: String, image: UIImage, date: String, likes: Int, comments: Int, feedType: FeedType) {
+    func configureCell(title: String, subtitle: String, image: UIImage, numberOfImages: Int, date: String, likes: Int, comments: Int, feedType: FeedType) {
         postTitle.text = title
         postSubtitle.text = subtitle
         postImage.image = image
+        numberOfImagesLabel.text = String(numberOfImages)
         postingDate.text = date
         likesLabel.text = String(likes)
         commentsLabel.text = String(comments)
