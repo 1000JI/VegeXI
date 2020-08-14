@@ -35,7 +35,7 @@ class MainTabBarController: UITabBarController {
         super.viewDidAppear(animated)
         if !registerButtonInit {
             setupMiddleButton()
-            registerButtonInit.toggle()
+            registerButtonInit = true
         }
         
     }
@@ -79,7 +79,7 @@ class MainTabBarController: UITabBarController {
             image: nil,
             selectedImage: nil)
         
-        let myPageViewController = UIViewController()
+        let myPageViewController = MyPageViewController()
         let naviMyPage = UINavigationController(rootViewController: myPageViewController)
         naviMyPage.tabBarItem = UITabBarItem(
             title: "마이페이지",

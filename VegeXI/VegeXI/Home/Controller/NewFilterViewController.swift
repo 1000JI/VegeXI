@@ -71,8 +71,7 @@ class NewFilterViewController: UIViewController {
     
     // MARK: - Helpers
     private func closeFilterView() {
-        present(SharePostViewController(), animated: true)
-        print(#function)
+        self.dismiss(animated: true, completion: nil)
     }
     
     private func applyFilter() {

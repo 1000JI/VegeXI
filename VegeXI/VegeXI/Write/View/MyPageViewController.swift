@@ -25,6 +25,11 @@ class MyPageViewController: UIViewController {
         configureUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
     
     // MARK: - UI
     private func configureUI() {

@@ -80,7 +80,8 @@ class HomeViewController: UIViewController {
     }
     
     func tappedFilterEvent() {
-        let filterController = FilterViewController()
+        let filterController = NewFilterViewController()
+        filterController.modalPresentationStyle = .fullScreen
         present(filterController, animated: true)
     }
     
