@@ -21,6 +21,7 @@ enum SignErrors {
     case passwordNotMatching
     case fillNickName
     case missingEmail
+    case nicknameAlreadyInUse
     
     func generateErrorMessage() -> String {
         switch self {
@@ -48,6 +49,8 @@ enum SignErrors {
             return "닉네임을 입력해주세요."
         case .missingEmail:
             return "이메일 주소를 입력해주세요"
+        case .nicknameAlreadyInUse:
+            return "중복된 닉네임 입니다."
         }
     }
 }

@@ -33,6 +33,7 @@ class MyPageCategoryView: UIView {
     
     private var firstSectionTapGesture: UITapGestureRecognizer?
     private var secondSectionTapGesture: UITapGestureRecognizer?
+    private var controlSections: (Int) -> Void = { _ in return }
     
     
     // MARK: - Lifecycle
@@ -154,12 +155,20 @@ class MyPageCategoryView: UIView {
         case firstSectionTapGesture:
             selectedSectionNumber = 0
             handleSectionSelected(sectionNumber: selectedSectionNumber)
+            controlSections(selectedSectionNumber)
         case secondSectionTapGesture:
             selectedSectionNumber = 1
             handleSectionSelected(sectionNumber: selectedSectionNumber)
+            controlSections(selectedSectionNumber)
         default:
             break
         }
+    }
+    
+    
+    // MARK: - Helpers
+    func prepareForActions(action: @escaping (Int) -> Void) {
+        controlSections = action
     }
     
 }

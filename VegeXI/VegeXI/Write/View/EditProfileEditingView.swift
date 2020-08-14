@@ -11,16 +11,16 @@ import UIKit
 class EditProfileEditingView: UIView {
     
     // MARK: - Properties
-    let profileViewContainer = UIView()
+    private let profileViewContainer = UIView()
     
-    let profileImageView = UIImageView().then {
+    private let profileImageView = UIImageView().then {
         $0.clipsToBounds = true
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 112 / 2
         $0.backgroundColor = .red
     }
     let profileEditButton = UIButton().then {
-        let image = UIImage(named: "EditProfile_Icon")?.withTintColor(.vegeTextBlackColor, renderingMode: .alwaysOriginal)
+        let image = UIImage(systemName: "camera.fill")?.withTintColor(.vegeTextBlackColor, renderingMode: .alwaysOriginal)
         $0.setImage(image, for: .normal)
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 32 / 2
@@ -28,13 +28,13 @@ class EditProfileEditingView: UIView {
         $0.layer.borderWidth = 0.5
     }
     
-    let nicknameLable = UILabel().then {
+    private let nicknameLable = UILabel().then {
         $0.text = EditProfileStrings.nickname.generateString()
         $0.font = UIFont.spoqaHanSansRegular(ofSize: 16)
         $0.textColor = .vegeTextBlackColor
     }
     let nicknameTextField = EditProfileTextFieldView()
-    
+    private let myNickname = "뚜꾸리"
     
     
     // MARK: - Lifecycle
@@ -55,7 +55,7 @@ class EditProfileEditingView: UIView {
     }
     
     private func setPropertyAttributes() {
-        
+        nicknameTextField.textField.text = myNickname
     }
     
     private func setConstraints() {

@@ -115,4 +115,36 @@ struct MockData {
             "time": "지난 달",
         ],
     ]
+    
+    static var editProfileVegeTypes =
+        [
+            ["title": "비건", "image": "Vegun_Info"],
+            ["title": "오보", "image": "Ovo_Info"],
+            ["title": "락토", "image": "Lacto_Info"],
+            ["title": "락토오보", "image": "LactoOvo_Info"],
+            ["title": "페스코", "image": "Pesco_Info"],
+            ["title": "지향없음", "image": ""]
+    ]
+    
+    static var postExample = [
+        [
+            "title": "[비건 브랜드] 멜릭서 립밤 추천…",
+            "subtitle": "글은 최신순으로 보여지게 해주세요!!!!!!!! ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ…",
+            "image": "feed_Example",
+            "numberOfImages": 10,
+            "date": "2020. 08. 07",
+            "likes": 3,
+            "comments": 2,
+        ],
+        [
+            "title": "안녕안녕 힘들다 배고프다 집에 가고싶어! 졸려!후 학ㅎ하하하하하헤헤히히히히히히히히히히히히히",
+            "subtitle": "내용은 두줄까지 들어가고 길어지면 말줄임표 들어갈 수 있게 해주세용ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ…",
+            "image": "",
+            "numberOfImages": 0,
+            "date": "2020. 07. 07",
+            "likes": 3,
+            "comments": 2,
+        ],
+    ]
+    
 }

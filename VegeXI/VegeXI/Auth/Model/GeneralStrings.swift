@@ -106,6 +106,10 @@ enum EditProfileStrings {
     case barTitle
     case nickname
     case vegeType
+    case confirm
+    case camera
+    case album
+    case cancel
     
     func generateString() -> String {
         switch self {
@@ -115,6 +119,26 @@ enum EditProfileStrings {
             return "닉네임"
         case .vegeType:
             return "지향하는 채식타입"
+        case .confirm:
+            return "확인"
+        case .camera:
+            return "사진 촬영"
+        case .album:
+            return "앨범에서 선택"
+        case .cancel:
+            return "취소"
         }
     }
+}
+
+enum SettingViewStrings {
+    case barTitle
+    
+    func generateString() -> String {
+        switch self {
+        case .barTitle:
+            return "설정"
+        }
+    }
+    
 }

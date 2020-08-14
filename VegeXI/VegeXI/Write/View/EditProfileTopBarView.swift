@@ -11,7 +11,7 @@ import UIKit
 class EditProfileTopBarView: UIView {
     
     // MARK: - Properties
-    private let barTitle = UILabel().then {
+    let barTitle = UILabel().then {
         $0.text = EditProfileStrings.barTitle.generateString()
         $0.font = UIFont.spoqaHanSansBold(ofSize: 16)
         $0.textColor = .vegeTextBlackColor
@@ -26,8 +26,9 @@ class EditProfileTopBarView: UIView {
     
     
     // MARK: - Lifecycle
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(title text: String) {
+        super.init(frame: .zero)
+        barTitle.text = text
         configureUI()
     }
     
