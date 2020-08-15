@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MobileCoreServices
 
 class EditProfileViewController: UIViewController {
 
@@ -18,6 +19,11 @@ class EditProfileViewController: UIViewController {
     
     private lazy var typeTableView = typeSelectionView.vegeTypeTableView
     
+    private let imagePicker = UIImagePickerController()
+    
+    var user: User? {
+        didSet { configureViewData() }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -53,6 +59,7 @@ class EditProfileViewController: UIViewController {
         
         editingView.nicknameTextField.textField.delegate = self
         typeTableView.delegate = self
+        imagePicker.delegate = self
     }
     
     private func setConstraints() {
@@ -77,7 +84,11 @@ class EditProfileViewController: UIViewController {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(75)
         }
-        
+    }
+    
+    func configureViewData() {
+        guard let user = user else { return }
+        editingView.user = user
     }
     
     
@@ -90,8 +101,19 @@ class EditProfileViewController: UIViewController {
     @objc
     private func handleProfileEditButton(_ sender: UIButton) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction(title: EditProfileStrings.camera.generateString(), style: .default, handler: nil)
-        let albumAction = UIAlertAction(title: EditProfileStrings.album.generateString(), style: .default, handler: nil)
+        alert.view.tintColor = .black
+        
+        let cameraAction = UIAlertAction(title: EditProfileStrings.camera.generateString(), style: .default) { ACTION in
+            guard UIImagePickerController.isSourceTypeAvailable(.camera) else { return }
+            self.imagePicker.sourceType = .camera
+            self.imagePicker.mediaTypes = [kUTTypeImage] as [String]
+            self.present(self.imagePicker, animated: true)
+        }
+        let albumAction = UIAlertAction(title: EditProfileStrings.album.generateString(), style: .default) { ACTION in
+            self.imagePicker.sourceType = .savedPhotosAlbum
+            self.imagePicker.allowsEditing = true
+            self.present(self.imagePicker, animated: true)
+        }
         let cancelAction = UIAlertAction(title: EditProfileStrings.cancel.generateString(), style: .cancel, handler: nil)
         [cameraAction, albumAction, cancelAction].forEach {
             alert.addAction($0)
@@ -135,5 +157,21 @@ extension EditProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? EditProfileTypeTableViewCell else { return }
         cell.isClicked = false
+    }
+}
+
+
+// MARK: - UIImagePickerControllerDelegate
+extension EditProfileViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let mediaType = info[.mediaType] as! NSString
+        if UTTypeEqual(mediaType, kUTTypeImage) {
+            let originalImage = info[.originalImage] as! UIImage
+            let editedImage = info[.editedImage] as? UIImage
+
+            let selectedImage = editedImage ?? originalImage
+            editingView.profileImageView.image = selectedImage
+        }
+        self.imagePicker.dismiss(animated: true, completion: nil)
     }
 }
