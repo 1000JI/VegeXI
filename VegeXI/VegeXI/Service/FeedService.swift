@@ -14,6 +14,60 @@ struct FeedService {
     static let shared = FeedService()
     private init() { }
     
+    func fetchMyBookmark(userUid: String, completion: @escaping([Feed]) -> Void) {
+        var bookmarkFeeds = [Feed]()
+        
+        REF_USER_BOOKMARKS.child(userUid).observeSingleEvent(of: .value) { snapshot in
+            guard let values = snapshot.value as? [String: Int] else {
+                completion(bookmarkFeeds)
+                return
+            }
+            values.keys.forEach {
+                self.fetchFeed(feedID: $0) { feed in
+                    bookmarkFeeds.append(feed)
+                    completion(bookmarkFeeds)
+                }
+            }
+        }
+    }
+    
+    func fetchMyFeeds(userUid: String, completion: @escaping([Feed]) -> Void) {
+        var myFeeds = [Feed]()
+        
+        REF_USER_FEEDS.child(userUid).observeSingleEvent(of: .value) { snapshot in
+            guard let values = snapshot.value as? [String: Int] else {
+                completion(myFeeds)
+                return
+            }
+            values.keys.forEach {
+                self.fetchFeed(feedID: $0) { feed in
+                    myFeeds.append(feed)
+                    completion(myFeeds)
+                }
+            }
+        }
+    }
+    
+    func fetchFeed(feedID: String, completion: @escaping(Feed) -> Void) {
+        REF_FEEDS.child(feedID).observeSingleEvent(of: .value) { snapshot in
+            guard let dictionary = snapshot.value as? [String: Any] else { return }
+            guard let uid = dictionary["writerUid"] as? String else { return }
+            
+            UserService.shared.fetchUser(uid: uid) { user in
+                var feed = Feed(user: user, feedID: feedID, dictionary: dictionary)
+                
+                switch feed.feedType {
+                case .textType: completion(feed)
+                case .picAndTextType:
+                    self.fetchFeedPictures(findKey: feedID) { urls in
+                        feed.imageUrls = urls
+                        completion(feed)
+                    }
+                }
+            }
+        }
+    }
+    
     func fetchComments(feedID: String, completion: @escaping([Comment]) -> Void) {
         var comments = [Comment]()
         

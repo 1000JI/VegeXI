@@ -133,6 +133,8 @@ class FBSignInViewController: UIViewController {
                 return
             } else {
                 guard let userUid = authResult?.user.uid else { return }
+                AuthService.shared.saveUserDefaultUID(withUid: userUid)
+                
                 guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
                 let controller = MainTabBarController()
                 controller.userUid = userUid

@@ -10,14 +10,6 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
-enum LoginType: String {
-    case kakao
-    case naver
-    case google
-    case apple
-    case basic
-}
-
 struct AuthModel {
     let email: String
     let nickname: String
@@ -70,7 +62,8 @@ struct AuthService {
                             "nickname": authData.nickname,
                             "profileImageUrl": profileImageUrl,
                             "uid": uid,
-                            "type": authData.loginType.rawValue]
+                            "type": authData.loginType.rawValue,
+                            "vegeType": "nothing"]
                         
                         REF_USERS.child(uid).updateChildValues(values) { (error, ref) in
                             if let error = error {

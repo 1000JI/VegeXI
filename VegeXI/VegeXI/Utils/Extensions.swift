@@ -39,6 +39,13 @@ extension UIViewController {
         tabBarController?.tabBar.isHidden = isHidden
     }
     
+    func presentWriteButtonInTabBar() {
+        DispatchQueue.main.async {
+            guard let mainTabbarController = self.tabBarController as? MainTabBarController else { return }
+            mainTabbarController.view.bringSubviewToFront(mainTabbarController.registerButton)
+        }
+    }
+    
     func keyboardWillShowNotification(handler: @escaping((Notification) -> ())) {
         NotificationCenter.default.addObserver(
             forName: UIResponder.keyboardWillShowNotification,

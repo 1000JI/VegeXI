@@ -12,8 +12,7 @@ struct DetailViewModel {
     let feed: Feed
     
     var profileImageURL: URL? {
-        let imageURL = URL(string: feed.writerUser.profileImageUrl)
-        return imageURL
+        return feed.writerUser.profileImageUrl
     }
     
     var writeDate: String {

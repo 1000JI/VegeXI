@@ -126,21 +126,21 @@ class FeedWriteController: UITableViewController {
     
     @objc
     func tappedShareButton() {
-//        FeedService.shared.uploadFeed(
-//            title: feedTitle,
-//            content: feedContent,
-//            imageArray: imageArray,
-//            location: location) { (error, ref) in
-//                if let error = error {
-//                    print("DEBUG: \(error.localizedDescription)")
-//                    return
-//                }
-//                print("FEED UPLOAD SUCCESS")
-//                self.dismiss(animated: true, completion: nil)
-//        }
-        let controller = SharePostViewController()
-        controller.modalPresentationStyle = .overFullScreen
-        present(controller, animated: true)
+        FeedService.shared.uploadFeed(
+            title: feedTitle,
+            content: feedContent,
+            imageArray: imageArray,
+            location: location) { (error, ref) in
+                if let error = error {
+                    print("DEBUG: \(error.localizedDescription)")
+                    return
+                }
+                print("FEED UPLOAD SUCCESS")
+                self.dismiss(animated: true, completion: nil)
+        }
+//        let controller = SharePostViewController()
+//        controller.modalPresentationStyle = .overFullScreen
+//        present(controller, animated: true)
     }
     
     @objc

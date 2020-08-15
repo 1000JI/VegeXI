@@ -53,13 +53,6 @@ class MainTabBarController: UITabBarController {
         }
     }
     
-    override var hidesBottomBarWhenPushed: Bool {
-        didSet {
-            registerButton.isHidden = hidesBottomBarWhenPushed
-            view.layoutIfNeeded()
-        }
-    }
-    
     
     // MARK: - Helpers
     
@@ -110,6 +103,8 @@ class MainTabBarController: UITabBarController {
     }
     
     func setupMiddleButton() {
+        registerButton = nil
+        
         let buttonSize: CGFloat = 52
         registerButton = UIButton(
             frame: CGRect(
@@ -127,6 +122,8 @@ class MainTabBarController: UITabBarController {
         
         registerButton.setImage(UIImage(named: "tabbar_PlusButton"), for: .normal)
         registerButton.addTarget(self, action: #selector(registerButtonAction), for: .touchUpInside)
+        
+        self.view.bringSubviewToFront(registerButton)
     }
     
     
