@@ -85,7 +85,6 @@ class SignInViewController: UIViewController {
     }
     
     @objc private func handleSignUpButton(_ sender: UIButton) {
-        logoutMethod()
         let nextVC = SignUpViewController()
         nextVC.modalPresentationStyle = .fullScreen
         present(nextVC, animated: true)
@@ -103,15 +102,6 @@ class SignInViewController: UIViewController {
         
         AppleLoginService.shared.appleLoginInit(delegateView: self)
         NaverLoginService.shared.loginInstance?.delegate = self
-    }
-    
-    private func logoutMethod() {
-        do {
-            try Auth.auth().signOut()
-            print("Logged Out Sucessfully")
-        } catch {
-            print(error)
-        }
     }
     
     private func configureNavi() {

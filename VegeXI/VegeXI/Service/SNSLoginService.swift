@@ -96,6 +96,7 @@ final class KakaoLoginService {
             KOSessionTask.userMeTask(completion: { (error, user) in
                 if let error = error {
                     print("DEBUG: error \(error.localizedDescription)")
+                    return
                 }
 
 //                KOSessionTask.accessTokenInfoTask { (info, error) in
