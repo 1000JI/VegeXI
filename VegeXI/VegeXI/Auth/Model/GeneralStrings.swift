@@ -133,12 +133,17 @@ enum EditProfileStrings {
 
 enum SettingViewStrings {
     case barTitle
+    case bugReportingNoAvailable
     
     func generateString() -> String {
         switch self {
         case .barTitle:
             return "설정"
+        case .bugReportingNoAvailable:
+            return """
+            이 디바이스에서는
+            지원하지 않는 기능입니다.
+"""
         }
     }
-    
 }

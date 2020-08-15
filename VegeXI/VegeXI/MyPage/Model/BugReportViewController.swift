@@ -76,10 +76,7 @@ class BugReportViewController: UIViewController {
         if !MFMailComposeViewController.canSendMail() {
             let alert = UIAlertController(
                 title: nil,
-                message: """
-이 디바이스에서는
-지원하지 않는 기능입니다.
-""",
+                message: SettingViewStrings.bugReportingNoAvailable.generateString(),
                 preferredStyle: .alert)
             alert.addAction(UIAlertAction(
                 title: "확인",
@@ -115,13 +112,6 @@ class BugReportViewController: UIViewController {
     @objc
     private func handleSendButton(_ sender: UIButton) {
         sendEmail()
-        let alert = UIAlertController(title: nil, message: "성공적으로 발송되었습니다", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(
-            title: "확인",
-            style: .default,
-            handler: { _ in self.navigationController?.popViewController(animated: true) }
-        ))
-        self.present(alert, animated: true)
     }
     
 }
@@ -137,8 +127,11 @@ extension BugReportViewController: UITextViewDelegate {
 }
 
 
+// MARK: - MFMailComposeViewControllerDelegate
 extension BugReportViewController: MFMailComposeViewControllerDelegate {
+    
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: { self.navigationController?.popViewController(animated: true) } )
     }
+    
 }
