@@ -19,12 +19,19 @@ class SharePostViewController: UIViewController {
     private lazy var categoryCollectionViews = sharePostScrollView.sharePostContentView.categoryViews // 컬렉션 뷰를 포함하는 모든 카테고리 뷰를 저장
     private var selectedCellInfo = [Int: IndexPathSet]() // 유저가 선택한 셀이 저장
     
+    private let backgroundColor = UIColor.black.withAlphaComponent(0.75)
+    
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .clear
+        view.backgroundColor = backgroundColor
         configureUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
     }
     
     override func viewWillLayoutSubviews() {
