@@ -33,7 +33,7 @@ struct SettingCategories {
             "type": "pager"
         ],
         [
-            "title": "느린채식 어플 응원하기",
+            "title": "느린채식 앱 응원하기",
             "subtitle": "별점과 코멘트는 큰 힘이 됩니다💚",
             "info": "",
             "type": "subtitle"

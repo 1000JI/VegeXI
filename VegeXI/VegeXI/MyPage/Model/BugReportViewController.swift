@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import MessageUI
 
 class BugReportViewController: UIViewController {
-
+    
     // MARK: - Properties
     private let topBarView = EditProfileTopBarView(title: "문의/버그신고")
     private let textView = UITextView().then {
@@ -19,6 +20,7 @@ class BugReportViewController: UIViewController {
         $0.layer.cornerRadius = 5
     }
     private let sendButton = SignButton(title: "보내기")
+    private let composeVC = MFMailComposeViewController()
     
     
     // MARK: - Lifecycle
@@ -26,6 +28,12 @@ class BugReportViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureUI()
+        setEmailConfiguration()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
     }
     
     
@@ -63,20 +71,47 @@ class BugReportViewController: UIViewController {
     }
     
     
+    // MARK: - Helpers
+    private func setEmailConfiguration() {
+        if !MFMailComposeViewController.canSendMail() {
+            let alert = UIAlertController(
+                title: nil,
+                message: SettingViewStrings.bugReportingNoAvailable.generateString(),
+                preferredStyle: .alert)
+            alert.addAction(UIAlertAction(
+                title: "확인",
+                style: .default,
+                handler: { _ in self.navigationController?.popViewController(animated: true) }
+            ))
+            print("Mail services are not available")
+            self.present(alert, animated: true)
+        }
+        return
+    }
+    
+    private func sendEmail() {
+        guard let text = textView.text else { return }
+        composeVC.mailComposeDelegate = self
+        
+        // Configure the fields of the interface.
+        composeVC.setToRecipients(["KasRoid@gmail.com", "chjh1992@gmail.com"])
+        composeVC.setSubject("버그 리포팅")
+        composeVC.setMessageBody(text, isHTML: false)
+        
+        // Present the view controller modally.
+        self.present(composeVC, animated: true, completion: nil)
+    }
+    
+    
     // MARK: - Selectors
     @objc
     private func handleLeftBarButton(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
-
+    
     @objc
     private func handleSendButton(_ sender: UIButton) {
-        let alert = UIAlertController(title: nil, message: "성공적으로 발송되었습니다", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(
-            title: "확인",
-            style: .default,
-            handler: { _ in self.dismiss(animated: true, completion: nil) }
-        ))
+        sendEmail()
     }
     
 }
@@ -87,6 +122,16 @@ extension BugReportViewController: UITextViewDelegate {
     
     func textViewDidChangeSelection(_ textView: UITextView) {
         sendButton.isActive = textView.text != "" ? true : false
+    }
+    
+}
+
+
+// MARK: - MFMailComposeViewControllerDelegate
+extension BugReportViewController: MFMailComposeViewControllerDelegate {
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        self.dismiss(animated: true, completion: { self.navigationController?.popViewController(animated: true) } )
     }
     
 }

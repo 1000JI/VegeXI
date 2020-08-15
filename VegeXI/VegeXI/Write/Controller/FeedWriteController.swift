@@ -138,9 +138,9 @@ class FeedWriteController: UITableViewController {
                 print("FEED UPLOAD SUCCESS")
                 self.dismiss(animated: true, completion: nil)
         }
-//        let controller = SharePostViewController()
-//        controller.modalPresentationStyle = .overFullScreen
-//        present(controller, animated: true)
+        let controller = SharePostViewController()
+        controller.modalPresentationStyle = .overFullScreen
+        present(controller, animated: true)
     }
     
     @objc
