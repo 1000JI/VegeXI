@@ -74,7 +74,7 @@ class EditProfileViewController: UIViewController {
     // MARK: - Selectors
     @objc
     private func handleTopBarLeftBarButton(_ sender: UIButton) {
-        self.dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     @objc

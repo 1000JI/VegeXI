@@ -33,8 +33,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         window?.rootViewController = UINavigationController(rootViewController: controller)
 
-//        window?.rootViewController = NewFilterViewController()
-//        window?.rootViewController = MyPageViewController()
+//        let viewCon = MainTabBarController()
+        let viewCon = SharePostViewController()
+//        let viewCon = MyPageViewController()
+        let naviCon = UINavigationController(rootViewController: viewCon)
+        window?.rootViewController = naviCon
 
         window?.makeKeyAndVisible()
         

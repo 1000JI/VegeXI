@@ -16,8 +16,8 @@ class SharePostViewController: UIViewController {
     private let bottomShareButtonBar = FilterViewBottomBar(title: GeneralStrings.share.generateString())
     private let data = MockData.newFilteredList
     private lazy var vegeInfoCollectionView = sharePostScrollView.sharePostContentView.vegeTypeInfoView.categoryCollectionView
-    private lazy var categoryCollectionViews = sharePostScrollView.sharePostContentView.categoryViews
-    private var selectedCellInfo = [Int: IndexPathSet]()
+    private lazy var categoryCollectionViews = sharePostScrollView.sharePostContentView.categoryViews // 컬렉션 뷰를 포함하는 모든 카테고리 뷰를 저장
+    private var selectedCellInfo = [Int: IndexPathSet]() // 유저가 선택한 셀이 저장
     
     
     // MARK: - Lifecycle
@@ -113,14 +113,25 @@ extension SharePostViewController: UICollectionViewDelegateFlowLayout {
 extension SharePostViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // 모든 카테고리를 컬렉션뷰를 순환하며 단 하나의 셀만 선택될 수 있도록 세팅
         guard let cell = collectionView.cellForItem(at: indexPath) as? SharePostCollectionViewCell else { print("Guare Activated, \(#function)"); return }
+        if collectionView.tag != 0 {
+            let placeholder = selectedCellInfo[0]
+            selectedCellInfo.removeAll()
+            selectedCellInfo[0] = placeholder
+            
+            categoryCollectionViews.forEach {
+                $0.collectionViewCells.forEach {
+                    $0.isClicked = false
+                }
+            }
+        }
         cell.isClicked = true
         selectedCellInfo[collectionView.tag] = [indexPath]
         print(selectedCellInfo)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-//        selectedCellInfo[collectionView.tag]?.remove(indexPath)
         guard let cell = collectionView.cellForItem(at: indexPath) as? SharePostCollectionViewCell else { print("Guare Activated, \(#function)"); return }
         cell.isClicked = false
     }

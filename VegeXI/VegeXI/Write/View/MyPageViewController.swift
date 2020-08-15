@@ -81,15 +81,13 @@ class MyPageViewController: UIViewController {
     @objc
     private func handleTopRightBarButton(_ sender: UIButton) {
         let nextVC = SettingViewController()
-        nextVC.modalPresentationStyle = .fullScreen
-        present(nextVC, animated: true)
+        navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @objc
     private func handleProfileEditButton() {
         let nextVC = EditProfileViewController()
-        nextVC.modalPresentationStyle = .fullScreen
-        present(nextVC, animated: true)
+        navigationController?.pushViewController(nextVC, animated: true)
     }
     
     

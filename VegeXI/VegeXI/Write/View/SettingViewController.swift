@@ -58,7 +58,7 @@ class SettingViewController: UIViewController {
     // MARK: - Selectors
     @objc
     private func handleTopBarLeftBarButton(_ sender: UIButton) {
-        self.dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     
@@ -128,21 +128,18 @@ extension SettingViewController: UITableViewDelegate {
         switch title {
         case "비밀번호 변경":
             let nextVC = ForgotPasswordViewController()
-            present(nextVC, animated: true)
+            navigationController?.pushViewController(nextVC, animated: true)
         case "문의/버그신고":
             let nextVC = BugReportViewController()
-            nextVC.modalPresentationStyle = .fullScreen
-            present(nextVC, animated: true)
+            navigationController?.pushViewController(nextVC, animated: true)
         case "서비스 이용 약관":
             let nextVC = ExplanationViewController()
             nextVC.configureViewController(title: "서비스 이용 약관", content: SettingCategories.instance.agreement)
-            nextVC.modalPresentationStyle = .fullScreen
-            present(nextVC, animated: true)
+            navigationController?.pushViewController(nextVC, animated: true)
         case "개인정보 처리방침":
             let nextVC = ExplanationViewController()
             nextVC.configureViewController(title: "개인정보 처리방침", content: SettingCategories.instance.privacyPolicy)
-            nextVC.modalPresentationStyle = .fullScreen
-            present(nextVC, animated: true)
+            navigationController?.pushViewController(nextVC, animated: true)
         case "로그아웃":
             let alert = UIAlertController(title: "정말 로그아웃하시겠습니까?", message: nil, preferredStyle: .alert)
             let confirmAction = UIAlertAction(title: "로그아웃", style: .destructive, handler: nil)

@@ -66,7 +66,7 @@ class BugReportViewController: UIViewController {
     // MARK: - Selectors
     @objc
     private func handleLeftBarButton(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
 
     @objc

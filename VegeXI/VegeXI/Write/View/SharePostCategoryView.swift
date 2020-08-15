@@ -17,7 +17,6 @@ class SharePostCategoryView: UIView {
     }
     lazy var foldButton = UIButton().then {
         let image = configureButtonImage(newValue: isFolded)
-//        let image = UIImage(systemName: "chevron.down")?.withTintColor(.vegeTextBlackColor, renderingMode: .alwaysOriginal)
         $0.setImage(image, for: .normal)
     }
     private let underBar = UIView().then {
@@ -31,6 +30,7 @@ class SharePostCategoryView: UIView {
         collectionView.tag = self.tag
         return collectionView
     }()
+    var collectionViewCells = [SharePostCollectionViewCell]()
     private var data = [String]()
     
     var isFolded: Bool = false {
@@ -154,6 +154,7 @@ extension SharePostCategoryView: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SharePostCollectionViewCell.identifier, for: indexPath) as? SharePostCollectionViewCell else { fatalError() }
         let title = data[indexPath.item]
         cell.configureCell(title: title, tag: self.tag)
+        collectionViewCells.append(cell)
         return cell
     }
     
