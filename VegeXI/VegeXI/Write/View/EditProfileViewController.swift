@@ -26,6 +26,16 @@ class EditProfileViewController: UIViewController {
         configureUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        isTabbarHidden(isHidden: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        isTabbarHidden(isHidden: false)
+    }
+    
     
     // MARK: - UI
     private func configureUI() {
@@ -74,7 +84,7 @@ class EditProfileViewController: UIViewController {
     // MARK: - Selectors
     @objc
     private func handleTopBarLeftBarButton(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc

@@ -20,6 +20,9 @@ class HomeViewController: UIViewController {
     private var feeds = [Feed]() {
         didSet { mainTableView.feeds = feeds }
     }
+    private var filterFeeds = [Feed]() {
+        didSet { mainTableView.filterFeeds = filterFeeds }
+    }
     
     // MARK: - LifeCycle
     
@@ -76,7 +79,29 @@ class HomeViewController: UIViewController {
     }
     
     func tappedSortEvent() {
-        present(UIViewController(), animated: true)
+        let sortAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let newestSortAction = UIAlertAction(
+            title: "최신순",
+            style: .default) { action in
+                self.feeds = self.feeds
+        }
+        let popularSortAction = UIAlertAction(
+            title: "인기순",
+            style: .default) { action in
+                self.filterFeeds = self.feeds.sorted(by: { lhs, rhs -> Bool in
+                    lhs.likes > rhs.likes
+                })
+        }
+        let cancelAction = UIAlertAction(
+            title: "취소",
+            style: .cancel,
+            handler: nil)
+        sortAlert.addAction(newestSortAction)
+        sortAlert.addAction(popularSortAction)
+        sortAlert.addAction(cancelAction)
+        sortAlert.view.tintColor = .vegeTextBlackColor
+        
+        present(sortAlert, animated: true)
     }
     
     func tappedFilterEvent() {

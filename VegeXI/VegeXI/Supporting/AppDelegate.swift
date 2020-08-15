@@ -38,7 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let viewCon = MyPageViewController()
         let naviCon = UINavigationController(rootViewController: viewCon)
         window?.rootViewController = naviCon
-
         window?.makeKeyAndVisible()
         
         return true

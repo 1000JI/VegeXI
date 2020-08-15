@@ -18,20 +18,80 @@ class MyPageViewController: UIViewController {
     private let bookmarkView = MyPageBookmarkView()
     private lazy var categorySubviews = [postView, bookmarkView]
     
+    private var myFeeds = [Feed]()
+    private var bookmarkFeeds = [Feed]()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        
+        fetchMyFeeds()
+        fetchMyBookmarkFeeds()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.isHidden = true
+        configureNavi()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.presentWriteButtonInTabBar()
+    }
+    
+    // MARK: - API
+    func fetchMyFeeds() { // 내 글 가져오기
+        showLoader(true)
+        
+        guard let userUid = UserService.shared.user?.uid else { return }
+        FeedService.shared.fetchMyFeeds(userUid: userUid) { feeds in
+            self.showLoader(false)
+            self.myFeeds = feeds
+            
+            self.myFeeds.forEach { tweet in
+                FeedService.shared.checkIfUserLikedAndBookmarkFeed(
+                feedID: tweet.feedID) { (didLike, didBookmark) in
+                    guard didLike == true || didBookmark == true else { return }
+                    
+                    if let index = self.myFeeds.firstIndex(where: {
+                        $0.feedID == tweet.feedID
+                    }) {
+                        self.myFeeds[index].didLike = didLike
+                        self.myFeeds[index].didBookmark = didBookmark
+                    }
+                }
+            }
+        }
+    }
+    
+    func fetchMyBookmarkFeeds() { // 내가 북마크 한 글 가져오기
+        guard let userUid = UserService.shared.user?.uid else { return }
+        FeedService.shared.fetchMyBookmark(userUid: userUid) { feeds in
+            self.bookmarkFeeds = feeds
+            
+            self.bookmarkFeeds.forEach { tweet in
+                FeedService.shared.checkIfUserLikedAndBookmarkFeed(
+                feedID: tweet.feedID) { (didLike, didBookmark) in
+                    guard didLike == true || didBookmark == true else { return }
+                    
+                    if let index = self.bookmarkFeeds.firstIndex(where: {
+                        $0.feedID == tweet.feedID
+                    }) {
+                        self.bookmarkFeeds[index].didLike = didLike
+                        self.bookmarkFeeds[index].didBookmark = didBookmark
+                    }
+                }
+            }
+        }
     }
     
     
     // MARK: - UI
+    private func configureNavi() {
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
     private func configureUI() {
         setStoredPropertyAttributes()
         setConstraints()
@@ -44,6 +104,9 @@ class MyPageViewController: UIViewController {
         postView.tag = 0
         bookmarkView.tag = 1
         categoryView.prepareForActions(action: controlSections(selectedSectionNumber:))
+        
+        guard let user = UserService.shared.user else { return }
+        profileView.userData = user
     }
     
     private func setConstraints() {
@@ -81,12 +144,14 @@ class MyPageViewController: UIViewController {
     @objc
     private func handleTopRightBarButton(_ sender: UIButton) {
         let nextVC = SettingViewController()
+        nextVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @objc
     private func handleProfileEditButton() {
         let nextVC = EditProfileViewController()
+        nextVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(nextVC, animated: true)
     }
     

@@ -11,6 +11,10 @@ import UIKit
 class MyPageProfileView: UIView {
     
     // MARK: - Properties
+    var userData: User? {
+        didSet { configure() }
+    }
+    
     let profileViewContainer = UIView()
     
     let profileImageView = UIImageView().then {
@@ -49,6 +53,10 @@ class MyPageProfileView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    convenience init(user: User) {
+        self.init(frame: .zero)
+        self.userData = user
+    }
     
     // MARK: - UI
     private func configureUI() {
@@ -91,4 +99,10 @@ class MyPageProfileView: UIView {
         }
     }
     
+    func configure() {
+        guard let user = userData else { return }
+        profileImageView.sd_setImage(with: user.profileImageUrl)
+        nicknameLabel.text = user.nickname
+        vegeTypeLabel.text = user.profileVegeExplainText
+    }
 }

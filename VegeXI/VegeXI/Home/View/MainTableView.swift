@@ -12,8 +12,22 @@ class MainTableView: UITableView {
     
     // MARK: - Properties
     
+    var isFilterFeeds = false
+    
     var feeds = [Feed]() {
-        didSet { reloadData() }
+        didSet {
+            isFilterFeeds = false
+            sortTitleLabel.text = "최신순"
+            reloadData()
+        }
+    }
+    
+    var filterFeeds = [Feed]() {
+        didSet {
+            isFilterFeeds = true
+            sortTitleLabel.text = "인기순"
+            reloadData()
+        }
     }
     
     private let headerViewHeight: CGFloat = 56
@@ -160,12 +174,13 @@ class MainTableView: UITableView {
 
 extension MainTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return feeds.count
+        return isFilterFeeds ? filterFeeds.count : feeds.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier, for: indexPath) as! MainTableViewCell
-        cell.feed = feeds[indexPath.row]
+        cell.feed = isFilterFeeds ?
+            filterFeeds[indexPath.row] : feeds[indexPath.row]
         cell.tappedLikeButton = tappedLikeButton(cell:)
         cell.tappedCommentButton = tappedCommentButton(cell:)
         cell.tappedBookmarkButton = tappedBookmarkButton(cell:)
@@ -178,8 +193,13 @@ extension MainTableView: UITableViewDataSource {
 
 extension MainTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return feeds[indexPath.row].feedType == .textType ?
+        if isFilterFeeds {
+            return filterFeeds[indexPath.row].feedType == .textType ?
             textCellHeight : picAndTextCellHeight
+        } else {
+            return feeds[indexPath.row].feedType == .textType ?
+            textCellHeight : picAndTextCellHeight
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

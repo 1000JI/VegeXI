@@ -23,9 +23,25 @@ struct Feed {
     var likes: Int
     var didLike: Bool = false
     var comments: Int
-    let imageUrls: [URL]?
+    var imageUrls: [URL]?
     var location: LocationModel?
     var didBookmark: Bool = false
+    
+    init(user: User, feedID: String, dictionary: [String : Any]) {
+        let type = dictionary["type"] as? String ?? "textType"
+        self.feedType = FeedType(rawValue: type)!
+        self.writerUser = user
+        self.feedID = feedID
+        
+        let timestamp = dictionary["timestamp"] as? Int ?? 0
+        self.writeDate = Date(timeIntervalSince1970: TimeInterval(exactly: timestamp)!)
+        
+        self.title = dictionary["title"] as? String ?? ""
+        self.content = dictionary["content"] as? String ?? ""
+        
+        self.likes = dictionary["likes"] as? Int ?? 0
+        self.comments = dictionary["comments"] as? Int ?? 0
+    }
     
     init(dictionary: [String : Any], user: User, feedID: String, likeDidLike: Bool, bookmarkDidLike: Bool, imageUrlArray: [URL]? = nil) {
         let type = dictionary["type"] as? String ?? "textType"

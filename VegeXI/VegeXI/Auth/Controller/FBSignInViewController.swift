@@ -124,11 +124,23 @@ class FBSignInViewController: UIViewController {
     @objc private func handleSignInButton(_ sender: UIButton) {
         guard let email = idInputView.textField.text else { return }
         guard let password = passwordInputView.textField.text else { return }
+        
+        showLoader(true)
         Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
             if let error = error {
+                self.showLoader(false)
                 self.generateErrorMessages(error: error)
+                return
             } else {
-                print("Logged In Successfully")
+                guard let userUid = authResult?.user.uid else { return }
+                AuthService.shared.saveUserDefaultUID(withUid: userUid)
+                
+                guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
+                let controller = MainTabBarController()
+                controller.userUid = userUid
+                window.rootViewController = controller
+                window.frame = UIScreen.main.bounds
+                window.makeKeyAndVisible()
             }
         }
     }

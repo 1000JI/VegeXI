@@ -12,7 +12,7 @@ struct CommentViewModel {
     let comment: Comment
     
     var profileImageURL: URL? {
-        return URL(string: comment.writer.profileImageUrl)
+        return comment.writer.profileImageUrl
     }
     
     var writeDate: String {

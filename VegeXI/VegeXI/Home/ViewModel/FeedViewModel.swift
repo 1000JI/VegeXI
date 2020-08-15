@@ -12,7 +12,7 @@ struct FeedViewModel {
     let feed: Feed
     
     var profileImageURL: URL? {
-        return URL(string: feed.writerUser.profileImageUrl)
+        return feed.writerUser.profileImageUrl
     }
     
     var titleFeedImageURL: URL? {
