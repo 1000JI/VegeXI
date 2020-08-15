@@ -9,7 +9,7 @@
 import UIKit
 
 class MyPageViewController: UIViewController {
-
+    
     // MARK: - Properties
     private let topBarView = MyPageTopBarView()
     private let profileView = MyPageProfileView()
@@ -18,6 +18,10 @@ class MyPageViewController: UIViewController {
     private let bookmarkView = MyPageBookmarkView()
     private lazy var categorySubviews = [postView, bookmarkView]
     
+    private lazy var postTableView = postView.postTableview
+    private lazy var bookmarkTableView = bookmarkView.postTableview
+    
+    private let mockData = MockData.postExample
     private var myFeeds = [Feed]()
     private var bookmarkFeeds = [Feed]()
     
@@ -25,7 +29,6 @@ class MyPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        
         fetchMyFeeds()
         fetchMyBookmarkFeeds()
     }
@@ -93,13 +96,18 @@ class MyPageViewController: UIViewController {
     }
     
     private func configureUI() {
-        setStoredPropertyAttributes()
+        setPropertyAttributes()
         setConstraints()
     }
     
-    private func setStoredPropertyAttributes() {
+    private func setPropertyAttributes() {
         topBarView.rightBarButton.addTarget(self, action: #selector(handleTopRightBarButton(_:)), for: .touchUpInside)
         profileView.profileEditButton.addTarget(self, action: #selector(handleProfileEditButton), for: .touchUpInside)
+        
+        postTableView.delegate = self
+        postTableView.dataSource = self
+        bookmarkTableView.delegate = self
+        bookmarkTableView.dataSource = self
         
         postView.tag = 0
         bookmarkView.tag = 1
@@ -158,13 +166,114 @@ class MyPageViewController: UIViewController {
     
     // MARK: - Helpers
     private func controlSections(selectedSectionNumber: Int) {
-        print(#function)
         categorySubviews.forEach {
             if $0.tag == selectedSectionNumber {
                 $0.isHidden = false
             } else {
                 $0.isHidden = true
             }
+        }
+    }
+    
+    private func configurePostTableViewDataSource(tableView: UITableView, indexPath: IndexPath) -> MyPagePostTableViewCell {
+        guard let cell = postTableView.dequeueReusableCell(withIdentifier: MyPagePostTableViewCell.identifier, for: indexPath) as? MyPagePostTableViewCell else { fatalError() }
+        let data = myFeeds[indexPath.row]
+        let title = data.title
+        let subtitle = data.content
+        let imageURL = data.imageUrls ?? [URL]()
+        let url = imageURL[0]
+        let numberOfImages = data.imageUrls?.count ?? 0
+        let date = data.writeDate
+        let likes = data.likes
+        let comments = data.comments
+        let feedType = data.feedType
+        
+        cell.configureCell(title: title, subtitle: subtitle, image: url, numberOfImages: numberOfImages, date: date, likes: likes, comments: comments, feedType: feedType)
+        return cell
+    }
+    
+    private func configureBookmarkTableViewDataSource(tableView: UITableView, indexPath: IndexPath) -> MyPageBookmarkableViewCell {
+        guard let cell = bookmarkTableView.dequeueReusableCell(withIdentifier: MyPageBookmarkableViewCell.identifier, for: indexPath) as? MyPageBookmarkableViewCell else { fatalError() }
+        let data = bookmarkFeeds[indexPath.row]
+        let title = data.title
+        let subtitle = data.content
+        let imageURL = data.imageUrls ?? [URL]()
+        let url = imageURL[0]
+        let numberOfImages = data.imageUrls?.count ?? 0
+        let date = data.writeDate
+        let likes = data.likes
+        let comments = data.comments
+        let feedType = data.feedType
+        cell.configureCell(title: title, subtitle: subtitle, image: url, numberOfImages: numberOfImages, date: date, likes: likes, comments: comments, feedType: feedType)
+        return cell
+    }
+    
+}
+
+
+// MARK: - UITableViewDataSource
+extension MyPageViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch tableView {
+        case postTableView:
+            return myFeeds.count
+        case bookmarkTableView:
+            return bookmarkFeeds.count
+        default:
+            fatalError("Incorrect TableView Info")
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch tableView {
+        case postTableView:
+            return configurePostTableViewDataSource(tableView: tableView, indexPath: indexPath)
+        case bookmarkTableView:
+            return configureBookmarkTableViewDataSource(tableView: tableView, indexPath: indexPath)
+        default:
+            fatalError("Incorrect TableView Info")
+        }
+    }
+    
+}
+
+
+// MARK: - UITableViewDelegate
+extension MyPageViewController: UITableViewDelegate {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        switch tableView {
+        case postTableView:
+            return 1
+        case bookmarkTableView:
+            return 1
+        default:
+            fatalError("Incorrect TableView Info")
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch tableView {
+        case postTableView:
+            let header = MyPagePostTableViewHeader()
+            return header
+        case bookmarkTableView:
+            let header = MyPageBookmarkableViewHeader()
+            return header
+        default:
+            fatalError("Incorrect TableView Info")
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch tableView {
+        case postTableView:
+            return 52
+        case bookmarkTableView:
+            return 52
+        default:
+            fatalError("Incorrect TableView Info")
         }
     }
     

@@ -190,12 +190,15 @@ class MyPageBookmarkableViewCell: UITableViewCell {
     
     
     // MARK: - Helpers
-    func configureCell(title: String, subtitle: String, image: UIImage, numberOfImages: Int, date: String, likes: Int, comments: Int, feedType: FeedType) {
+    func configureCell(title: String, subtitle: String, image: URL, numberOfImages: Int, date: Date, likes: Int, comments: Int, feedType: FeedType) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy MM dd"
+        
         postTitle.text = title
         postSubtitle.text = subtitle
-        postImage.image = image
+        postImage.sd_setImage(with: image)
         numberOfImagesLabel.text = String(numberOfImages)
-        postingDate.text = date
+        postingDate.text = dateFormatter.string(from: date)
         likesLabel.text = String(likes)
         commentsLabel.text = String(comments)
         self.feedType = feedType
