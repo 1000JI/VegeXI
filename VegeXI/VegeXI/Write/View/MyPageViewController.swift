@@ -152,6 +152,9 @@ class MyPageViewController: UIViewController {
     private func handleProfileEditButton() {
         let nextVC = EditProfileViewController()
         nextVC.hidesBottomBarWhenPushed = true
+        
+        guard let user = UserService.shared.user else { return }
+        nextVC.user = user
         navigationController?.pushViewController(nextVC, animated: true)
     }
     

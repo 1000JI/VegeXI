@@ -11,9 +11,13 @@ import UIKit
 class EditProfileEditingView: UIView {
     
     // MARK: - Properties
+    var user: User? {
+        didSet { configure() }
+    }
+    
     private let profileViewContainer = UIView()
     
-    private let profileImageView = UIImageView().then {
+    let profileImageView = UIImageView().then {
         $0.clipsToBounds = true
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 112 / 2
@@ -91,4 +95,9 @@ class EditProfileEditingView: UIView {
         }
     }
     
+    func configure() {
+        guard let user = user else { return }
+        profileImageView.sd_setImage(with: user.profileImageUrl)
+        nicknameTextField.textField.text = user.nickname
+    }
 }
