@@ -22,8 +22,12 @@ class MyPageViewController: UIViewController {
     private lazy var bookmarkTableView = bookmarkView.postTableview
     
     private let mockData = MockData.postExample
-    private var myFeeds = [Feed]()
-    private var bookmarkFeeds = [Feed]()
+    private var myFeeds = [Feed]() {
+        didSet { postTableView.reloadData() }
+    }
+    private var bookmarkFeeds = [Feed]() {
+        didSet { bookmarkTableView.reloadData() }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -184,7 +188,7 @@ class MyPageViewController: UIViewController {
         let title = data.title
         let subtitle = data.content
         let imageURL = data.imageUrls ?? [URL]()
-        let url = imageURL[0]
+        let url = imageURL.count > 0 ? imageURL[0] : nil
         let numberOfImages = data.imageUrls?.count ?? 0
         let date = data.writeDate
         let likes = data.likes
@@ -201,7 +205,7 @@ class MyPageViewController: UIViewController {
         let title = data.title
         let subtitle = data.content
         let imageURL = data.imageUrls ?? [URL]()
-        let url = imageURL[0]
+        let url = imageURL.count > 0 ? imageURL[0] : nil
         let numberOfImages = data.imageUrls?.count ?? 0
         let date = data.writeDate
         let likes = data.likes
