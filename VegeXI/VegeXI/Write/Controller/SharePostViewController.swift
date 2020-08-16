@@ -9,7 +9,7 @@
 import UIKit
 
 class SharePostViewController: UIViewController {
-
+    
     // MARK: - Properties
     typealias IndexPathSet = Set<IndexPath>
     private let sharePostScrollView = SharePostScrollView()
@@ -18,6 +18,13 @@ class SharePostViewController: UIViewController {
     private lazy var vegeInfoCollectionView = sharePostScrollView.sharePostContentView.vegeTypeInfoView.categoryCollectionView
     private lazy var categoryCollectionViews = sharePostScrollView.sharePostContentView.categoryViews // 컬렉션 뷰를 포함하는 모든 카테고리 뷰를 저장
     private var selectedCellInfo = [Int: IndexPathSet]() // 유저가 선택한 셀이 저장
+    
+    private var vegeType: VegeType {
+        return configureVegeType(selectedCellInfo: selectedCellInfo)
+    }
+    private var categoryType: PostCategory {
+        return configureCategory(selectedCellInfo: selectedCellInfo)
+    }
     
     private let backgroundColor = UIColor.black.withAlphaComponent(0.75)
     
@@ -40,7 +47,7 @@ class SharePostViewController: UIViewController {
         sharePostScrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: view.frame.maxY + 280)
     }
     
-
+    
     // MARK: - UI
     private func configureUI() {
         setPropertyAttributes()
@@ -88,7 +95,99 @@ class SharePostViewController: UIViewController {
         print(#function)
     }
     
+    private func configureVegeType(selectedCellInfo: [Int: IndexPathSet]) -> VegeType {
+        guard let data = selectedCellInfo[0]?.first else { return .nothing }
+        switch data.row {
+        case 0:
+            return .nothing
+        case 1:
+            return .vegan
+        case 2:
+            return .ovo
+        case 3:
+            return .lacto
+        case 4:
+            return .lacto_ovo
+        case 5:
+            return .pesco
+        default:
+            return .nothing
+        }
+    }
+    
+    private func configureCategory(selectedCellInfo: [Int: IndexPathSet]) -> PostCategory {
+        for index in 1...4 {
+            guard let data = selectedCellInfo[index]?.first else { continue }
+            switch index {
+            case 1:
+                switch data {
+                case [0, 0]:
+                    return .koreanFood
+                case [0, 1]:
+                    return .snackBar
+                case [0, 2]:
+                    return .japaneseFood
+                case [0, 3]:
+                    return .chineseFood
+                case [0, 4]:
+                    return .westernFood
+                case [0, 5]:
+                    return .eastAsianFood
+                case [0, 6]:
+                    return .indianFood
+                case [0, 7]:
+                    return .breadAndCoffee
+                case [0, 8]:
+                    return .alcohol
+                default:
+                    return .noInfo
+                }
+            case 2:
+                switch data {
+                case [0, 0]:
+                    return .restuarant
+                case [0, 1]:
+                    return .bakeryAndCafe
+                case [0, 2]:
+                    return .houseHoldGoodsStore
+                case [0, 3]:
+                    return .Exhibition
+                default:
+                    return .noInfo
+                }
+            case 3:
+                switch data {
+                case [0, 0]:
+                    return .cosmetics
+                case [0, 1]:
+                    return .houseHoldGoods
+                case [0, 2]:
+                    return .fashion
+                default:
+                    return .noInfo
+                }
+            case 4:
+                switch data {
+                case [0, 0]:
+                    return .influencer
+                case [0, 1]:
+                    return .book
+                case [0, 2]:
+                    return .movie
+                case [0, 3]:
+                    return .documentary
+                default:
+                    return .noInfo
+                }
+                
+            default:
+                return .noInfo
+            }
+        }
+        return .noInfo
+    }
 }
+    
 
 
 // MARK: - UICollectionViewDelegateFlowLayout
@@ -136,6 +235,7 @@ extension SharePostViewController: UICollectionViewDelegate {
         cell.isClicked = true
         selectedCellInfo[collectionView.tag] = [indexPath]
         print(selectedCellInfo)
+        print(vegeType, categoryType)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

@@ -18,6 +18,10 @@ class EditProfileViewController: UIViewController {
     private let bottomBarView = FilterViewBottomBar(title: EditProfileStrings.confirm.generateString())
     
     private lazy var typeTableView = typeSelectionView.vegeTypeTableView
+    private var selectedCell: IndexPath = IndexPath() // 유저가 선택한 타입의 정보가 저장
+    private var vegeType: VegeType {
+        configureVegeType(selectedCell: selectedCell)
+    }
     
     private let imagePicker = UIImagePickerController()
     
@@ -34,6 +38,7 @@ class EditProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
         isTabbarHidden(isHidden: true)
     }
     
@@ -129,6 +134,27 @@ class EditProfileViewController: UIViewController {
     private func handleBottomBarConfirmButton() {
         print(#function)
     }
+    
+    
+    // MARK: - Helpers
+    private func configureVegeType(selectedCell: IndexPath) -> VegeType {
+        switch selectedCell.row {
+        case 0:
+            return .vegan
+        case 1:
+            return .ovo
+        case 2:
+            return .lacto
+        case 3:
+            return .lacto_ovo
+        case 4:
+            return .pesco
+        case 5:
+            return .nothing
+        default:
+            return .nothing
+        }
+    }
 
 }
 
@@ -153,6 +179,8 @@ extension EditProfileViewController: UITableViewDelegate {
             $0.isClicked = false
         }
         cell.isClicked = true
+        selectedCell = indexPath
+        print(vegeType)
     }
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? EditProfileTypeTableViewCell else { return }
