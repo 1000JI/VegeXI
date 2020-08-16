@@ -147,3 +147,7 @@ enum SettingViewStrings {
         }
     }
 }
+
+enum UserProfileStrings: String {
+    case barTitle = "프로필"
+}

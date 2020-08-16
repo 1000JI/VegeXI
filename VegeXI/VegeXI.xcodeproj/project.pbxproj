@@ -60,6 +60,7 @@
 		42ABADC424E2CCAF0094CA9A /* SharePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADC324E2CCAF0094CA9A /* SharePostViewController.swift */; };
 		42ABADC624E35DC50094CA9A /* SharePostScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADC524E35DC50094CA9A /* SharePostScrollView.swift */; };
 		42ABADC824E35EC20094CA9A /* SharePostContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ABADC724E35EC20094CA9A /* SharePostContentView.swift */; };
+		42B1077724E984C90018D707 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B1077624E984C90018D707 /* UserProfileViewController.swift */; };
 		42BE29EA24DD2E4600449221 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29E924DD2E4600449221 /* FilterViewController.swift */; };
 		42BE29EC24DD307E00449221 /* FilterViewTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29EB24DD307E00449221 /* FilterViewTopBar.swift */; };
 		42BE29EE24DD322600449221 /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE29ED24DD322600449221 /* FilterTableViewCell.swift */; };
@@ -148,8 +149,8 @@
 		4243D57C24DD290F003F3761 /* SearchHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewController.swift; sourceTree = "<group>"; };
 		424C6FF424E38507005859BF /* SharePostCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostCategoryView.swift; sourceTree = "<group>"; };
 		424C6FF624E437EA005859BF /* SharePostSettingSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostSettingSwitchView.swift; sourceTree = "<group>"; };
-		424C6FF824E4B5EA005859BF /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPageViewController.swift; path = VegeXI/Write/View/MyPageViewController.swift; sourceTree = SOURCE_ROOT; };
-		424C6FFA24E4B611005859BF /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileViewController.swift; path = VegeXI/Write/View/EditProfileViewController.swift; sourceTree = SOURCE_ROOT; };
+		424C6FF824E4B5EA005859BF /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPageViewController.swift; path = VegeXI/MyPage/Controller/MyPageViewController.swift; sourceTree = SOURCE_ROOT; };
+		424C6FFA24E4B611005859BF /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileViewController.swift; path = VegeXI/MyPage/Controller/EditProfileViewController.swift; sourceTree = SOURCE_ROOT; };
 		424C6FFC24E4B664005859BF /* MyPageProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPageProfileView.swift; path = VegeXI/Write/View/MyPageProfileView.swift; sourceTree = SOURCE_ROOT; };
 		4257EF4124DC3F2D00CFF4C6 /* FakeSearchNaviBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSearchNaviBar.swift; sourceTree = "<group>"; };
 		4257EF4324DC3FF200CFF4C6 /* FakeSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSearchBar.swift; sourceTree = "<group>"; };
@@ -179,12 +180,12 @@
 		42834C8624E60164000C91F0 /* MyPageBookmarkableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPageBookmarkableViewCell.swift; path = VegeXI/Write/View/MyPageBookmarkableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		42834C8824E6033B000C91F0 /* MyPagePostTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPagePostTableViewHeader.swift; path = VegeXI/Write/View/MyPagePostTableViewHeader.swift; sourceTree = SOURCE_ROOT; };
 		42834C8A24E64C9F000C91F0 /* MyPageBookmarkableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPageBookmarkableViewHeader.swift; path = VegeXI/Write/View/MyPageBookmarkableViewHeader.swift; sourceTree = SOURCE_ROOT; };
-		42834C8C24E65095000C91F0 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingViewController.swift; path = VegeXI/Write/View/SettingViewController.swift; sourceTree = SOURCE_ROOT; };
+		42834C8C24E65095000C91F0 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingViewController.swift; path = VegeXI/MyPage/Controller/SettingViewController.swift; sourceTree = SOURCE_ROOT; };
 		42834C8E24E654F3000C91F0 /* SettingViewCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewCellType.swift; sourceTree = "<group>"; };
 		42834C9024E655C2000C91F0 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingTableViewCell.swift; path = VegeXI/MyPage/Model/SettingTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		42834C9224E65B7B000C91F0 /* SettingCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCategories.swift; sourceTree = "<group>"; };
-		42834C9424E673CA000C91F0 /* ExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExplanationViewController.swift; path = VegeXI/MyPage/Model/ExplanationViewController.swift; sourceTree = SOURCE_ROOT; };
-		42834C9624E6868B000C91F0 /* BugReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BugReportViewController.swift; path = VegeXI/MyPage/Model/BugReportViewController.swift; sourceTree = SOURCE_ROOT; };
+		42834C9424E673CA000C91F0 /* ExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExplanationViewController.swift; path = VegeXI/MyPage/Controller/ExplanationViewController.swift; sourceTree = SOURCE_ROOT; };
+		42834C9624E6868B000C91F0 /* BugReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BugReportViewController.swift; path = VegeXI/MyPage/Controller/BugReportViewController.swift; sourceTree = SOURCE_ROOT; };
 		4296390A24E572CA00ED23C7 /* EditProfileTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileTypeTableViewCell.swift; path = VegeXI/Write/View/EditProfileTypeTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		42ABADB324E140490094CA9A /* NewFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFilterViewController.swift; sourceTree = "<group>"; };
 		42ABADB524E14FFF0094CA9A /* VegetarianInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VegetarianInfoView.swift; sourceTree = "<group>"; };
@@ -197,6 +198,7 @@
 		42ABADC324E2CCAF0094CA9A /* SharePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostViewController.swift; sourceTree = "<group>"; };
 		42ABADC524E35DC50094CA9A /* SharePostScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostScrollView.swift; sourceTree = "<group>"; };
 		42ABADC724E35EC20094CA9A /* SharePostContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostContentView.swift; sourceTree = "<group>"; };
+		42B1077624E984C90018D707 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		42BE29E924DD2E4600449221 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		42BE29EB24DD307E00449221 /* FilterViewTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewTopBar.swift; sourceTree = "<group>"; };
 		42BE29ED24DD322600449221 /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
@@ -310,6 +312,13 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		42B1077524E984570018D707 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		4EDD59B61593B9AB8AD2819E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -409,11 +418,12 @@
 		AF89EAC724E0031A00F2A5E5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				42834C9624E6868B000C91F0 /* BugReportViewController.swift */,
 				424C6FFA24E4B611005859BF /* EditProfileViewController.swift */,
+				42834C9424E673CA000C91F0 /* ExplanationViewController.swift */,
 				424C6FF824E4B5EA005859BF /* MyPageViewController.swift */,
 				42834C8C24E65095000C91F0 /* SettingViewController.swift */,
-				42834C9424E673CA000C91F0 /* ExplanationViewController.swift */,
-				42834C9624E6868B000C91F0 /* BugReportViewController.swift */,
+				42B1077624E984C90018D707 /* UserProfileViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -548,6 +558,7 @@
 				AFC1186724D3AFEE005B2E44 /* Home */,
 				AF8E0D5424DD08F500D08D58 /* Write */,
 				AFC1186824D3AFFA005B2E44 /* MyPage */,
+				42B1077524E984570018D707 /* Profile */,
 				AFC1186A24D3B00F005B2E44 /* Service */,
 				AF9E8D0F24D51A220047F0C4 /* Header */,
 				AFF46CAB24D859DE008F118E /* Utils */,
@@ -849,6 +860,7 @@
 				4267C95724DB1D2F00702BAC /* GeneralStrings.swift in Sources */,
 				4267C94F24DACA4100702BAC /* SignButton.swift in Sources */,
 				4267C95B24DBC36800702BAC /* ForgotPasswordViewController.swift in Sources */,
+				42B1077724E984C90018D707 /* UserProfileViewController.swift in Sources */,
 				42BE29EA24DD2E4600449221 /* FilterViewController.swift in Sources */,
 				42834C8F24E654F3000C91F0 /* SettingViewCellType.swift in Sources */,
 				42ABADBC24E2219D0094CA9A /* AlignedCollectionViewFlowLayout.swift in Sources */,

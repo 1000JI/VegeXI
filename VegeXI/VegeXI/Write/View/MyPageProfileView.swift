@@ -15,13 +15,13 @@ class MyPageProfileView: UIView {
         didSet { configure() }
     }
     
-    let profileViewContainer = UIView()
+    private let profileViewContainer = UIView()
     
     let profileImageView = UIImageView().then {
         $0.clipsToBounds = true
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 112 / 2
-        $0.backgroundColor = .red
+        $0.image = UIImage(named: "cell_Human")
     }
     let profileEditButton = UIButton().then {
         let image = UIImage(named: "EditProfile_Icon")?.withTintColor(.vegeTextBlackColor, renderingMode: .alwaysOriginal)

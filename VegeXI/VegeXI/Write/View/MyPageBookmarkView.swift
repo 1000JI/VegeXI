@@ -15,12 +15,18 @@ class MyPageBookmarkView: UIView {
     let postTableview = UITableView()
     
     // MARK: - Lifecycle
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.isHidden = true
+    init(isHidden: Bool) {
+        super.init(frame: .zero)
+        self.isHidden = isHidden
         configureUI()
     }
     
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        self.isHidden = true
+//        configureUI()
+//    }
+//
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
