@@ -19,12 +19,11 @@ class SharePostViewController: UIViewController {
     private lazy var vegeInfoCollectionView = sharePostScrollView.sharePostContentView.vegeTypeInfoView.categoryCollectionView
     private lazy var categoryCollectionViews = sharePostScrollView.sharePostContentView.categoryViews // 컬렉션 뷰를 포함하는 모든 카테고리 뷰를 저장
     private var selectedCellInfo = [Int: IndexPathSet]() // 유저가 선택한 셀이 저장
-    private var selectedCategory: (VegeType, PostCategory)?
     
     private var vegeType: VegeType { // 유저가 설정한 타입 값
         return configureVegeType(selectedCellInfo: selectedCellInfo)
     }
-    private var CategoryTitle: CategoryType { // 각 카테고리를 구분하는 타이틀 저장
+    private var categoryTitleType: CategoryType { // 각 카테고리를 구분하는 타이틀 저장
         return configureCategoryTitle(selectedCellInfo: selectedCellInfo)
     }
     private var categoryType: PostCategory { // 유저가 설정한 카테고리 값
@@ -36,6 +35,12 @@ class SharePostViewController: UIViewController {
     
     private let backgroundColor = UIColor.black.withAlphaComponent(0.75)
     
+    
+    // Previous Data
+    var feedTitle: String = ""
+    var feedContent: String = ""
+    var location: LocationModel?
+    var imageArray = [UIImage]()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -110,12 +115,30 @@ class SharePostViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
             present(alert, animated: true)
             return }
-        print(sharePostSetting)
-        print(#function)
         
-        self.presentingViewController?
-            .presentingViewController?
-            .dismiss(animated: true, completion: nil)
+        let feedCategory = FeedCategory(
+            vegeType: vegeType,
+            categoryTitleType: categoryTitleType,
+            categoryType: categoryType)
+        
+        showLoader(true)
+        FeedService.shared.uploadFeed(
+            title: feedTitle,
+            content: feedContent,
+            imageArray: imageArray,
+            location: location,
+            category: feedCategory,
+            isOpen: sharePostSetting) { (error, ref) in
+                self.showLoader(false)
+                if let error = error {
+                    print("DEBUG: \(error.localizedDescription)")
+                    return
+                }
+                print("FEED UPLOAD SUCCESS")
+                self.presentingViewController?
+                    .presentingViewController?
+                    .dismiss(animated: true, completion: nil)
+        }
     }
     
     private func configureVegeType(selectedCellInfo: [Int: IndexPathSet]) -> VegeType {
@@ -276,9 +299,11 @@ extension SharePostViewController: UICollectionViewDelegate {
         }
         cell.isClicked = true
         selectedCellInfo[collectionView.tag] = [indexPath]
-        print(selectedCellInfo)
-        print(vegeType, CategoryTitle, categoryType)
-        selectedCategory = (vegeType, categoryType)
+
+//        print(selectedCellInfo)
+//        print(vegeType, CategoryTitle, categoryType)
+//        selectedCategory = (vegeType, categoryType)
+
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

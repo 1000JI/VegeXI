@@ -87,16 +87,16 @@ class FeedRegisterController: UIViewController {
     // MARK: - Selectors
     
     @objc func handleRegister() {
-        guard let title = titleTextField.text else { return }
-        guard let content = contentTextView.text else { return }
-        
-        FeedService.shared.uploadFeed(title: title, content: content, imageArray: imageArray) { (error, ref) in
-            if let error = error {
-                debugPrint(error.localizedDescription)
-                return
-            }
-            print("Feed Upload Success!!!")
-        }
+//        guard let title = titleTextField.text else { return }
+//        guard let content = contentTextView.text else { return }
+//
+//        FeedService.shared.uploadFeed(title: title, content: content, imageArray: imageArray) { (error, ref) in
+//            if let error = error {
+//                debugPrint(error.localizedDescription)
+//                return
+//            }
+//            print("Feed Upload Success!!!")
+//        }
     }
     
     @objc func handelImagePicker() {

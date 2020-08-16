@@ -266,11 +266,19 @@ struct FeedService {
                     content: String,
                     imageArray: [UIImage],
                     location: LocationModel? = nil,
+                    category: FeedCategory,
+                    isOpen: Bool,
                     completion: @escaping((Error?, DatabaseReference) -> Void)) {
         guard let writerUid = UserService.shared.user?.uid else { return }
         
         let feedType = imageArray.count > 0 ?
             FeedType.picAndTextType: FeedType.textType
+        
+        let categoryValue = [
+            "vegeType": category.vegeType.rawValue,
+            "categoryTitleType": category.categoryTitleType.rawValue,
+            "categoryType": category.categoryType.rawValue
+        ]
         
         var values = [
             "writerUid": writerUid,
@@ -279,7 +287,9 @@ struct FeedService {
             "title": title,
             "content": content,
             "likes": 0,
-            "comments": 0
+            "comments": 0,
+            "category": categoryValue,
+            "isOpen": isOpen
             ] as [String : Any]
         
         if let location = location {

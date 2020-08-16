@@ -15,7 +15,7 @@ class MainTableView: UITableView {
     var isFilterFeeds = false
     var viewType: ViewType = .home
     
-    var feeds = [Feed]() {
+    var recentFeeds = [Feed]() {
         didSet {
             isFilterFeeds = false
             sortTitleLabel.text = "최신순"
@@ -23,7 +23,7 @@ class MainTableView: UITableView {
         }
     }
     
-    var filterFeeds = [Feed]() {
+    var popularFeeds = [Feed]() {
         didSet {
             isFilterFeeds = true
             sortTitleLabel.text = "인기순"
@@ -116,8 +116,8 @@ class MainTableView: UITableView {
             cell.feed?.likes = likes
             
             let row = self.indexPath(for: cell)!.row
-            self.feeds[row].didLike = cell.feed?.didLike ?? false
-            self.feeds[row].likes = cell.feed?.likes ?? 0
+            self.recentFeeds[row].didLike = cell.feed?.didLike ?? false
+            self.recentFeeds[row].likes = cell.feed?.likes ?? 0
         }
         
     }
@@ -138,7 +138,7 @@ class MainTableView: UITableView {
             cell.feed?.didBookmark.toggle()
             
             let row = self.indexPath(for: cell)!.row
-            self.feeds[row].didBookmark = cell.feed?.didBookmark ?? false
+            self.recentFeeds[row].didBookmark = cell.feed?.didBookmark ?? false
         }
     }
     
@@ -180,13 +180,13 @@ class MainTableView: UITableView {
 
 extension MainTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return isFilterFeeds ? filterFeeds.count : feeds.count
+        return isFilterFeeds ? popularFeeds.count : recentFeeds.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier, for: indexPath) as! MainTableViewCell
         cell.feed = isFilterFeeds ?
-            filterFeeds[indexPath.row] : feeds[indexPath.row]
+            popularFeeds[indexPath.row] : recentFeeds[indexPath.row]
         cell.tappedLikeButton = tappedLikeButton(cell:)
         cell.tappedCommentButton = tappedCommentButton(cell:)
         cell.tappedBookmarkButton = tappedBookmarkButton(cell:)
@@ -200,10 +200,10 @@ extension MainTableView: UITableViewDataSource {
 extension MainTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if isFilterFeeds {
-            return filterFeeds[indexPath.row].feedType == .textType ?
+            return popularFeeds[indexPath.row].feedType == .textType ?
             textCellHeight : picAndTextCellHeight
         } else {
-            return feeds[indexPath.row].feedType == .textType ?
+            return recentFeeds[indexPath.row].feedType == .textType ?
             textCellHeight : picAndTextCellHeight
         }
     }
