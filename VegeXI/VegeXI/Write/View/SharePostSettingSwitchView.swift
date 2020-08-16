@@ -25,6 +25,12 @@ class SharePostSettingSwitchView: UIView {
         $0.textColor = .vegeLightGraySearchHistoryClearButtonColor
     }
     
+    var isSwitchOn: Bool {
+        get {
+            shareSwitch.isOn
+        }
+    }
+    
     
     // MARK: - Lifecycle
     override init(frame: CGRect) {

@@ -140,6 +140,7 @@ class FeedWriteController: UITableViewController {
         }
         let controller = SharePostViewController()
         controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
         present(controller, animated: true)
     }
     
