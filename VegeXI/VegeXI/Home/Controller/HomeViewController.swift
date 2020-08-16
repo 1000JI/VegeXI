@@ -37,11 +37,12 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavi()
-        fetchFeeds()
+//        fetchFeeds()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.presentWriteButtonInTabBar()
         
         let indexPath = IndexPath(item: 0, section: 0)
         categoryView.collectionView.selectItem(
@@ -52,7 +53,6 @@ class HomeViewController: UIViewController {
             categoryView.collectionView,
             didSelectItemAt: indexPath)
     }
-    
     
     // MARK: - API
     
@@ -71,6 +71,7 @@ class HomeViewController: UIViewController {
     func tappedSearchButton() {
         let controller = SearchHistoryViewController()
         controller.feeds = feeds
+        controller.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(controller, animated: true)
     }
     

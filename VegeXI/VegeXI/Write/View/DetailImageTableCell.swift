@@ -93,7 +93,12 @@ class DetailImageTableCell: UITableViewCell {
     }
     
     func configure() {
-        moreImageCountLabel.text = "1/\(imageUrlArray.count)"
+        if imageUrlArray.count > 1 {
+            moreImageCountLabel.text = "1/\(imageUrlArray.count)"
+        } else {
+            moreImageCountLabel.isHidden = true
+            moreCountLabelBackView.isHidden = true
+        }
     }
 }
 
@@ -152,6 +157,7 @@ class DetailImageCollectionCell: UICollectionViewCell {
         $0.backgroundColor = .systemFill
         $0.layer.cornerRadius = 8
         $0.clipsToBounds = true
+        $0.contentMode = .scaleAspectFill
     }
     
     // MARK: - LifeCycle
