@@ -11,7 +11,7 @@ import UIKit
 class MyPagePostTableViewHeader: UIView {
     
     // MARK: - Properties
-    private let leftLabel = UILabel().then {
+    let leftLabel = UILabel().then {
         $0.text = "글 3"
         $0.font = UIFont.spoqaHanSansRegular(ofSize: 14)
         $0.textColor = .vegeTextBlackColor
@@ -23,7 +23,7 @@ class MyPagePostTableViewHeader: UIView {
         $0.distribution = .fillProportionally
         $0.spacing = 0
     }
-    private let rightLabel = UILabel().then {
+    let rightLabel = UILabel().then {
         $0.text = "전체"
         $0.font = UIFont.spoqaHanSansRegular(ofSize: 13)
         $0.textColor = .vegeTextBlackColor
@@ -33,6 +33,7 @@ class MyPagePostTableViewHeader: UIView {
         let image = UIImage(named: "Arrow_Down")
         $0.image = image
     }
+    private var filterActionHandler: () -> Void = { return }
     
     
     // MARK: - Lifecycle
@@ -54,7 +55,9 @@ class MyPagePostTableViewHeader: UIView {
     }
     
     private func setPropertyAttributes() {
-        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
+        rightStackView.addGestureRecognizer(tapGesture)
+        rightStackView.isUserInteractionEnabled = true
     }
     
     private func setConstraints() {
@@ -72,6 +75,20 @@ class MyPagePostTableViewHeader: UIView {
         rightImageView.snp.makeConstraints {
             $0.width.equalTo(18)
         }
+    }
+    
+    
+    // MARK: - Helpers
+    func configureHeader(numberOfPosts: Int, filterActionHandler: @escaping () -> Void) {
+        leftLabel.text = "글 " + String(numberOfPosts)
+        self.filterActionHandler = filterActionHandler
+    }
+    
+    
+    // MARK: - Selectors
+    @objc
+    private func handleTapGesture(_ sender: UITapGestureRecognizer) {
+        filterActionHandler()
     }
     
 }
