@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
     
     private let homeCustomNavigationBar = CustomMainNavigationBar()
     private let categoryView = CategoryCollectionView()
-    private let mainTableView = MainTableView(frame: .zero, style: .grouped)
+    private let mainTableView = MainTableView(viewType: .home)
     private let refreshControl = UIRefreshControl()
     
     private var feeds = [Feed]() {

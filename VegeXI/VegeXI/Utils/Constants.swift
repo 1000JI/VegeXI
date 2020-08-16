@@ -20,6 +20,7 @@ let REF_USER_FEEDS = DB_REF.child("user-feeds")
 let REF_USER_LIKES = DB_REF.child("user-likes")
 let REF_USER_BOOKMARKS = DB_REF.child("user-bookmarks")
 let REF_USER_COMMENTS = DB_REF.child("user-comments")
+let REF_USER_HISTORY = DB_REF.child("user-history")
 
 let REF_FEEDS = DB_REF.child("feeds")
 let REF_FEED_COMMENTS = DB_REF.child("feed-comments")

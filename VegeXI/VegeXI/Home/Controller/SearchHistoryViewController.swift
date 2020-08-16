@@ -15,6 +15,12 @@ class SearchHistoryViewController: UIViewController {
     var searchFeeds = [Feed]() {
         didSet { mainTableView.feeds = searchFeeds }
     }
+    var searchFilterFeeds = [Feed]() {
+        didSet { mainTableView.filterFeeds = searchFilterFeeds }
+    }
+    var histories = [String]() {
+        didSet { historyTableView.reloadData() }
+    }
     
     private let fakeSearchNaviBar = FakeSearchNaviBar()
     private let historyTableView = UITableView(frame: .zero, style: .plain).then {
@@ -25,11 +31,11 @@ class SearchHistoryViewController: UIViewController {
     private let categoryView = CategoryCollectionView().then {
         $0.isHidden = true
     }
-    private lazy var mainTableView = MainTableView(frame: .zero, style: .grouped).then {
+    private lazy var mainTableView = MainTableView(viewType: .search).then {
         $0.isHidden = true
         $0.handleCommentTapped = tappedCommentEvent(feed:)
+        $0.handleSortTapped = tappedSortEvent
     }
-    private let refreshControl = UIRefreshControl()
     
     
     // MARK: - Lifecycle
@@ -37,11 +43,17 @@ class SearchHistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        fetchHistoryList()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        showSearchTableView(isShow: false)
+        
+        if fakeSearchNaviBar.fakeSearchBar.isSearching {
+            showSearchTableView(isShow: true)
+        } else {
+            showSearchTableView(isShow: false)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +64,13 @@ class SearchHistoryViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         isTabbarHidden(isHidden: false)
+    }
+    
+    // MARK: - API
+    func fetchHistoryList() {
+        FeedService.shared.fetchHistories { histories in
+            self.histories = histories
+        }
     }
     
     
@@ -95,6 +114,35 @@ class SearchHistoryViewController: UIViewController {
         fakeSearchNaviBar.configureSearchNaviBar(leftBarButtonActionHandler: handleLeftBackBarButton)
     }
     
+    // MARK: - Actions
+    func tappedSortEvent() {
+        let sortAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let newestSortAction = UIAlertAction(
+            title: "최신순",
+            style: .default) { action in
+                self.searchFeeds = self.searchFeeds.sorted(by: { lhs, rhs -> Bool in
+                    lhs.writeDate > rhs.writeDate
+                })
+        }
+        let popularSortAction = UIAlertAction(
+            title: "인기순",
+            style: .default) { action in
+                self.searchFilterFeeds = self.searchFeeds.sorted(by: { lhs, rhs -> Bool in
+                    lhs.likes > rhs.likes
+                })
+        }
+        let cancelAction = UIAlertAction(
+            title: "취소",
+            style: .cancel,
+            handler: nil)
+        sortAlert.addAction(newestSortAction)
+        sortAlert.addAction(popularSortAction)
+        sortAlert.addAction(cancelAction)
+        sortAlert.view.tintColor = .vegeTextBlackColor
+        
+        present(sortAlert, animated: true)
+    }
+    
     
     // MARK: - Helpers
     private func showSearchTableView(isShow: Bool) {
@@ -131,19 +179,28 @@ class SearchHistoryViewController: UIViewController {
     }
     
     private func removeData(index: Int) {
-        let indexPath = IndexPath(row: index, section: 0)
-        MockData.searchHistory.remove(at: index)
-        historyTableView.deleteRows(at: [indexPath], with: .none)
-        historyTableView.reloadData()
+        let keyword = histories[index]
+        showLoader(true)
+        FeedService.shared.removeHistory(keyword: keyword) { (error, ref) in
+            self.showLoader(false)
+            if let error = error {
+                print("DEBUG: Remove History error \(error.localizedDescription)")
+                return
+            }
+            print("DEBUG: History Remove Success")
+            self.histories.remove(at: index)
+        }
     }
     
     private func handleAllClearButton() {
-        removeAllData()
-    }
-    
-    private func removeAllData() {
-        MockData.searchHistory.removeAll()
-        historyTableView.reloadData()
+        FeedService.shared.allRemoveHistories { (error, ref) in
+            if let error = error {
+                print("DEBUG: Remove History error \(error.localizedDescription)")
+                return
+            }
+            print("DEBUG: History All Remove Success")
+            self.histories.removeAll()
+        }
     }
     
     private func handleLeftBackBarButton() {
@@ -172,12 +229,12 @@ extension SearchHistoryViewController: UITableViewDataSource {
     
     // Cell
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return MockData.searchHistory.count
+        return histories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = historyTableView.dequeueReusableCell(withIdentifier: SearchHistoryTableViewCell.identifier, for: indexPath) as? SearchHistoryTableViewCell else { fatalError("No Cell Info") }
-        let text = MockData.searchHistory[indexPath.row]
+        let text = histories[indexPath.row]
         cell.selectionStyle = .none
         cell.configureCell(text: text, tag: indexPath.row, tapActionHandler: handleDeleteButton(cellNumber:))
         return cell
@@ -191,7 +248,8 @@ extension SearchHistoryViewController: UITableViewDelegate {
         guard let cell = historyTableView.cellForRow(at: indexPath) as? SearchHistoryTableViewCell else { return }
         fakeSearchNaviBar.fakeSearchBar.currentText = cell.leftLable.text!
         
-        _ = textFieldShouldReturn(fakeSearchNaviBar.fakeSearchBar.searchTextField)
+        let keyword = fakeSearchNaviBar.fakeSearchBar.searchTextField
+        _ = textFieldShouldReturn(keyword)
         
         fakeSearchNaviBar.fakeSearchBar.isSearching = fakeSearchNaviBar.fakeSearchBar.searchTextField.text != "" ? true : false
     }
@@ -213,10 +271,24 @@ extension SearchHistoryViewController: UITextFieldDelegate {
         } else {
             showSearchTableView(isShow: true)
             
+            let keyword = text.trimmingCharacters(in: [".", "#", "$", "[", "]"])
+            var isNewKeyword = true
+            if self.histories.contains(keyword) { isNewKeyword = false }
+            if isNewKeyword {
+                FeedService.shared.uploadHistoryKeyword(keyword: keyword) { (error, ref) in
+                    if let error = error {
+                        print("DEBUG: History Upload Error \(error.localizedDescription)")
+                        return
+                    }
+                    print("DEBUG: History Save Success")
+                    self.histories.append(keyword)
+                }
+            }
+            
             guard let feeds = feeds else { return false }
             searchFeeds = feeds.filter {
-                $0.title.lowercased().contains(text) ||
-                    $0.content.lowercased().contains(text)
+                $0.title.lowercased().contains(keyword) ||
+                    $0.content.lowercased().contains(keyword)
             }
         }
         return true

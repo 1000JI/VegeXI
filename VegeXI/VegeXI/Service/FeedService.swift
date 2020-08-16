@@ -14,6 +14,39 @@ struct FeedService {
     static let shared = FeedService()
     private init() { }
     
+    func allRemoveHistories(completion: @escaping(Error?, DatabaseReference) -> Void) {
+        guard let userUid = UserService.shared.user?.uid else { return }
+        REF_USER_HISTORY.child(userUid).removeValue(completionBlock: completion)
+    }
+    
+    func removeHistory(keyword: String, completion: @escaping(Error?, DatabaseReference) -> Void) {
+        guard let userUid = UserService.shared.user?.uid else { return }
+        
+        REF_USER_HISTORY.child(userUid).child(keyword).removeValue(completionBlock: completion)
+    }
+    
+    func fetchHistories(completion: @escaping([String]) -> Void) {
+        guard let userUid = UserService.shared.user?.uid else { return }
+        var histories = [String]()
+        
+        REF_USER_HISTORY.child(userUid).observeSingleEvent(of: .value) { snapshot in
+            guard let values = snapshot.value as? [String: Int] else {
+                completion(histories)
+                return
+            }
+            values.keys.forEach { histories.append(String($0)) }
+            completion(histories)
+            return
+        }
+        completion(histories)
+    }
+    
+    func uploadHistoryKeyword(keyword: String, completion: @escaping(Error?, DatabaseReference) -> Void) {
+        guard let userUid = UserService.shared.user?.uid else { return }
+        
+        REF_USER_HISTORY.child(userUid).updateChildValues([keyword: 1], withCompletionBlock: completion)
+    }
+    
     func fetchMyBookmark(userUid: String, completion: @escaping([Feed]) -> Void) {
         var bookmarkFeeds = [Feed]()
         
@@ -29,6 +62,7 @@ struct FeedService {
                 }
             }
         }
+        completion(bookmarkFeeds)
     }
     
     func fetchMyFeeds(userUid: String, completion: @escaping([Feed]) -> Void) {
@@ -46,6 +80,7 @@ struct FeedService {
                 }
             }
         }
+        completion(myFeeds)
     }
     
     func fetchFeed(feedID: String, completion: @escaping(Feed) -> Void) {

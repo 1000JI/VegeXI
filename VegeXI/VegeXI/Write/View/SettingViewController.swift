@@ -151,16 +151,20 @@ extension SettingViewController: UITableViewDelegate {
             print(notificationSetting)
         case "비밀번호 변경":
             let nextVC = ForgotPasswordViewController()
+            nextVC.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(nextVC, animated: true)
         case "문의/버그신고":
             let nextVC = BugReportViewController()
+            nextVC.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(nextVC, animated: true)
         case "서비스 이용 약관":
             let nextVC = ExplanationViewController()
+            nextVC.hidesBottomBarWhenPushed = true
             nextVC.configureViewController(title: "서비스 이용 약관", content: SettingCategories.instance.agreement)
             navigationController?.pushViewController(nextVC, animated: true)
         case "개인정보 처리방침":
             let nextVC = ExplanationViewController()
+            nextVC.hidesBottomBarWhenPushed = true
             nextVC.configureViewController(title: "개인정보 처리방침", content: SettingCategories.instance.privacyPolicy)
             navigationController?.pushViewController(nextVC, animated: true)
         case "로그아웃":

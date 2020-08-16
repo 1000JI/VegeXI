@@ -13,6 +13,12 @@ enum FeedType: String {
     case picAndTextType
 }
 
+struct FeedCategory {
+    let vegeType: VegeType
+    let categoryTitle: String
+    let categoryType: PostCategory
+}
+
 struct Feed {
     let feedType: FeedType
     let writerUser: User
@@ -26,6 +32,7 @@ struct Feed {
     var imageUrls: [URL]?
     var location: LocationModel?
     var didBookmark: Bool = false
+    var category: FeedCategory?
     
     init(user: User, feedID: String, dictionary: [String : Any]) {
         let type = dictionary["type"] as? String ?? "textType"
