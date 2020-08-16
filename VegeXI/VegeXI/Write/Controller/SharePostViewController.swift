@@ -109,6 +109,10 @@ class SharePostViewController: UIViewController {
             return }
         print(sharePostSetting)
         print(#function)
+        
+        self.presentingViewController?
+            .presentingViewController?
+            .dismiss(animated: true, completion: nil)
     }
     
     private func configureVegeType(selectedCellInfo: [Int: IndexPathSet]) -> VegeType {

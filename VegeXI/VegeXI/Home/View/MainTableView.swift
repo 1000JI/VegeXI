@@ -13,6 +13,7 @@ class MainTableView: UITableView {
     // MARK: - Properties
     
     var isFilterFeeds = false
+    var viewType: ViewType = .home
     
     var feeds = [Feed]() {
         didSet {
@@ -36,9 +37,19 @@ class MainTableView: UITableView {
     
     private let sortTitleLabel = UILabel()
     private let sortImageView = UIImageView()
+    private lazy var sortStack = makeFilterView(
+        filterLabel: sortTitleLabel,
+        filterName: "최신순",
+        filterImageView: sortImageView,
+        imageName: "feed_DownButton")
     
     private let filterTitleLabel = UILabel()
     private let filterImageView = UIImageView()
+    private lazy var filterStack = makeFilterView(
+        filterLabel: filterTitleLabel,
+        filterName: "필터",
+        filterImageView: filterImageView,
+        imageName: "feed_PlusButton")
     
     var handleSortTapped: (() -> Void)?
     var handleFilterTapped: (() -> Void)?
@@ -47,19 +58,9 @@ class MainTableView: UITableView {
     private lazy var headerView = UIView().then {
         $0.backgroundColor = .white
         
-        let sortStack = makeFilterView(
-            filterLabel: sortTitleLabel,
-            filterName: "최신순",
-            filterImageView: sortImageView,
-            imageName: "feed_DownButton")
         let sortTapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedSortButton))
         sortStack.addGestureRecognizer(sortTapGesture)
         
-        let filterStack = makeFilterView(
-            filterLabel: filterTitleLabel,
-            filterName: "필터",
-            filterImageView: filterImageView,
-            imageName: "feed_PlusButton")
         let filterTapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedFilterButton))
         filterStack.addGestureRecognizer(filterTapGesture)
         
@@ -79,9 +80,14 @@ class MainTableView: UITableView {
     
     // MARK: - LifeCycle
     
-    override init(frame: CGRect, style: UITableView.Style) {
-        super.init(frame: frame, style: style)
+    init(viewType: ViewType) {
+        super.init(frame: .zero, style: .grouped)
+        self.viewType = viewType
         configureTableView()
+        
+        if viewType == .search {
+            filterStack.isHidden = true
+        }
     }
     
     required init?(coder: NSCoder) {

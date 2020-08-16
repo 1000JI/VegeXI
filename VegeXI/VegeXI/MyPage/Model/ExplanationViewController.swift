@@ -27,6 +27,16 @@ class ExplanationViewController: UIViewController {
         configureUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        isTabbarHidden(isHidden: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        isTabbarHidden(isHidden: false)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         scrollView.contentSize = CGSize(width: view.frame.width, height: contentLabel.frame.maxY)
