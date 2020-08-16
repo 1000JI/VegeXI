@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         window?.rootViewController = UINavigationController(rootViewController: controller)
 
-//        let viewCon = SettingViewController()
+//        let viewCon = NewFilterViewController()
 //        let naviCon = UINavigationController(rootViewController: viewCon)
 //        window?.rootViewController = naviCon
         window?.makeKeyAndVisible()
