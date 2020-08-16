@@ -24,6 +24,9 @@ class SharePostViewController: UIViewController {
     private var vegeType: VegeType { // 유저가 설정한 타입 값
         return configureVegeType(selectedCellInfo: selectedCellInfo)
     }
+    private var CategoryTitle: CategoryType { // 각 카테고리를 구분하는 타이틀 저장
+        return configureCategoryTitle(selectedCellInfo: selectedCellInfo)
+    }
     private var categoryType: PostCategory { // 유저가 설정한 카테고리 값
         return configureCategory(selectedCellInfo: selectedCellInfo)
     }
@@ -133,6 +136,25 @@ class SharePostViewController: UIViewController {
         default:
             return .nothing
         }
+    }
+    
+    private func configureCategoryTitle(selectedCellInfo: [Int: IndexPathSet]) -> CategoryType {
+        for index in 1...4 {
+            guard let _ = selectedCellInfo[index] else { continue }
+            switch index {
+            case 1:
+                return .diet
+            case 2:
+                return .location
+            case 3:
+                return .product
+            case 4:
+                return .content
+            default:
+                fatalError()
+            }
+        }
+        return .content
     }
     
     private func configureCategory(selectedCellInfo: [Int: IndexPathSet]) -> PostCategory {
@@ -255,7 +277,7 @@ extension SharePostViewController: UICollectionViewDelegate {
         cell.isClicked = true
         selectedCellInfo[collectionView.tag] = [indexPath]
         print(selectedCellInfo)
-        print(vegeType, categoryType)
+        print(vegeType, CategoryTitle, categoryType)
         selectedCategory = (vegeType, categoryType)
         print(selectedCategory)
     }

@@ -38,6 +38,10 @@ class SettingTableViewCell: UITableViewCell {
         $0.clipsToBounds = true
     }
     private let switcher = UISwitch()
+    var switchStatus: Bool {
+        return switcher.isOn
+    }
+    
     private let separator = UIView().then {
         $0.backgroundColor = .vegeLightGrayVegeInfoThinBar
     }

@@ -14,6 +14,14 @@ class SettingViewController: UIViewController {
     private let topBarView = EditProfileTopBarView(title: SettingViewStrings.barTitle.generateString())
     private let settingTableView = UITableView()
     
+    private var notificationSwitchCell: SettingTableViewCell?
+    private var notificationSetting: Bool { // 유저가 설정한 Notification 값
+        if let status = notificationSwitchCell?.switchStatus {
+            return status
+        }
+        fatalError()
+    }
+    
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -24,6 +32,7 @@ class SettingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
         isTabbarHidden(isHidden: true)
     }
     
@@ -112,6 +121,9 @@ extension SettingViewController: UITableViewDataSource {
         let lastCellIndex = SettingCategories.instance.categoryInfo.count - 1
         let hideSeparator = indexPath.row == lastCellIndex ? true : false
         cell.configureCell(title: title, subtitle: subtitle, info: info, isOn: false, cellType: cellType, separatorIsHidden: hideSeparator)
+        if indexPath.row == 0 {
+            notificationSwitchCell = cell
+        }
         return cell
     }
     
@@ -135,6 +147,8 @@ extension SettingViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let title = SettingCategories.instance.categoryInfo[indexPath.row]["title"] else { return }
         switch title {
+        case "푸시알림 설정":
+            print(notificationSetting)
         case "비밀번호 변경":
             let nextVC = ForgotPasswordViewController()
             nextVC.hidesBottomBarWhenPushed = true
