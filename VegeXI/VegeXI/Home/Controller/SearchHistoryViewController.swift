@@ -12,6 +12,7 @@ class SearchHistoryViewController: UIViewController {
 
     // MARK: - Properties
     
+    private var firstLoad = true
     private var isRecent = true // false => popular
     private var isApplyCategory: Bool {
         return filterFeeds.count != 0
@@ -19,15 +20,11 @@ class SearchHistoryViewController: UIViewController {
     var amountFeeds = [Feed]() {
         didSet { configureFeeds(feeds: amountFeeds) }
     }
-    private var filterFeeds = [Feed]() {
+    var filterFeeds = [Feed]() {
         didSet { configureFeeds(feeds: filterFeeds) }
     }
-    
     var searchFeeds = [Feed]() {
         didSet { mainTableView.recentFeeds = searchFeeds }
-    }
-    var searchFilterFeeds = [Feed]() {
-        didSet { mainTableView.popularFeeds = searchFilterFeeds }
     }
     var histories = [String]() {
         didSet { historyTableView.reloadData() }
@@ -200,14 +197,18 @@ class SearchHistoryViewController: UIViewController {
             categoryView.isHidden = true
             mainTableView.isHidden = true
             
-            let indexPath = IndexPath(item: 0, section: 0)
-            categoryView.collectionView.selectItem(
-                at: indexPath,
-                animated: false,
-                scrollPosition: .centeredHorizontally)
-            categoryView.collectionView(
-                categoryView.collectionView,
-                didSelectItemAt: indexPath)
+            if firstLoad {
+                firstLoad.toggle()
+                
+                let indexPath = IndexPath(item: 0, section: 0)
+                categoryView.collectionView.selectItem(
+                    at: indexPath,
+                    animated: false,
+                    scrollPosition: .centeredHorizontally)
+                categoryView.collectionView(
+                    categoryView.collectionView,
+                    didSelectItemAt: indexPath)
+            }
         }
     }
     
