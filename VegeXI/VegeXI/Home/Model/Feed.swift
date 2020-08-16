@@ -15,8 +15,25 @@ enum FeedType: String {
 
 struct FeedCategory {
     let vegeType: VegeType
-    let categoryTitle: String
+    let categoryTitleType: CategoryType
     let categoryType: PostCategory
+    
+    init(dictionary: [String: Any]) {
+        let vegeString = dictionary["vegeType"] as? String ?? "nothing"
+        self.vegeType = VegeType(rawValue: vegeString)!
+        
+        let vegeTitleString = dictionary["categoryTitleType"] as? String ?? "식단"
+        self.categoryTitleType = CategoryType(rawValue: vegeTitleString)!
+        
+        let vegeCategoryString = dictionary["categoryType"] as? String ?? "한식"
+        self.categoryType = PostCategory(rawValue: vegeCategoryString)!
+    }
+    
+    init(vegeType: VegeType, categoryTitleType: CategoryType, categoryType: PostCategory) {
+        self.vegeType = vegeType
+        self.categoryTitleType = categoryTitleType
+        self.categoryType = categoryType
+    }
 }
 
 struct Feed {
@@ -32,7 +49,8 @@ struct Feed {
     var imageUrls: [URL]?
     var location: LocationModel?
     var didBookmark: Bool = false
-    var category: FeedCategory?
+    var category: FeedCategory
+    var isOpen: Bool
     
     init(user: User, feedID: String, dictionary: [String : Any]) {
         let type = dictionary["type"] as? String ?? "textType"
@@ -48,6 +66,17 @@ struct Feed {
         
         self.likes = dictionary["likes"] as? Int ?? 0
         self.comments = dictionary["comments"] as? Int ?? 0
+        
+        if let getCategory = dictionary["category"] as? [String: Any] {
+            self.category = FeedCategory(dictionary: getCategory)
+        } else {
+            self.category = FeedCategory(
+                vegeType: .nothing,
+                categoryTitleType: .diet,
+                categoryType: .chineseFood)
+        }
+        
+        self.isOpen = dictionary["isOpen"] as? Bool ?? true
     }
     
     init(dictionary: [String : Any], user: User, feedID: String, likeDidLike: Bool, bookmarkDidLike: Bool, imageUrlArray: [URL]? = nil) {
@@ -78,5 +107,16 @@ struct Feed {
         if let location = getLocation {
             self.location = LocationModel(dictionary: location)
         }
+        
+        if let getCategory = dictionary["category"] as? [String: Any] {
+            self.category = FeedCategory(dictionary: getCategory)
+        } else {
+            self.category = FeedCategory(
+                vegeType: .nothing,
+                categoryTitleType: .diet,
+                categoryType: .chineseFood)
+        }
+        
+        self.isOpen = dictionary["isOpen"] as? Bool ?? true
     }
 }

@@ -21,6 +21,8 @@ class CategoryCollectionView: UIView {
         $0.backgroundColor = .vegeTextBlackColor
     }
     
+    var tappedCategory: ((String) -> Void)?
+    
     // MARK: - LifeCycle
     
     override init(frame: CGRect) {
@@ -102,6 +104,8 @@ extension CategoryCollectionView: UICollectionViewDelegateFlowLayout {
             }
             self.layoutIfNeeded()
         }
+        
+        tappedCategory?(categoryList[indexPath.item])
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

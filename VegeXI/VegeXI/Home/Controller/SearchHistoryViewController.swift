@@ -11,12 +11,23 @@ import UIKit
 class SearchHistoryViewController: UIViewController {
 
     // MARK: - Properties
-    var feeds: [Feed]?
+    
+    private var isRecent = true // false => popular
+    private var isApplyCategory: Bool {
+        return filterFeeds.count != 0
+    }
+    var amountFeeds = [Feed]() {
+        didSet { configureFeeds(feeds: amountFeeds) }
+    }
+    private var filterFeeds = [Feed]() {
+        didSet { configureFeeds(feeds: filterFeeds) }
+    }
+    
     var searchFeeds = [Feed]() {
-        didSet { mainTableView.feeds = searchFeeds }
+        didSet { mainTableView.recentFeeds = searchFeeds }
     }
     var searchFilterFeeds = [Feed]() {
-        didSet { mainTableView.filterFeeds = searchFilterFeeds }
+        didSet { mainTableView.popularFeeds = searchFilterFeeds }
     }
     var histories = [String]() {
         didSet { historyTableView.reloadData() }
@@ -112,24 +123,49 @@ class SearchHistoryViewController: UIViewController {
         
         fakeSearchNaviBar.fakeSearchBar.searchTextField.delegate = self
         fakeSearchNaviBar.configureSearchNaviBar(leftBarButtonActionHandler: handleLeftBackBarButton)
+        categoryView.tappedCategory = tappedCategory(category:)
     }
     
     // MARK: - Actions
+    func tappedCategory(category: String) {
+        self.isRecent = true
+        if category == "전체" {
+            filterFeeds.removeAll()
+            configureFeeds(feeds: searchFeeds)
+        } else {
+            filterFeeds = searchFeeds.filter {
+                $0.category.categoryTitleType.rawValue == category
+            }
+        }
+    }
+    
     func tappedSortEvent() {
         let sortAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let newestSortAction = UIAlertAction(
             title: "최신순",
             style: .default) { action in
-                self.searchFeeds = self.searchFeeds.sorted(by: { lhs, rhs -> Bool in
-                    lhs.writeDate > rhs.writeDate
-                })
+                self.isRecent = true
+                self.filterFeeds = self.isApplyCategory ?
+                    self.filterFeeds.sorted(by: { lhs, rhs -> Bool in
+                        lhs.writeDate > rhs.writeDate
+                    })
+                    :
+                    self.searchFeeds.sorted(by: { lhs, rhs -> Bool in
+                        lhs.writeDate > rhs.writeDate
+                    })
         }
         let popularSortAction = UIAlertAction(
             title: "인기순",
             style: .default) { action in
-                self.searchFilterFeeds = self.searchFeeds.sorted(by: { lhs, rhs -> Bool in
-                    lhs.likes > rhs.likes
-                })
+                self.isRecent = false
+                self.filterFeeds = self.isApplyCategory ?
+                    self.filterFeeds.sorted(by: { lhs, rhs -> Bool in
+                        lhs.likes > rhs.likes
+                    })
+                    :
+                    self.searchFeeds.sorted(by: { lhs, rhs -> Bool in
+                        lhs.likes > rhs.likes
+                    })
         }
         let cancelAction = UIAlertAction(
             title: "취소",
@@ -145,6 +181,15 @@ class SearchHistoryViewController: UIViewController {
     
     
     // MARK: - Helpers
+    
+    func configureFeeds(feeds: [Feed]) {
+        if isRecent {
+            mainTableView.recentFeeds = feeds
+        } else {
+            mainTableView.popularFeeds = feeds
+        }
+    }
+    
     private func showSearchTableView(isShow: Bool) {
         if isShow {
             historyTableView.isHidden = true
@@ -285,8 +330,8 @@ extension SearchHistoryViewController: UITextFieldDelegate {
                 }
             }
             
-            guard let feeds = feeds else { return false }
-            searchFeeds = feeds.filter {
+            self.isRecent = true
+            searchFeeds = amountFeeds.filter {
                 $0.title.lowercased().contains(keyword) ||
                     $0.content.lowercased().contains(keyword)
             }

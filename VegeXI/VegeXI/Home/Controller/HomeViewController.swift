@@ -17,11 +17,15 @@ class HomeViewController: UIViewController {
     private let mainTableView = MainTableView(viewType: .home)
     private let refreshControl = UIRefreshControl()
     
-    private var feeds = [Feed]() {
-        didSet { mainTableView.feeds = feeds }
+    private var isRecent = true // false => popular
+    private var isApplyCategory: Bool {
+        return filterFeeds.count != 0
+    }
+    private var amountFeeds = [Feed]() {
+        didSet { configureFeeds(feeds: amountFeeds) }
     }
     private var filterFeeds = [Feed]() {
-        didSet { mainTableView.filterFeeds = filterFeeds }
+        didSet { configureFeeds(feeds: filterFeeds) }
     }
     
     // MARK: - LifeCycle
@@ -61,16 +65,28 @@ class HomeViewController: UIViewController {
         FeedService.shared.fetchFeeds { feeds in
             self.showLoader(false)
             self.refreshControl.endRefreshing()
-            self.feeds = feeds
+            self.amountFeeds = feeds.filter { $0.isOpen == true }
         }
     }
     
     
     // MARK: - Actions
     
+    func tappedCategory(category: String) {
+        self.isRecent = true
+        if category == "전체" {
+            filterFeeds.removeAll()
+            configureFeeds(feeds: amountFeeds)
+        } else {
+            filterFeeds = amountFeeds.filter {
+                $0.category.categoryTitleType.rawValue == category
+            }
+        }
+    }
+    
     func tappedSearchButton() {
         let controller = SearchHistoryViewController()
-        controller.feeds = feeds
+        controller.amountFeeds = amountFeeds
         controller.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(controller, animated: true)
     }
@@ -84,14 +100,28 @@ class HomeViewController: UIViewController {
         let newestSortAction = UIAlertAction(
             title: "최신순",
             style: .default) { action in
-                self.feeds = self.feeds
+                self.isRecent = true
+                self.filterFeeds = self.isApplyCategory ?
+                    self.filterFeeds.sorted(by: { lhs, rhs -> Bool in
+                        lhs.writeDate > rhs.writeDate
+                    })
+                    :
+                    self.amountFeeds.sorted(by: { lhs, rhs -> Bool in
+                        lhs.writeDate > rhs.writeDate
+                    })
         }
         let popularSortAction = UIAlertAction(
             title: "인기순",
             style: .default) { action in
-                self.filterFeeds = self.feeds.sorted(by: { lhs, rhs -> Bool in
-                    lhs.likes > rhs.likes
-                })
+                self.isRecent = false
+                self.filterFeeds = self.isApplyCategory ?
+                    self.filterFeeds.sorted(by: { lhs, rhs -> Bool in
+                        lhs.likes > rhs.likes
+                    })
+                    :
+                    self.amountFeeds.sorted(by: { lhs, rhs -> Bool in
+                        lhs.likes > rhs.likes
+                    })
         }
         let cancelAction = UIAlertAction(
             title: "취소",
@@ -127,7 +157,16 @@ class HomeViewController: UIViewController {
     
     // MARK: - Helpers
     
+    func configureFeeds(feeds: [Feed]) {
+        if isRecent {
+            mainTableView.recentFeeds = feeds
+        } else {
+            mainTableView.popularFeeds = feeds
+        }
+    }
+    
     func configureViewEvent() {
+        categoryView.tappedCategory = tappedCategory(category:)
         homeCustomNavigationBar.tappedSearchButton = tappedSearchButton
         homeCustomNavigationBar.tappedAlertButton = tappedAlertButton
     }
