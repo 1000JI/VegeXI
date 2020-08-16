@@ -299,6 +299,11 @@ extension SharePostViewController: UICollectionViewDelegate {
         }
         cell.isClicked = true
         selectedCellInfo[collectionView.tag] = [indexPath]
+
+//        print(selectedCellInfo)
+//        print(vegeType, CategoryTitle, categoryType)
+//        selectedCategory = (vegeType, categoryType)
+
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
