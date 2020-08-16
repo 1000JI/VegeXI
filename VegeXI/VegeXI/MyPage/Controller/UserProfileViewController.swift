@@ -18,6 +18,8 @@ class UserProfileViewController: UIViewController {
     }
     private let postView = MyPageBookmarkView(isHidden: false)
     private lazy var postTableView = postView.postTableview
+    private var postViewCountingLabel: UILabel? // 글 갯수 표시
+    
     private let mockData = MockData.postExample
     
     
@@ -148,6 +150,7 @@ extension UserProfileViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = MyPageBookmarkableViewHeader()
+        postViewCountingLabel = header.leftLabel
         return header
     }
     
