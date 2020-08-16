@@ -15,15 +15,19 @@ class SharePostViewController: UIViewController {
     private let sharePostScrollView = SharePostScrollView()
     private let bottomShareButtonBar = FilterViewBottomBar(title: GeneralStrings.share.generateString())
     private let data = MockData.newFilteredList
+    
     private lazy var vegeInfoCollectionView = sharePostScrollView.sharePostContentView.vegeTypeInfoView.categoryCollectionView
     private lazy var categoryCollectionViews = sharePostScrollView.sharePostContentView.categoryViews // 컬렉션 뷰를 포함하는 모든 카테고리 뷰를 저장
     private var selectedCellInfo = [Int: IndexPathSet]() // 유저가 선택한 셀이 저장
     
-    private var vegeType: VegeType {
+    private var vegeType: VegeType { // 유저가 설정한 타입 값
         return configureVegeType(selectedCellInfo: selectedCellInfo)
     }
-    private var categoryType: PostCategory {
+    private var categoryType: PostCategory { // 유저가 설정한 카테고리 값
         return configureCategory(selectedCellInfo: selectedCellInfo)
+    }
+    private var sharePostSetting: Bool { // 유저가 설정한 공개설정 값
+        return sharePostScrollView.sharePostContentView.sharePostSettingSwitchView.isSwitchOn
     }
     
     private let backgroundColor = UIColor.black.withAlphaComponent(0.75)
@@ -59,16 +63,17 @@ class SharePostViewController: UIViewController {
         categoryCollectionViews.forEach {
             $0.collectionView.delegate = self
         }
+        
         bottomShareButtonBar.configureBottomBar {
             self.handleShareButton()
         }
+        sharePostScrollView.handleDismissAction = handleDismissAction
     }
     
     private func setConstraints() {
         [sharePostScrollView, bottomShareButtonBar].forEach {
             view.addSubview($0)
         }
-        
         sharePostScrollView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
@@ -82,6 +87,10 @@ class SharePostViewController: UIViewController {
     
     
     // MARK: - Helpers
+    private func handleDismissAction() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     private func getTextSize(collectionView: UICollectionView, indexPath: IndexPath) -> CGSize {
         let key = data[collectionView.tag].keys.first!
         let text = data[collectionView.tag][key]![indexPath.item]
@@ -92,6 +101,12 @@ class SharePostViewController: UIViewController {
     }
     
     private func handleShareButton() {
+        guard selectedCellInfo.count == 2 else {
+            let alert = UIAlertController(title: nil, message: "타입과 카테고리를 선택하세요", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+            present(alert, animated: true)
+            return }
+        print(sharePostSetting)
         print(#function)
     }
     
