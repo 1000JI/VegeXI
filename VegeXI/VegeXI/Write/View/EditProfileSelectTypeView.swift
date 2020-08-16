@@ -19,7 +19,9 @@ class EditProfileSelectTypeView: UIView {
     let vegeTypeTableView = UITableView()
     var tableViewCells = [EditProfileTypeTableViewCell]()
     private let data = MockData.editProfileVegeTypes
-    private let selectedType = "지향없음"
+    var selectedType = "지향없음" {
+        didSet { vegeTypeTableView.reloadData() }
+    }
     
     
     // MARK: - Lifecycle

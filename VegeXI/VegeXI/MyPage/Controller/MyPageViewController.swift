@@ -40,6 +40,7 @@ class MyPageViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavi()
+        fetchMydata()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,6 +49,11 @@ class MyPageViewController: UIViewController {
     }
     
     // MARK: - API
+    func fetchMydata() {
+        guard let user = UserService.shared.user else { return }
+        profileView.userData = user
+    }
+    
     func fetchMyFeeds() { // 내 글 가져오기
         showLoader(true)
         
@@ -116,9 +122,6 @@ class MyPageViewController: UIViewController {
         postView.tag = 0
         bookmarkView.tag = 1
         categoryView.prepareForActions(action: controlSections(selectedSectionNumber:))
-        
-        guard let user = UserService.shared.user else { return }
-        profileView.userData = user
     }
     
     private func setConstraints() {

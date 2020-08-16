@@ -18,7 +18,7 @@ class EditProfileViewController: UIViewController {
     private let bottomBarView = FilterViewBottomBar(title: EditProfileStrings.confirm.generateString())
     
     private lazy var typeTableView = typeSelectionView.vegeTypeTableView
-    private var selectedCell: IndexPath = IndexPath() // 유저가 선택한 타입의 정보가 저장
+    private var selectedCell: IndexPath = IndexPath(row: 0, section: 0) // 유저가 선택한 타입의 정보가 저장
     private var vegeType: VegeType {
         configureVegeType(selectedCell: selectedCell)
     }
@@ -94,6 +94,7 @@ class EditProfileViewController: UIViewController {
     func configureViewData() {
         guard let user = user else { return }
         editingView.user = user
+        typeSelectionView.selectedType = user.vegeType.description
     }
     
     
@@ -132,9 +133,31 @@ class EditProfileViewController: UIViewController {
     }
     
     private func handleBottomBarConfirmButton() {
-        print(#function)
+        guard let user = UserService.shared.user else { return }
+        guard let nickname = editingView.nicknameTextField.textField.text,
+            !nickname.isEmpty else { return }
+        
+        showLoader(true)
+        AuthService.shared.editUserInfo(
+            nickname: nickname,
+            editImage: editingView.profileImageView.image!,
+            vegeType: vegeType) { (error, ref) in
+                if let error = error {
+                    print("DEBUG: User Info Edit Error \(error.localizedDescription)")
+                    return
+                }
+                print("DEBUG: User Info Edit Success")
+                UserService.shared.fetchUser(uid: user.uid) { user in
+                    self.showLoader(false)
+                    UserService.shared.user = user
+                    
+                    self.navigationController?.popViewController(animated: true)
+                }
+        }
     }
-    
+    /*
+     https://firebasestorage.googleapis.com/v0/b/vegexiproject.appspot.com/o/profile_images%2FFA906E2A-7F32-435C-BD0A-8FA29330CAC2?alt=media&token=d7ef37b0-2c70-4941-8016-57f78f6be440
+     */
     
     // MARK: - Helpers
     private func configureVegeType(selectedCell: IndexPath) -> VegeType {

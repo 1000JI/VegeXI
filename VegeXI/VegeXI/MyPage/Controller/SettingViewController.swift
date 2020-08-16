@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SettingViewController: UIViewController {
     
@@ -182,7 +183,32 @@ extension SettingViewController: UITableViewDelegate {
             navigationController?.pushViewController(nextVC, animated: true)
         case "로그아웃":
             let alert = UIAlertController(title: "정말 로그아웃하시겠습니까?", message: nil, preferredStyle: .alert)
-            let confirmAction = UIAlertAction(title: "로그아웃", style: .destructive, handler: nil)
+            let confirmAction = UIAlertAction(title: "로그아웃", style: .destructive) { ACTION in
+                guard let userLoginType = UserService.shared.user?.loginType else { return }
+                switch userLoginType {
+                case .kakao: KakaoLoginService.shared.logoutKakaoAuth { (isSuccess, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        return
+                    }
+                    }
+                case .naver:
+                    NaverLoginService.shared.loginInstance?.removeNaverLoginCookie()
+                case .google:
+                    GoogleLoginService.shared.instance?.signOut()
+                case .apple:
+                    break
+                case .basic:
+                    do {
+                        try Auth.auth().signOut()
+                    } catch {
+                        print(error.localizedDescription)
+                        return
+                    }
+                }
+                AuthService.shared.removeUserDefaultUID()
+                AuthService.shared.moveSignInViewController()
+            }
             let cancelAction = UIAlertAction(title: "취소", style: .default, handler: nil)
             alert.addAction(confirmAction)
             alert.addAction(cancelAction)
@@ -191,5 +217,4 @@ extension SettingViewController: UITableViewDelegate {
             return
         }
     }
-    
 }

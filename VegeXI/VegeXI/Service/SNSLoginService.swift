@@ -85,6 +85,11 @@ final class KakaoLoginService {
     static let shared = KakaoLoginService()
     private init() { }
     
+    func logoutKakaoAuth(completion: @escaping(KOCompletionSuccessHandler)) {
+        guard let session = KOSession.shared() else { return }
+        session.logoutAndClose(completionHandler: completion)
+    }
+    
     func registerKakaoAuth() {
         guard let session = KOSession.shared() else { return }
         if session.isOpen() { session.close() }
@@ -227,7 +232,6 @@ final class BasicLoginService {
         
     }
     
-    // Google 로그인
     func createUser (errorHandler: @escaping (Error) -> (), email: String?, nickname: String?, password: String?, dismiss view: UIViewController) {
         guard let email = email else { return }
         guard let nickname = nickname else { return }
