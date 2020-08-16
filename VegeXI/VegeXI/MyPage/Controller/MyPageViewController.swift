@@ -40,14 +40,14 @@ class MyPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        fetchMyFeeds()
-        fetchMyBookmarkFeeds()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavi()
         fetchMydata()
+        fetchMyFeeds()
+        fetchMyBookmarkFeeds()
     }
     
     override func viewDidAppear(_ animated: Bool) {

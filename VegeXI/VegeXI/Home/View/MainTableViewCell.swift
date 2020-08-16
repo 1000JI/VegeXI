@@ -33,6 +33,7 @@ class MainTableViewCell: UITableViewCell {
             $0.width.height.equalTo(40)
         }
         $0.layer.cornerRadius = 40 / 2
+        $0.clipsToBounds = true
     }
     
     private let writerLabel = UILabel().then {
