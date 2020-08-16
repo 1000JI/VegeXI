@@ -11,8 +11,11 @@ import UIKit
 class SharePostScrollView: UIScrollView {
     
     // MARK: - Properties
-    private let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    private let dismissArea = UIView().then {
+        $0.backgroundColor = .clear
+    }
     let sharePostContentView = SharePostContentView()
+    var handleDismissAction: () -> Void = { return }
     
     
     // MARK: - Lifecycle
@@ -29,29 +32,27 @@ class SharePostScrollView: UIScrollView {
     
     // MARK: - UI
     private func configureUI() {
-//        setPropertyAttributes()
+        setPropertyAttributes()
         setConstraints()
     }
     
     private func setPropertyAttributes() {
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blurEffectView.backgroundColor = .clear
-        blurEffectView.contentView.backgroundColor = .clear
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
+        dismissArea.addGestureRecognizer(tapGesture)
+        dismissArea.isUserInteractionEnabled = true
     }
     
     private func setConstraints() {
-        [/*blurEffectView,*/ sharePostContentView].forEach {
+        [dismissArea, sharePostContentView].forEach {
             addSubview($0)
         }
         
-//        blurEffectView.snp.makeConstraints {
-//            $0.top.equalToSuperview().offset(-350)
-//            $0.leading.trailing.equalToSuperview()
-//            $0.width.equalToSuperview()
-//            $0.height.equalTo(600)
-//        }
+        dismissArea.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(sharePostContentView.snp.bottom)
+        }
         sharePostContentView.snp.makeConstraints {
-//            $0.top.equalTo(blurEffectView.snp.bottom).offset(-10)
             $0.top.equalToSuperview().offset(200)
             $0.leading.trailing.bottom.equalToSuperview()
             $0.width.equalToSuperview()
@@ -59,4 +60,10 @@ class SharePostScrollView: UIScrollView {
         }
     }
     
+    
+    // MARK: - Selectors
+    @objc
+    private func handleTapGesture() {
+        handleDismissAction()
+    }
 }
