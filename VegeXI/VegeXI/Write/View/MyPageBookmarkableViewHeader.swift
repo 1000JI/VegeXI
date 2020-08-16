@@ -11,7 +11,7 @@ import UIKit
 class MyPageBookmarkableViewHeader: UIView {
     
     // MARK: - Properties
-    private let leftLabel = UILabel().then {
+    let leftLabel = UILabel().then {
         $0.text = "글 10"
         $0.font = UIFont.spoqaHanSansRegular(ofSize: 14)
         $0.textColor = .vegeTextBlackColor

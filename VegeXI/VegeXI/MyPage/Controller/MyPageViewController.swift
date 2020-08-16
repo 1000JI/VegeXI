@@ -14,8 +14,15 @@ class MyPageViewController: UIViewController {
     private let topBarView = MyPageTopBarView()
     private let profileView = MyPageProfileView()
     private let categoryView = MyPageCategoryView()
+    
     private let postView = MyPagePostView()
+    private var postViewCountingLabel: UILabel? // 글 갯수 표시
+    private var postViewFilter: UILabel? // 필터 텍스트
+    private var filter: MyPostFilter?
+    
     private let bookmarkView = MyPageBookmarkView(isHidden: true)
+    private var bookmarkViewCountingLabel: UILabel? // 글 갯수 표시
+    
     private lazy var categorySubviews = [postView, bookmarkView]
     
     private lazy var postTableView = postView.postTableview
@@ -175,6 +182,23 @@ class MyPageViewController: UIViewController {
     
     
     // MARK: - Helpers
+    private func filterActionHandler() {
+        let alert = UIAlertController(title: "필터", message: nil, preferredStyle: .actionSheet)
+        let entireAction = UIAlertAction(title: "전체", style: .default, handler: {
+            _ in self.filter = .entirePosts; self.postViewFilter?.text = self.filter?.rawValue
+        })
+        let publicAction = UIAlertAction(title: "공개", style: .default, handler: {
+            _ in self.filter = .publicPosts; self.postViewFilter?.text = self.filter?.rawValue
+        })
+        let privateAction = UIAlertAction(title: "비공개", style: .default, handler: {
+            _ in self.filter = .privatePosts; self.postViewFilter?.text = self.filter?.rawValue
+        })
+        alert.addAction(entireAction)
+        alert.addAction(publicAction)
+        alert.addAction(privateAction)
+        present(alert, animated: true)
+    }
+    
     private func controlSections(selectedSectionNumber: Int) {
         categorySubviews.forEach {
             if $0.tag == selectedSectionNumber {
@@ -267,9 +291,13 @@ extension MyPageViewController: UITableViewDelegate {
         switch tableView {
         case postTableView:
             let header = MyPagePostTableViewHeader()
+            postViewCountingLabel = header.leftLabel
+            postViewFilter = header.rightLabel
+            header.configureHeader(numberOfPosts: 4, filterActionHandler: filterActionHandler)
             return header
         case bookmarkTableView:
             let header = MyPageBookmarkableViewHeader()
+            bookmarkViewCountingLabel = header.leftLabel
             return header
         default:
             fatalError("Incorrect TableView Info")

@@ -8,6 +8,12 @@
 
 import Foundation
 
+enum MyPostFilter: String {
+    case entirePosts = "전체"
+    case publicPosts = "공개"
+    case privatePosts = "비공개"
+}
+
 enum VegeType: String {
     case vegan
     case ovo
