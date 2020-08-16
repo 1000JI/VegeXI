@@ -25,6 +25,36 @@ enum LoginType: String {
     case basic
 }
 
+enum PostCategory: String {
+    typealias IndexPathSet = Set<IndexPath>
+    
+    case koreanFood = "한식"
+    case snackBar = "분식"
+    case japaneseFood = "일식"
+    case chineseFood = "중식"
+    case westernFood = "양식"
+    case eastAsianFood = "동남아"
+    case indianFood = "인도, 중동"
+    case breadAndCoffee = "빵, 커피"
+    case alcohol = "술"
+    
+    case restuarant = "식당"
+    case bakeryAndCafe = "베이커리, 카페"
+    case houseHoldGoodsStore = "생활용품점"
+    case Exhibition = "전시회, 박랍회"
+    
+    case cosmetics = "화장품"
+    case houseHoldGoods = "생활용품"
+    case fashion = "패션"
+    
+    case influencer = "인플루언서"
+    case book = "책"
+    case movie = "영화"
+    case documentary = "다큐멘터리"
+    
+    case noInfo = ""
+}
+
 struct User {
     let email: String
     let nickname: String
