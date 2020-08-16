@@ -29,6 +29,7 @@ struct FeedService {
                 }
             }
         }
+        completion(bookmarkFeeds)
     }
     
     func fetchMyFeeds(userUid: String, completion: @escaping([Feed]) -> Void) {
@@ -46,6 +47,7 @@ struct FeedService {
                 }
             }
         }
+        completion(myFeeds)
     }
     
     func fetchFeed(feedID: String, completion: @escaping(Feed) -> Void) {

@@ -18,6 +18,7 @@ class SharePostViewController: UIViewController {
     private lazy var vegeInfoCollectionView = sharePostScrollView.sharePostContentView.vegeTypeInfoView.categoryCollectionView
     private lazy var categoryCollectionViews = sharePostScrollView.sharePostContentView.categoryViews // 컬렉션 뷰를 포함하는 모든 카테고리 뷰를 저장
     private var selectedCellInfo = [Int: IndexPathSet]() // 유저가 선택한 셀이 저장
+    private var selectedCategory: (VegeType, PostCategory)?
     
     private var vegeType: VegeType {
         return configureVegeType(selectedCellInfo: selectedCellInfo)
@@ -236,6 +237,8 @@ extension SharePostViewController: UICollectionViewDelegate {
         selectedCellInfo[collectionView.tag] = [indexPath]
         print(selectedCellInfo)
         print(vegeType, categoryType)
+        selectedCategory = (vegeType, categoryType)
+        print(selectedCategory)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
