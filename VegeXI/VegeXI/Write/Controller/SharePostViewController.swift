@@ -279,7 +279,6 @@ extension SharePostViewController: UICollectionViewDelegate {
         print(selectedCellInfo)
         print(vegeType, CategoryTitle, categoryType)
         selectedCategory = (vegeType, categoryType)
-        print(selectedCategory)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
