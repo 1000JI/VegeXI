@@ -132,5 +132,10 @@ class ForgotPasswordViewController: UIViewController {
 extension ForgotPasswordViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         hideWarnings()
+        if textField.text?.isEmpty == true {
+            sendButton.isActive = false
+        } else {
+            sendButton.isActive = true
+        }
     }
 }

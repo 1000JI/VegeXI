@@ -143,7 +143,7 @@ enum SettingViewStrings {
             return """
             이 디바이스에서는
             지원하지 않는 기능입니다.
-"""
+            """
         }
     }
 }
