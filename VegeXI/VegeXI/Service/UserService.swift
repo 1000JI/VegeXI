@@ -25,9 +25,15 @@ enum LoginType: String {
     case basic
 }
 
+enum CategoryType: String {
+    case diet = "식단"
+    case location = "장소"
+    case product = "제품"
+    case content = "컨텐츠"
+}
+
 enum PostCategory: String {
-    typealias IndexPathSet = Set<IndexPath>
-    
+    // 식단
     case koreanFood = "한식"
     case snackBar = "분식"
     case japaneseFood = "일식"
@@ -37,16 +43,16 @@ enum PostCategory: String {
     case indianFood = "인도, 중동"
     case breadAndCoffee = "빵, 커피"
     case alcohol = "술"
-    
+    // 장소
     case restuarant = "식당"
     case bakeryAndCafe = "베이커리, 카페"
     case houseHoldGoodsStore = "생활용품점"
     case Exhibition = "전시회, 박랍회"
-    
+    // 제품
     case cosmetics = "화장품"
     case houseHoldGoods = "생활용품"
     case fashion = "패션"
-    
+    // 컨텐츠
     case influencer = "인플루언서"
     case book = "책"
     case movie = "영화"
