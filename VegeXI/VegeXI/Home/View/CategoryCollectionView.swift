@@ -16,6 +16,7 @@ class CategoryCollectionView: UIView {
                                                        collectionViewLayout: flowLayout)
     private let flowLayout = UICollectionViewFlowLayout()
     private let categoryList = ["전체", "식단", "장소"," 제품", "컨텐츠"]
+    private var previousIndexPath = IndexPath(item: 0, section: 0)
     
     private let selectedUnderLineView = UIView().then {
         $0.backgroundColor = .vegeTextBlackColor
@@ -91,8 +92,13 @@ extension CategoryCollectionView: UICollectionViewDataSource {
 
 extension CategoryCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        (collectionView
+            .cellForItem(at: previousIndexPath) as! CategoryCell)
+            .deSelectCategory()
+        
         let cell = collectionView.cellForItem(at: indexPath) as! CategoryCell
         cell.selectCategory()
+        previousIndexPath = indexPath
         
         UIView.animate(withDuration: 0.3) {
             self.selectedUnderLineView.snp.removeConstraints()
@@ -104,7 +110,6 @@ extension CategoryCollectionView: UICollectionViewDelegateFlowLayout {
             }
             self.layoutIfNeeded()
         }
-        
         tappedCategory?(categoryList[indexPath.item])
     }
     

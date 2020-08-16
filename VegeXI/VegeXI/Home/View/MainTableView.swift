@@ -51,9 +51,26 @@ class MainTableView: UITableView {
         filterImageView: filterImageView,
         imageName: "feed_PlusButton")
     
+    private lazy var homeFilterOnImageView = UIImageView().then {
+        $0.image = UIImage(named: "home_FilterOn")
+        $0.contentMode = .scaleAspectFill
+        $0.isHidden = true
+        $0.isUserInteractionEnabled = true
+        
+        let tapGesture = UITapGestureRecognizer(
+            target: self, action: #selector(tappedFilterOff))
+        $0.addGestureRecognizer(tapGesture)
+        
+        $0.snp.makeConstraints {
+            $0.width.equalTo(40)
+            $0.height.equalTo(20)
+        }
+    }
+    
     var handleSortTapped: (() -> Void)?
     var handleFilterTapped: (() -> Void)?
     var handleCommentTapped: ((Feed) -> Void)?
+    var handleFilterApply: (() -> Void)?
     
     private lazy var headerView = UIView().then {
         $0.backgroundColor = .white
@@ -66,6 +83,7 @@ class MainTableView: UITableView {
         
         $0.addSubview(sortStack)
         $0.addSubview(filterStack)
+        $0.addSubview(homeFilterOnImageView)
         
         sortStack.snp.makeConstraints {
             $0.centerY.equalToSuperview()
@@ -73,6 +91,11 @@ class MainTableView: UITableView {
         }
         
         filterStack.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-16)
+        }
+        
+        homeFilterOnImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().offset(-16)
         }
@@ -97,15 +120,32 @@ class MainTableView: UITableView {
     
     // MARK: - Seletors
     
-    @objc func tappedSortButton() {
+    @objc
+    func tappedSortButton() {
         handleSortTapped?()
     }
     
-    @objc func tappedFilterButton() {
+    @objc
+    func tappedFilterButton() {
         handleFilterTapped?()
     }
     
+    @objc
+    func tappedFilterOff() {
+        handleFilterApply?()
+    }
+    
     // MARK: - Action
+    
+    func applyFilter() {
+        filterStack.isHidden = true
+        homeFilterOnImageView.isHidden = false
+    }
+    
+    func clearFilter() {
+        filterStack.isHidden = false
+        homeFilterOnImageView.isHidden = true
+    }
     
     func tappedLikeButton(cell: MainTableViewCell) {
         guard let feed = cell.feed else { return }

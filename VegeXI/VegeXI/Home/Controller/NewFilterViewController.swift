@@ -8,9 +8,17 @@
 
 import UIKit
 
+protocol NewFilterViewControllerDelegate: class {
+    func applyFilters(selectedVegeType: [VegeType],
+                      selectedCategoryTitle: [CategoryType],
+                      selectedFilters: [PostCategory])
+}
+
 class NewFilterViewController: UIViewController {
     
     // MARK: - Properties
+    var delegate: NewFilterViewControllerDelegate?
+    
     typealias IndexPathSet = Set<IndexPath>
     private let topBar = FilterViewTopBar()
     private let filterTableView = UITableView(frame: .zero, style: .grouped)
@@ -87,9 +95,13 @@ class NewFilterViewController: UIViewController {
         configureVegeType(selectedCellInfo: selectedCells)
         configureCategoryTitle(selectedCellInfo: selectedCells)
         configureCategory(selectedCellInfo: selectedCells)
-        print(selectedVegeType)
-        print(selectedCategoryTitle)
-        print(selectedFilters)
+        
+        delegate?.applyFilters(
+            selectedVegeType: self.selectedVegeType,
+            selectedCategoryTitle: self.selectedCategoryTitle,
+            selectedFilters: self.selectedFilters)
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     private func saveSelectionData(cellTag: Int, indexPath: IndexPath) {
