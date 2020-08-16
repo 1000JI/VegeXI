@@ -37,7 +37,7 @@ class SettingTableViewCell: UITableViewCell {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
     }
-    private let switcher = UISwitch()
+    let switcher = UISwitch()
     var switchStatus: Bool {
         return switcher.isOn
     }

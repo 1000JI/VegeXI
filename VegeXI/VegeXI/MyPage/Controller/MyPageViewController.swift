@@ -15,7 +15,7 @@ class MyPageViewController: UIViewController {
     private let profileView = MyPageProfileView()
     private let categoryView = MyPageCategoryView()
     private let postView = MyPagePostView()
-    private let bookmarkView = MyPageBookmarkView()
+    private let bookmarkView = MyPageBookmarkView(isHidden: true)
     private lazy var categorySubviews = [postView, bookmarkView]
     
     private lazy var postTableView = postView.postTableview

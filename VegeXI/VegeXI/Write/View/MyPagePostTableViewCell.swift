@@ -199,6 +199,7 @@ class MyPagePostTableViewCell: UITableViewCell {
         likes: Int,
         comments: Int,
         feedType: FeedType) {
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy MM dd"
         

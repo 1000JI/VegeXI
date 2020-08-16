@@ -30,6 +30,11 @@ class SettingViewController: UIViewController {
         configureUI()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        notificationSwitchCell?.switcher.addTarget(self, action: #selector(handleNotificationSwitch(_:)), for: .valueChanged)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
@@ -79,6 +84,14 @@ class SettingViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @objc
+    private func handleNotificationSwitch(_ sender: UISwitch) {
+        sender.isOn = false
+        let alert = UIAlertController(title: nil, message: "아직 지원되지 않는 기능입니다", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        present(alert, animated: true)
+    }
+    
     
     // MARK: - Helpers
     private func configureCellType(cellType: String) -> SettingViewCellType {
@@ -103,7 +116,7 @@ class SettingViewController: UIViewController {
 
 // MARK: - UITableViewDataSource
 extension SettingViewController: UITableViewDataSource {
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return SettingCategories.instance.categoryInfo.count
     }
