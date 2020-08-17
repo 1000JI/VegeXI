@@ -50,4 +50,8 @@ class MyPageBookmarkableViewHeader: UIView {
         }
     }
     
+    func configureHeader(numberOfPosts: Int) {
+        leftLabel.text = "글 " + String(numberOfPosts)
+    }
+    
 }

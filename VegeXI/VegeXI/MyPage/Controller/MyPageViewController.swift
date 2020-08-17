@@ -293,11 +293,12 @@ extension MyPageViewController: UITableViewDelegate {
             let header = MyPagePostTableViewHeader()
             postViewCountingLabel = header.leftLabel
             postViewFilter = header.rightLabel
-            header.configureHeader(numberOfPosts: 4, filterActionHandler: filterActionHandler)
+            header.configureHeader(numberOfPosts: myFeeds.count, filterActionHandler: filterActionHandler)
             return header
         case bookmarkTableView:
             let header = MyPageBookmarkableViewHeader()
             bookmarkViewCountingLabel = header.leftLabel
+            header.configureHeader(numberOfPosts: bookmarkFeeds.count)
             return header
         default:
             fatalError("Incorrect TableView Info")
