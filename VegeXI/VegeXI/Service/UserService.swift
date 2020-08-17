@@ -21,6 +21,17 @@ enum VegeType: String {
     case lacto_ovo
     case pesco
     case nothing
+    
+    var description: String {
+        switch self {
+        case .vegan: return "비건"
+        case .ovo: return "오보"
+        case .lacto: return "락토"
+        case .lacto_ovo: return "락토오보"
+        case .pesco: return "페스코"
+        case .nothing: return "지향없음"
+        }
+    }
 }
 
 enum LoginType: String {

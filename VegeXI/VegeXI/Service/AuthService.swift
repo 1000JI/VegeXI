@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FirebaseDatabase
 
 struct AuthModel {
     let email: String
@@ -21,6 +22,45 @@ struct AuthService {
     static let shared = AuthService()
     private init() { }
     
+    func editUserInfo(nickname: String, editImage: UIImage, vegeType: VegeType, completion: @escaping((Error?, DatabaseReference) -> Void)) {
+        guard let user = UserService.shared.user else { return }
+        
+        let imageStringURL = user.profileImageUrl.absoluteString
+        let imageAddressArray = imageStringURL.components(separatedBy: "%")
+        let imageAddress = imageAddressArray[1].components(separatedBy: "?")
+        
+        STORAGE_PROFILE_IMAGES.child(imageAddress[0]).delete { error in
+            if let error = error {
+                print("DEBUG: Image Delete Error \(error.localizedDescription)")
+            }
+            
+            guard let jpegProfileImageData = editImage.jpegData(compressionQuality: 0.3) else { return }
+            let filename = UUID().uuidString
+            let storageRef = STORAGE_PROFILE_IMAGES.child(filename)
+            storageRef.putData(jpegProfileImageData, metadata: nil) { (meta, error) in
+                if error != nil {
+                    print("DEBUG: Storage Save Image Data Error, \(error!.localizedDescription)")
+                    return
+                }
+                
+                storageRef.downloadURL { (url, error) in
+                    if error != nil {
+                        print("DEBUG: Storage downloadURL Error, \(error!.localizedDescription)")
+                        return
+                    }
+                    
+                    guard let profileImageUrl = url?.absoluteString else { return }
+                    
+                    let values = [
+                        "nickname": nickname,
+                        "profileImageUrl": profileImageUrl,
+                        "vegeType": vegeType.rawValue]
+                    REF_USERS.child(user.uid).updateChildValues(values, withCompletionBlock: completion)
+                }
+            }
+        }
+    }
+    
     func authServiceUser(authData: AuthModel) {
         guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
         window.rootViewController?.showLoader(true)
@@ -28,7 +68,6 @@ struct AuthService {
         guard let jpegProfileImageData = UIImage(named: "slowvegexicon")?.jpegData(compressionQuality: 0.3) else { return }
         let filename = UUID().uuidString
         let storageRef = STORAGE_PROFILE_IMAGES.child(filename)
-        
         storageRef.putData(jpegProfileImageData, metadata: nil) { (meta, error) in
             if error != nil {
                 print("DEBUG: Storage Save Image Data Error, \(error!.localizedDescription)")
@@ -90,12 +129,22 @@ struct AuthService {
         userDefaults.set(withUid, forKey: "saveUid")
     }
     
-
+    func removeUserDefaultUID() {
+        let userDefaults = UserDefaults.standard
+        userDefaults.removeObject(forKey: "saveUid")
+    }
     
     func rootHomeViewSetupVisible() {
         guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
         window.rootViewController?.showLoader(false)
         window.rootViewController = MainTabBarController()
+        window.frame = UIScreen.main.bounds
+        window.makeKeyAndVisible()
+    }
+    
+    func moveSignInViewController() {
+        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
+        window.rootViewController = SignInViewController()
         window.frame = UIScreen.main.bounds
         window.makeKeyAndVisible()
     }
