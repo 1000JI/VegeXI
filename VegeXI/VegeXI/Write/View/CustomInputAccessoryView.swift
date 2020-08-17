@@ -16,9 +16,11 @@ class CustomInputAccessoryView: UIView {
     
     private let profileImageView = UIImageView().then {
         $0.image = UIImage(named: "cell_Human")
+        $0.clipsToBounds = true
         $0.snp.makeConstraints {
             $0.height.width.equalTo(38)
         }
+        $0.layer.cornerRadius = 38 / 2
     }
     
     private lazy var commentTextField = UITextField().then {
@@ -77,6 +79,10 @@ class CustomInputAccessoryView: UIView {
             $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-10)
         }
         commentTextField.layer.cornerRadius = 40 / 2
+        
+        // ImageView Set
+        guard let user = UserService.shared.user else { return }
+        profileImageView.sd_setImage(with: user.profileImageUrl)
     }
 }
 

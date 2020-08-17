@@ -21,9 +21,11 @@ class CommentTableViewCell: UITableViewCell {
     private let profileImageView = UIImageView().then {
         $0.image = UIImage.basicHumanImage
         $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
         $0.snp.makeConstraints {
             $0.height.width.equalTo(24)
         }
+        $0.layer.cornerRadius = 24 / 2
     }
     
     private let writerNameLabel = UILabel().then {

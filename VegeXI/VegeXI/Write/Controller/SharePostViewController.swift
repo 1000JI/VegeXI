@@ -134,7 +134,7 @@ class SharePostViewController: UIViewController {
                     print("DEBUG: \(error.localizedDescription)")
                     return
                 }
-                print("FEED UPLOAD SUCCESS")
+                print("DEBUG: FEED UPLOAD SUCCESS")
                 self.presentingViewController?
                     .presentingViewController?
                     .dismiss(animated: true, completion: nil)
@@ -299,10 +299,6 @@ extension SharePostViewController: UICollectionViewDelegate {
         }
         cell.isClicked = true
         selectedCellInfo[collectionView.tag] = [indexPath]
-
-//        print(selectedCellInfo)
-//        print(vegeType, CategoryTitle, categoryType)
-//        selectedCategory = (vegeType, categoryType)
 
     }
     

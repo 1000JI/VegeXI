@@ -144,7 +144,8 @@ struct AuthService {
     
     func moveSignInViewController() {
         guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
-        window.rootViewController = SignInViewController()
+        let naviController = UINavigationController(rootViewController: SignInViewController())
+        window.rootViewController = naviController
         window.frame = UIScreen.main.bounds
         window.makeKeyAndVisible()
     }

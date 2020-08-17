@@ -107,7 +107,6 @@
 		AF8B261224DB15630075156C /* SpoqaHanSansRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF8B260C24DB12100075156C /* SpoqaHanSansRegular.ttf */; };
 		AF8E0D5924DD092E00D08D58 /* WriteEmptyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E0D5824DD092E00D08D58 /* WriteEmptyController.swift */; };
 		AF8E0D5B24DD277C00D08D58 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E0D5A24DD277C00D08D58 /* Feed.swift */; };
-		AF8E0D5D24DD320700D08D58 /* FeedRegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E0D5C24DD320700D08D58 /* FeedRegisterController.swift */; };
 		AF8E0D6024DD43FF00D08D58 /* BSImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = AF8E0D5F24DD43FF00D08D58 /* BSImagePicker */; };
 		AF8E0D6224DD5D5800D08D58 /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E0D6124DD5D5800D08D58 /* FeedService.swift */; };
 		AF8E0D6524DDC3A700D08D58 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = AF8E0D6424DDC3A700D08D58 /* SDWebImage */; };
@@ -243,7 +242,6 @@
 		AF8B260D24DB12100075156C /* SpoqaHanSansBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpoqaHanSansBold.ttf; sourceTree = "<group>"; };
 		AF8E0D5824DD092E00D08D58 /* WriteEmptyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteEmptyController.swift; sourceTree = "<group>"; };
 		AF8E0D5A24DD277C00D08D58 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
-		AF8E0D5C24DD320700D08D58 /* FeedRegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRegisterController.swift; sourceTree = "<group>"; };
 		AF8E0D6124DD5D5800D08D58 /* FeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; };
 		AF8E0D6724DDD83900D08D58 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		AF9799A324E64ACB0067C611 /* DetailImageTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageTableCell.swift; sourceTree = "<group>"; };
@@ -461,7 +459,6 @@
 			children = (
 				AF8E0D5824DD092E00D08D58 /* WriteEmptyController.swift */,
 				42ABADC324E2CCAF0094CA9A /* SharePostViewController.swift */,
-				AF8E0D5C24DD320700D08D58 /* FeedRegisterController.swift */,
 				AF58B5F724E14D7A00BA2224 /* FeedDetailController.swift */,
 				AF8932EC24E3AEF900221AA6 /* FeedWriteController.swift */,
 				AF564AA324E54B8200989F82 /* SearchLocationController.swift */,
@@ -855,7 +852,6 @@
 				42834C8724E60164000C91F0 /* MyPageBookmarkableViewCell.swift in Sources */,
 				42ABADBA24E16D4E0094CA9A /* FilterCollectionViewCell.swift in Sources */,
 				42834C9724E6868B000C91F0 /* BugReportViewController.swift in Sources */,
-				AF8E0D5D24DD320700D08D58 /* FeedRegisterController.swift in Sources */,
 				42ABADB624E14FFF0094CA9A /* VegetarianInfoView.swift in Sources */,
 				4267C95724DB1D2F00702BAC /* GeneralStrings.swift in Sources */,
 				4267C94F24DACA4100702BAC /* SignButton.swift in Sources */,

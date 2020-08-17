@@ -121,17 +121,19 @@ class FeedDetailController: UIViewController {
     }
     
     func tappedMoreButton() {
-        guard let uid = UserService.shared.user?.uid else { return }
-        guard let feedWriterUid = feed?.writerUser.uid else { return }
+        guard let user = UserService.shared.user else { return }
+        guard let feed = feed else { return }
         
         firstEnter = true
-        if uid == feedWriterUid {
+        if user.uid == feed.writerUser.uid {
             showMoreWriterButtnAlert(
                 viewController: self,
                 editHandler: nil,
                 linkCopyHandler: nil,
                 shareHandler: nil,
-                deleteHandler: nil)
+                deleteHandler: { ACTION in
+                    
+            })
         } else {
             showMoreBasicButtnAlert(
                 viewController: self,

@@ -15,7 +15,7 @@ class CategoryCollectionView: UIView {
     lazy var collectionView = UICollectionView(frame: .zero,
                                                        collectionViewLayout: flowLayout)
     private let flowLayout = UICollectionViewFlowLayout()
-    private let categoryList = ["전체", "식단", "장소"," 제품", "컨텐츠"]
+    private let categoryList = ["전체", "식단", "장소", "제품", "컨텐츠"]
     private var previousIndexPath = IndexPath(item: 0, section: 0)
     
     private let selectedUnderLineView = UIView().then {

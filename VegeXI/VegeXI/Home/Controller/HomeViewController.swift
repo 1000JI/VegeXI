@@ -86,10 +86,10 @@ class HomeViewController: UIViewController {
         } else {
             self.filterFeeds = self.isFilter ?
                 self.amountFilterFeeds.filter {
-                    $0.category.categoryTitleType.rawValue == category }
+                    return $0.category.categoryTitleType.rawValue == category }
                 :
                 self.amountFeeds.filter {
-                    $0.category.categoryTitleType.rawValue == category }
+                    return $0.category.categoryTitleType.rawValue == category }
         }
     }
     
@@ -200,7 +200,13 @@ class HomeViewController: UIViewController {
     // MARK: - Selectors
     
     @objc func handleRefresh() {
-        fetchFeeds()
+        self.clearFilterMethod?()
+        self.firstCategoryMove()
+        
+        self.isFilter = false
+        self.isRecent = true
+        self.filterFeeds.removeAll()
+        self.fetchFeeds()
     }
     
     

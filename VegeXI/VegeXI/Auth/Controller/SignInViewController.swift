@@ -84,12 +84,6 @@ class SignInViewController: UIViewController {
         }
     }
     
-    @objc private func handleSignUpButton(_ sender: UIButton) {
-        let nextVC = SignUpViewController()
-        nextVC.modalPresentationStyle = .fullScreen
-        present(nextVC, animated: true)
-    }
-    
     
     // MARK: - Helpers
     

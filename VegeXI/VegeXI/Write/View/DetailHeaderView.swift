@@ -31,6 +31,7 @@ class DetailHeaderView: UIView {
     
     private let profileImageView = UIImageView().then {
         $0.image = UIImage(named: "cell_Human")
+        $0.clipsToBounds = true
         $0.snp.makeConstraints {
             $0.width.height.equalTo(40)
         }

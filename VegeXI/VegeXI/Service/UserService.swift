@@ -8,6 +8,14 @@
 
 import Foundation
 
+enum LoginType: String {
+    case kakao
+    case naver
+    case google
+    case apple
+    case basic
+}
+
 enum MyPostFilter: String {
     case entirePosts = "전체"
     case publicPosts = "공개"
@@ -32,14 +40,6 @@ enum VegeType: String {
         case .nothing: return "지향없음"
         }
     }
-}
-
-enum LoginType: String {
-    case kakao
-    case naver
-    case google
-    case apple
-    case basic
 }
 
 enum CategoryType: String {

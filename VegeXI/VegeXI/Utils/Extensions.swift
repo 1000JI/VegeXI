@@ -105,7 +105,7 @@ extension UIViewController {
         
         let editAction = UIAlertAction(
             title: "수정",
-            style: .destructive,
+            style: .default,
             handler: editHandler)
         let linkCopyAction = UIAlertAction(
             title: "링크복사",
@@ -117,17 +117,17 @@ extension UIViewController {
             handler: shareHandler)
         let deleteAction = UIAlertAction(
             title: "삭제",
-            style: .default,
+            style: .destructive,
             handler: deleteHandler)
         let cancelAction = UIAlertAction(
             title: "취소",
             style: .cancel,
             handler: nil)
         
+        moreAlert.addAction(deleteAction)
         moreAlert.addAction(editAction)
         moreAlert.addAction(linkCopyAction)
         moreAlert.addAction(shareAction)
-        moreAlert.addAction(deleteAction)
         moreAlert.addAction(cancelAction)
         moreAlert.view.tintColor = .black
         
