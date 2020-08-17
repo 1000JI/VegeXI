@@ -33,6 +33,7 @@ class EditProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        hideKeyboardWhenTappedAround()
         configureUI()
     }
     
@@ -190,6 +191,11 @@ extension EditProfileViewController: UITextFieldDelegate {
         } else {
             editingView.nicknameTextField.clearButton.isHidden = false
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
 }
 

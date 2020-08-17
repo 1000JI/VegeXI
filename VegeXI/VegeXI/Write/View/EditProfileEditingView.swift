@@ -38,7 +38,6 @@ class EditProfileEditingView: UIView {
         $0.textColor = .vegeTextBlackColor
     }
     let nicknameTextField = EditProfileTextFieldView()
-    private let myNickname = "뚜꾸리"
     
     
     // MARK: - Lifecycle
@@ -59,7 +58,6 @@ class EditProfileEditingView: UIView {
     }
     
     private func setPropertyAttributes() {
-        nicknameTextField.textField.text = myNickname
     }
     
     private func setConstraints() {
